@@ -6,19 +6,17 @@ This is the first stable public release, version `1.0.0`.
 
 ## Release scope
 
-The repository releases results produced by **HiReTest itself**. Outputs from comparison methods, ablation studies, and the human evaluation are not included. Small adapters, grammars, configurations, and instructions for the comparison methods are retained only as optional experiment-support material; upstream implementations and model weights are not redistributed.
+This repository releases only the implementation and experimental outputs of **HiReTest itself**. Implementations, adapters, configurations, generated outputs, ablation results, and human-evaluation materials for comparison methods are outside the scope of this release.
 
+The comparison experiments reported in the paper were conducted using the corresponding public implementations and the settings described in the paper. This repository is a HiReTest main-method release, not a complete reproduction package for every comparison experiment in the paper.
 
 ## Repository layout
 
 ```text
 .
 ├── artifacts/                # released HiReTest test cases and result workbooks
-├── baselines/                # optional comparison-method adapters and SysY grammars
-├── configs/                  # optional comparison-method run metadata
-├── docs/                     # comparison-method reproduction notes
 ├── prompts/public_templates/ # public generation, constraint, and review prompts
-├── requirements/             # core and optional dependency lists
+├── requirements/core.txt     # Python dependencies for HiReTest
 ├── scripts/                  # artifact-manifest generator
 ├── src/hiretest/             # HiReTest implementation and evaluator
 ├── .env.example              # environment-variable template without real secrets
@@ -27,7 +25,7 @@ The repository releases results produced by **HiReTest itself**. Outputs from co
 └── pyproject.toml            # Python package metadata
 ```
 
-## Released HiReTest artifacts
+## Released artifacts
 
 ```text
 artifacts/
@@ -58,7 +56,7 @@ For the first three transitions, each `caseN.txt` is a complete SysY source prog
 
 `artifacts/manifest.json` records the released files, counts, and SHA-256 checksums.
 
-## HiReTest implementation
+## Implementation
 
 The main pipeline is implemented under `src/hiretest/`:
 
@@ -67,12 +65,12 @@ The main pipeline is implemented under `src/hiretest/`:
 - `train.py` trains and evaluates the repair-change classifier.
 - `export_positive_predictions.py` exports changes predicted to be repair-relevant.
 - `get_results.py` extracts source context and constructs history-guided generation prompts.
-- `ask_for_llm.py` generates, reviews, and repairs candidate test cases through a configured LLM API.
+- `ask_for_llm.py` generates, reviews, and repairs candidate tests through a configured LLM API.
 - `test.py` compiles and executes generated tests and produces result workbooks.
-- `reproduce_test.py` provides the command-line entry point for reevaluating released cases.
+- `reproduce_test.py` provides the command-line entry point for reevaluating released HiReTest cases.
 - `runtime.ll` provides the LLVM-compatible SysY input/output runtime used by backend stages.
 
-The public templates under `prompts/public_templates/` cover generation prompts, processed and raw stage constraints, and test-review prompts for all five transitions.
+The public files under `prompts/public_templates/` contain generation prompts, processed and raw stage constraints, and test-review prompts for all five transitions.
 
 ## Installation
 
@@ -103,10 +101,10 @@ python -m pip install -e .
 
 ## Inspecting the release
 
-Run a dry check to verify that all released stage directories are visible:
+Run a dry check to confirm that all released stage directories are visible:
 
 ```bash
-python -m hiretest.reproduce_test --case-root artifacts/cases --rq RQ1 --method Hiretest --stage all --dry-run
+python -m hiretest.reproduce_test --case-root artifacts/cases --stage all --dry-run
 ```
 
 After changing the released artifacts, rebuild the integrity manifest with:
@@ -124,8 +122,6 @@ For example, on Windows:
 ```powershell
 python -m hiretest.reproduce_test `
   --case-root artifacts/cases `
-  --rq RQ1 `
-  --method Hiretest `
   --stage 1to2 `
   --students-dir D:\path\to\authorized\data_2025\data
 ```
@@ -135,6 +131,7 @@ Newly reproduced workbooks are written under `artifacts/reproduced/` by default 
 The evaluator uses the following environment variables when applicable:
 
 - `HIRETEST_DATA_ROOT` and `HIRETEST_DERIVED_DATA_ROOT` point to authorized data outside the repository.
+- `HIRETEST_REPAIR_PROMPT_ROOT` points to authorized history-guided prompts that cannot be published.
 - `HIRETEST_MARS_JAR` points to a locally obtained MARS installation.
 - `HIRETEST_LLI` points to LLVM `lli`.
 - `HIRETEST_RUNTIME_LL` optionally overrides the included `src/hiretest/runtime.ll`.
@@ -143,23 +140,11 @@ The evaluator uses the following environment variables when applicable:
 
 Never commit a populated `.env` file.
 
-## Optional comparison-method support
-
-No comparison-method outputs are published in `artifacts/`. The following optional support files remain in the repository:
-
-- `baselines/tdonly/`: task-description-only generator wrapper and prompt.
-- `baselines/fuzz4all_sysy/`: SysY specifications, Fuzz4All configuration, extraction utility, and validation templates.
-- `baselines/grammarinator/`: stage-specific SysY grammars, tokens, and generation wrapper.
-- `baselines/react_agent/`: LangGraph ReAct prompt builder, generator, and runner.
-- `configs/baselines.json`: recorded comparison-method settings.
-- `docs/BASELINE_REPRODUCTION.md`: installation and execution notes for the optional comparison support.
-
-These files do not contain the upstream Fuzz4All, Grammarinator, LangGraph, or model implementations. Third-party software must be obtained separately and remains subject to its own license.
-
 ## Data and privacy
 
-The repository publishes generated test artifacts, not the underlying student dataset. 
-The dataset is available on Zenodo at the following link:
+The repository publishes generated test artifacts, not the underlying student dataset. Raw and derived student data, identities, grades, private prompts, model checkpoints, reference implementations, and API credentials must remain outside the public repository.
+
+If a public or controlled-access dataset is deposited on Zenodo, add its stable DOI link here and describe its access conditions. Do not replace this statement with an unverified URL.
 
 ## Citation
 

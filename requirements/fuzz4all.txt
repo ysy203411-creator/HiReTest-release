@@ -1,5 +1,0 @@
-# Install the pinned upstream Fuzz4All requirements separately after recording its commit.
-transformers
-torch
-pyyaml
-openai
