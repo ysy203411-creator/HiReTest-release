@@ -1,7 +1,5 @@
 # HiReTest
 
-[中文说明](README.zh-CN.md) | English
-
 HiReTest is a historical repair-guided test-generation method for progressive programming assignments. It mines changes between repaired and inherited code, identifies repair-relevant changes, combines them with assignment constraints, and uses a large language model to generate and review tests. This repository contains the HiReTest implementation, public prompt templates, and the released outputs of the main method on five SysY compiler-assignment transitions.
 
 This is the first stable public release, version `1.0.0`.
