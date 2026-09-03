@@ -1,0 +1,23 @@
+int global_var;
+const int CONST_VAL = 10;
+
+void voidFunction() {
+    return;
+}
+
+int intFunctionA() {  // Renamed to avoid confusion
+    return CONST_VAL;
+}
+
+int intFunctionB() {
+    int local_var = 5;
+    return local_var + CONST_VAL;
+}
+
+int main(){
+    voidFunction();
+    int result1 = intFunctionA();
+    int result2 = intFunctionB();
+    printf("%d %d\n", result1, result2);
+    return 0;
+}

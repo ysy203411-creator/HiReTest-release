@@ -1,0 +1,15 @@
+const int a = 5;
+int b = 10;
+void printSum(int x, int y) {
+    printf("Sum: %d\n", x + y);
+}
+int main(){
+    int result;
+    // 空行测试
+    result = a + b;
+    
+    // 空格测试
+    printSum(a, b);
+    
+    return 0;
+}

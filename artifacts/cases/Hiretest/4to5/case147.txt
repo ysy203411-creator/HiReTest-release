@@ -1,0 +1,22 @@
+const int SIZE = 5;
+const int arr_const[SIZE] = {1, 2, 3, 4, 5};
+int arr[SIZE] = {1, 2, 3, 4, 5};
+
+int sumArray(int a[], int size) {
+    int sum = 0;
+    int i = 0;
+    /* 由于不允许使用 for/while 等循环语句，这里直接按固定 SIZE 展开 */
+    sum = sum + a[0];
+    sum = sum + a[1];
+    sum = sum + a[2];
+    sum = sum + a[3];
+    sum = sum + a[4];
+    return sum;
+}
+
+int main() {
+    int result;
+    result = sumArray(arr, SIZE);
+    printf("Sum of array: %d\n", result);
+    return 0;
+}

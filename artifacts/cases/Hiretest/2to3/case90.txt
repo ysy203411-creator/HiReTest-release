@@ -1,0 +1,14 @@
+const int CONST_VAL = 5;
+int globalArray[10] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result is: %d\n", result);
+}
+int main(){
+    int localVar = 10;
+    int sum = add(localVar, CONST_VAL;
+    printResult(sum);
+    return 0;
+}

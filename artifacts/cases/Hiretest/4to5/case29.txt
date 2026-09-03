@@ -1,0 +1,34 @@
+const int newline = 10;
+const int tab = 9;
+const int carriageReturn = 13;
+const int backspace = 8;
+const int formfeed = 12;
+
+int main(){
+    int input;
+    input = getint();
+    
+    if (input == newline) {
+        printf("Newline character detected: %d\n", input);
+    } 
+
+    if (input == tab) {
+        printf("Tab character detected: %d\n", input);
+    } 
+
+    if (input == carriageReturn) {
+        printf("Carriage return character detected: %d\n", input);
+    } 
+
+    if (input == backspace) {
+        printf("Backspace character detected: %d\n", input);
+    } 
+
+    if (input == formfeed) {
+        printf("Formfeed character detected: %d\n", input);
+    } else {
+        printf("Unknown character: %d\n", input);
+    }
+    
+    return 0;
+}

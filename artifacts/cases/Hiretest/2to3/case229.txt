@@ -1,0 +1,23 @@
+const int x = 5;
+int global_var = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int a = 2;
+    int b = 3;
+    int result;
+    
+    /* This is a multi-line comment
+       that spans multiple lines
+       and should correctly update
+       the line numbers in the lexer. */
+    
+    result = add(a, b);
+    print_result(result);
+    
+    return 0;
+}

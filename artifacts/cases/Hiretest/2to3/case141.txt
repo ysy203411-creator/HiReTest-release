@@ -1,0 +1,16 @@
+const int expectedParamCount = 3;
+int add(int a, int b, int c) {
+    return a + b + c;
+}
+int main(){
+    int x = 5;
+    int y = 10;
+    int z = 15;
+    int result;
+    // Correct number of parameters
+    result = add(x, y, z);
+    printf("Result with correct parameters: %d\n", result);
+    // Removed the incorrect function call
+    printf("Result with incorrect parameters: %s\n", "function call removed");
+    return 0;
+}

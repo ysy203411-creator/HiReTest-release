@@ -1,0 +1,20 @@
+const int SIZE = 5;
+int global_arr[SIZE] = {0}; // 初始化未提供全部元素，需默认初始化为 0
+int global_var;
+void test_func(int arr[], int size) { // 修改参数类型为 int[]
+    int i = 0;
+    while (i < size) {
+        printf("%d\n", arr[i]);
+        i = i + 1;
+    }
+}
+int main(){
+    global_var = getint();
+    global_arr[0] = global_var;
+    global_arr[1] = global_var + 1;
+    global_arr[2] = global_var + 2;
+    global_arr[3] = global_var + 3;
+    global_arr[4] = global_var + 4;
+    test_func(global_arr, SIZE);
+    return 0;
+}

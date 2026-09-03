@@ -1,0 +1,16 @@
+int globalVar;
+const int CONST_VAL = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = getint();
+    int sum = add(localVar, CONST_VAL);
+    printResult(sum);
+    globalVar = getint(); // 使用允许的库函数 getint()
+    printf("Char received: %d\n", globalVar);
+    return 0;
+}

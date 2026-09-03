@@ -1,0 +1,20 @@
+const int rq1_case_id_46 = 46;
+const int MAX = 10;
+int data[MAX] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+int sumArray(int arr[], int size) {
+    int sum = 0;
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+int main(){
+    int total = sumArray(data, MAX);
+    if (total == 55) {
+        printf("Sum is correct: %d\n", total);
+    } else {
+        printf("Sum is incorrect: %d\n", total);
+    }
+    return 0;
+}

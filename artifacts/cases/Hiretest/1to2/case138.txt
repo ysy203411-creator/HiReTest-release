@@ -1,0 +1,22 @@
+const int MAX = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+    return;
+}
+int main(){
+    int localVar = 3;
+    int sum = add(globalVar, localVar);
+    int array[MAX];
+    array[0] = sum;
+    if (array[0] > 0) {
+        printf("Positive sum\n");
+    } else {
+        printf("Non-positive sum\n");
+    }
+    printResult(array[0]);
+    return 0;
+}

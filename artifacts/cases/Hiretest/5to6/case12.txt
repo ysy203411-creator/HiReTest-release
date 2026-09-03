@@ -1,0 +1,16 @@
+const int SIZE = 5;
+int array[SIZE] = {1, 2, 3, 4, 5};
+void printArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int main(){
+    int input;
+    input = getint();
+    array[0] = input;
+    printArray(array, SIZE);
+    return 0;
+}

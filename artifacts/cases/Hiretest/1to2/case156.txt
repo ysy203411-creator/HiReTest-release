@@ -1,0 +1,20 @@
+const int MAX = 100;
+int data[MAX];
+int compute(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("The result is: %d\n", result);
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    int result = compute(x, y);
+    printResult(result);
+    
+    // Intentional error: single '&' in a condition
+    if (x & y) {
+        printf("This line should not compile due to single '&'\n");
+    }
+    return 0;
+}

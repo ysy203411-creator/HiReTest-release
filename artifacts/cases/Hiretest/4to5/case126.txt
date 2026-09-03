@@ -1,0 +1,14 @@
+int global_var;
+
+int main() {
+    int local_var;
+    /* 提示语句改为带一个 %d 并传入常量参数，满足约束 10 */
+    printf("%d\n", 0);
+    global_var = getint(); // 测试 getint() 的处理
+    printf("You entered: %d\n", global_var);
+    
+    printf("%d\n", 0);
+    local_var = getint(); // 测试 getint() 的处理
+    printf("You entered: %d\n", local_var);
+    return 0;
+}

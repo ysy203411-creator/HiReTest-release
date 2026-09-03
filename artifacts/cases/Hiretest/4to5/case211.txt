@@ -1,0 +1,16 @@
+const int TRUE = 1;
+const int FALSE = 0;
+int globalVar = 10;
+void checkCondition(int value) {
+    if (value != FALSE) {
+        printf("Condition is TRUE\\n");
+    } else {
+        printf("Condition is FALSE\\n");
+    }
+}
+int main(){
+    int input;
+    input = getint();
+    checkCondition(input);
+    return 0;
+}

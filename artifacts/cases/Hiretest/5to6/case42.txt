@@ -1,0 +1,9 @@
+const int constValue = 10;
+const int constArray[3] = {1, 2, 3};
+int main(){
+    int a = constValue;
+    int b = constArray[1];
+    printf("%d\n", a);
+    printf("%d\n", b);
+    return 0;
+}

@@ -1,0 +1,12 @@
+const int SIZE = 5;
+int arr[SIZE] = {1, 2, 3, 4, 5};
+const int constArr[SIZE] = {1, 2, 3, 4, 5};
+int main(){
+    int index = 2;
+    arr[index] = 10; // 修改数组元素
+    printf("arr[%d] = %d\n", index, arr[index]); // 打印数组元素
+    index = 3;
+    // constArr[index] = 10; // 这行应该导致编译错误，因为constArr是常量数组，不能修改
+    printf("constArr[%d] = %d\n", index, constArr[index]); // 打印常量数组元素
+    return 0;
+}

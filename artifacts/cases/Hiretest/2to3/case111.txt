@@ -1,0 +1,26 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int arr[5] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+    return;
+}
+int main(){
+    int localVar = 3;
+    int result = add(globalVar, localVar);
+    printResult(result);
+    result = multiply(arr[2], CONST_VAL);
+    printResult(result);
+    if (result > 20 && result < 50) {
+        printf("Result is within range.\n");
+    } else {
+        printf("Result is out of range.\n");
+    }
+    return 0;
+}

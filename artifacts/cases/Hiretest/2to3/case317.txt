@@ -1,0 +1,22 @@
+const int MAX = 10;
+int numbers[MAX];
+int sum(int[] array) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        total = total + array[i];
+    }
+    return total;
+}
+void initialize(int[] array) {
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        array[i] = i;
+    }
+}
+int main(){
+    initialize(numbers);
+    int result = sum(numbers);
+    printf("Sum is: %d\n", result);
+    return 0;
+}

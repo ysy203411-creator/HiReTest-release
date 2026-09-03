@@ -1,0 +1,8 @@
+const int a = 5
+int b = 10;
+int c = 15;
+int main(){
+    int sum = a + b + c;
+    printf("Sum: %d\n", sum);
+    return 0;
+}

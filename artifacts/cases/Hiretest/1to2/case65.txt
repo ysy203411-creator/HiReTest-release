@@ -1,0 +1,15 @@
+const int a = 5;
+int b = 10;
+int arr[3] = {1, 2, 3};
+void printSum(int x, int y) {
+    printf("Sum: %d\n", x + y);
+}
+int main(){
+    int localVar = a + b;
+    int result = arr[0] * arr[1];
+    printSum(localVar, result);
+    if (localVar > 0 & result < 10) { // 使用单独的 &，应视为非法符号
+        printf("This line contains an error.\n");
+    }
+    return 0;
+}

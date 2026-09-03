@@ -1,0 +1,23 @@
+const int rq1_case_id_36 = 36;
+const int SIZE = 10;
+int array[SIZE];
+void addArrayConstInit(int value) {
+    static int index = 0;
+    if (index < SIZE) {
+        array[index] = value;
+        index = index + 1;
+    }
+}
+
+int main(){
+    const int testString[11] = {72, 101, 108, 108, 111, 10, 87, 111, 114, 108, 100}; // ASCII values for "Hello\nWorld!"
+    int i = 0;
+    for (i = 0; i < 10; i = i + 1) {
+        addArrayConstInit(testString[i]);
+    }
+    for (i = 0; i < SIZE; i = i + 1) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+    return 0;
+}

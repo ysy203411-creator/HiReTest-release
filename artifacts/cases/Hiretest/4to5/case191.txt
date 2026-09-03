@@ -1,0 +1,22 @@
+int globalVar;
+const int CONST_VAR = 5;
+int compare(int a, int b) {
+    if (a != b) {
+        return 1;
+    }
+    return 0;
+}
+void printResult(int result) {
+    if (result) {
+        printf("True\n");
+    } else {
+        printf("False\n");
+    }
+}
+int main(){
+    int a = getint();
+    int b = getint();
+    int result = compare(a, b);
+    printResult(result);
+    return 0;
+}

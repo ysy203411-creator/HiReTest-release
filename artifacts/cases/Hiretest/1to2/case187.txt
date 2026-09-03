@@ -1,0 +1,15 @@
+const int MAX = 100;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result is: %d\n", result);
+}
+int main(){
+    int a = 5;
+    int b = 10;
+    int result = add(a, b);  // 修正了函数调用中的括号错误
+    printResult(result);
+    return 0;
+}

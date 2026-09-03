@@ -1,0 +1,19 @@
+const int rq1_case_id_2 = 2;
+const int SIZE = 5;
+int globalArray[SIZE];
+void modifyArray(int index, int value) {
+    if (index >= 0 && index < SIZE) {
+        globalArray[index] = value; // 正确使用左值
+    }
+}
+int main(){
+    int localArray[SIZE];
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        localArray[i] = i * 2; // 正确使用左值
+    }
+    modifyArray(2, 10);
+    printf("globalArray[2] = %d\n", globalArray[2]); // 检查修改
+    printf("localArray[2] = %d\n", localArray[2]);   // 检查初始化
+    return 0;
+}

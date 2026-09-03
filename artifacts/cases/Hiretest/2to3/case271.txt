@@ -1,0 +1,21 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 3;
+    int result = 0;
+    int arr[5] = {1, 2, 3, 4, 5};
+    if (globalVar > 0 && localVar < 5) {
+        result = add(globalVar, localVar);
+    }
+    if (arr[0] == 1 && arr[4] == 5) {
+        result = add(result, CONST_VAL);
+    }
+    printResult(result);
+    return 0;
+}

@@ -1,0 +1,22 @@
+const int MAX = 10;
+int globalArray[MAX];
+int add(int a, int b) {
+    return a + b;
+}
+void printArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+}
+int main(){
+    int localArray[MAX];
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        localArray[i] = i * 2;
+    }
+    printArray(localArray);
+    int sum = add(5, 10);
+    printf("Sum: %d\n", sum);
+    return 0;
+}

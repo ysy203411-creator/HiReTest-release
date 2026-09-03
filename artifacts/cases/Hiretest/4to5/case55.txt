@@ -1,0 +1,20 @@
+const int a = 5;
+int b;
+
+int add(int x, int y) {
+    return x + y;
+}
+
+int sub(int x, int y) {
+    return x - y;
+}
+
+int main() {
+    int x = getint();
+    int y = getint();
+    int resultAdd = add(x, y);
+    int resultSub = sub(x, y);
+    printf("Addition %d\n", resultAdd);
+    printf("Subtraction %d\n", resultSub);
+    return 0;
+}

@@ -1,0 +1,15 @@
+const int MAX = 100;
+int globalVar;
+int add(int a, int b) {
+    return a + b;
+}
+void printHello() {
+    printf("Hello, World!\n");
+}
+int main(){
+    int result;
+    result = add(5, 10);
+    printf("Result: %d\n", result);
+    printHello();
+    return 0;
+}

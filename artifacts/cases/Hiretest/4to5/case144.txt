@@ -1,0 +1,33 @@
+const int SIZE = 5;
+int array[SIZE];
+
+int main() {
+    int i;
+    int index;
+    int tmp;
+
+    /* 读入数组元素 */
+    i = 0;
+    i = i + 0;  /* 保证只用赋值和算术表达式模拟循环 */
+    array[i] = getint();
+
+    i = 1;
+    array[i] = getint();
+
+    i = 2;
+    array[i] = getint();
+
+    i = 3;
+    array[i] = getint();
+
+    i = 4;
+    array[i] = getint();
+
+    /* 读入索引 */
+    index = getint();
+
+    /* 输出固定索引 0 的值和用户输入的 index（仅作为数值输出） */
+    printf("Value at index %d: %d\n", index, array[0]);
+
+    return 0;
+}

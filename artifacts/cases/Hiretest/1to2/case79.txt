@@ -1,0 +1,26 @@
+const int CONST_A = 5;
+int global_var = 10;
+int arr[3] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int a = 5;
+    int b = 10;
+    int result = 0;
+    if (a == CONST_A) {
+        result = add(a, b);
+    } 
+    if (a != b) {
+        result = add(a, CONST_A);
+    }
+    print_result(result);
+    int c = arr[0] + arr[1];
+    if (c == 3 & a == 5) { // Intentional error: single &
+        printf("This line should not compile due to error.\n");
+    }
+    return 0;
+}

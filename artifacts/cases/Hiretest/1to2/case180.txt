@@ -1,0 +1,17 @@
+const int CONST_VALUE = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printCharacter(int c) {
+    printf("Character: %d\n", c);
+}
+int main(){
+    const int localConst = 20;
+    int localVar = 15;
+    int result = add(globalVar, localVar);
+    printf("Result: %d\n", result);
+    int myChar = 65; // ASCII code for 'A'
+    printCharacter(myChar);
+    return 0;
+}

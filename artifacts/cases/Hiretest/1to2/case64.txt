@@ -1,0 +1,20 @@
+const int CONST_ONE = 1;
+const int CONST_TWO = 2;
+int globalVar = 0;
+int globalArray[5] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int localVar = CONST_ONE;
+    int result = add(globalVar, localVar);
+    printSum(result, CONST_TWO);
+    if (localVar & 1) { // This line contains the error with single '&'
+        printf("This should not compile due to single '&'\n");
+    }
+    return 0;
+}

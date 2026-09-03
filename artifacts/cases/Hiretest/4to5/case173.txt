@@ -1,0 +1,24 @@
+const int CONST_VAL = 10;
+int global_var;
+int array[5] = {1, 2, 3, 0, 0}; // 补全数组初始化
+int add(int a, int b) {
+    return a + b;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int local_var = getint();
+    int sum = add(local_var, CONST_VAL);
+    print_result(sum);
+    int i = 0;
+    // 使用if语句和goto替代while循环
+    loop_start:
+    if (i < 5) {
+        array[i] = array[i] * 2;
+        printf("Array[%d]: %d\n", i, array[i]);
+        i = i + 1;
+        goto loop_start;
+    }
+    return 0;
+}

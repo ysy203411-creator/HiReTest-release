@@ -1,0 +1,19 @@
+const int SIZE = 10;
+int arr[SIZE];
+int sum(int arr[], int length) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < length; i = i + 1) {
+        total = total + arr[i];
+    }
+    return total;
+}
+int main(){
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        arr[i] = i;
+    }
+    int total_sum = sum(arr, SIZE);
+    printf("Total sum: %d\n", total_sum);
+    return 0;
+}

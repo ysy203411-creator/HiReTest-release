@@ -1,0 +1,15 @@
+const int SIZE = 5;
+int array[SIZE] = {1, 2, 3, 4, 5};
+int func() {
+    return 42;
+}
+int main(){
+    int a = 10;
+    int b = 20;
+    int c = func();
+    int result = a + b + c;
+    int sum = array[2] + array[3];
+    printf("Result: %d\n", result);
+    printf("Sum: %d\n", sum);
+    return 0;
+}

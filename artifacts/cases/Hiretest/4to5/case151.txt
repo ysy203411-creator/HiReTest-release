@@ -1,0 +1,18 @@
+const int SIZE = 5;
+int intArray[SIZE];
+void fillArray(int arr[]) {
+    for (int i = 0; i < SIZE; i = i + 1) {
+        arr[i] = getint();
+    }
+}
+void printArray(int arr[]) {
+    for (int i = 0; i < SIZE; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int main(){
+    fillArray(intArray);
+    printArray(intArray);
+    return 0;
+}

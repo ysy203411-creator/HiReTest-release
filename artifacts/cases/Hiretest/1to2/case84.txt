@@ -1,0 +1,20 @@
+const int a = 5;
+int b = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int x = (a + b) * arr[2]; // 使用括号进行表达式解析
+    int y = add(x, arr[3]);
+    printResult(y);
+    if (x > 10 && y < 50) {
+        printf("Both conditions are met.\n");
+    } else {
+        printf("Conditions not met.\n");
+    }
+    return 0;
+}

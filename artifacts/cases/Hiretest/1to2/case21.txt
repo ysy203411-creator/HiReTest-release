@@ -1,0 +1,23 @@
+const int MAX_LENGTH = 100;
+int globalArray[MAX_LENGTH];
+void writeToFile(int content, int fileIndex) {
+    // 模拟文件写入操作
+    printf("Writing to file index: %d, Content: %d\n", fileIndex, content);
+}
+void testWriteToFile() {
+    int content = 42; // 使用整数代替字符串
+    int fileIndex = 24; // 使用整数代替字符串
+    writeToFile(content, fileIndex);
+}
+int main(){
+    int localArray[10] = {0}; // 初始化数组
+    int i;
+    for (i = 0; i < 10; i = i + 1) {
+        localArray[i] = i * i;
+    }
+    testWriteToFile();
+    for (i = 0; i < 10; i = i + 1) {
+        printf("localArray[%d] = %d\n", i, localArray[i]);
+    }
+    return 0;
+}

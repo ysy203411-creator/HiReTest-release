@@ -1,0 +1,20 @@
+int globalVar;
+const int CONST_VAL = 10;
+void checkState(int a) {
+    if (a > 0) {
+        printf("Positive\n");
+    } else {
+        printf("Non-positive\n");
+    }
+}
+int main(){
+    int input;
+    input = getint();
+    if (input > CONST_VAL) {
+        printf("Input is greater than CONST_VAL\n");
+    } else {
+        printf("Input is not greater than CONST_VAL\n");
+    }
+    checkState(input);
+    return 0;
+}

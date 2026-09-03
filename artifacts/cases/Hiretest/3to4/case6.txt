@@ -1,0 +1,18 @@
+const int rq1_case_id_6 = 6;
+const int SIZE = 3;
+int Output_LLVM_Printf_String[SIZE] = {1, 2, 3};
+int Outputlist_LLVM[SIZE] = {4, 5, 6};
+void print_arrays() {
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        printf("%d\n", Output_LLVM_Printf_String[i]);
+    }
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        printf("%d\n", Outputlist_LLVM[i]);
+    }
+}
+int main(){
+    print_arrays();
+    return 0;
+}

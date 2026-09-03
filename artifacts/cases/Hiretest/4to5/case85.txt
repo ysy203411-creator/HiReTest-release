@@ -1,0 +1,15 @@
+int globalVar;
+const int globalConst = 10;
+int array[5];
+void testFunction(int param) {
+    int localVar = param + globalConst;
+    printf("%d\n", localVar);
+}
+int main(){
+    int inputValue;
+    inputValue = getint();
+    array[0] = inputValue;
+    globalVar = array[0] + globalConst;
+    testFunction(globalVar);
+    return 0;
+}

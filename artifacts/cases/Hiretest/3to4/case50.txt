@@ -1,0 +1,17 @@
+const int rq1_case_id_50 = 50;
+const int MAX = 100;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+    return;
+}
+int main(){
+    int a = 5;
+    int b = 15;
+    printSum(a, b);
+    return 0;
+}

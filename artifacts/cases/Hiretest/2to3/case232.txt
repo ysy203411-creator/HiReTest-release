@@ -1,0 +1,12 @@
+const int MAX = 10;
+int arr[MAX];
+int func() {
+    int a = 5;
+    a = a + 2;
+    return 0; // 修改为返回字面量 0
+}
+int main(){
+    int x = func();
+    printf("%d\n", x);
+    return 0;
+}

@@ -1,0 +1,25 @@
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE] = {0};  // 初始化全局数组
+void initializeArray(int arr[]) {  // 修改形参为 int[]
+    int i = 0;
+    for (i = 0; i < MAX_SIZE; i = i + 1) {
+        arr[i] = i;
+    }
+}
+int sumArray(int arr[]) {  // 修改形参为 int[]
+    int sum = 0;
+    int i = 0;
+    for (i = 0; i < MAX_SIZE; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+int main(){
+    int localArray[MAX_SIZE];
+    initializeArray(localArray);
+    int globalSum = sumArray(globalArray);
+    int localSum = sumArray(localArray);
+    printf("Global Array Sum: %d\n", globalSum);
+    printf("Local Array Sum: %d\n", localSum);
+    return 0;
+}

@@ -1,0 +1,20 @@
+const int MAX = 100;
+int globalArray[MAX];
+int square(int x) {
+    return x * x;
+}
+void printSquare(int num) {
+    int result = square(num);
+    printf("Square of %d is %d\n", num, result);
+}
+int main(){
+    int localVar = 5;
+    globalArray[0] = localVar;
+    printSquare(globalArray[0]);
+    int a = 10;
+    int b = 20;
+    if (a & b) {  // 使用单独的 &，应视为非法符号
+        printf("This line should not compile.\n");
+    }
+    return 0;
+}

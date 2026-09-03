@@ -1,0 +1,20 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+    return;
+}
+int main(){
+    int x = 3;
+    int y = 4;
+    int result = add(x, y);
+    printResult(result);
+    // Introduce an error with a single |
+    if (x | y) {
+        printf("This line contains an error due to single |.\n");
+    }
+    return 0;
+}

@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: "HiReTest: Historical Repair-Guided Test Generation for Progressive Programming Assignments"
+message: "Please cite the HiReTest paper and the artifact release used."
+type: software
+authors:
+  - family-names: "JIANG"
+    given-names: "JING"
+version: "1.0.0"
+license: "MIT"

@@ -1,0 +1,14 @@
+const int TRUE = 1;
+const int FALSE = 0;
+int x;
+int y;
+int main(){
+    x = getint(); // 输入用于控制逻辑短路
+    y = getint(); // 输入用于控制逻辑短路
+    if (x || (y && FALSE)) {
+        printf("Short-circuit works: %d\n", TRUE);
+    } else {
+        printf("Short-circuit failed: %d\n", FALSE);
+    }
+    return 0;
+}

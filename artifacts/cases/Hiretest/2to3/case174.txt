@@ -1,0 +1,18 @@
+const int a = 5;
+int b = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+void printValue(int value) {
+    printf("%d\n", value);
+}
+int add(int x, int y) {
+    return x + y;
+}
+int main(){
+    int result = add(a, b);
+    printValue(result);
+    
+    int unaryResult = -arr[0];
+    printValue(unaryResult);
+    
+    return 0;
+}

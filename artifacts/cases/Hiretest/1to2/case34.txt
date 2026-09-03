@@ -1,0 +1,20 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int a = 5;
+    int b = 10;
+    int result = 0;
+    if (a > 0 & b > 0) {  // Intentional error: single '&' should be '&&'
+        result = add(a, b);
+    } else {
+        result = -1;
+    }
+    printResult(result);
+    return 0;
+}

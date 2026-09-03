@@ -1,0 +1,27 @@
+int a;
+int b;
+int c;
+
+void print_all_non_zero() {
+    printf("All_non-zero\n");
+    return;
+}
+
+void print_at_least_one_zero() {
+    printf("At_least_one_is_zero\n");
+    return;
+}
+
+int main() {
+    a = getint();
+    b = getint();
+    c = getint();
+
+    int all_non_zero_flag;
+    all_non_zero_flag = (a != 0) * (b != 0) * (c != 0);
+
+    print_all_non_zero();
+    print_at_least_one_zero();
+
+    return 0;
+}

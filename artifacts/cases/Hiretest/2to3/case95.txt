@@ -1,0 +1,20 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int array[3] = {1, 2};
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 3;
+    int sum = add(globalVar, localVar);
+    printResult(sum);
+    if (CONST_VAL > 0) {
+        printf("CONST_VAL is positive.\n");
+    }
+    array[1] = 10;
+    printf("Array element: %d\n", array[1]);
+    return 0;
+}

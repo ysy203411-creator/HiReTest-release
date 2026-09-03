@@ -1,0 +1,22 @@
+const int CONST_INT = 10;
+int globalVar = 5;
+int arr[5] = {1, 2, 3, 0, 0};  // 修改初始化列表以提供全部元素
+void testFunction(int param) {
+    const int localConst = 20;
+    int localVar = param;
+    localVar = CONST_INT;  // Should not cause error, as localVar is not a constant
+}
+int main(){
+    const int localConstMain = 30;
+    int localVarMain = 40;
+    localVarMain = localConstMain;  // Should not cause error, as localVarMain is not a constant
+    if (globalVar > 0) {
+        printf("GlobalVar is positive\n");
+    }
+    int i = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        arr[i] = i;  // Valid array modification
+    }
+    testFunction(globalVar);
+    return 0;
+}

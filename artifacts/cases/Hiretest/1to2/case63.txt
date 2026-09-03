@@ -1,0 +1,20 @@
+const int CONST_VAL = 10;
+int globalVar = CONST_VAL;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = getint();
+    int result = add(globalVar, localVar);
+    printResult(result);
+    int condition = (result > CONST_VAL) & (localVar < CONST_VAL); // Intentional error: single & instead of &&
+    if (condition) {
+        printf("Condition met.\n");
+    } else {
+        printf("Condition not met.\n");
+    }
+    return 0;
+}

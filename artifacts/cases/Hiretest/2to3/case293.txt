@@ -1,0 +1,9 @@
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int result;
+    result = add(1, 2;  // 缺少右括号
+    printf("Result: %d\n", result);
+    return 0;
+}

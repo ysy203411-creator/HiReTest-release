@@ -1,0 +1,22 @@
+const int CONST_ONE = 1;
+const int CONST_TWO = 2;
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+int main(){
+    int result;
+    int array[5] = {1, 2, 3, 4, 5};
+    int x = 10;
+    int y = 20;
+    // Testing logical OR with additional context for operators
+    if (x > 5 | y < 25) {  // Intentional single | to test error detection
+        result = add(x, y);
+    } else {
+        result = multiply(x, y);
+    }
+    printf("Result: %d\n", result);
+    return 0;
+}

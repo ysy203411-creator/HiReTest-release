@@ -1,0 +1,13 @@
+int globalVar;
+const int globalConst = 10;
+void testFunction() {
+    int localVar = 5;
+    const int localConst = 20;
+    printf("%d %d\n", localVar, localConst);
+}
+int main(){
+    globalVar = getint();
+    printf("%d %d\n", globalVar, globalConst);
+    testFunction();
+    return 0;
+}

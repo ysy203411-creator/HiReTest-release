@@ -1,0 +1,11 @@
+const int MAX_CHAR = 255;
+int testChar;
+int main(){
+    testChar = getint();
+    if (testChar > MAX_CHAR || testChar < 0) {
+        printf("Error: CHAR value out of bounds\n");
+    } else {
+        printf("CHAR value is within bounds: %d\n", testChar);
+    }
+    return 0;
+}

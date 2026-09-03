@@ -1,0 +1,15 @@
+int global_var;
+int const_var = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+void function_with_flag(int flag) {
+    if (flag == 0) {
+        printf("Branch destination added\\n");
+    } else {
+        printf("Return instruction added\\n");
+    }
+}
+int main(){
+    int local_var = getint();
+    function_with_flag(local_var);
+    return 0;
+}

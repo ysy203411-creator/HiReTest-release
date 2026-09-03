@@ -1,0 +1,19 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+int main(){
+    int x = 3;
+    int y = 4;
+    int result1 = add(x, y);
+    int result2 = multiply(CONST_VAL, globalVar);
+    
+    printf("Result 1: %d\n", result1);
+    printf("Result 2: %d\n", result2);
+    
+    return 0;
+}

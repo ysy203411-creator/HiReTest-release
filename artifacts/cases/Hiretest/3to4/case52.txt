@@ -1,0 +1,19 @@
+const int rq1_case_id_52 = 52;
+const int CONST_VAL = 10;
+int globalVar = 5;
+int negate(int x) {
+    if (x == 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+int main(){
+    int a = 0;
+    int b = 1;
+    int result1 = negate(a); // 应该返回 1
+    int result2 = negate(b); // 应该返回 0
+    printf("Result1: %d\n", result1);
+    printf("Result2: %d\n", result2);
+    return 0;
+}

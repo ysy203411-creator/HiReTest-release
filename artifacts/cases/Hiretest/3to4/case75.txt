@@ -1,0 +1,15 @@
+const int rq1_case_id_75 = 75;
+const int GLOBAL_INT = 65;
+int testConversion(int a, int b) {
+    return a + b;
+}
+void testVoidFunc() {
+    return; // Correct usage of return in a void function
+}
+int main(){
+    const int LOCAL_INT = 66;
+    int result1 = testConversion(GLOBAL_INT, LOCAL_INT);
+    printf("Result 1: %d\n", result1);
+    testVoidFunc();
+    return 0;
+}

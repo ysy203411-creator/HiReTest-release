@@ -1,0 +1,26 @@
+const int MAX_LEVELS = 10;
+int level_tables[MAX_LEVELS];
+void init_levels() {
+    int i = 0;
+    for (i = 0; i < MAX_LEVELS; i = i + 1) {
+        level_tables[i] = i * 10;
+    }
+}
+int get_level_value(int level) {
+    if (level < 0 || level >= MAX_LEVELS) {
+        return -1;
+    }
+    return level_tables[level];
+}
+int main(){
+    init_levels();
+    int level = 5;
+    int value = get_level_value(level);
+    printf("Value at level %d is %d\n", level, value);
+    
+    level = 11; // Test out of bounds
+    value = get_level_value(level);
+    printf("Value at level %d is %d\n", level, value);
+    
+    return 0;
+}

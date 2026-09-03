@@ -1,0 +1,34 @@
+const int SIZE = 5;
+int errors[SIZE];
+int globalIndex = 0; // 修改全局变量名
+void addError(int errorCode) {
+    if (globalIndex < SIZE) {
+        errors[globalIndex] = errorCode;
+        globalIndex = globalIndex + 1;
+    }
+}
+void printErrors() {
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        printf("%d\n", errors[i]);
+    }
+}
+int main(){
+    if (globalIndex < SIZE) { // 将条件放在 if 语句中
+        addError(404);
+    }
+    if (globalIndex < SIZE) {
+        addError(404); // Duplicate error code
+    }
+    if (globalIndex < SIZE) {
+        addError(500);
+    }
+    if (globalIndex < SIZE) {
+        addError(500); // Duplicate error code
+    }
+    if (globalIndex < SIZE) {
+        addError(403);
+    }
+    printErrors(); // Should print errors without duplicates
+    return 0;
+}

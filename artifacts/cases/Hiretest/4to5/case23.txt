@@ -1,0 +1,25 @@
+int a = 10;
+int b = 5;
+int c = 2;
+int multiply(int x, int y) {
+    return x * y;
+}
+int divide(int x, int y) {
+    if (y != 0) {
+        return x / y;
+    }
+    return 0; // Avoid division by zero
+}
+int mod(int x, int y) {
+    if (y != 0) {
+        return x % y;
+    }
+    return 0; // Avoid division by zero
+}
+int main(){
+    int result1 = multiply(a, b);
+    int result2 = divide(a, c);
+    int result3 = mod(a, c);
+    printf("%d %d %d\n", result1, result2, result3);
+    return 0;
+}

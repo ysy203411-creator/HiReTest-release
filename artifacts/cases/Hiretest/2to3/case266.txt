@@ -1,0 +1,19 @@
+const int SIZE = 10;
+int arr[SIZE];
+int sum;
+void calculateSum(int numbers[]) {  // 修改形参声明为符合约束
+    int i;
+    sum = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        sum = sum + numbers[i];
+    }
+}
+int main(){
+    int i;
+    for (i = 0; i < SIZE; i = i + 1) {
+        arr[i] = i * 2;
+    }
+    calculateSum(arr);
+    printf("Sum: %d\n", sum);
+    return 0;  // 添加缺少的 return 0;
+}

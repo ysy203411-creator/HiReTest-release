@@ -1,0 +1,19 @@
+const int a = 5;
+int b = 10;
+void printValues(int x, int y) {
+    printf("Values: %d, %d\n", x, y);  // 正确的 printf 调用
+}
+int main(){
+    int c = a + b;
+    int d = 0;
+    
+    if (c > 10) {
+        d = c - 5;  // 正确的 if 语句
+    } else {
+        d = c + 5;  // 正确的 else 语句
+    }
+    
+    printValues(c, d);  // 正确的函数调用
+    
+    return 0;
+}

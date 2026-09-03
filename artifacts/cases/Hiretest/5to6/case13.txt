@@ -1,0 +1,8 @@
+int a; // 全局声明
+
+int main() {
+    a = getint();
+    printf("Input value is %d\n", a); // 移除非ASCII字符
+    printf("Character output: A\n");
+    return 0;
+}

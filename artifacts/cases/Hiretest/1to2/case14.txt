@@ -1,0 +1,16 @@
+const int MAX = 10;
+int array[MAX];
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int x = 5;
+    int y = 10;
+    int result = add(x, y);
+    if (result > 10 & result < 20) { // 错误：单独使用了 &，应为 &&
+        printf("Result is between 10 and 20\n");
+    } else {
+        printf("Result is out of range\n");
+    }
+    return 0;
+}

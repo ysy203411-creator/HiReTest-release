@@ -1,0 +1,22 @@
+const int MAX = 10;
+int numbers[MAX];
+int sum;
+void calculateSum(int arr[], int length) {
+    int i = 0;
+    for (i = 0; i < length; i = i + 1) {
+        sum = sum + arr[i];
+    }
+}
+int main(){
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        numbers[i] = i;
+    }
+    calculateSum(numbers, MAX);
+    if (sum | 0) { // 使用单独的 |，应视为非法符号
+        printf("Sum is non-zero\n");
+    } else {
+        printf("Sum is zero\n");
+    }
+    return 0;
+}

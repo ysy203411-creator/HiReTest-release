@@ -1,0 +1,18 @@
+const int a = 1;
+const int b = 0;
+int result;
+void testLAndExp(int x, int y) {
+    if (x * y) { // 使用乘法替代逻辑与
+        printf("Both are true\n"); // 修改为不使用格式符
+    } else {
+        printf("At least one is false\n"); // 修改为不使用格式符
+    }
+}
+int main(){
+    int input1 = getint();
+    int input2 = getint();
+    result = a * b; // 使用乘法替代逻辑与
+    printf("Result of a * b: %d\n", result);
+    testLAndExp(input1, input2);
+    return 0;
+}

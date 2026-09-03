@@ -1,0 +1,21 @@
+int global_var = 0;
+void void_function() {
+    return; // 正确的 void 函数返回
+}
+int int_function() {
+    return 0; // 修改后的 int 函数返回，符合约束
+}
+int main(){
+    int a = 0;
+    const int b = 5;
+    int arr[10];
+    int i;
+    for (i = 0; i < 10; i = i + 1) {
+        if (i == 5) {
+            break; // 合法的 break
+        }
+        continue; // 合法的 continue
+    }
+    printf("All tests passed.\n");
+    return 0;
+}

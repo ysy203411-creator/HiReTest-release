@@ -1,0 +1,14 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int array[5] = {1, 2, 3, 4, 5};
+void function(int param, int arr[]) {
+    printf("%d\n", param);
+    printf("%d\n", arr[0]);
+}
+int main(){
+    int localVar = 3;
+    int localArray[3] = {7, 8, 9};
+    function(localVar, localArray);
+    int anotherArray[3];  // 声明局部数组，无需初始化
+    return 0;
+}

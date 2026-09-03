@@ -1,0 +1,26 @@
+const int MAX = 100;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+int main(){
+    int result;
+    int x = 5;
+    int y = 10;
+    int arr[5] = {1, 2, 3, 4, 5};
+    result = add(x, y);
+    printf("Addition Result: %d\n", result);
+    result = multiply(x, y);
+    printf("Multiplication Result: %d\n", result);
+    if (x < y) {
+        printf("x is less than y\n");
+    } else {
+        printf("x is not less than y\n");
+    }
+    result = arr[2] + arr[3];
+    printf("Array Sum: %d\n", result);
+    return 0;
+}

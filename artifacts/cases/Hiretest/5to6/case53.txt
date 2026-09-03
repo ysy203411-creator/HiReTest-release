@@ -1,0 +1,16 @@
+int a;
+int b;
+int c;
+const int CONST_VAL = 10;
+void testFunction(int x) {
+    int localVar = x + CONST_VAL;
+    printf("Local variable: %d\n", localVar);
+}
+int main(){
+    a = getint();
+    b = getint();
+    c = a + b;
+    printf("Sum: %d\n", c);
+    testFunction(c);
+    return 0;
+}

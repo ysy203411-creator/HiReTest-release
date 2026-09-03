@@ -1,0 +1,18 @@
+const int size = 10;
+int ascii_codes[size];
+
+int main() {
+    int i;
+    for (i = 0; i < size; i = i + 1) {
+        ascii_codes[i] = 97 + i;  // 97 是 'a' 的 ASCII 码
+    }
+    ascii_codes[5] = 92;  // 92 是 '\' 的 ASCII 码
+    ascii_codes[6] = 110; // 110 是 'n' 的 ASCII 码
+
+    printf("String ASCII codes:\n");
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d ", ascii_codes[i]);
+    }
+    printf("\n");
+    return 0;
+}

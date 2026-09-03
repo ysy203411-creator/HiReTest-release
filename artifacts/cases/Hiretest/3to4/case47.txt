@@ -1,0 +1,26 @@
+const int rq1_case_id_47 = 47;
+const int a = 10;
+int b = 20;
+int arr[5] = {1, 2, 3, 4, 5};
+int sum(int x, int y) {
+    return x + y;
+}
+void printSum(int x, int y) {
+    int result = sum(x, y);
+    printf("Sum: %d\n", result);
+    return;
+}
+int main(){
+    int x = 5;
+    int y = 15;
+    int z = sum(x, y);
+    printf("Result: %d\n", z);
+    printSum(a, b);
+    
+    if (x < y) {
+        printf("x is less than y\n");
+    } else {
+        printf("x is not less than y\n");
+    }
+    return 0;
+}

@@ -1,0 +1,14 @@
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE];
+void processArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < MAX_SIZE; i = i + 1) {
+        arr[i] = i * 2;
+    }
+}
+int main(){
+    int localArray[5]; // 添加了缺少的右括号
+    processArray(globalArray);
+    printf("Global array first element: %d\n", globalArray[0]);
+    return 0;
+}

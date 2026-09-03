@@ -1,0 +1,14 @@
+int a;
+int b;
+int main(){
+    a = getint();
+    b = getint();
+    int result = a - b; // 使用减法运算替代比较运算
+    if (result > 0) {
+        printf("a is greater than b\\n");
+    } else {
+        printf("a is not greater than b\\n");
+    }
+    printf("This should always print\\n");
+    return 0;
+}

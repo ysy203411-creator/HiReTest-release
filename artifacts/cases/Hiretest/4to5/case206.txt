@@ -1,0 +1,8 @@
+int g = 0;
+
+int main() {
+    int a = 65;
+    int b = 12345;
+    printf("Character: %d, Number: %d\n", a, b);
+    return 0;
+}

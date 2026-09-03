@@ -1,0 +1,12 @@
+const int constVal = 10;
+int globalVar;
+int testFunc(int a, int b) {
+    return a + b;
+}
+int main(){
+    int x = getint();
+    int y = 65; // ASCII value of 'A'
+    int result = testFunc(x, y);
+    printf("%d\n", result);
+    return 0;
+}

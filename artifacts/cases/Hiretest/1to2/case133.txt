@@ -1,0 +1,14 @@
+const int MAX_LEN = 1024;
+int global_array[MAX_LEN];
+const int VALUE = 10;
+void printValue(int x) {
+    printf("Value: %d\n", x);
+}
+int main(){
+    int local_var = 5;
+    const int local_const = 2;
+    int result = local_var + VALUE + local_const;
+    printValue(result);
+    // Removed unsupported string usage
+    return 0;
+}

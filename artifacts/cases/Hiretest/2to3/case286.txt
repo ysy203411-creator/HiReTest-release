@@ -1,0 +1,13 @@
+const int CONST_VAL = 10;
+int globalVar = 0;
+int arr[5] = {1, 2, 3, 4, 5};
+void testFunc(int a, int b, int arr[]) {
+    printf("a: %d, b: %d, arr[0]: %d\n", a, b, arr[0]);
+}
+int main(){
+    int localVar = 5;
+    int anotherVar = 10;
+    int localArr[3] = {CONST_VAL, localVar, anotherVar};
+    testFunc(localVar, anotherVar, localArr);
+    return 0;
+}

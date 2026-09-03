@@ -1,0 +1,10 @@
+const int a = 5;
+const int b = 65; // ASCII value of 'A'
+int main(){
+    const int c = 10;
+    const int d = 66; // ASCII value of 'B'
+    int e = getint();
+    printf("%d %d %d %d\n", a, c, b, d);
+    printf("%d\n", e);
+    return 0;
+}

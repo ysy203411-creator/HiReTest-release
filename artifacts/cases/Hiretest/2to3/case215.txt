@@ -1,0 +1,18 @@
+const int a = 5;
+int b = 10;
+int arr[3] = {1, 2};
+void func() {
+    int x = a + b;
+    printf("Value: %d\n", x;
+}
+int main(){
+    int y = getint();
+    arr[0] = y
+    func();
+    if (y > 0 {
+        printf("Positive\n");
+    } else {
+        printf("Non-positive\n");
+    }
+    return 0;
+}

@@ -1,0 +1,22 @@
+const int MAX_SIZE = 100;
+int globalArray[MAX_SIZE];
+int myFunction(int param) {
+    int localVar = param * 2;
+    return localVar;
+}
+int anotherFunction() {
+    int localInt = 65; // ASCII value of 'A'
+    return localInt;
+}
+void voidFunction() {
+    printf("This is a void function.\n");
+    return;
+}
+int main(){
+    int result = myFunction(10);
+    printf("Result: %d\n", result);
+    int charResult = anotherFunction();
+    printf("Char Result: %d\n", charResult);
+    voidFunction();
+    return 0;
+}

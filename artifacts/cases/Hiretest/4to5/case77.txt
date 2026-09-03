@@ -1,0 +1,17 @@
+const int CONST_VAL = 10;
+int globalVar;
+int compare(int a, int b) {
+    if (a > b) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+int main(){
+    int input = getint();
+    int result1 = compare(CONST_VAL, input);
+    int result2 = compare(input, CONST_VAL);
+    printf("Result1: %d\n", result1);
+    printf("Result2: %d\n", result2);
+    return 0;
+}

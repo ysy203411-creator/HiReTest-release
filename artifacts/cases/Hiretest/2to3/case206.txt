@@ -1,0 +1,7 @@
+const int a = 5, b = 10; // 正确的常量声明
+const int c = 15 // 缺少分号的常量声明，旧版本会报错，新版本会自动补全分号
+int main(){
+    int sum = a + b + c;
+    printf("Sum: %d\n", sum);
+    return 0;
+}

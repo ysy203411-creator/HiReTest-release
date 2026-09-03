@@ -1,0 +1,17 @@
+int globalVar;
+void testFunction() {
+    int localVar = 10;
+    // break; // 删除错误的 break 语句
+}
+int main(){
+    const int constVar = 5;
+    int array[5] = {1, 2, 3, 4, 5};
+    int i;
+    for (i = 0; i < 5; i = i + 1) {
+        if (array[i] == constVar) {
+            break; // 正确使用
+        }
+    }
+    testFunction(); // 调用函数以测试函数内的错误处理
+    return 0;
+}

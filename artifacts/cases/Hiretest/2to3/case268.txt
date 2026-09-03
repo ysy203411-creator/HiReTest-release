@@ -1,0 +1,15 @@
+const int x = 5;
+const int y = 10;
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+int main(){
+    int result1 = add(x, y);
+    int result2 = multiply(x, y);
+    printf("Addition result: %d\n", result1);
+    printf("Multiplication result: %d\n", result2);
+    return 0;
+}

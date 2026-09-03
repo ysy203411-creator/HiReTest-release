@@ -1,0 +1,12 @@
+int a;
+int b;
+int main(){
+    int x;
+    int y;
+    x = getint();
+    y = getint();
+    a = (x > 0) ? 1 : ((x < 0) ? (y / x > 1) : 0); // 使用条件运算符替代 if-else
+    b = (x < 0) ? 1 : ((x > 0) ? (y / x < 1) : 0); // 使用条件运算符替代 if-else
+    printf("%d %d", a, b);
+    return 0;
+}

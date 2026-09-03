@@ -1,0 +1,17 @@
+int global_var;
+const int CONST_VAL = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int input;
+    int result;
+    global_var = getint();
+    input = global_var + CONST_VAL;
+    result = add(input, CONST_VAL);
+    print_result(result);
+    return 0;
+}

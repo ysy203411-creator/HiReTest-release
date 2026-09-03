@@ -1,0 +1,18 @@
+int globalVar;
+const int CONST_VAL = 10;
+int compute(int x) {
+    return x * 2;
+}
+void printResult(int result) {
+    printf("Result is: %d\n", result);
+}
+int main(){
+    int input;
+    int result;
+    input = getint();
+    result = compute(input);
+    printResult(result);
+    globalVar = CONST_VAL + result;
+    printf("Global variable is: %d\n", globalVar);
+    return 0;
+}

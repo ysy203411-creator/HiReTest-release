@@ -1,0 +1,16 @@
+int a;
+int b;
+int c[10];
+void func(int x) {
+    int a;
+    a = x + 1;
+    printf("%d\n", a);
+}
+int main(){
+    a = getint();
+    b = getint();
+    c[0] = a + b;
+    printf("%d\n", c[0]);
+    func(c[0]);
+    return 0;
+}

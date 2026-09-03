@@ -1,0 +1,18 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 3;
+    int sum = add(globalVar, localVar);
+    printResult(sum);
+    int check = CONST_VAL + globalVar; // 修改为算术运算
+    if (check) {
+        printf("This line should not be printed.\n");
+    }
+    return 0;
+}

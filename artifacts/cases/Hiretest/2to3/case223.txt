@@ -1,0 +1,22 @@
+const int MAX_LENGTH = 1024;
+int globalVar = 0;
+int array[MAX_LENGTH];
+int processString(int str[]) {
+    int length = 0;
+    int i = 0;
+    for (i = 0; str[i] != 0; i = i + 1) {
+        length = length + 1;
+    }
+    return length;
+}
+int main(){
+    int testString[] = {84, 104, 105, 115, 32, 105, 115, 32, 97, 32, 116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103, 32, 116, 111, 32, 99, 104, 101, 99, 107, 32, 116, 104, 101, 32, 108, 101, 120, 101, 114, 32, 115, 116, 114, 105, 110, 103, 32, 104, 97, 110, 100, 108, 105, 110, 103, 46, 0};  // 修改为变量数组
+    int length = processString(testString);
+    printf("Length of the string: %d\n", length);
+    if (length > MAX_LENGTH) {
+        printf("Error: String length exceeds maximum allowed length.\n");
+    } else {
+        printf("String length is within the allowed range.\n");
+    }
+    return 0;
+}

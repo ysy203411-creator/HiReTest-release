@@ -1,0 +1,7 @@
+const int a = 5
+const int b = 10;
+int main(){
+    int sum = a + b;
+    printf("%d\n", sum);
+    return 0;
+}

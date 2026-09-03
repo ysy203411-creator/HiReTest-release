@@ -1,0 +1,20 @@
+const int SIZE = 5;
+int array[SIZE];
+void initializeArray(int arr[], int size) {
+    int i = 0;
+    for (; i < size; i = i + 1) { // 将初始化移至for循环内部
+        arr[i] = -1; // Initialize with a negative value
+    }
+}
+void printArray(int arr[], int size) {
+    int i = 0;
+    for (; i < size; i = i + 1) { // 将初始化移至for循环内部
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int main(){
+    initializeArray(array, SIZE);
+    printArray(array, SIZE);
+    return 0;
+}

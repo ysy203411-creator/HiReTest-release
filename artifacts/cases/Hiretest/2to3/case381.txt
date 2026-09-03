@@ -1,0 +1,27 @@
+const int CONST_ONE = 1;
+const int CONST_ZERO = 0;
+int globalVar = 5;
+int array[3] = {1, 2};
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int a = 10;
+    int b = 20;
+    int c = 0;
+    int result = 0;
+    if (a > b && b > c) {
+        result = add(a, b);
+    } else {
+        result = add(b, c);
+    }
+    printResult(result);
+    int index = 1;
+    if (index >= 0 && index < 3) {
+        printf("Array element: %d\n", array[index]);
+    }
+    return 0;
+}

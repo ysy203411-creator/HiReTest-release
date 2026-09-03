@@ -1,0 +1,18 @@
+const int rq1_case_id_38 = 38;
+const int a = 10;
+int b = 20;
+int arr[5] = {1, 2, 3, 4, 5};
+int sum(int x, int y) {
+    return x + y;
+}
+void printSum(int arr[]) {  // 修改形参为数组类型
+    int result = sum(arr[1], arr[2]);  // 使用数组元素进行计算
+    printf("Sum: %d\n", result);
+    return;
+}
+int main(){
+    int localVar = a + b;
+    printf("Local Variable: %d\n", localVar);
+    printSum(arr);  // 传递数组变量名
+    return 0;
+}

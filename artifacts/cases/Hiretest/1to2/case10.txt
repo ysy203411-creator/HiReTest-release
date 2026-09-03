@@ -1,0 +1,27 @@
+const int MAX = 10;
+int globalVar = 5;
+int numbers[MAX];
+void printNumbers(int[] arr) {
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+}
+int main(){
+    int localVar = 3;
+    const int localConst = 2;
+    int result = localVar + globalVar * localConst;
+    
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        numbers[i] = i * result;
+    }
+    
+    printNumbers(numbers);
+    
+    if (result > 20 & result < 50) { // 错误：使用单独的 & 代替 &&
+        printf("Result is between 20 and 50\n");
+    }
+    
+    return 0;
+}

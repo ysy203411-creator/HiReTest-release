@@ -1,0 +1,24 @@
+const int SIZE = 10;
+int globalVar = 5;
+int array[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+int add(int a, int b) {
+    return a + b;
+}
+void printValues(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("Value at index %d: %d\n", i, arr[i]);
+    }
+}
+int main(){
+    int localVar = 3;
+    int result = add(globalVar, localVar);
+    printf("The result of adding %d and %d is %d\n", globalVar, localVar, result);
+    
+    // Test the format specifier counting logic
+    printf("This string has %d format specifiers: %d, and %%\n", 2, result);
+    
+    printValues(array, SIZE);
+    
+    return 0;
+}

@@ -1,0 +1,9 @@
+int x;
+int y;
+
+int main() {
+    x = getint();
+    y = !x; // test logical not operator
+    printf("%d\n", y); // output 1 if x == 0, else 0
+    return 0;
+}

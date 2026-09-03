@@ -1,0 +1,13 @@
+const int SIZE = 10;
+int arr[SIZE];
+void func(int param, int array[]) {
+    printf("%d\n", param);
+    printf("%d\n", array[0]);
+}
+int main(){
+    int x = 5;
+    int y[SIZE];
+    y[0] = 42;
+    func(x, y);
+    return 0;
+}

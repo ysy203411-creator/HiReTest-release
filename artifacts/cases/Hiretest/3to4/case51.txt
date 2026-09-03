@@ -1,0 +1,23 @@
+const int rq1_case_id_51 = 51;
+const int CONST_VAL = 5;
+int globalVar = 10;
+int array[5] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+    return;
+}
+int main(){
+    int localVar = 20;
+    int result = add(globalVar, localVar);
+    printResult(result);
+    int mulResult = globalVar * CONST_VAL;
+    printf("Multiplication Result: %d\n", mulResult);
+    int divResult = array[4] / CONST_VAL;
+    printf("Division Result: %d\n", divResult);
+    int modResult = array[3] % CONST_VAL;
+    printf("Modulo Result: %d\n", modResult);
+    return 0;
+}

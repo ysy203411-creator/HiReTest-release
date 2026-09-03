@@ -1,0 +1,16 @@
+const int a = 5;
+const int b = 10;
+int x;
+int y;
+int add(int p, int q) {
+    return p + q;
+}
+int main(){
+    x = getint();
+    y = getint();
+    int result1 = add(a, b);
+    int result2 = add(x, y);
+    printf("%d\n", result1);
+    printf("%d\n", result2);
+    return 0;
+}

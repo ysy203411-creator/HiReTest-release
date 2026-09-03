@@ -1,0 +1,33 @@
+const int rq1_case_id_77 = 77;
+const int SIZE = 5;
+int globalArray[SIZE] = {1, 2, 3, 4, 5};
+int getElement(int arr[], int index) {
+    return arr[index];
+}
+void printArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+}
+int main(){
+    int localArray[SIZE] = {10, 20, 30, 40, 50};
+    int index = 2;
+    
+    // Test global array access
+    int globalValue = getElement(globalArray, index);
+    printf("Global array value at index %d: %d\n", index, globalValue);
+    
+    // Test local array access
+    int localValue = getElement(localArray, index);
+    printf("Local array value at index %d: %d\n", index, localValue);
+    
+    // Test printing entire array
+    printf("Global array:\n");
+    printArray(globalArray, SIZE);
+    
+    printf("Local array:\n");
+    printArray(localArray, SIZE);
+    
+    return 0;
+}

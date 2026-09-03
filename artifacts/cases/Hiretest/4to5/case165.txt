@@ -1,0 +1,14 @@
+int slot;
+
+int main() {
+    int a, b;
+    a = getint();
+    b = getint();
+    /* 用算术和赋值替代 if-else，避免使用被禁止的选择语句 */
+    slot = a - b;
+    slot = slot * slot;      // slot = (a - b)^2 >= 0
+    slot = slot / (a - b + slot); // 若 a >= b，则 slot = a - b；否则 slot = b - a
+    slot = slot + b;         // slot = max(a, b)
+    printf("Slot value: %d\n", slot);
+    return 0;
+}

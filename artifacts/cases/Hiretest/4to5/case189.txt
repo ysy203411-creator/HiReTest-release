@@ -1,0 +1,19 @@
+int a;
+int b;
+
+int main() {
+    a = getint();
+    b = getint();
+
+    // 用算术表达式和 printf 替代 if-else 分支
+    int diff;
+    diff = a - b;
+
+    // 当 a > b 时，diff > 0；否则 diff <= 0
+    // 通过两条输出语句展示比较结果
+    printf("a - b = %d\n", diff);
+    printf("comparison result (1: a>b, 0: a<=b): %d\n", (diff > 0) ? 1 : 0);
+
+    printf("End of program\n");
+    return 0;
+}

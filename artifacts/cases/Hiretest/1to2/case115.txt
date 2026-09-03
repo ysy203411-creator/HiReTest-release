@@ -1,0 +1,24 @@
+const int MAX = 10;
+int globalArray[MAX] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void printArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+}
+int main(){
+    int x = 5;
+    int y = 10;
+    int result = add(x, y);
+    printf("Result: %d\n", result);
+    int localArray[3] = {4, 5, 6};
+    printArray(globalArray, MAX);
+    printArray(localArray, 3);
+    if (x & y) {  // Intentional error: single '&' instead of '&&'
+        printf("This line should trigger an error.\n");
+    }
+    return 0;
+}

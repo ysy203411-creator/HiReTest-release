@@ -1,0 +1,19 @@
+int a;
+int b;
+const int c = 5;
+int arr[10];
+void compute(int x) {
+    int result = x * c;
+    printf("Result: %d\n", result);
+}
+int main(){
+    a = getint();
+    b = getint();
+    arr[0] = a + b;
+    arr[1] = a - b;
+    arr[2] = a * b;
+    compute(arr[0]);
+    compute(arr[1]);
+    compute(arr[2]);
+    return 0;
+}

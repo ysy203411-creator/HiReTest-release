@@ -1,0 +1,26 @@
+const int CONST_NUM = 10;
+int global_var = 5;
+int global_array[CONST_NUM] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+int main(){
+    int local_var = getint();
+    int result_add = add(local_var, global_var);
+    int result_multiply = multiply(local_var, CONST_NUM);
+    if (result_add > result_multiply) {
+        printf("Addition result is greater: %d\n", result_add);
+    } else {
+        printf("Multiplication result is greater or equal: %d\n", result_multiply);
+    }
+    int array_sum = 0;
+    int i = 0;
+    for (i = 0; i < CONST_NUM; i = i + 1) {
+        array_sum = array_sum + global_array[i];
+    }
+    printf("Sum of global_array: %d\n", array_sum);
+    return 0;
+}

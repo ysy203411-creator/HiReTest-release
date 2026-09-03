@@ -1,0 +1,3 @@
+langgraph==1.2.9
+langgraph-prebuilt==1.1.0
+langchain-openai==1.3.5

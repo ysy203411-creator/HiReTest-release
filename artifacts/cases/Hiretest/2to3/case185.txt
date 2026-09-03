@@ -1,0 +1,13 @@
+const int SIZE = 5;
+int arr[SIZE];
+int main(){
+    int x = 10;
+    if (x & 1) {
+        printf("Odd number\n");
+    } else {
+        printf("Even number\n");
+    }
+    arr[0] = x;
+    printf("%d\n", arr[0]);
+    return 0;
+}

@@ -1,0 +1,15 @@
+const int MAX = 100;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+int main(){
+    int result1 = add(5, 10;
+    int result2 = multiply(2, 3);
+    printf("Result1: %d\n", result1);
+    printf("Result2: %d\n", result2);
+    return 0;
+}

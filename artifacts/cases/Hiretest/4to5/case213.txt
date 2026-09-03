@@ -1,0 +1,19 @@
+const int SIZE = 5;
+int array[SIZE];
+void read_input(int arr[]) {
+    for (int i = 0; i < SIZE; i = i + 1) {
+        arr[i] = getint();
+    }
+}
+
+void print_output(int arr[]) {
+    for (int i = 0; i < SIZE; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+}
+
+int main() {
+    read_input(array);
+    print_output(array);
+    return 0;
+}

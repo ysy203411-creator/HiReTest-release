@@ -1,0 +1,13 @@
+const int a = 5;
+int b = 10;
+int sum(int x, int y) {
+    return x + y;
+}
+int main(){
+    int result;
+    if (a > 0 {
+        result = sum(a, b);
+    }
+    printf("Result: %d\n", result);
+    return 0;
+}

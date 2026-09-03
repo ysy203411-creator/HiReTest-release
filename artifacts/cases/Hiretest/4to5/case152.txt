@@ -1,0 +1,11 @@
+const int SIZE = 5;
+const int arr[SIZE] = {1, 2, 3, 4, 5};
+int main(){
+    int i = 0;
+    while (i < SIZE) {
+        printf("%d ", arr[i]);
+        i = i + 1;
+    }
+    printf("\n");
+    return 0;
+}

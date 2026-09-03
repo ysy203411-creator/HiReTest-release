@@ -1,0 +1,12 @@
+int globalVar;
+int func(int x) {
+    return x * 2;
+}
+int main(){
+    int localVar = 5;
+    int result;
+    globalVar = getint();
+    result = func(globalVar);
+    printf("%d\n", result);
+    return 0;
+}

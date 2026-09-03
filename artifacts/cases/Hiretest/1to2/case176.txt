@@ -1,0 +1,20 @@
+const int MAX = 10;
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+int main(){
+    int x = 5;
+    int y = 2;
+    int result1, result2;
+    // Test function with multiple parameters
+    result1 = add(x, y);
+    result2 = multiply(x, y);
+    
+    printf("Addition: %d\n", result1);
+    printf("Multiplication: %d\n", result2);
+    
+    return 0;
+}

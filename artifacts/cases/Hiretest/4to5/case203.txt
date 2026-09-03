@@ -1,0 +1,16 @@
+const int SIZE = 5;
+int array[SIZE];
+void copyArray(int constArray[], int array[], int size) {
+    for (int i = 0; i < size; i = i + 1) {
+        array[i] = constArray[i];
+    }
+}
+
+int main(){
+    int constArray[SIZE] = {1, 2, 3, 4, 5}; // 改为普通数组
+    copyArray(constArray, array, SIZE);
+    for (int i = 0; i < SIZE; i = i + 1) {
+        printf("%d ", array[i]);
+    }
+    return 0;
+}

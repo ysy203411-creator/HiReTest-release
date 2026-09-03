@@ -1,0 +1,12 @@
+const int a = 10;
+int b = 20;
+int sum(int x, int y) {
+    return x + y;
+}
+int main(){
+    int result;
+    result = sum(a, b);
+    printf("Result: %d\n", result);
+    int arr[5] = {1, 2, 3, 4, 5};
+    return 0;
+}

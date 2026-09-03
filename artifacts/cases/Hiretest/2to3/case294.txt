@@ -1,0 +1,12 @@
+const int a = 5;
+int b[10] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    int result = add(x, y;  // 缺少右括号 )
+    printf("Result is: %d\n", result);
+    return 0;
+}

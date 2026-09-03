@@ -1,0 +1,11 @@
+const int a = 10;
+int func() {
+    int a = 20; // 局部变量遮蔽全局常量
+    int b = 30;
+    return b;
+}
+int main(){
+    int c = 40;
+    printf("%d\n", c);
+    return 0;
+}

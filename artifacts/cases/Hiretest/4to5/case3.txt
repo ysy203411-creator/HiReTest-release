@@ -1,0 +1,23 @@
+const int size = 5;
+int globalArray[size] = {1, 2, 3, 4, 5};
+
+void printArray(int arr[], int length) {
+    int i = 0;
+    for (i = 0; i < length; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+    return;
+}
+
+int main() {
+    int localArray[size] = {6, 7, 8, 9, 10};
+
+    printArray(globalArray, size);
+
+    printArray(localArray, size);
+
+    int input = getint();
+    printf("%d\n", input);
+
+    return 0;
+}

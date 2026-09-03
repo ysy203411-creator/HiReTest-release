@@ -1,0 +1,14 @@
+int global_var;
+const int CONST_VAL = 10;
+void helper_func(int param) {
+    int local_var = param + CONST_VAL;
+    printf("%d\n", local_var);
+}
+int main(){
+    int input_val;
+    input_val = getint();
+    global_var = input_val + CONST_VAL;
+    printf("%d\n", global_var);
+    helper_func(global_var);
+    return 0;
+}

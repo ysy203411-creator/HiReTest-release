@@ -1,0 +1,16 @@
+const int a = 5;
+int b;
+int getValue() {
+    return a;
+}
+void setValue(int x) {
+    b = x;
+}
+int main(){
+    int c;
+    c = getValue(); // 正确的函数调用
+    c = getint(; // 缺少右括号，测试 j 类错误修复
+    setValue(c);
+    printf("%d\n", b);
+    return 0;
+}

@@ -1,0 +1,27 @@
+const int MAX = 10;
+int globalArray[MAX];
+int main(){
+    int localVar = 5;
+    int anotherVar;
+    printf("Enter a number: ");
+    anotherVar = getint();
+    int temp = (anotherVar < localVar);
+    printf("The number is %s %d\n", temp ? "less than" : "greater than or equal to", localVar);
+    int i = 0;
+    int condition = 1;
+    while (condition) {
+        globalArray[i] = i * anotherVar;
+        i = i + 1;
+        condition = i < MAX;
+    }
+    printf("Array values: ");
+    int j = 0;
+    condition = 1;
+    while (condition) {
+        printf("%d ", globalArray[j]);
+        j = j + 1;
+        condition = j < MAX;
+    }
+    printf("\n");
+    return 0;
+}

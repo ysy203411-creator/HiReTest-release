@@ -1,0 +1,14 @@
+int a;
+int b;
+int result;
+int main(){
+    a = 10;
+    b = getint(); // Read an integer from standard input
+    result = a * b; // Test multiplication
+    printf("Multiplication result: %d\n", result);
+    result = a / b; // Test division
+    printf("Division result: %d\n", result);
+    result = a % b; // Test modulus
+    printf("Modulus result: %d\n", result);
+    return 0;
+}

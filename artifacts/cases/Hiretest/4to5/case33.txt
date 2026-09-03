@@ -1,0 +1,32 @@
+int globalVar;
+const int constVal = 5;
+int array[10];
+
+void testFunction(int param) {
+    int localVar = param * 2;
+    printf("%d\n", localVar);
+}
+
+int main() {
+    int input;
+    input = getint();
+    globalVar = input + constVal;
+    testFunction(globalVar);
+
+    int i = 0;
+    /* 用 while 循环代替 for 循环，对 array 进行赋值 */
+    while (i < 10) {
+        array[i] = i * 2;
+        i = i + 1;
+    }
+
+    int j = 0;
+    /* 用 while 循环代替 for 循环，输出 array 内容 */
+    while (j < 10) {
+        printf("%d ", array[j]);
+        j = j + 1;
+    }
+
+    printf("\n");
+    return 0;
+}

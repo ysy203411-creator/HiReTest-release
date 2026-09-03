@@ -1,0 +1,11 @@
+const int MAX_SIZE = 10;
+int arr[MAX_SIZE];
+void process(int a, int[] b) {
+    printf("Value: %d\n", a);
+    printf("Array Element: %d\n", b[0);
+}
+int main(){
+    int x = 5;
+    process(x, arr);
+    return 0;
+}

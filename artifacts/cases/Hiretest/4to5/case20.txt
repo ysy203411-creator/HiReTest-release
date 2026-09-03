@@ -1,0 +1,10 @@
+const int CONST_VAL = 10;
+int global_array[3] = {CONST_VAL, 20, 30};
+int main(){
+    int a = getint();
+    int b = CONST_VAL + a;
+    int local_array[3] = {b, 40, 50};
+    printf("%d %d %d\n", global_array[0], global_array[1], global_array[2]);
+    printf("%d %d %d\n", local_array[0], local_array[1], local_array[2]);
+    return 0;
+}

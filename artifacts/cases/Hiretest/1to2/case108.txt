@@ -1,0 +1,14 @@
+const int a = 5;
+int b = 10;
+int add(int x, int y) {
+    return x + y;
+}
+int main(){
+    int result = add(a, b);
+    if (result & 1) { // 使用单独的 & 作为逻辑运算符，应该是错误
+        printf("Result is odd\n");
+    } else {
+        printf("Result is even\n");
+    }
+    return 0;
+}

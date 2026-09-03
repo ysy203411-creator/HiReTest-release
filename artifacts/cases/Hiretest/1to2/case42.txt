@@ -1,0 +1,16 @@
+const int MAX = 10;
+int a[MAX] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+int b = 5;
+int add(int x, int y) {
+    return x + y;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int sum = add(a[2], b);
+    print_result(sum);
+    int char_value = 65; // ASCII value for 'A'
+    printf("Character value: %d\n", char_value);
+    return 0;
+}

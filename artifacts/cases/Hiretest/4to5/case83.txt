@@ -1,0 +1,7 @@
+const int MAX_INT = 300;
+int main(){
+    int a = MAX_INT; // a is assigned a value greater than 127
+    int b = a % 256; // b is calculated using modulo operation to simulate char truncation
+    printf("%d\n", b); // Expecting output to be 44 (300 % 256)
+    return 0;
+}

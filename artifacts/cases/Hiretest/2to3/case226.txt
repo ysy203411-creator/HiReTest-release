@@ -1,0 +1,25 @@
+const int SIZE = 5;
+int array[SIZE] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+void printArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    int sum = add(x, y);
+    printf("Sum: %d\n", sum);
+    
+    printArray(array);
+    
+    int z = (x > y) | (x < y); // Intentional error: single | instead of ||
+    printf("Comparison result: %d\n", z);
+    
+    return 0;
+}

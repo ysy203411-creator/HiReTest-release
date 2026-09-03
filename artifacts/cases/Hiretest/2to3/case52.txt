@@ -1,0 +1,13 @@
+const int a = 1;
+int b = 2;
+int arr[5] = {1, 2, 3, 0, 0}; // 修改初始化列表以提供全部元素
+int add(int x, int y) {
+    return x + y;
+}
+int main(){
+    int result = add(a, b);
+    printf("Result: %d\n", result);
+    arr[3] = result;
+    printf("Array element: %d\n", arr[3]);
+    return 0;
+}

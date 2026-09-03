@@ -1,0 +1,20 @@
+const int MAX = 100;
+int values[MAX] = {1, 2, 3, 4, 5}; // 修改为全局数组
+int array[MAX];
+int sum(int[] arr, int n) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < n; i = i + 1) {
+        total = total + arr[i];
+    }
+    return total;
+}
+void printSum(int result) {
+    printf("Sum is: %d\n", result);
+}
+int main(){
+    int n = 5; // 使用全局数组的长度
+    int result = sum(values, n); // 调用sum函数时传入全局数组
+    printSum(result);
+    return 0;
+}

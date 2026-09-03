@@ -1,0 +1,30 @@
+int a = 10;
+int b = 20;
+const int c = 30;
+int arr[3] = {0, 0, 0}; // 将数组声明为全局变量
+
+int add(int x, int y) {
+    return x + y;
+}
+
+void printSum(int arr[], int size) { // 修改参数类型为int arr[]
+    int sum = 0;
+    int j = 0; // 修改变量名以避免重复定义
+    for (j = 0; j < size; j = j + 1) {
+        sum = sum + arr[j];
+    }
+    printf("Sum: %d\n", sum);
+}
+
+int main(){
+    arr[0] = a; // 初始化全局数组
+    arr[1] = b;
+    arr[2] = c;
+    
+    int result = add(a, b);
+    printf("Result: %d\n", result);
+    printSum(arr, 3); // 使用全局数组作为参数
+    int input = getint();
+    printf("Input: %d\n", input);
+    return 0;
+}

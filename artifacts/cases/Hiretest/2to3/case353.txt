@@ -1,0 +1,16 @@
+const int MAX = 10;
+int arr[MAX];
+int func(int a) {
+    int arr[5]; // 局部变量遮蔽全局变量
+    arr[2] = a;
+    return arr[2];
+}
+int main(){
+    int x = 5;
+    int y[MAX];
+    y[0] = 1;
+    y[1] = 2;
+    printf("%d\n", y[1]);
+    printf("%d\n", func(y[0]));
+    return 0;
+}

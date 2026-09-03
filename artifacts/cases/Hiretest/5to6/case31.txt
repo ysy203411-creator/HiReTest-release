@@ -1,0 +1,32 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int arr[5] = {1, 2, 3, 4, 5};
+
+void printArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int calculateSum(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int localVar = getint();
+    printf("Local Variable: %d\n", localVar);
+    
+    int sum = calculateSum(CONST_VAL, globalVar);
+    printf("Sum: %d\n", sum);
+    
+    printf("Array Elements: ");
+    int arraySize = 5;
+    printArray(arr, arraySize);
+    
+    int helloVal = 0;
+    printf("Hello, World value: %d\n", helloVal);
+    
+    return 0;
+}

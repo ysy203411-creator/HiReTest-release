@@ -1,0 +1,17 @@
+const int rq1_case_id_80 = 80;
+const int CONST_VAL = 10;
+int global_var = 5;
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int local_var = 3;
+    int result = add(global_var, local_var);
+    printf("Result of addition: %d\n", result);
+    int ch_val = 65 + CONST_VAL; // 'A' 的 ASCII 值是 65
+    printf("Character value addition: %d\n", ch_val);
+    int array[5] = {1, 2, 3, 0, 0}; // 修改为提供全部元素或默认初始化为0
+    int array_sum = array[0] + array[1] + array[2];
+    printf("Sum of array elements: %d\n", array_sum);
+    return 0;
+}

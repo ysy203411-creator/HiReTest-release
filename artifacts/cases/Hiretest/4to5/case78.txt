@@ -1,0 +1,8 @@
+const int MAX = 255;
+const int C = 44; // Adjusted to fit within the int type
+int main(){
+    int a = -12; // Adjusted to fit within the int type
+    printf("C = %d\n", C);
+    printf("a = %d\n", a);
+    return 0;
+}

@@ -1,0 +1,14 @@
+int global_var;
+const int CONST_VAL = 10;
+int array[5] = {1, 2, 3, 4, 5};
+void testFunction(int a, int b, int c) {
+    printf("Function called with: %d, %d, %d\n", a, b, c);
+}
+int main(){
+    int local_var;
+    local_var = getint();
+    testFunction(local_var, CONST_VAL, array[0]);
+    printf("Global variable: %d\n", global_var);
+    printf("Local variable: %d\n", local_var);
+    return 0;
+}

@@ -1,0 +1,21 @@
+const int x = 5;
+int a[10];
+int b;
+int add(int a, int b) {
+    return a + b;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int y = x + 2;
+    a[0] = y;
+    b = add(a[0], x);
+    print_result(b);
+    if (b > 10 & b < 20) { // a 类错误：使用单独的 &
+        printf("b is between 10 and 20\n");
+    } else {
+        printf("b is not between 10 and 20\n");
+    }
+    return 0;
+}

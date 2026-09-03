@@ -1,0 +1,17 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+void printValue(int value) {
+    printf("Value: %d\n", value);
+    return;
+}
+int main(){
+    int localVar = 3;
+    int result = 0;
+    if (localVar & globalVar) { // 使用单独的 &，应视为非法符号
+        result = CONST_VAL + localVar;
+    } else {
+        result = CONST_VAL - globalVar;
+    }
+    printValue(result);
+    return 0;
+}

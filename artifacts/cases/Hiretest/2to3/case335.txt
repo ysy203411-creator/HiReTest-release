@@ -1,0 +1,24 @@
+const int CONST_VAL = 10;
+int global_var = 5;
+int add(int a, int b) {
+    return a + b;
+}
+int subtract(int a, int b) {
+    return a - b;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int local_var = 3;
+    int result_add = add(global_var, local_var);
+    int result_subtract = subtract(CONST_VAL, local_var);
+    print_result(result_add);
+    print_result(result_subtract);
+    if (result_add > result_subtract) {
+        printf("Addition result is greater.\n");
+    } else {
+        printf("Subtraction result is greater or equal.\n");
+    }
+    return 0;
+}

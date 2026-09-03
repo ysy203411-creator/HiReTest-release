@@ -1,0 +1,18 @@
+const int a = 5;
+const int b = 10;
+int c[3] = {1, 2, 3};
+int add(int x, int y) {
+    return x + y;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int x = getint();
+    int y = getint();
+    int result = add(x, y);
+    if (x > 0 | y > 0) { // 使用单独的 |，应视为非法符号
+        print_result(result);
+    }
+    return 0;
+}

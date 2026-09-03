@@ -1,0 +1,12 @@
+const int a = 10;
+int b;
+int main(){
+    int c = getint();
+    b = a + c;
+    printf("%d\n", b);
+    int ch = 97; // ASCII value of 'a'
+    printf("%d\n", ch);
+    ch = 10; // ASCII value of '\n'
+    printf("%d", ch);
+    return 0;
+}

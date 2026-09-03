@@ -1,0 +1,22 @@
+const int rq1_case_id_84 = 84;
+const int MAX_SIZE = 10;
+int process(int number) {
+    int result = number * 2;
+    return result;
+}
+void display(int numbers[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d\n", numbers[i]);
+    }
+}
+int main(){
+    int numbers[MAX_SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int processedNumbers[MAX_SIZE];
+    int i = 0;
+    for (i = 0; i < MAX_SIZE; i = i + 1) {
+        processedNumbers[i] = process(numbers[i]);
+    }
+    display(processedNumbers, MAX_SIZE);
+    return 0;
+}

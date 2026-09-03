@@ -1,0 +1,25 @@
+const int MAX_LENGTH = 1024;
+int globalArray[MAX_LENGTH] = {0};
+void checkStorageLength() {
+    int length = getint(); // 假设输入一个大于 storage 长度的值
+    if (length > MAX_LENGTH) {
+        printf("Length exceeds storage capacity: %d\n", length);
+    } else {
+        printf("Length is within storage capacity: %d\n", length);
+    }
+}
+int main(){
+    int input;
+    printf("Enter a number: ");
+    input = getint();
+    
+    if (input & 1) { // 使用单独的 &，应视为非法符号
+        printf("Odd number\n");
+    } else {
+        printf("Even number\n");
+    }
+    
+    checkStorageLength();
+    
+    return 0;
+}

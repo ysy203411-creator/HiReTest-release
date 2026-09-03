@@ -1,0 +1,23 @@
+const int MAX = 100;
+int globalVar = 10;
+int array[5] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int localVar = 20;
+    int result = add(globalVar, localVar);
+    printf("Result: %d\n", result);
+    printSum(array[1], array[3]);
+    // This is a single line comment
+    /* This is a 
+       multi-line comment
+       that should be ignored */
+    if (5 & 3) {} // Intentional error for testing
+    if (5 | 3) {} // Intentional error for testing
+    return 0;
+}

@@ -1,0 +1,13 @@
+const int MAX_ERRORS = 5;
+int errorTypes[MAX_ERRORS] = {1, 2, 3, 4, 5};
+int errorLines[MAX_ERRORS] = {10, 20, 30, 40, 50};
+void printErrors() {
+    int i = 0;
+    for (i = 0; i < MAX_ERRORS; i = i + 1) {
+        printf("Error Type: %d, Line: %d\n", errorTypes[i], errorLines[i]);
+    }
+}
+int main(){
+    printErrors();
+    return 0;
+}

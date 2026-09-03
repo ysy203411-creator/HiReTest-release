@@ -1,0 +1,12 @@
+int global_var;
+const int const_var = 10;
+void print_message(int num) {
+    printf("The number is: %d\n", num);
+}
+int main(){
+    int local_var;
+    local_var = getint();
+    global_var = const_var + local_var;
+    print_message(global_var);
+    return 0;
+}

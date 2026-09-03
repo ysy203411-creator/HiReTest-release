@@ -1,0 +1,16 @@
+const int a = 5
+int b = 10;
+int c = 15;
+void foo() {
+    int x = 20;
+    int y = 25;
+    int z = 30
+    printf("%d %d %d\n", x, y, z);
+}
+int main(){
+    int d = 35;
+    int e = 40;
+    int f = 45
+    foo();
+    return 0;
+}

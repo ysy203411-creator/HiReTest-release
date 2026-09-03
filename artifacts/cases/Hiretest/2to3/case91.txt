@@ -1,0 +1,19 @@
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE] = {1, 2, 3, 4, 5, 0, 0, 0, 0, 0}; // 修改初始化列表，补全所有元素
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int localVar = getint();
+    printSum(localVar, globalArray[2]);
+    if (localVar > 5) {
+        printf("Local variable is greater than 5\n");
+    } else {
+        printf("Local variable is less than or equal to 5\n");
+    }
+    return 0;
+}

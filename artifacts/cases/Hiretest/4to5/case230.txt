@@ -1,0 +1,24 @@
+int global_var;
+const int CONST_VAL = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int arr[], int size) {
+    int sum = 0;
+    int i = 0;
+    while (i < size) {
+        sum = add(sum, arr[i]);
+        i = i + 1;
+    }
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int numbers[5];
+    int i = 0;
+    while (i < 5) {
+        numbers[i] = getint();
+        i = i + 1;
+    }
+    printSum(numbers, 5);
+    return 0;
+}

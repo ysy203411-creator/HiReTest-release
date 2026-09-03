@@ -1,0 +1,13 @@
+const int globalConst = 10;
+int globalVar;
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int localVar = 5;
+    int result;
+    globalVar = getint();
+    result = add(globalVar, localVar);
+    printf("Result: %d\n", result);
+    return 0;
+}

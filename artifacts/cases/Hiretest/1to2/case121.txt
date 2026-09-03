@@ -1,0 +1,17 @@
+const int MAX = 100;
+int a[MAX];
+int sum(int[] arr, int size) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        total = total + arr[i];
+    }
+    return total;
+}
+int main(){
+    int result;
+    int numbers[5] = {1, 2, 3, 4, 5};
+    result = sum(numbers, 5);
+    printf("The sum is: %d\n", result);
+    return 0;
+}

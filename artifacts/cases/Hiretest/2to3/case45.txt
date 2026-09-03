@@ -1,0 +1,24 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+int main(){
+    int result;
+    // 测试函数调用，无参数
+    result = add(CONST_VAL, globalVar);
+    printf("Result of add: %d\n", result);
+    
+    // 测试函数调用，有参数
+    result = multiply(globalVar, CONST_VAL);
+    printf("Result of multiply: %d\n", result);
+    
+    // 测试函数调用，缺少右括号错误
+    result = add(globalVar, CONST_VAL;
+    printf("This line should not compile due to missing ')'\n");
+    
+    return 0;
+}

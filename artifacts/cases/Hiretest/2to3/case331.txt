@@ -1,0 +1,18 @@
+const int VALUE = 10;
+int numbers[5] = {1, 2, 3, 4, VALUE};
+int sum(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("The result is: %d\n", result);
+}
+int main(){
+    int x = 5;
+    int y = 3;
+    int result = sum(x, y);
+    printResult(result);
+    if (x > 0 & y < 10) {  // a 类错误：使用单独的 &
+        printf("Both conditions are true.\n");
+    }
+    return 0;
+}

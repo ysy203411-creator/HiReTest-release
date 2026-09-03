@@ -1,0 +1,20 @@
+const int SIZE = 10;
+int globalArray[SIZE] = {1, 2, 3, 4, 5, 0, 0, 0, 0, 0}; // 修改初始化列表以满足约束
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 5;
+    int sum = add(globalArray[0], localVar);
+    printResult(sum);
+    if (sum > 10) {
+        printf("Sum is greater than 10\n");
+    } else {
+        printf("Sum is less or equal to 10\n");
+    }
+    
+    return 0;
+}

@@ -1,0 +1,15 @@
+const int MAX = 100;
+int arr[MAX];
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    int result = add(x, y);
+    printf("Result: %d\n", result);
+    if (x > 0 & y > 0) {  // 错误：使用单个 & 代替 &&
+        printf("Both x and y are positive.\n");
+    }
+    return 0;
+}

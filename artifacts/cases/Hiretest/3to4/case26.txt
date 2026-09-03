@@ -1,0 +1,21 @@
+const int rq1_case_id_26 = 26;
+const int CONST_VAL = 5;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 3;
+    int array[3] = {1, 2, 3};
+    int result = add(globalVar, localVar);
+    printResult(result);
+    if (array[0] == CONST_VAL) {  // 修改：将if条件中的关系运算符移到条件判断中
+        printf("Array first element equals CONST_VAL\n");
+    } else {
+        printf("Array first element does not equal CONST_VAL\n");
+    }
+    return 0;
+}

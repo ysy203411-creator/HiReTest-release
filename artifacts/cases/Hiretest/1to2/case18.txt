@@ -1,0 +1,22 @@
+const int CONST_VAL = 10;
+int global_var = 5;
+int global_array[3] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void print_result(int result) {
+    printf("The result is: %d\n", result);
+    return;
+}
+int main(){
+    int local_var = 3;
+    int result = add(global_var, local_var);
+    print_result(result);
+    
+    // This line contains an error with a single '&' which should be '&&'
+    if (global_var & local_var) {
+        printf("This line should cause a lexical error due to single '&'\n");
+    }
+    
+    return 0;
+}

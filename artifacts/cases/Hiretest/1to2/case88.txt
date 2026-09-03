@@ -1,0 +1,17 @@
+const int a = 5;
+const int b = 10;
+int result;
+int computeDifference(int x, int y) {
+    return x - y;
+}
+int main(){
+    int x = a;
+    int y = b;
+    result = computeDifference(x, y);
+    if (result < 0) {
+        printf("Result is negative: %d\n", result);
+    } else {
+        printf("Result is non-negative: %d\n", result);
+    }
+    return 0;
+}

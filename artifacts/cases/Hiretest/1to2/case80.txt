@@ -1,0 +1,23 @@
+const int a = 5;
+int b = 3;
+int c = 0;
+int add(int x, int y) {
+    return x + y;
+}
+void negate(int x) {
+    printf("Negated: %d\n", -x);
+}
+int main(){
+    int result = add(a, b);
+    printf("Result: %d\n", result);
+    
+    int negated = -a;
+    printf("Negated a: %d\n", negated);
+    negate(b);
+    
+    int positive = +c;
+    printf("Positive c: %d\n", positive);
+    int notZero = !c;
+    printf("Not zero: %d\n", notZero);
+    return 0;
+}

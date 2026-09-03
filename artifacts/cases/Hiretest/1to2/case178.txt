@@ -1,0 +1,14 @@
+int a = 5;
+const int b = 10;
+int arr[3] = {1, 2, 3};
+int add(int x, int y) {
+    return x + y;
+}
+void printSum(int x, int y) {
+    printf("Sum: %d\n", x + y);
+}
+int main(){
+    int result = add(a, b);  // 添加缺失的右括号
+    printSum(result, arr[2]);
+    return 0;
+}

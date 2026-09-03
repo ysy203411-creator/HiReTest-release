@@ -1,0 +1,8 @@
+const int a = 10;
+const int b = 20;
+int main(){
+    int result;
+    const int c = a + b;
+    printf("%d\n", c); // 应输出30
+    return 0;
+}

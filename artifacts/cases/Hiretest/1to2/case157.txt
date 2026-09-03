@@ -1,0 +1,22 @@
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE] = {1, 2, 3, 4, 5};
+void printArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+}
+int main(){
+    int localArray[MAX_SIZE];
+    int i = 0;
+    for (i = 0; i < MAX_SIZE; i = i + 1) {
+        localArray[i] = globalArray[i] * 2;
+    }
+    printArray(localArray, MAX_SIZE);
+    int a = 10;
+    int b = 20;
+    if (a & b) { // 错误：使用单独的 & 符号
+        printf("This is an error.\n");
+    }
+    return 0;
+}

@@ -1,0 +1,11 @@
+const int a = 5;
+int add(int x, int y) {
+    return x + y;
+}
+int main(){
+    int result;
+    // 调用函数时传递正确数量的参数
+    result = add(2, 3);
+    printf("Result: %d\n", result);
+    return 0;
+}

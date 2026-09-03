@@ -1,0 +1,20 @@
+int a;
+int b;
+int result;
+
+int compare(int x, int y) {
+    int diff;
+    int sq;
+    diff = x - y;
+    sq = diff * diff;
+    /* 如果 x == y，则 sq == 0，返回 1；否则返回 0 */
+    return 1 - (sq / (sq + 1));
+}
+
+int main() {
+    a = getint();
+    b = getint();
+    result = compare(a, b);
+    printf("Result of comparison: %d\n", result);
+    return 0;
+}

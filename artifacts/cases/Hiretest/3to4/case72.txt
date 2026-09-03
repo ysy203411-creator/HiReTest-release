@@ -1,0 +1,12 @@
+const int rq1_case_id_72 = 72;
+const int MAX = 5;
+int arr[MAX];
+int index = 0;
+void set_value(int array[], int idx, int value) {
+    array[idx] = value;
+}
+int main(){
+    set_value(arr, index, 10);
+    printf("Value at index %d: %d\n", index, arr[index]);
+    return 0;
+}

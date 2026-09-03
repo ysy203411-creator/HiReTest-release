@@ -1,0 +1,10 @@
+int a;
+int b;
+int result;
+int main(){
+    a = getint();
+    b = getint();
+    result = a + b - 5;
+    printf("%d\n", result);
+    return 0;
+}

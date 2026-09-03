@@ -1,0 +1,16 @@
+const int rq1_case_id_3 = 3;
+const int CONST_VAL = 10;
+int global_var = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void print_sum(int x, int y) {
+    int sum = add(x, y);
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int a = 3;
+    int b = 7;
+    print_sum(a, b);
+    return 0;
+}

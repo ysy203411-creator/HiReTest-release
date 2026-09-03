@@ -1,0 +1,23 @@
+const int rq1_case_id_76 = 76;
+const int MAX_SIZE = 100;
+int globalArray[MAX_SIZE];
+int globalVar;
+
+void testFunction(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        arr[i] = getint();
+    }
+}
+
+int main() {
+    int localArray[MAX_SIZE];
+    int localVar;
+    testFunction(localArray, MAX_SIZE);
+    testFunction(globalArray, MAX_SIZE);
+    localVar = getint();
+    globalVar = getint();
+    printf("LocalVar: %d\n", localVar);
+    printf("GlobalVar: %d\n", globalVar); // 修正此处的变量名
+    return 0;
+}

@@ -1,0 +1,17 @@
+int global_var;
+const int CONST_VAL = 10;
+
+void read_int() {
+    int c;
+    c = getint();
+    printf("%d\n", c);
+}
+
+int main(){
+    int local_var;
+    local_var = getint();
+    global_var = local_var + CONST_VAL;
+    printf("%d\n", global_var);
+    read_int();
+    return 0;
+}

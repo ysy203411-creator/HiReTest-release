@@ -1,0 +1,21 @@
+int globalVar = 10;
+int array[5] = {1, 2, 3, 4, 5};
+
+void modifyGlobalVar(int value) {
+    globalVar = value;
+}
+
+int accessArrayElement(int index) {
+    return array[index];
+}
+
+int main() {
+    int input;
+    input = getint();
+    /* 直接在主函数中使用 input 修改全局变量，避免将函数调用表达式作为参数传递 */
+    globalVar = input;
+    printf("Global Variable: %d\n", globalVar);
+    int element = accessArrayElement(2); // 修改：先获取数组元素，再传递给printf
+    printf("Array Element at index 2: %d\n", element);
+    return 0;
+}

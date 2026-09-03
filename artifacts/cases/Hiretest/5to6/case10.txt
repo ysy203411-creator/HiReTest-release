@@ -1,0 +1,22 @@
+int globalVar;
+const int CONST_VAL = 10;
+int array[5] = {1, 2, 3, 4, 5};
+void testFunction(int a, int b) {
+    int localVar = a + b;
+    printf("Local Variable: %d\n", localVar);
+}
+int main(){
+    int input1 = getint();
+    int input2 = getint();
+    globalVar = input1 + input2;
+    printf("Global Variable: %d\n", globalVar);
+    
+    testFunction(globalVar, CONST_VAL);
+    
+    int i = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        printf("Array[%d]: %d\n", i, array[i]);
+    }
+    
+    return 0;
+}

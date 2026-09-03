@@ -1,0 +1,14 @@
+const int MAX = 100;
+int globalArray[MAX];
+void testFunction() {
+    return;  // 修改为不带表达式的return语句
+}
+int main(){
+    int localVar = 10;
+    globalArray[0] = localVar;
+    if (localVar > 5) {
+        printf("Local variable is greater than 5\n");
+    }
+    testFunction();
+    return 0;
+}

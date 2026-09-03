@@ -1,0 +1,24 @@
+const int MAX = 100;
+int globalVar = 0; // 显式初始化为 0
+int array[MAX];
+int computeValue(int x) {
+    if (x > 0) {
+        return x * 2;
+    } else {
+        return x - 2;
+    }
+}
+void processArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        arr[i] = computeValue(arr[i]);
+    }
+}
+int main(){
+    int localVar = getint();
+    globalVar = computeValue(localVar);
+    processArray(array);
+    printf("GlobalVar: %d\n", globalVar);
+    printf("Array[0]: %d\n", array[0]);
+    return 0;
+}

@@ -1,0 +1,56 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Model weights and model caches
+starcoderbase/
+models/
+*.bin
+*.safetensors
+*.ckpt
+
+# Restricted data and large derived intermediates
+data/raw/
+data/private/
+data/restricted/
+data/downloads/
+*.pkl
+*.pt
+
+# Local/generated output; approved artifacts belong under artifacts/
+output/
+outputs/
+artifacts/RQ1/development_*/
+tmp/
+temp/
+
+# Editor and agent artifacts
+.codex/
+.codex_tmp/
+.codex-tmp/
+.agents/
+.claude/
+.obsidian/
+*.inspect.ndjson
+**/*_editable/
+~$*.docx
+
+# Never vendor nested Git metadata
+**/.git/
+
+# OS files
+.DS_Store
+Thumbs.db

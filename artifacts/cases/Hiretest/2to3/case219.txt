@@ -1,0 +1,24 @@
+const int MAX_LENGTH = 10;
+const int ESCAPE_CHAR = 92; // ASCII for '\'
+const int NEWLINE_CHAR = 110; // ASCII for 'n'
+int str[MAX_LENGTH] = {72, 101, 108, 108, 111, ESCAPE_CHAR, NEWLINE_CHAR, 0, 0, 0};
+int main(){
+    int i = 0;
+    int c;
+    for (i = 0; i < MAX_LENGTH; i = i + 1) {
+        c = str[i];
+        if (c == ESCAPE_CHAR) {
+            printf("Escape sequence detected at index %d\n", i);
+            i = i + 1;
+            if (i < MAX_LENGTH) {
+                c = str[i];
+                printf("Character after escape: %d\n", c);
+            } else {
+                printf("Error: Escape sequence at end of string\n");
+            }
+        } else {
+            printf("Character: %d\n", c);
+        }
+    }
+    return 0;
+}

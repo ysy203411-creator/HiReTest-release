@@ -1,0 +1,18 @@
+const int global_const = 10;
+int global_var = 20;
+int func(int param) {
+    const int local_const = 30;
+    int local_var = 40;
+    {
+        int inner_var = 50;
+        printf("Inner Scope: %d\n", inner_var);
+    }
+    // Test if the compiler can correctly identify the scope of 'local_var'
+    printf("Local Scope: %d\n", local_var);
+    return param + local_const;
+}
+int main(){
+    int result = func(global_var);
+    printf("Result: %d\n", result);
+    return 0;
+}

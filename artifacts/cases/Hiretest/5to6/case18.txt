@@ -1,0 +1,14 @@
+const int a = 10;
+int globalVar;
+
+void printGlobalVar() {
+    printf("Global Variable: %d\n", globalVar);
+}
+
+int main() {
+    int localVar = getint();
+    globalVar = localVar + a;
+    printGlobalVar();
+    printf("Local Variable: %d\n", localVar);
+    return 0;
+}

@@ -1,0 +1,21 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result is: %d\n", result);
+}
+int main(){
+    int localVar = 2;
+    int result = add(globalVar, localVar);
+    printResult(result);
+    
+    if (result > CONST_VAL & result < CONST_VAL + 10) { // Intentional error: single &
+        printf("Result is within range.\n");
+    } else {
+        printf("Result is out of range.\n");
+    }
+    
+    return 0;
+}

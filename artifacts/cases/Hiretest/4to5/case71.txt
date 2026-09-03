@@ -1,0 +1,8 @@
+int globalArray[5] = {1, 2, 3, 4, 5};
+void printArrayElement(int arr[]) {
+    printf("%d\n", arr[2]);
+}
+int main(){
+    printArrayElement(globalArray);
+    return 0;
+}

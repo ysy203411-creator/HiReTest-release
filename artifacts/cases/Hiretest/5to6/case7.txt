@@ -1,0 +1,19 @@
+int globalVar;
+const int CONST_VAL = 10;
+void printInstructions(int[] instructions, int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d ", instructions[i]);
+    }
+    printf("\n");
+}
+int main(){
+    int localVar = 5;
+    int result = 0;
+    int instructions[3] = {1, 2, 3};
+    printInstructions(instructions, 3);
+    globalVar = getint();
+    result = globalVar + localVar + CONST_VAL;
+    printf("Result: %d\n", result);
+    return 0;
+}

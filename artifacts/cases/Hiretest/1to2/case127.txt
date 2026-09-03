@@ -1,0 +1,20 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int a = 3;
+    int b = 7;
+    int result = add(a, b);
+    if (a & b) {  // Intentional error: using single '&' instead of '&&'
+        printResult(result);
+    }
+    if (a | b) {  // Intentional error: using single '|' instead of '||'
+        printResult(result);
+    }
+    return 0;
+}

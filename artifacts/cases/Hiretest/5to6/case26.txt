@@ -1,0 +1,18 @@
+int a = 10;
+int b = 0;
+
+int checkNot(int x) {
+    if (x) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+int main() {
+    int result1 = checkNot(a);
+    int result2 = checkNot(b);
+    printf("Result of a == 0: %d\n", result1);
+    printf("Result of b == 0: %d\n", result2);
+    return 0;
+}

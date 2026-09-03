@@ -1,0 +1,35 @@
+const int HW_VERSION = 3;
+void printLexerTokens() {
+    printf("Lexer Tokens\n");
+}
+void printLexerErrorList() {
+    printf("Lexer Error List\n");
+}
+void printParserSyntax() {
+    printf("Parser Syntax\n");
+}
+void printErrorList() {
+    printf("Error List\n");
+}
+void printSymbolTable() {
+    printf("Symbol Table\n");
+}
+int main(){
+    if (HW_VERSION == 1) {
+        printLexerTokens();
+        printLexerErrorList();
+    } 
+
+    if (HW_VERSION == 2) {
+        printParserSyntax();
+        printErrorList();
+    } 
+
+    if (HW_VERSION == 3) {
+        printSymbolTable();
+        printErrorList();
+    } else {
+        printf("Invalid homework version\n");
+    }
+    return 0;
+}

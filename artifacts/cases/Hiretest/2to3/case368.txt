@@ -1,0 +1,19 @@
+const int CONST_VAL = 10;
+int globalVar;
+int arr[5] = {1, 2, 3, 0, 0};  // 提供全部元素以满足约束条件4
+void printArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        printf("%d\n", arr[i]);  // 添加下标访问以满足约束条件6
+    }
+}
+int main(){
+    int localVar = 5;
+    int anotherVar;
+    int localArr[3];
+    localArr[0] = CONST_VAL;
+    localArr[1] = localVar;
+    localArr[2] = globalVar;
+    printArray(arr);
+    return 0;
+}

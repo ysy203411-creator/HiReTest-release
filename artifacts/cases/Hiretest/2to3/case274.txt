@@ -1,0 +1,10 @@
+const int a = 5;
+int func(int x) {
+    return x + a;
+}
+int main(){
+    int result;
+    result = func(10; // 缺少右括号
+    printf("Result: %d\n", result);
+    return 0;
+}

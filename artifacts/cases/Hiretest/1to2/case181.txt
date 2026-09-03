@@ -1,0 +1,12 @@
+const int SIZE = 5;
+int array[SIZE] = {1, 2, 3, 4, 5};
+int getElement(int arr[], int index) {
+    return arr[index];
+}
+int main(){
+    int idx = 2;
+    int result = getElement(array, idx);
+    printf("Element at index %d is %d\n", idx, result);
+    int errorTest = array[3];
+    return 0;
+}

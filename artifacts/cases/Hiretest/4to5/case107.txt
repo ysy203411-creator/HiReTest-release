@@ -1,0 +1,26 @@
+const int CONST_VAL = 10;
+int globalVar;
+int array[5] = {1, 2, 3, 4, 5};
+int compute(int a, int b) {
+    int result = a + b;
+    return result;
+}
+void processArray(int arr[], int size) {
+    int i = 0;
+    while (i < size) {
+        arr[i] = compute(arr[i], CONST_VAL);
+        i = i + 1;
+    }
+}
+int main(){
+    int localVar = getint();
+    globalVar = compute(localVar, CONST_VAL);
+    processArray(array, 5);
+    int i = 0;
+    while (i < 5) {
+        printf("%d ", array[i]);
+        i = i + 1;
+    }
+    printf("%d\n", globalVar);
+    return 0;
+}

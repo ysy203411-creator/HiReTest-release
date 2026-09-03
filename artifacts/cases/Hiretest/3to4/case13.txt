@@ -1,0 +1,32 @@
+const int rq1_case_id_13 = 13;
+const int a = 10;
+const int b = 20;
+int x;
+int y;
+int numbers[5] = {1, 2, 3, 4, 5};
+int compare(int val1, int val2) {
+    if (val1 == val2) {
+        return 1;
+    } else {
+        return 0;
+    }
+    return 0; // 添加此行以符合约束
+}
+void print_result(int result) {
+    if (result) {
+        printf("Values are equal.\n");
+    } else {
+        printf("Values are not equal.\n");
+    }
+}
+int main(){
+    x = a;
+    y = b;
+    int result = compare(x, y);
+    print_result(result);
+    x = numbers[2];
+    y = numbers[3];
+    result = compare(x, y);
+    print_result(result);
+    return 0;
+}

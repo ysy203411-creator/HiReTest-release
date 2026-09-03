@@ -1,0 +1,14 @@
+int a;
+int b;
+int func1(int x) {
+    return x + 1;
+}
+int func2(int y) {
+    return y + 2;
+}
+int main(){
+    int result1 = func1(a);
+    int result2 = func2(b);
+    printf("%d %d\n", result1, result2);
+    return 0;
+}

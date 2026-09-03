@@ -1,0 +1,17 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int functionWithReturn() {
+    int localVar = 3;
+    return localVar + CONST_VAL;
+}
+void functionWithoutReturn() {
+    int anotherVar = 7;
+    // No return statement needed
+}
+int main(){
+    int result = functionWithReturn();
+    printf("Result: %d\n", result);
+    functionWithoutReturn();
+    printf("Void function executed.\n");
+    return 0;
+}

@@ -1,0 +1,25 @@
+const int LENGTH = 5;
+int globalArray[LENGTH] = {1, 2, 3, 4, 5};
+
+int sumArray(int arr[], int length) {
+    int sum = 0;
+    int i = 0;
+    /* 用 while 循环代替 for 循环 */
+    while (i < length) {
+        sum = sum + arr[i];
+        i = i + 1;
+    }
+    return sum;
+}
+
+int main() {
+    int input;
+    /* 不输出提示字符串，避免非法字符问题 */
+    input = getint();
+    int localArray[LENGTH] = {input, input + 1, input + 2, input + 3, input + 4};
+    int sumGlobal = sumArray(globalArray, LENGTH);
+    int sumLocal = sumArray(localArray, LENGTH);
+    printf("Sum of globalArray: %d\n", sumGlobal);
+    printf("Sum of localArray: %d\n", sumLocal);
+    return 0;
+}

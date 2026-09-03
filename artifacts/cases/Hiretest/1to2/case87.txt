@@ -1,0 +1,16 @@
+const int a = 10;
+const int b = 3;
+int result[2];
+int multiply(int x, int y) {
+    return x * y;
+}
+int divide(int x, int y) {
+    return x / y;
+}
+int main(){
+    result[0] = multiply(a, b);
+    result[1] = divide(a, b);
+    printf("Multiplication: %d\n", result[0]);
+    printf("Division: %d\n", result[1]);
+    return 0;
+}

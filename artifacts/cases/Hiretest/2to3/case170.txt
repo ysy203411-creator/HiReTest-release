@@ -1,0 +1,19 @@
+const int a = 5;
+int b = 10;
+int c[5] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+int subtract(int x, int y) {
+    return x - y;
+}
+int main(){
+    int local_a = 3; // 修改局部变量名以避免重名
+    int local_b = 20; // 修改局部变量名以避免重名
+    int result = add(local_a, local_b);
+    printf("Result: %d\n", result);
+    int local_c[3]; // 修改局部数组名以避免重名
+    local_c[0] = subtract(local_b, local_a);
+    printf("Subtraction: %d\n", local_c[0]);
+    return 0;
+}

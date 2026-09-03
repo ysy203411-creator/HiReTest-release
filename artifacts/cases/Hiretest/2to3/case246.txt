@@ -1,0 +1,19 @@
+const int MAX = 10;
+int globalVar = 5;
+int array[MAX];
+void testFunc(int param) {
+    int localVar = param;
+    localVar = localVar + 1;
+}
+int main(){
+    int x = 0;
+    int y;
+    x = 5;
+    y = x + 1;
+    testFunc(y);
+    if (x == 5) {
+        printf("x is %d\n", x);
+    }
+    int z = array[3;
+    return 0;
+}

@@ -1,0 +1,26 @@
+const int LENGTH = 5;
+int array[LENGTH];
+int func(int a, int b) {
+    if (a > b) { // 将关系运算符放到if语句中
+        return a;
+    } else {
+        return b;
+    }
+    return 1;
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    int result = func(x, y);
+    printf("Result: %d\n", result);
+    int i = 0;
+    for (i = 0; i < LENGTH; i = i + 1) {
+        array[i] = i * 2;
+    }
+    if (result > 0) {
+        printf("Positive result\n");
+    } else {
+        printf("Non-positive result\n");
+    }
+    return 0;
+}

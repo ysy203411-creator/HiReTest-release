@@ -1,0 +1,12 @@
+int main() {
+    int a, b;
+    int c;
+    a = getint();
+    b = getint();
+    c = 88; // ASCII 'X'
+    printf("Value of a: %d\n", a);
+    printf("Value of b: %d\n", b);
+    printf("Character (as int): %d\n", c);
+    printf("Formatted string: %d %d %d\n", a, c, b);
+    return 0;
+}

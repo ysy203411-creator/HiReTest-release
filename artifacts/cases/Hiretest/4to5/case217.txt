@@ -1,0 +1,13 @@
+int a;
+int b;
+int main(){
+    const int c = 5;
+    int arr[3];
+    a = getint();
+    b = a + c;
+    arr[0] = b;
+    arr[1] = a;
+    arr[2] = c;
+    printf("%d %d %d\n", arr[0], arr[1], arr[2]);
+    return 0;
+}

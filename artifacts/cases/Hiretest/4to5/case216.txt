@@ -1,0 +1,19 @@
+const int SIZE = 5;
+int arr[SIZE];
+void initArray(int arr[]) {
+    int i = 0;
+    while (i < SIZE) {
+        arr[i] = i * i;
+        i = i + 1;
+    }
+}
+int main(){
+    initArray(arr);
+    int index = getint();
+    if (index >= 0 && index < SIZE) {
+        printf("Element at index %d is %d\n", index, arr[index]);
+    } else {
+        printf("Index out of bounds\n");
+    }
+    return 0;
+}

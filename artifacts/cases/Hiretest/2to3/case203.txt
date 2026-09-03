@@ -1,0 +1,20 @@
+const int MAX_DEPTH = 256;
+int depthCounter = 0;
+void recursiveFunction() {
+    if (depthCounter > MAX_DEPTH) {
+        printf("Exceeded max depth\n");
+        return;
+    }
+    depthCounter = depthCounter + 1;
+    // Simulate some recursive processing
+    if (depthCounter % 2 == 0) {
+        printf("Even depth: %d\n", depthCounter);
+    } else {
+        printf("Odd depth: %d\n", depthCounter);
+    }
+    depthCounter = depthCounter - 1;
+}
+int main(){
+    recursiveFunction();
+    return 0;
+}

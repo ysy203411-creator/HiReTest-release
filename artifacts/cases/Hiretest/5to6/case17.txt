@@ -1,0 +1,18 @@
+int a, b, c, d, e;
+void testFunc(int x1, int x2, int x3, int x4, int x5) {
+    a = x1;
+    b = x2;
+    c = x3;
+    d = x4;
+    e = x5;
+}
+int main(){
+    int input1 = getint();
+    int input2 = getint();
+    int input3 = getint();
+    int input4 = getint();
+    int input5 = getint();
+    testFunc(input1, input2, input3, input4, input5);
+    printf("%d %d %d %d %d", a, b, c, d, e);
+    return 0;
+}

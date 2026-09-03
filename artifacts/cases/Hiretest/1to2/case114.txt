@@ -1,0 +1,14 @@
+const int MAX = 10;
+int arr[MAX];
+int sum(int a, int b) {
+    return a + b;
+}
+int main(){
+    int x = 5;
+    int y = 3;
+    int result = sum(x, y);
+    if (result & x) { // 错误：使用了单独的 & 符号
+        printf("Result is: %d\n", result);
+    }
+    return 0;
+}

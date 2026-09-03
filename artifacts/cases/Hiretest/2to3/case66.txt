@@ -1,0 +1,34 @@
+const int SIZE = 5;
+int globalArray[SIZE] = {1, 2, 3, 4, 5};
+int globalVar = 10;
+void printArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int localArray[SIZE];
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        localArray[i] = globalArray[i] + i;
+    }
+    
+    printArray(localArray, SIZE);
+    
+    int sum = add(globalVar, localArray[2]);
+    printf("Sum: %d\n", sum);
+    
+    // 修改部分：将关系和逻辑运算符移到条件判断中
+    if ((sum > 20 && sum < 30) || (sum == 15)) {
+        printf("Result: 1\n");
+    } else {
+        printf("Result: 0\n");
+    }
+    
+    return 0;
+}

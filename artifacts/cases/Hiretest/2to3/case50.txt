@@ -1,0 +1,20 @@
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE];
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+    return;
+}
+int main(){
+    int localVar = 5;
+    int result = add(localVar, globalArray[2]);
+    printResult(result);
+    if (result > 10) {
+        printf("Result is greater than 10\n");
+    } else {
+        printf("Result is not greater than 10\n");
+    }
+    return 0;
+}

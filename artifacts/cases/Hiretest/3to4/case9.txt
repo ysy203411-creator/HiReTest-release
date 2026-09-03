@@ -1,0 +1,15 @@
+const int rq1_case_id_9 = 9;
+const int CONST_VAL = 10;
+int global_var = 5;
+int arr[3] = {1, 2, 3};
+void testFunc(int a, int b[], int c) {
+    printf("a: %d\n", a);
+    printf("b[0]: %d\n", b[0]);
+    printf("c: %d\n", c);
+}
+int main(){
+    int local_var = 20;
+    int local_arr[2] = {4, 5};
+    testFunc(local_var, arr, CONST_VAL);
+    return 0;
+}

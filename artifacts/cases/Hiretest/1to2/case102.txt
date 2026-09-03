@@ -1,0 +1,17 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int localVar = 3;
+    int result;
+    result = add(CONST_VAL, (globalVar + localVar)); // 使用括号表达式
+    printf("Result: %d\n", result);
+    if ((result > 10) & (result < 20)) { // 使用单独的 & 来触发错误
+        printf("In range\n");
+    } else {
+        printf("Out of range\n");
+    }
+    return 0;
+}

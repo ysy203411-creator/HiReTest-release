@@ -1,0 +1,16 @@
+const int a = 5;
+const int b = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+void printInt(int c) {
+    printf("%d\n", c);
+}
+int main(){
+    int x = 65; // 使用整型字面量代替字符常量 'A'
+    int y = add(a, b);
+    printf("%d\n", y);
+    printInt(x);
+    return 0;
+}

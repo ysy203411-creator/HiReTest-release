@@ -1,0 +1,11 @@
+int a;
+int b;
+int main(){
+    int x;
+    x = getint();
+    a = !x;
+    b = !a;
+    printf("%d\n", a);
+    printf("%d\n", b);
+    return 0;
+}

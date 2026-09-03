@@ -1,0 +1,18 @@
+int globalVar;
+const int CONST_VAL = 10;
+int add(int a, int b) {
+    int result = a + b;
+    return result;
+}
+void printSum(int x, int y) {
+    int sum = add(x, y);
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int localVar = getint();
+    int anotherVar = CONST_VAL;
+    printSum(localVar, anotherVar);
+    globalVar = add(localVar, anotherVar);
+    printf("Global Var: %d\n", globalVar);
+    return 0;
+}

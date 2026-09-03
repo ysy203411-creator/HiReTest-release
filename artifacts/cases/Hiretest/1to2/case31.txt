@@ -1,0 +1,14 @@
+const int a = 10;
+const int b = 20;
+int add(int x, int y) {
+    return x + y;
+}
+void printSum(int x, int y) {
+    printf("Sum: %d\n", add(x, y));
+}
+int main(){
+    int result = add(a, b);
+    printf("Result: %d\n", result);
+    printSum(a, b);
+    return 0;
+}

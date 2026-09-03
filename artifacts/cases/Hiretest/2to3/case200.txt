@@ -1,0 +1,19 @@
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+void printArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < MAX_SIZE; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int main(){
+    int localVar = 5;
+    int result = add(globalArray[0], localVar);
+    printf("Result: %d\n", result);
+    printArray(globalArray);
+    return 0;
+}

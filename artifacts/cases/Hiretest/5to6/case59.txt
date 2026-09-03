@@ -1,0 +1,9 @@
+const int ARRAY_SIZE = 5;
+int str[ARRAY_SIZE] = {72, 105, 0, 0, 0}; // "Hi" 的 ASCII 值为 72, 105
+int main(){
+    int i;
+    for (i = 0; i < ARRAY_SIZE; i = i + 1) {
+        printf("%d ", str[i]);
+    }
+    return 0;
+}

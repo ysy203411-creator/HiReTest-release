@@ -1,0 +1,16 @@
+const int x = 10;
+int y = 20;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int result = add(x, y); // 添加右小括号
+    printResult(result);
+    if (x > 5) { // 添加右小括号
+        printf("x is greater than 5\n");
+    }
+    return 0;
+}

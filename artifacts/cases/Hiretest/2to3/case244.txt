@@ -1,0 +1,17 @@
+const int MAX_SIZE = 10;
+int globalVar = 5;
+int arr[MAX_SIZE];
+int compute(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result is: %d\n", result);
+    return;
+}
+int main(){
+    int localVar = 3;
+    int sum = compute(globalVar, localVar);
+    arr[0] = sum;
+    printResult(arr[0]);
+    return 0;
+}

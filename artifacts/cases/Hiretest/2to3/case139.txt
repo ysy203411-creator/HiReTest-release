@@ -1,0 +1,9 @@
+const int a = 5;
+int main(){
+    int array[10];
+    int i;  // 声明局部变量 i
+    for (i = 0; i < 10; i = i + 1) {  // 使用局部变量 i 代替常量 a
+        array[i] = i;
+    }
+    return 0;
+}

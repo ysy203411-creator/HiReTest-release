@@ -1,0 +1,22 @@
+const int CONST_INT = 10;
+const int CONST_CHAR = 20;
+int parseBtype(int type) {
+    if (type == 0) {
+        return CONST_INT;
+    } else {
+        return CONST_CHAR;
+    }
+    return 1;
+    return 0; // 添加显式的 return 语句
+}
+int main(){
+    int result;
+    int typeInt = 0;
+    int typeChar = 1;
+    
+    result = parseBtype(typeInt);
+    printf("Result for int type: %d\n", result);
+    result = parseBtype(typeChar);
+    printf("Result for char type: %d\n", result);
+    return 0;
+}

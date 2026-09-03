@@ -1,0 +1,18 @@
+const int CONST_VAL = 10;
+int global_var = CONST_VAL;
+int arr[5] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int local_var = 5;
+    int result = add(local_var, global_var);
+    print_result(result);
+    /* 原本这里使用了逻辑运算符 && 作为赋值右侧，违反约束 13，改为纯算术表达式 */
+    int undeclared_var = arr[2] + local_var;
+    printf("Undeclared Var: %d\n", undeclared_var);
+    return 0;
+}

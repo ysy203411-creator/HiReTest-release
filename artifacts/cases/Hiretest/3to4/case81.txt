@@ -1,0 +1,15 @@
+const int rq1_case_id_81 = 81;
+const int MAX_SIZE = 10;
+int globalInt = 42;
+int intArray[MAX_SIZE] = {1, 2, 3, 4, 5};
+int convertIntToInt(int i) {
+    return i;
+}
+void printConvertedValues() {
+    int intFromInt = convertIntToInt(globalInt);
+    printf("Converted int to int: %d\n", intFromInt);
+}
+int main(){
+    printConvertedValues();
+    return 0;
+}

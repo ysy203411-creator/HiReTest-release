@@ -1,0 +1,14 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 3;
+    int result = add(globalVar, localVar);
+    printResult(result);
+    return 0;
+}

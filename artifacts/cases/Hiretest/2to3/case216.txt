@@ -1,0 +1,23 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int arr[3] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 0;
+    localVar = add(globalVar, CONST_VAL);
+    if (localVar > 10 && localVar < 20) {
+        printResult(localVar);
+    } else {
+        printf("Value out of range\n");
+    }
+    int i = 0;
+    for (i = 0; i < 3; i = i + 1) {
+        printf("Array element %d: %d\n", i, arr[i]);
+    }
+    return 0;
+}

@@ -1,0 +1,19 @@
+const int CONST_VALUE = 10;
+int globalVar = 5;
+int array[5] = {1, 2, 3, 4, 5};
+void function1() {
+    int localVar = 10;
+    int anotherVar;  // This line is missing a semicolon, should trigger the error handling
+    localVar = localVar + CONST_VALUE;
+}
+int function2(int param) {
+    return param * 2;
+}
+int main(){
+    int mainVar = 0;
+    printf("Hello, World!\n");
+    function1();
+    mainVar = function2(globalVar);
+    printf("Result: %d\n", mainVar);
+    return 0;
+}

@@ -1,0 +1,17 @@
+const int SIZE = 10;
+int array[SIZE;
+void processArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        arr[i] = i * i;
+    }
+}
+int main(){
+    int numbers[SIZE];
+    processArray(numbers);
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        printf("%d\n", numbers[i]);
+    }
+    return 0;
+}

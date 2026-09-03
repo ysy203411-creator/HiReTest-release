@@ -1,0 +1,35 @@
+int a;
+int b;
+int c;
+void checkSize(int x) {
+    if (x == 4) {
+        printf("Size is 4 bytes\n");
+    } else {
+        printf("Size is not 4 bytes\n");
+    }
+}
+int main(){
+    a = getint();
+    b = getint();
+    c = getint();
+    
+    if (a == 4) {
+        printf("Size is 4 bytes\n");
+    } else {
+        printf("Size is not 4 bytes\n");
+    }
+    
+    if (b == 4) {
+        printf("Size is 4 bytes\n");
+    } else {
+        printf("Size is not 4 bytes\n");
+    }
+    
+    if (c == 4) {
+        printf("Size is 4 bytes\n");
+    } else {
+        printf("Size is not 4 bytes\n");
+    }
+    
+    return 0;
+}

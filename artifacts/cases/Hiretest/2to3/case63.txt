@@ -1,0 +1,26 @@
+const int MAX_LEVEL = 10;
+int currentLevel = 0;
+int symbolTable[MAX_LEVEL];
+void addSymbol(int level, int symbol) {
+    if (level >= 0 && level < MAX_LEVEL) {
+        symbolTable[level] = symbol;
+    }
+}
+void deleteLevel() {
+    if (currentLevel >= 0 && currentLevel < MAX_LEVEL) {
+        printf("Deleting level %d\n", currentLevel);
+        symbolTable[currentLevel] = 0; // Simulate removal
+        currentLevel = currentLevel - 1;
+    }
+}
+int main(){
+    addSymbol(currentLevel, 100);
+    currentLevel = currentLevel + 1;
+    addSymbol(currentLevel, 200);
+    currentLevel = currentLevel + 1;
+    addSymbol(currentLevel, 300);
+    printf("Current Level: %d\n", currentLevel);
+    deleteLevel();
+    printf("Current Level after deletion: %d\n", currentLevel);
+    return 0;
+}

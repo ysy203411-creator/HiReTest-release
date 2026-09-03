@@ -1,0 +1,26 @@
+// 添加全局声明部分
+int newline = 10; // ASCII for '\n'
+int quote = 34; // ASCII for '\"'
+int single_quote = 39; // ASCII for '\''
+int backslash = 92; // ASCII for '\\'
+int bell = 7; // ASCII for '\a'
+int backspace = 8; // ASCII for '\b'
+int tab = 9; // ASCII for '\t'
+int vertical_tab = 11; // ASCII for '\v'
+int form_feed = 12; // ASCII for '\f'
+int null_char = 0; // ASCII for '\0'
+
+int main() {
+    printf("Testing escape sequences:\n");
+    printf("Newline: [%d]\n", newline);
+    printf("Quote: [%d]\n", quote);
+    printf("Single Quote: [%d]\n", single_quote);
+    printf("Backslash: [%d]\n", backslash);
+    printf("Bell: [%d]\n", bell);
+    printf("Backspace: [%d]\n", backspace);
+    printf("Tab: [%d]\n", tab);
+    printf("Vertical Tab: [%d]\n", vertical_tab);
+    printf("Form Feed: [%d]\n", form_feed);
+    printf("Null Char: [%d]\n", null_char);
+    return 0;
+}

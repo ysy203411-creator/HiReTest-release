@@ -1,0 +1,14 @@
+int arr[3] = {1, 2, 3};  // 修改为变量数组
+int sum(int arr[], int size) {  // 修改参数类型为 int[]
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        total = total + arr[i];
+    }
+    return total;
+}
+int main(){
+    int result = sum(arr, 3);  // 修改参数为变量数组名
+    printf("Sum of array elements: %d\n", result);
+    return 0;
+}

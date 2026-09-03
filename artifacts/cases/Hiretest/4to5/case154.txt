@@ -1,0 +1,15 @@
+const int CONST_VALUE = 10;
+int global_var;
+int add(int a, int b) {
+    return a + b;
+}
+void print_sum(int a, int b) {
+    int sum = add(a, b);
+    printf("%d\n", sum);
+}
+int main(){
+    int input1 = getint();
+    int input2 = getint();
+    print_sum(input1, input2);
+    return 0;
+}

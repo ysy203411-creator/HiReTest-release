@@ -1,0 +1,41 @@
+const int size = 10;
+int globalArray[5] = {0}; // 初始化全局数组
+
+void initializeArray(int arr[], int length) {
+    int i = 0;
+    /* 使用 while 循环代替 for */
+    while (i < length) {
+        arr[i] = i * 2;
+        i = i + 1;
+    }
+    return;
+}
+
+int main() {
+    int localArray[3];
+    int i = 0;
+
+    /* 手动初始化局部数组元素，避免使用初始化列表语法 */
+    localArray[0] = 1;
+    localArray[1] = 2;
+    localArray[2] = 0;
+
+    initializeArray(globalArray, 5);
+
+    /* 重新使用 i 前不再重复声明 */
+    i = 0;
+    while (i < 3) {
+        printf("%d ", localArray[i]);
+        i = i + 1;
+    }
+    printf("\n");
+
+    i = 0;
+    while (i < 5) {
+        printf("%d ", globalArray[i]);
+        i = i + 1;
+    }
+    printf("\n");
+
+    return 0;
+}

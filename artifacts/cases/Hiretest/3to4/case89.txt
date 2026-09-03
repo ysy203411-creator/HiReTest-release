@@ -1,0 +1,30 @@
+const int rq1_case_id_89 = 89;
+const int CONST_VAL = 10;
+int global_var = 0;
+int arr[5] = {1, 2, 3, 4, 5};
+void updateArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        arr[i] = i * 2; // 正确的赋值操作
+    }
+}
+int main(){
+    int local_var = 5;
+    const int local_const = 20;
+    int i;
+    
+    for (i = 0; i < 5; i = i + 1) {
+        global_var = i; // 正确的赋值操作
+    }
+    for (i = 0; i < 5; i = i + 1) {
+        arr[i] = i; // 正确的赋值操作
+    }
+    for (i = 0; i < 5; i = i + 1) {
+        local_var = i; // 正确的赋值操作
+    }
+    // 下面的循环中尝试对常量进行赋值，应触发错误
+    for (i = 0; i < 5; i = i + 1) {
+        local_const = i; // 错误：对常量进行赋值
+    }
+    return 0;
+}

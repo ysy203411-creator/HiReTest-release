@@ -1,0 +1,21 @@
+int globalVar;
+const int CONST_VAL = 10;
+void processArray(int arr[], int arrSize) {
+    int i = 0;
+    while (i < arrSize) {
+        arr[i] = arr[i] * CONST_VAL;
+        i = i + 1;
+    }
+}
+int calculateSum(int a, int b) {
+    return a + b;
+}
+int main(){
+    int input;
+    int arr[5] = {1, 2, 3, 4, 5};
+    input = getint();
+    processArray(arr, 5);
+    globalVar = calculateSum(arr[0], input);
+    printf("Result: %d\n", globalVar);
+    return 0;
+}

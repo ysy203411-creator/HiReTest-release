@@ -1,0 +1,16 @@
+const int SIZE = 10;
+int array[SIZE];
+int sum(int arr[]) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        total = total + arr[i];
+    }
+    return total;
+}
+int main(){
+    array[0 = 1; // 缺少右中括号错误
+    array[1 = 2; // 缺少右中括号错误
+    printf("Sum: %d\n", sum(array));
+    return 0;
+}

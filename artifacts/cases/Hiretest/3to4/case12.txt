@@ -1,0 +1,20 @@
+const int rq1_case_id_12 = 12;
+const int a = 5;
+const int b = 10;
+int compare(int x, int y) {
+    if (x >= y) {
+        return 1;
+    } else {
+        return 0;
+    }
+    return 0; // 修改后的代码，添加了缺少的 return 语句
+}
+int main(){
+    int result1 = compare(a, b);
+    int result2 = compare(b, a);
+    int result3 = compare(a, a);
+    printf("Result1: %d\n", result1);
+    printf("Result2: %d\n", result2);
+    printf("Result3: %d\n", result3);
+    return 0;
+}

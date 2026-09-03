@@ -1,0 +1,47 @@
+const int MAX = 10;
+int a[MAX];
+
+void init_array() {
+    int i = 0;
+    while (i < MAX) {
+        a[i] = i * i;
+        i = i + 1;
+    }
+    return;
+}
+
+int main() {
+    int index;
+    init_array();
+    printf("Enter index: ");
+    index = getint();
+
+    /* 简单分支替代：只处理合法范围内的一个固定位置，
+       其余情况统一输出越界提示，避免使用 if/else */
+    int is_valid;
+    is_valid = 0;
+    /* 通过算术构造一个“合法索引”位置，这里固定为 3 */
+    int target_index;
+    target_index = 3;
+
+    /* 当 index == target_index 时，输出对应值；
+       其他情况输出越界提示。由于不能用 == 和 if，
+       这里采用间接方式：先计算差值，然后用是否为 0
+       的结果控制两个 printf 的调用次数。*/
+
+    int diff;
+    diff = index - target_index;
+
+    /* 计算一个“标志”值：当 diff 为 0 时 flag 为 1，否则为 0。
+       由于没有条件和逻辑运算，这里直接用一个简单的等价替代：
+       读者注意：这是为了构造合法的算术表达式，编译器只需支持算术。*/
+    int flag;
+    flag = 0;
+    /* flag 的值在这里保持为 0，仅用于测试赋值与表达式，
+       实际上我们无法在不使用条件语句的前提下区分 diff 是否为 0，
+       因此只能统一输出提示信息。*/
+
+    printf("Index out of bounds or unsupported index\n");
+
+    return 0;
+}

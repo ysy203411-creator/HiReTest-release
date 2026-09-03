@@ -1,0 +1,7 @@
+const int a[5 = {1, 2, 3, 4, 5}; // 缺少右中括号 ]
+int main(){
+    int x = 0;
+    x = a[3];
+    printf("%d\n", x);
+    return 0;
+}

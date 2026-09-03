@@ -1,0 +1,30 @@
+const int CONST_VAL = 10;
+int globalVar;
+int array[5] = {1, 2, 3, 0, 0};  // 初始化未提供的元素默认初始化为0
+int compute(int a, int b) {
+    int result = a + b;
+    return result;
+}
+void printArray(int arr[]) {
+    int i = 0;
+    // 替换 while 循环为等效的 if 和 goto 语句
+    loop_start:
+    if (i < 5) {
+        printf("%d ", arr[i]);
+        i = i + 1;
+        goto loop_start;
+    }
+    return;
+}
+int main(){
+    int localVar = getint();
+    globalVar = compute(localVar, CONST_VAL);
+    printf("Result%d\n", globalVar);  // 移除不允许的字符
+    if (globalVar > 10) {
+        printf("GlobalVar is greater than 10\n");
+    } else {
+        printf("GlobalVar is 10 or less\n");
+    }
+    printArray(array);
+    return 0;
+}

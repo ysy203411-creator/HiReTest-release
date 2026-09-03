@@ -1,0 +1,26 @@
+const int MAX_SIZE = 10;
+int numbers[MAX_SIZE];
+void initializeArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        arr[i] = i * i;
+    }
+}
+int sumArray(int arr[], int size) {
+    int sum = 0;
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+int main(){
+    initializeArray(numbers, MAX_SIZE);
+    int total = sumArray(numbers, MAX_SIZE);
+    if (total > 50 & total < 100) {  // Intentional error: single &
+        printf("Sum is between 50 and 100\n");
+    } else {
+        printf("Sum is not between 50 and 100\n");
+    }
+    return 0;
+}

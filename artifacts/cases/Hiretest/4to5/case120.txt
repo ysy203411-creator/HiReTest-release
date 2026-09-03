@@ -1,0 +1,21 @@
+const int SIZE = 5;
+const int arr[SIZE] = {1, 2, 3, 4, 5};
+
+int main() {
+    int sum = 0;
+    int i = 0;
+
+    /* 用 while 也不被允许，这里改为等价的顺序展开以避免循环语句 */
+    sum = sum + arr[i];  /* i = 0 */
+    i = i + 1;
+    sum = sum + arr[i];  /* i = 1 */
+    i = i + 1;
+    sum = sum + arr[i];  /* i = 2 */
+    i = i + 1;
+    sum = sum + arr[i];  /* i = 3 */
+    i = i + 1;
+    sum = sum + arr[i];  /* i = 4 */
+
+    printf("Sum of array elements: %d\n", sum);
+    return 0;
+}

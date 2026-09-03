@@ -1,0 +1,20 @@
+const int rq1_case_id_62 = 62;
+const int CONST_VAL = 10;
+int global_var = 0;
+int arr[5] = {1, 2, 3, 4, 5};
+void updateArray(int a[]) {
+    a[0] = 100; // Valid operation
+}
+void testFunction() {
+    int local_var = 5;
+    for (CONST_VAL = 0; CONST_VAL < 10; CONST_VAL = CONST_VAL + 1) { // h类错误：对常量进行赋值
+        local_var = local_var + CONST_VAL;
+    }
+}
+int main(){
+    int local_var = 0;
+    updateArray(arr);
+    printf("Array first element: %d\n", arr[0]);
+    testFunction();
+    return 0;
+}

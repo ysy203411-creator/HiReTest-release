@@ -1,0 +1,28 @@
+const int SIZE = 5;
+int globalArray[SIZE];
+int globalVar;
+
+void initializeGlobalArray() {
+    /* 展开原本的 while 循环逻辑 */
+    globalArray[0] = 0 * 2;
+    globalArray[1] = 1 * 2;
+    globalArray[2] = 2 * 2;
+    globalArray[3] = 3 * 2;
+    globalArray[4] = 4 * 2;
+    return;
+}
+
+int main() {
+    initializeGlobalArray();
+    globalVar = getint();
+
+    /* 展开原本的 while 循环打印逻辑 */
+    printf("%d ", globalArray[0]);
+    printf("%d ", globalArray[1]);
+    printf("%d ", globalArray[2]);
+    printf("%d ", globalArray[3]);
+    printf("%d ", globalArray[4]);
+
+    printf("%d", globalVar);
+    return 0;
+}

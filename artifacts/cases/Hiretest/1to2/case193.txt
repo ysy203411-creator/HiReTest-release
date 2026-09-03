@@ -1,0 +1,22 @@
+const int a = 10;
+int b = 20;
+int arr[5] = {1, 2, 3};
+int add(int x, int y) {
+    return x + y;
+}
+void printSum(int x, int y) {
+    int sum = add(x, y);
+    printf("Sum: %d\n", sum);
+    return;
+}
+int main(){
+    int c = a + b;
+    printf("Value of c: %d\n", c);
+    printSum(arr[1], arr[2]);
+    if (c > 15 && c < 50) {
+        printf("c is within the expected range.\n");
+    } else {
+        printf("c is out of range.\n");
+    }
+    return 0;
+}

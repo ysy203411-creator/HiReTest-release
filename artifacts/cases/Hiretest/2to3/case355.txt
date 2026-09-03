@@ -1,0 +1,13 @@
+const int MAX = 100;
+int foo(int a) {
+    return a + 1;
+}
+int bar(int b) { // 修改参数名以避免重定义
+    return b * 2;
+}
+int main(){
+    int x = getint();
+    int y = foo(x);
+    printf("%d\n", y);
+    return 0;
+}

@@ -1,0 +1,25 @@
+const int SIZE = 10;
+int array[SIZE];
+
+void initializeArray() {
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        array[i] = i + 1;
+    }
+}
+
+int sumArray(int arr[], int len) {
+    int sum = 0;
+    int i = 0;
+    for (i = 0; i < len; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+
+int main() {
+    initializeArray();
+    int totalSum = sumArray(array, SIZE);
+    printf("Total sum of array elements: %d\n", totalSum);
+    return 0;
+}

@@ -1,0 +1,17 @@
+const int MAX_SIZE = 100;
+int globalArray[MAX_SIZE];
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    int resultAdd = add(x, y);
+    int resultMul = multiply(x, y);
+    int complexCalc = add(resultAdd, multiply(resultAdd, resultMul));
+    printf("Result of complex calculation: %d\n", complexCalc);
+    return 0;
+}

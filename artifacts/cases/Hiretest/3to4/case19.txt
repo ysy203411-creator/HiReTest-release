@@ -1,0 +1,16 @@
+const int rq1_case_id_19 = 19;
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE] = {1, 2, 3, 4, 5};
+void printArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < MAX_SIZE; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+}
+int main(){
+    int localVar = 42;
+    int localArray[MAX_SIZE] = {6, 7, 8, 9, 10};
+    printArray(globalArray);
+    printArray(localArray);
+    return 0;
+}

@@ -1,0 +1,26 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int compute(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int x = 3;
+    int y = 4;
+    int z = 0;
+    int result;
+    // 使用逻辑或表达式
+    if (x > 0 || y > 0) {
+        result = compute(x, y);
+    } else {
+        result = compute(x, z);
+    }
+    printResult(result);
+    // 另一个逻辑或表达式
+    if (globalVar > 0 || CONST_VAL > 0) {
+        printf("Global or Const is positive.\n");
+    }
+    return 0;
+}

@@ -1,0 +1,16 @@
+const int CONST_VAL = 10;
+int globalVar;
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int localVar = 5;
+    int result = add(localVar, CONST_VAL);
+    printf("Result: %d\n", result);
+    // 测试变量声明和函数定义的区分
+    int anotherVar = 3;
+    int yetAnotherVar;
+    printf("AnotherVar: %d\n", anotherVar);
+    printf("YetAnotherVar: %d\n", yetAnotherVar);
+    return 0;
+}

@@ -1,0 +1,7 @@
+const int a = 5;
+const int b = 10, c = 15;
+const int d = 20
+const int e = 25, f = 30;
+int main(){
+    return 0;
+}

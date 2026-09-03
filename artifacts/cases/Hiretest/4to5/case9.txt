@@ -1,0 +1,20 @@
+const int size = 5;
+int globalVar = 42;
+int globalArray[5] = {1, 2, 3, 4, 5};
+
+void printGlobalVar() {
+    printf("%d\n", globalVar);
+}
+
+void printGlobalArray() {
+    for (int i = 0; i < size; i = i + 1) {
+        printf("%d ", globalArray[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    printGlobalVar();
+    printGlobalArray();
+    return 0;
+}

@@ -1,0 +1,8 @@
+const int SIZE = 5;
+int array[SIZE];
+int main(){
+    int index = 3;
+    int value = array[index; // 缺少右中括号
+    printf("%d\n", value);
+    return 0;
+}

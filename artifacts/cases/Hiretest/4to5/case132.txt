@@ -1,0 +1,27 @@
+int globalVar;
+int array[5];
+const int constVar = 10;
+void modifyArray(int arr[]) {
+    arr[0] = 100;
+}
+int calculate(int a, int b) {
+    return a + b;
+}
+int main(){
+    int localVar = 5;
+    globalVar = 20;
+    array[1] = 50;
+    printf("%d\n", globalVar);
+    printf("%d\n", array[1]);
+    
+    modifyArray(array);
+    printf("%d\n", array[0]);
+    
+    int result = calculate(globalVar, localVar);
+    printf("%d\n", result);
+    
+    int inputVal = getint();
+    printf("%d\n", inputVal);
+    
+    return 0;
+}

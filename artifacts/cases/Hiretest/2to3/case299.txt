@@ -1,0 +1,23 @@
+const int SIZE = 5;
+int globalArray[SIZE];
+int sumArray(int arr[], int length) {
+    int sum = 0;
+    int i = 0;
+    for (i = 0; i < length; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+int main(){
+    int localArray[3] = {1, 2, 3};
+    int result = sumArray(localArray, 3);
+    printf("Sum of localArray: %d\n", result);
+    globalArray[0] = 10;
+    globalArray[1] = 20;
+    globalArray[2] = 30;
+    globalArray[3] = 40;
+    globalArray[4] = 50;
+    result = sumArray(globalArray, SIZE);
+    printf("Sum of globalArray: %d\n", result);
+    return 0;
+}

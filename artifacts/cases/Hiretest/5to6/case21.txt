@@ -1,0 +1,20 @@
+int globalVar;
+const int constArray[5] = {1, 2, 3, 0, 0}; // 补全初始化列表
+int main(){
+    int localVar = 0; // 初始化为0
+    static int staticVar;
+    int array[3] = {0}; // 初始化为0
+    printf("globalVar before init: %d\n", globalVar);
+    printf("localVar before init: %d\n", localVar);
+    printf("staticVar before init: %d\n", staticVar);
+    printf("array[0] before init: %d\n", array[0]);
+    globalVar = 10;
+    localVar = 20;
+    staticVar = 30;
+    array[0] = 40;
+    printf("globalVar after init: %d\n", globalVar);
+    printf("localVar after init: %d\n", localVar);
+    printf("staticVar after init: %d\n", staticVar);
+    printf("array[0] after init: %d\n", array[0]);
+    return 0;
+}

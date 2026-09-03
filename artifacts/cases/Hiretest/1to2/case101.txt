@@ -1,0 +1,18 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int x = 3;
+    int y = 7;
+    int result = 0;
+    if (x & y) { // 错误：单独的 & 应视为非法符号
+        result = add(x, y);
+    }
+    printResult(result);
+    return 0;
+}

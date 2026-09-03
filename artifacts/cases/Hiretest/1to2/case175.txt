@@ -1,0 +1,19 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+    return;
+}
+int main(){
+    int localVar = 0;
+    int result = 0;
+    localVar = CONST_VAL * 2;
+    result = add(localVar, globalVar);
+    printResult(result);
+    int unaryTest = -localVar;  // Test unary minus
+    printf("Unary Test: %d\n", unaryTest);
+    return 0;
+}

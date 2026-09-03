@@ -1,0 +1,68 @@
+const int SIZE = 5;
+int globalArray[SIZE];
+
+void initializeArray(int arr[]) {
+    int i;
+    i = 0;
+
+    /* 用顺序赋值模拟“展开”的初始化 */
+    arr[i] = i * 2;
+    i = i + 1;
+
+    arr[i] = i * 2;
+    i = i + 1;
+
+    arr[i] = i * 2;
+    i = i + 1;
+
+    arr[i] = i * 2;
+    i = i + 1;
+
+    arr[i] = i * 2;
+    i = i + 1;
+
+    return;
+}
+
+int sumArray(int arr[]) {
+    int sum;
+    int i;
+    sum = 0;
+    i = 0;
+
+    sum = sum + arr[i];
+    i = i + 1;
+
+    sum = sum + arr[i];
+    i = i + 1;
+
+    sum = sum + arr[i];
+    i = i + 1;
+
+    sum = sum + arr[i];
+    i = i + 1;
+
+    sum = sum + arr[i];
+    i = i + 1;
+
+    return sum;
+}
+
+int main() {
+    int localArray[SIZE];
+    int sum;
+    int inputValue;
+
+    initializeArray(localArray);
+    sum = sumArray(localArray);
+    printf("Sum of localArray: %d\n", sum);
+
+    initializeArray(globalArray);
+    sum = sumArray(globalArray);
+    printf("Sum of globalArray: %d\n", sum);
+
+    inputValue = getint();
+    printf("Input value: %d\n", inputValue);
+
+    return 0;
+}

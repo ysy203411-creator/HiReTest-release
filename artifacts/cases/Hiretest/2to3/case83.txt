@@ -1,0 +1,13 @@
+const int a = 5;
+int b = 10;
+int add(int x, int y) {
+    return x + y;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int sum = add(a, b);
+    printResult(sum);
+    return 0;
+}

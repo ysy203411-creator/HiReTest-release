@@ -1,0 +1,16 @@
+const int SIZE = 5;
+int arr[SIZE] = {1, 2, 3, 4, 5};
+int sum;
+int calculateSum(int nums[], int length) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < length; i = i + 1) {
+        total = total + nums[i];
+    }
+    return total;
+}
+int main(){
+    sum = calculateSum(arr, SIZE);
+    printf("Sum of array: %d\n", sum);
+    return 0;
+}

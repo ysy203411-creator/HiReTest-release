@@ -1,0 +1,34 @@
+const int SIZE = 5;
+int globalArray[SIZE] = {1, 2, 3, 4, 5};
+
+void printArray(int arr[], int size) {
+    int i = 0;
+    /* 由于不允许使用 while/for 等循环语句，这里手动展开对前 size 个元素的访问。
+       假设 size 不超过 SIZE（5），按索引依次访问。 */
+    if (size > 0) {
+        printf("%d ", arr[0]);
+    }
+    if (size > 1) {
+        printf("%d ", arr[1]);
+    }
+    if (size > 2) {
+        printf("%d ", arr[2]);
+    }
+    if (size > 3) {
+        printf("%d ", arr[3]);
+    }
+    if (size > 4) {
+        printf("%d ", arr[4]);
+    }
+    printf("\n");
+    return;
+}
+
+int main() {
+    int localArray[SIZE] = {10, 20, 30, 40, 50};
+    printArray(globalArray, SIZE);
+    printArray(localArray, SIZE);
+    int inputValue = getint();
+    printf("Input value: %d\n", inputValue);
+    return 0;
+}

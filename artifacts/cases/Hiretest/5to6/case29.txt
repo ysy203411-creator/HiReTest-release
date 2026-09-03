@@ -1,0 +1,10 @@
+int c1 = 10; // ASCII value for '\n'
+int c2 = 9;  // ASCII value for '\t'
+int c3 = 97; // ASCII value for 'a'
+
+int main() {
+    printf("Char 1: %d\n", c1); // Expecting 10 for '\n'
+    printf("Char 2: %d\n", c2); // Expecting 9 for '\t'
+    printf("Char 3: %d\n", c3); // Expecting 97 for 'a'
+    return 0;
+}

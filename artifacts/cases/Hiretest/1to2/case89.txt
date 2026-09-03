@@ -1,0 +1,21 @@
+const int CONST_VAL = 5;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void checkRelExp(int a, int b) {
+    if (a < b & a > CONST_VAL) { // 错误：使用单独的 & 代替 &&
+        printf("a is less than b and greater than CONST_VAL\n");
+    } else {
+        printf("Condition not met\n");
+    }
+}
+int main(){
+    int localVar = 20;
+    int result = add(globalVar, localVar);
+    printf("Result: %d\n", result);
+    
+    checkRelExp(globalVar, localVar);
+    
+    return 0;
+}

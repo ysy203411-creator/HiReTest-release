@@ -1,0 +1,30 @@
+const int MAX = 100;
+int numbers[MAX];
+void fillArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        arr[i] = i * i;
+    }
+}
+int sumArray(int arr[], int size) {
+    int sum = 0;
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+int main(){
+    fillArray(numbers, MAX);
+    int total = sumArray(numbers, MAX);
+    printf("Sum of squares: %d\n", total);
+    // This is a comment block
+    /* 
+    The following code is commented out
+    int error = 0;
+    if(total > 0 {
+        error = 1;
+    }
+    */
+    return 0;
+}

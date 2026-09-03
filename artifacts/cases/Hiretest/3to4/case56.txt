@@ -1,0 +1,21 @@
+const int rq1_case_id_56 = 56;
+const int TRUE = 1;
+const int FALSE = 0;
+int evaluateCondition(int a, int b) {
+    if (a != 0 || b != 0) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+int main(){
+    int x = getint();
+    int y = getint();
+    int result = evaluateCondition(x, y);
+    if (result) {
+        printf("Condition is True\n");
+    } else {
+        printf("Condition is False\n");
+    }
+    return 0;
+}

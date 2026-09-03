@@ -1,0 +1,29 @@
+const int SYNTAX = 0;
+const int SYMBOL = 1;
+const int LLVM = 2;
+int option;
+int parserResult = 100;
+int symbolResult = 200;
+int llvmResult = 300;
+void normalOutput() {
+    int outputRightFileName = 0;
+    int output = 0;
+    if (option == SYNTAX) {
+        outputRightFileName = SYNTAX;
+        output = parserResult;
+    } else if (option == SYMBOL) {
+        outputRightFileName = SYMBOL;
+        output = symbolResult;
+    } else if (option == LLVM) {
+        outputRightFileName = LLVM;
+        output = llvmResult;
+    } else {
+        outputRightFileName = -1;
+    }
+    printf("Output File: %d, Output Content: %d\n", outputRightFileName, output);
+}
+int main(){
+    option = getint();
+    normalOutput();
+    return 0;
+}

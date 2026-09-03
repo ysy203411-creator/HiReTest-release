@@ -1,0 +1,23 @@
+int globalVar = 10;
+const int CONST_VAL = 20;
+int array[5] = {1, 2, 3, 4, 5};
+int sum(int a, int b) {
+    return a + b;
+}
+void printMessage() {
+    printf("Initialization complete.\n");
+    return;
+}
+int main(){
+    int localVar = 5;
+    int result = sum(globalVar, localVar);
+    printf("Result: %d\n", result);
+    if (result > CONST_VAL) {
+        printMessage();
+    } else {
+        printf("Result is not greater than CONST_VAL.\n");
+    }
+    int index = 2;
+    printf("Array element: %d\n", array[index]);
+    return 0;
+}

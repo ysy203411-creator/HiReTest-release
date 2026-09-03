@@ -1,0 +1,19 @@
+int a;
+const int b = 5;
+int arr[3] = {1, 2, 3};
+void printArray(int arr[]) {
+    for (int i = 0; i < 3; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int computeSum(int x, int y) {
+    return x + y;
+}
+int main(){
+    a = getint();
+    int sum = computeSum(a, b);
+    printf("Sum: %d\n", sum);
+    printArray(arr);
+    return 0;
+}

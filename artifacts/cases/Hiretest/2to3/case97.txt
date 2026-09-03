@@ -1,0 +1,15 @@
+const int a = 10;
+const int b = 20;
+int arr[5] = {1, 2, 3, 4, 5};
+int compare(int x, int y) {
+    return x == y;
+}
+int main(){
+    int result = compare(a, b);
+    if (result & arr[0]) {  // 使用单独的 &，应识别为错误
+        printf("Equal\n");
+    } else {
+        printf("Not equal\n");
+    }
+    return 0;
+}

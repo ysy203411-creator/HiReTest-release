@@ -1,0 +1,16 @@
+const int a = 10;
+int b = 20;
+int arr[5] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int sum = add(a, b);
+    printResult(sum);
+    // Corrected string with a legal escape sequence.
+    printf("Hello, World!\n");
+    return 0;
+}

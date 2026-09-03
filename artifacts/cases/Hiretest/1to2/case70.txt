@@ -1,0 +1,22 @@
+const int MAX = 100;
+int arr[MAX];
+void printArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+}
+int main(){
+    int n = getint();
+    int i = 0;
+    for (i = 0; i < n; i = i + 1) {
+        arr[i] = getint();
+    }
+    printArray(arr, n);
+    int a = 5;
+    int b = 10;
+    if (a < b & a > 0) { // 错误：使用了单独的 & 作为条件运算符
+        printf("a is less than b and greater than 0\n");
+    }
+    return 0;
+}

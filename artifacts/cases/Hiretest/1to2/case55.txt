@@ -1,0 +1,21 @@
+const int MAX = 10;
+int arr[MAX];
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int x = 5;
+    int y = 6;
+    int result = add(x, y);
+    printResult(result);
+    int invalid;
+    if (x | y) { // Move the error to an if statement to satisfy a类错误的限制条件
+        invalid = 1;
+    } else {
+        invalid = 0;
+    }
+    return 0;
+}

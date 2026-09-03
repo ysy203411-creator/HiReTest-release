@@ -1,0 +1,13 @@
+const int size = 5;
+const int arr[5] = {1, 2, 3, 4, 5};
+
+int main() {
+    int sum = 0;
+    int i = 0;
+    // 用允许的语句类型改写 while 为 for
+    for (i = 0; i < size; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    printf("%d\n", sum);
+    return 0;
+}

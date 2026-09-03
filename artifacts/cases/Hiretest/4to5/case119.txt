@@ -1,0 +1,16 @@
+const int SIZE = 5;
+int numbers[SIZE];
+void storeInt(int index, int value) {
+    numbers[index] = value;
+}
+int main(){
+    int i = 0;
+    for (int j = 0; j < SIZE; j = j + 1) {
+        numbers[j] = getint();
+    }
+    storeInt(2, 42);
+    for (int j = 0; j < SIZE; j = j + 1) {
+        printf("%d\n", numbers[j]);
+    }
+    return 0;
+}

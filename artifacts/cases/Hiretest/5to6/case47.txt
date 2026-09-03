@@ -1,0 +1,10 @@
+const int strLen = 10;
+int str[strLen] = {72, 101, 108, 108, 111, 10, 87, 111, 114, 108};
+int escapeStr[strLen] = {76, 105, 110, 101, 49, 10, 76, 105, 110, 101};
+int specialCharStr[strLen] = {84, 97, 98, 116, 69, 110, 100, 0, 0, 0};
+int main(){
+    printf("Original String: %d\n", str[0]); // Example of printing first character as int
+    printf("Escaped Newline: %d\n", escapeStr[0]); // Example of printing first character as int
+    printf("Special Char: %d\n", specialCharStr[0]); // Example of printing first character as int
+    return 0;
+}

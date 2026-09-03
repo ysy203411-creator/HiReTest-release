@@ -1,0 +1,23 @@
+const int N = 10;
+int arr[N];
+void testFunction() {
+    int i = 0;
+    if (i < N) {
+        i = i + 1;  // 替代原先非法的 break
+    }
+    for (i = 0; i < N; i = i + 1) {
+        if (arr[i] == 0) {
+            continue;  // 合法：在 for 循环体中
+        }
+        arr[i] = i;
+    }
+}
+int main(){
+    int x = 5;
+    if (x > 0) {
+        x = x - 1;  // 替代原先非法的 continue
+    }
+    testFunction();
+    printf("Test completed. x = %d\n", x);  // 添加格式符 %d 和整型表达式参数 x
+    return 0;
+}

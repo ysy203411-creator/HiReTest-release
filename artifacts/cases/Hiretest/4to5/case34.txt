@@ -1,0 +1,13 @@
+const int SIZE = 5;
+const int str[SIZE] = {116, 101, 115, 116, 0}; // ASCII values for "test" with null terminator
+
+void printArray(const int arr[], int size) {
+    for (int i = 0; i < size; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+}
+
+int main() {
+    printArray(str, SIZE);
+    return 0;
+}

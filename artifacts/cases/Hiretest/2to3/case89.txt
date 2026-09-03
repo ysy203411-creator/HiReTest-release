@@ -1,0 +1,23 @@
+const int SIZE = 10;
+int globalArray[SIZE];
+void initializeArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        arr[i] = i * 2;
+    }
+}
+int sumArray(int arr[], int size) {
+    int sum = 0;
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+int main(){
+    int localArr[SIZE]; // 修改变量名以避免重名
+    initializeArray(localArr, SIZE); // 修改变量名以避免重名
+    int total = sumArray(localArr, SIZE); // 修改变量名以避免重名
+    printf("Total sum is: %d\n", total);
+    return 0;
+}

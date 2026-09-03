@@ -1,0 +1,13 @@
+const int a = 10;
+const int b = 20;
+int globalVar = a + b;
+int addConst(int x) {
+    int y = x + a; // 使用常量a进行计算，但不修改a
+    return y;
+}
+int main(){
+    int localVar = addConst(b);
+    printf("%d\n", globalVar);
+    printf("%d\n", localVar);
+    return 0;
+}

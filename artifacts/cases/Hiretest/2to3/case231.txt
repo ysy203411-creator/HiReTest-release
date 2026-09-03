@@ -1,0 +1,19 @@
+const int MAX = 10;
+int arr[MAX];
+void initializeArray(int array[]) {
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        array[i] = i * i;
+    }
+}
+void printArray(int array[]) {
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        printf("%d\n", array[i]);
+    }
+}
+int main(){
+    initializeArray(arr);
+    printArray(arr);
+    return 0;
+}

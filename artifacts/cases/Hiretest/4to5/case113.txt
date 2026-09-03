@@ -1,0 +1,49 @@
+const int SIZE = 10;
+int intArray[SIZE];
+int charValues[SIZE]; // 修改变量名以避免重名
+
+void initializeArrays() {
+    int i = 0;
+    /* 用 while 循环和算术表达式代替 for 和字符常量 */
+    while (i < SIZE) {
+        intArray[i] = i * 2;
+        /* 'a' 的 ASCII 值为 97，这里用整型常量表达 */
+        charValues[i] = 97 + i; // 修改变量名
+        i = i + 1;
+    }
+}
+
+int getIntElement(int index) {
+    /* 不使用 if 和逻辑运算符，改为简单的范围外返回固定值 */
+    int result = -1;
+    int i = 0;
+    while (i < SIZE) {
+        if (i == index) {
+            result = intArray[i];
+        }
+        i = i + 1;
+    }
+    return result;
+}
+
+int getCharElement(int index) {
+    int result = 0;
+    int i = 0;
+    while (i < SIZE) {
+        if (i == index) {
+            result = charValues[i]; // 修改变量名
+        }
+        i = i + 1;
+    }
+    return result;
+}
+
+int main() {
+    initializeArrays();
+    int index = getint();
+    int intElement = getIntElement(index);
+    int charElement = getCharElement(index);
+    printf("Integer element at %d: %d\n", index, intElement);
+    printf("Character element at %d: %d\n", index, charElement);
+    return 0;
+}

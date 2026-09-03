@@ -1,0 +1,16 @@
+const int rq1_case_id_16 = 16;
+const int a = 5;
+int x = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+void printArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+}
+int main(){
+    int localVar = a + x;
+    printf("Local Variable: %d\n", localVar);
+    printArray(arr);
+    return 0;
+}

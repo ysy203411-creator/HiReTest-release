@@ -1,0 +1,28 @@
+const int CONST_A = 5;
+const int CONST_B = 10;
+int globalVar = 0;
+int add(int a, int b) {
+    return a + b;
+}
+void compareAndPrint(int x, int y) {
+    if (x == y) {
+        printf("Equal\n");
+    } 
+    if (x != y) {
+        printf("Not Equal\n");
+    }
+}
+int main(){
+    int localVar = 3;
+    int result = add(CONST_A, localVar);
+    
+    compareAndPrint(result, CONST_B);
+    
+    if (result == CONST_A + localVar) {
+        printf("Result matches expected sum\n");
+    } else {
+        printf("Unexpected result\n");
+    }
+    
+    return 0;
+}

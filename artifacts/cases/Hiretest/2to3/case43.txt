@@ -1,0 +1,12 @@
+const int SIZE = 5;
+int array[SIZE];
+int value = 10;
+int main(){
+    int result;
+    array[0] = value; // 正确的赋值语句
+    result = array[1]; // 正确的赋值语句
+    int anotherValue = 20;
+    anotherValue = value // 错误的语句，缺少分号，测试 i 类错误
+    printf("%d\n", result);
+    return 0;
+}

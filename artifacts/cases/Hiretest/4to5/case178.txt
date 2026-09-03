@@ -1,0 +1,27 @@
+const int max_value = 100;
+int numbers[max_value];
+
+void initialize_array() {
+    int i = 0;
+    while (i < max_value) {
+        numbers[i] = i * 2;
+        i = i + 1;
+    }
+}
+
+int sum_array(int arr[], int size) {
+    int sum = 0;
+    int i = 0;
+    while (i < size) {
+        sum = sum + arr[i];
+        i = i + 1;
+    }
+    return sum;
+}
+
+int main() {
+    initialize_array();
+    int total_sum = sum_array(numbers, max_value);
+    printf("Total Sum: %d\n", total_sum);
+    return 0;
+}

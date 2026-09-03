@@ -1,0 +1,16 @@
+const int a = 5;
+int b = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+const int c = 20;
+void modifyArray(int arr[]) {
+    arr[0] = 100;
+}
+int main(){
+    int i;
+    for (i = 0; i < 5; i = i + 1) {
+        b = i;  // 正确：给变量赋值
+        arr[i] = i;  // 正确：给数组元素赋值
+    }
+    printf("%d %d\n", b, arr[0]);  // 修改后的 printf 调用，参数数量与 %d 数量一致
+    return 0;
+}

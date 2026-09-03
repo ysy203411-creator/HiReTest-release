@@ -1,0 +1,18 @@
+int a;
+int b;
+int c;
+int arr[5];
+void func() {
+    int x = getint();
+    arr[0] = x;
+    return;
+}
+int main(){
+    a = getint();
+    b = getint();
+    c = a + b;
+    func();
+    printf("Sum: %d\n", c);
+    printf("Array[0]: %d\n", arr[0]);
+    return 0;
+}

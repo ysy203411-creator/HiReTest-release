@@ -1,0 +1,15 @@
+int a;
+int b;
+int main(){
+    a = 5;
+    b = 10;
+    if (a == b) {
+        printf("a and b are equal\n");
+    } else {
+        printf("a and b are not equal\n");
+    }
+    a = 20;
+    b = 20;
+    printf("%d %d\n", a, b);
+    return 0;
+}

@@ -1,0 +1,23 @@
+const int MAX = 100;
+int numbers[MAX];
+int sum(int a, int b) {
+    return a + b;
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    int result = sum(x, y);
+    
+    if (result == 30) {
+        printf("Result is correct\n");
+    } else {
+        printf("Result is incorrect\n");
+    }
+    int comparison = (x == y) | (x != y); // 这里故意使用单个 |，以测试错误识别能力
+    if (comparison) {
+        printf("Comparison is true\n");
+    } else {
+        printf("Comparison is false\n");
+    }
+    return 0;
+}

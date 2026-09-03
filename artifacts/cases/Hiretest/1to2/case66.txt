@@ -1,0 +1,10 @@
+const int a = 5;
+const int b = 10;
+// int c = a | b; // 删除此行，因为 a 类错误不能出现在这里
+int main(){
+    int d = 20;
+    const int e = 5; // 修改为常量表达式
+    int f = e * 2;
+    printf("%d\n", f);
+    return 0;
+}

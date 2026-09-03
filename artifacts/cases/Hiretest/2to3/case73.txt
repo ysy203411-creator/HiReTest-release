@@ -1,0 +1,23 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int globalArr[3] = {1, 2, 3};
+void printValue(int value) {
+    printf("Value: %d\n", value);
+    return;
+}
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int localVar = 0;
+    localVar = add(globalVar, CONST_VAL);
+    printValue(localVar);
+    if (localVar > CONST_VAL) {
+        printf("localVar is greater than CONST_VAL\n");
+    } else {
+        printf("localVar is not greater than CONST_VAL\n");
+    }
+    globalArr[0] = getint();
+    printf("First element of globalArr: %d\n", globalArr[0]);
+    return 0;
+}

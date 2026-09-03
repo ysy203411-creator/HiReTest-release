@@ -1,0 +1,31 @@
+const int MAX = 100;
+int globalVar = 10;
+int compare(int a, int b) {
+    if (a > b) {
+        return 1;
+    } 
+    if (a < b) {
+        return -1;
+    } else {
+        return 0;
+    }
+    return 0; // 修改为 return 0; 以符合逻辑设计
+    return 1;
+}
+void printResult(int result) {
+    if (result == 1) {
+        printf("First number is greater.\n");
+    } 
+    if (result == -1) {
+        printf("Second number is greater.\n");
+    } else {
+        printf("Both numbers are equal.\n");
+    }
+}
+int main(){
+    int num1 = getint();
+    int num2 = getint();
+    int result = compare(num1, num2);
+    printResult(result);
+    return 0;
+}

@@ -1,0 +1,16 @@
+const int rq1_case_id_63 = 63;
+const int SIZE = 5;
+int sum(int arr[]) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        total = total + arr[i];
+    }
+    return total;
+}
+int main(){
+    int x = 10;
+    int result = sum(x); // 错误：将变量传给数组形参
+    printf("Result: %d\n", result);
+    return 0;
+}

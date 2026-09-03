@@ -1,0 +1,9 @@
+int a;
+int b;
+int main(){
+    a = getint();
+    b = a > 0; // b will be 1 if a > 0, otherwise 0
+    printf("The value of b is: %d\n", b);
+    printf("Character representation of b: %d\n", b); // Changed %c to %d
+    return 0;
+}

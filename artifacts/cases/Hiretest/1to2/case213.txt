@@ -1,0 +1,22 @@
+const int MAX = 100;
+int globalVar = 0;
+int add(int a, int b) {
+    return a + b;
+}
+void printMessage() {
+    printf("Hello, World!\n");
+}
+int main(){
+    int localVar = 10;
+    int result = add(globalVar, localVar);
+    printf("Result: %d\n", result);
+    // This is a single line comment
+    /* This is a multi-line comment
+    that spans multiple lines
+    and should end correctly */
+    printMessage();
+    if (localVar > 5 & localVar < 15) { // This line should trigger an error due to single '&'
+        printf("LocalVar is within range.\n");
+    }
+    return 0;
+}

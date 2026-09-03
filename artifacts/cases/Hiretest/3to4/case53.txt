@@ -1,0 +1,17 @@
+const int rq1_case_id_53 = 53;
+const int TRUE = 1;
+const int FALSE = 0;
+int isEqual(int a, int b) {
+    return a - b;
+}
+int main(){
+    int x = 5;
+    int y = 10;
+    int z = 5;
+    if (isEqual(x, z) == 0 && isEqual(y, z) == 0) {
+        printf("Both conditions are true.\n");
+    } else {
+        printf("At least one condition is false.\n");
+    }
+    return 0;
+}

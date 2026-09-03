@@ -1,0 +1,17 @@
+const int a = 5;
+const int b = 10;
+int x = 0;
+int y = 1;
+int compare(int num1, int num2) {
+    return num1 > num2;
+}
+int main(){
+    int result1 = compare(a, b);
+    int result2 = compare(b, a);
+    if (result1 | result2) {
+        printf("One of the comparisons is true.\n");
+    } else {
+        printf("Both comparisons are false.\n");
+    }
+    return 0;
+}

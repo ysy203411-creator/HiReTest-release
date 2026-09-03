@@ -1,0 +1,17 @@
+int a = 5;
+int b = 0;
+int c = 1;
+int main(){
+    int result1;
+    int result2;
+    int result3;
+    // Testing unary minus
+    result1 = -a;
+    printf("%d\n", result1);
+    // Testing logical NOT
+    result2 = !b; // Should be 1
+    printf("%d\n", result2);
+    result3 = !c; // Should be 0
+    printf("%d\n", result3);
+    return 0;
+}

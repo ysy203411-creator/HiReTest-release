@@ -1,0 +1,27 @@
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE];
+const int CONST_VAL = 5; // 修改了 CONST_VALUE 的名称
+void printArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < MAX_SIZE; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int add(int a, int b) {
+    return a + b;
+}
+void initializeArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < MAX_SIZE; i = i + 1) {
+        arr[i] = i * CONST_VAL; // 修改了 CONST_VALUE 的名称
+    }
+}
+int main(){
+    int localArray[MAX_SIZE];
+    initializeArray(localArray);
+    printArray(localArray);
+    int result = add(CONST_VAL, globalArray[0]); // 修改了 CONST_VALUE 的名称
+    printf("Result: %d\n", result);
+    return 0;
+}

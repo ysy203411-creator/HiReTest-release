@@ -1,0 +1,20 @@
+const int rq1_case_id_42 = 42;
+const int GLOBAL_CONST = 10;
+int globalVar = 5;
+int globalArray[3] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 2;
+    int result = add(globalVar, localVar);
+    printResult(result);
+    int charVar = 65; // 使用整型字面量代替字符
+    printf("Char as int: %d\n", charVar);
+    int voidFuncResult = 0; // 用于测试 void 函数的处理
+    printResult(voidFuncResult);
+    return 0;
+}

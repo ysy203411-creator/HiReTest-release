@@ -1,0 +1,31 @@
+const int MAX = 10;
+int globalVar;
+int array[MAX];
+
+void initializeArray(int arr[], int size) {
+    int i = 0;
+    while (i < size) {
+        arr[i] = i * 2;
+        i = i + 1;
+    }
+}
+
+int sumArray(int arr[], int size) {
+    int sum = 0;
+    int i = 0;
+    while (i < size) {
+        sum = sum + arr[i];
+        i = i + 1;
+    }
+    return sum;
+}
+
+int main() {
+    int localVar;
+    localVar = getint();
+    initializeArray(array, MAX);
+    globalVar = sumArray(array, MAX);
+    printf("Sum of array: %d\n", globalVar);
+    printf("Input value: %d\n", localVar);
+    return 0;
+}

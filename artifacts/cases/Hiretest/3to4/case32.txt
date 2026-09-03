@@ -1,0 +1,22 @@
+const int rq1_case_id_32 = 32;
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE];
+int getArrayElement(int index) {
+    if (index >= 0 && index < MAX_SIZE) {
+        return globalArray[index];
+    }
+    return -1;
+}
+void initializeArray() {
+    int i = 0;
+    for (i = 0; i < MAX_SIZE; i = i + 1) {
+        globalArray[i] = i * i;
+    }
+}
+int main(){
+    initializeArray();
+    int index = 5;
+    int value = getArrayElement(index);
+    printf("Element at index %d is %d\n", index, value);
+    return 0;
+}

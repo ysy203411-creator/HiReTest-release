@@ -1,0 +1,10 @@
+const int a = 5;
+const int b[3] = {1, 2, 3};
+int main(){
+    int x;
+    x = getint();
+    printf("%d\n", a);
+    printf("%d %d %d\n", b[0], b[1], b[2]);
+    printf("%d\n", x);
+    return 0;
+}

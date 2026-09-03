@@ -1,0 +1,15 @@
+const int CONST_VAL = 10;
+int globalVar = 0;
+void testFunction() {
+    int localVar = CONST_VAL;
+    localVar = localVar + 1;
+    return; // Correct usage for void function
+}
+int main(){
+    int mainVar = 0;
+    mainVar = getint();
+    if (mainVar > 0) {
+        printf("Positive number: %d\n", mainVar);
+    }
+    return 0; // Correct usage for main function
+}

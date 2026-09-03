@@ -1,0 +1,17 @@
+const int SIZE = 5;
+int array[SIZE] = {1, 2, 3, 4, 5};
+int getArraySize(int arr[]) {
+    return SIZE;
+}
+int main(){
+    int input, result;
+    input = getint();
+    if (input < SIZE) {
+        printf("Element at index %d: %d\n", input, array[input]);
+    } else {
+        printf("Index out of bounds\n");
+    }
+    result = getArraySize(array);
+    printf("Array size: %d\n", result);
+    return 0;
+}

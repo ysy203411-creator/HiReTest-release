@@ -1,0 +1,23 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int globalArray[3] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void printValue(int value) {
+    printf("Value: %d\n", value);
+}
+int main(){
+    int localVar = 0;
+    int result = add(CONST_VAL, globalVar);
+    printValue(result);
+    if (result > 10) {
+        localVar = globalArray[0];
+    } else {
+        localVar = globalArray[1];
+    }
+    printf("LocalVar: %d\n", localVar);
+    int unaryTest = -result; // 测试单目运算符
+    printf("UnaryTest: %d\n", unaryTest);
+    return 0;
+}

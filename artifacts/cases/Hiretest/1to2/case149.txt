@@ -1,0 +1,19 @@
+const int MAX = 100;
+int globalArray[MAX];
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    int result = add(x, y);
+    printResult(result);
+    // 使用非法符号 | 代替 ||
+    if (x > 0 | y > 0) {
+        printf("Both numbers are positive.\n");
+    }
+    return 0;
+}

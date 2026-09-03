@@ -1,0 +1,16 @@
+const int CONST_VAL = 10;
+int var = 5;
+int getConstValue() {
+    return CONST_VAL;
+}
+int getVarValue() {
+    return var;
+}
+int main(){
+    int result;
+    result = getConstValue();
+    printf("Const value: %d\n", result); // Expect 10
+    result = getVarValue();
+    printf("Var value: %d\n", result); // Expect 5
+    return 0;
+}

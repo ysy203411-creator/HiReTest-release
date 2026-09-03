@@ -1,0 +1,32 @@
+const int SIZE = 5;
+int intArray[SIZE];
+
+int main() {
+    int num;
+    int i;
+
+    num = getint();
+    printf("Integer: %d\n", num);
+
+    i = 0;
+    intArray[i] = num + i;
+    printf("intArray[%d]: %d\n", i, intArray[i]);
+
+    i = 1;
+    intArray[i] = num + i;
+    printf("intArray[%d]: %d\n", i, intArray[i]);
+
+    i = 2;
+    intArray[i] = num + i;
+    printf("intArray[%d]: %d\n", i, intArray[i]);
+
+    i = 3;
+    intArray[i] = num + i;
+    printf("intArray[%d]: %d\n", i, intArray[i]);
+
+    i = 4;
+    intArray[i] = num + i;
+    printf("intArray[%d]: %d\n", i, intArray[i]);
+
+    return 0;
+}

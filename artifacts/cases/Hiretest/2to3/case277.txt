@@ -1,0 +1,21 @@
+const int CONST_VAL = 5;
+int globalVar = 10;
+int array[5] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+    return;
+}
+int main(){
+    int localVar = 20;
+    int sum = add(globalVar, localVar);
+    printResult(sum);
+    if (CONST_VAL > 0 && localVar < 30) {
+        printf("Condition met!\n");
+    }
+    array[2] = 10;
+    printf("Array element: %d\n", array[2]);
+    return 0;
+}

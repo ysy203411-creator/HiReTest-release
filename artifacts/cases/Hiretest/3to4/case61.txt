@@ -1,0 +1,18 @@
+const int rq1_case_id_61 = 61;
+const int N = 10;
+int array[N];
+void printArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int main(){
+    int i = 0;
+    for (i = 0; i < N; i = i + 1) {
+        array[i] = i * i;
+    }
+    printArray(array, N);
+    return 0;
+}

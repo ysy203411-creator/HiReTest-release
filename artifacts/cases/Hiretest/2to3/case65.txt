@@ -1,0 +1,24 @@
+const int CONST_VAL = 10;
+int global_var = 5;
+int global_array[3] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int local_var = 3;
+    int local_array[2] = {CONST_VAL, global_var};
+    
+    int sum = add(local_var, global_array[0]);
+    print_result(sum);
+    
+    if (sum > CONST_VAL) {
+        printf("Sum is greater than constant value.\n");
+    } else {
+        printf("Sum is less than or equal to constant value.\n");
+    }
+    
+    return 0;
+}

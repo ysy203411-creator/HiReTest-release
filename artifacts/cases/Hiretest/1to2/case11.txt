@@ -1,0 +1,19 @@
+const int CONST_VAL = 10;
+int global_var = 5;
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+int main(){
+    int local_var = 3;
+    int result = add(global_var, CONST_VAL);
+    int final_result = multiply(result, local_var);
+    if (final_result > 20 & final_result < 50) { // Intentional error: single '&' instead of '&&'
+        printf("Final result is within range: %d\n", final_result);
+    } else {
+        printf("Final result is out of range: %d\n", final_result);
+    }
+    return 0;
+}

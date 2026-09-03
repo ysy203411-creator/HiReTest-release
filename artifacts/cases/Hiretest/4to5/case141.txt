@@ -1,0 +1,26 @@
+int global_var;
+const int CONST_VAL = 10;
+int compute(int a, int b) {
+    int result = a * b;
+    return result;
+}
+void print_value(int val) {
+    printf("Value: %d\n", val);
+}
+int main(){
+    int input1, input2;
+    input1 = getint();
+    input2 = getint();
+    
+    int result = compute(input1, input2);
+    print_value(result);
+    
+    if (result > CONST_VAL) {
+        global_var = result;
+    } else {
+        global_var = CONST_VAL;
+    }
+    
+    printf("Global Var: %d\n", global_var);
+    return 0;
+}

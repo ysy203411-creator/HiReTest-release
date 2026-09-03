@@ -1,0 +1,15 @@
+int a;
+const int b = 5;
+int sum(int x, int y) {
+    return x + y;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int num1 = getint();
+    int num2 = getint();
+    int result = sum(num1, num2);
+    printResult(result);
+    return 0;
+}

@@ -1,0 +1,25 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int array[3] = {1, 2, 3};
+void updateGlobalVar(int value) {
+    globalVar = value;
+}
+int calculateSum(int[] arr) {
+    int sum = 0;
+    int i = 0;
+    for (i = 0; i < 3; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+int main(){
+    int localVar = 0;
+    updateGlobalVar(CONST_VAL);
+    localVar = calculateSum(array);
+    if (localVar & globalVar) { // 使用单独的 &，应视为非法符号
+        printf("Sum and globalVar are both non-zero.\n");
+    } else {
+        printf("Either sum or globalVar is zero.\n");
+    }
+    return 0;
+}

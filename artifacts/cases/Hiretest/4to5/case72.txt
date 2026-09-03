@@ -1,0 +1,12 @@
+int a = 5;
+int b = 6;
+int c = 10;
+
+int main() {
+    int result1 = 1; // a - b == -1 -> true
+    int result2 = 1; // a - c != 0 -> true
+    int result3 = 0; // a - c == 0 -> false
+    int result4 = 0; // b - b != 0 -> false
+    printf("%d %d %d %d\n", result1, result2, result3, result4);
+    return 0;
+}

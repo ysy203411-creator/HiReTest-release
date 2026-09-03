@@ -1,0 +1,23 @@
+const int rq1_case_id_83 = 83;
+const int A = 65;
+const int B = 66;
+
+int main() {
+    int result;
+    int c1 = 65;
+    int c2 = 66;
+
+    result = c1 + c2; // 应该处理为整数相加
+    printf("Result of addition %d\n", result); // 期望输出为131
+
+    result = A + B; // 常量相加
+    printf("Const addition %d\n", result); // 期望输出为131
+
+    result = c1 - c2; // 整数相减
+    printf("Subtraction %d\n", result); // 期望输出为-1
+
+    result = A - B; // 常量相减
+    printf("Const subtraction %d\n", result); // 期望输出为-1
+
+    return 0;
+}

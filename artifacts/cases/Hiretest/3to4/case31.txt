@@ -1,0 +1,18 @@
+const int rq1_case_id_31 = 31;
+const int SIZE = 5;
+int globalArray[SIZE];
+void checkArray(int arr[]) {
+    printf("Array check passed\n");
+}
+int main(){
+    int localArray[SIZE];
+    int notArray = 10;
+    
+    // Correct usage: passing an array
+    checkArray(globalArray);
+    checkArray(localArray);
+    
+    // Incorrect usage: passing a non-array variable, should trigger type mismatch error
+    checkArray(notArray); // e 类错误
+    return 0;
+}

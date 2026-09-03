@@ -1,0 +1,20 @@
+const int rq1_case_id_71 = 71;
+const int CONST_VAL = 10;
+int globalVar = 5;
+int arr[5] = {1, 2, 3, 4, 5};
+int sum(int a, int b) {
+    return a + b;
+}
+void printChar(int c) {
+    printf("Character: %d\n", c);
+}
+int main(){
+    int localVar = 3;
+    int result = sum(globalVar, localVar);
+    printf("Result: %d\n", result);
+    int charValue = 10;  // Test character conversion
+    printChar(charValue);
+    int reversedValue = arr[4];  // Test reverse lookup
+    printf("Reversed Value: %d\n", reversedValue);
+    return 0;
+}

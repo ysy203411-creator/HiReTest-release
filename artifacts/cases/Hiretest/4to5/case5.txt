@@ -1,0 +1,17 @@
+const int CONST_VAL = 10;
+int global_var = 5;
+int negate(int x) {
+    return x == 0 ? 1 : 0; // 修改为使用条件表达式替代连续的 `!` 运算符
+}
+int main(){
+    int a = getint();
+    int b = !a;
+    int c = !!a;
+    int d = !!!a;
+    printf("%d\n", b); // Expected: 1 if a == 0, else 0
+    printf("%d\n", c); // Expected: 0 if a == 0, else 1
+    printf("%d\n", d); // Expected: 1 if a == 0, else 0
+    int e = negate(a);
+    printf("%d\n", e); // Expected: 1 if a == 0, else 0
+    return 0;
+}

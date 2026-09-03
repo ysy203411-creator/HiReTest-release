@@ -1,0 +1,16 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int localVar = 3;
+    int result;
+    result = add(globalVar, localVar); // Function call with parameters
+    if (result & CONST_VAL) { // Intentional error: single '&' instead of '&&'
+        printf("Result is non-zero.\n");
+    } else {
+        printf("Result is zero.\n");
+    }
+    return 0;
+}

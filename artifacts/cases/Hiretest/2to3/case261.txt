@@ -1,0 +1,11 @@
+const int a = 10;
+int b = 20;
+int add(int x, int y) {
+    return x + y;
+}
+int main(){
+    int result;
+    result = add(a, b; // 缺少右括号
+    printf("Result: %d\n", result);
+    return 0;
+}

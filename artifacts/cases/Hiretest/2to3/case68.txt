@@ -1,0 +1,24 @@
+const int CONST_VAL = 10;
+int var = 5;
+int arr[5] = {1, 2, CONST_VAL, 4, 5};
+void printConst(int x) {
+    printf("Const value: %d\n", x);
+}
+void printVar(int x) {
+    printf("Variable value: %d\n", x);
+}
+int main(){
+    int localVar = 3;
+    const int localConst = 7;
+    int result = 0;
+    printConst(CONST_VAL);
+    printVar(var);
+    result = arr[2] + localVar;
+    printf("Result: %d\n", result);
+    if (localConst > CONST_VAL) {
+        printf("Local const is greater.\n");
+    } else {
+        printf("CONST_VAL is greater or equal.\n");
+    }
+    return 0;
+}

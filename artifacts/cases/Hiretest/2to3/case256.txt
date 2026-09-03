@@ -1,0 +1,21 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int arr[5] = {1, 2, 3, 0, 0}; // 补充未初始化的元素为 0
+int add(int a, int b) {
+    return a + b;
+}
+void printValue(int value) {
+    printf("Value: %d\n", value);
+    return;
+}
+int main(){
+    int localVar = 3;
+    int sum = add(globalVar, localVar);
+    printf("Sum is: %d\n", sum);
+    int i = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        printf("Array element %d: %d\n", i, arr[i]);
+    }
+    printValue(CONST_VAL);
+    return 0;
+}

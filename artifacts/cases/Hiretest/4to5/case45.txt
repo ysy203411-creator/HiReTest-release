@@ -1,0 +1,52 @@
+int globalVar;
+const int CONST_VAL = 255;
+int array[5] = {1, 2, 3, 4, 5};
+
+int truncateToChar(int value) {
+    int result;
+    result = value % 256;
+    if (result < 0) {
+        result = result + 256;
+    }
+    return result;
+    return 0;
+}
+
+void printTruncatedValues(int values[]) {
+    int i;
+    int truncated;
+    i = 0;
+    truncated = truncateToChar(values[0]);
+    printf("Original: %d, Truncated: %d\n", values[0], truncated);
+
+    i = 1;
+    truncated = truncateToChar(values[1]);
+    printf("Original: %d, Truncated: %d\n", values[1], truncated);
+
+    i = 2;
+    truncated = truncateToChar(values[2]);
+    printf("Original: %d, Truncated: %d\n", values[2], truncated);
+
+    i = 3;
+    truncated = truncateToChar(values[3]);
+    printf("Original: %d, Truncated: %d\n", values[3], truncated);
+
+    i = 4;
+    truncated = truncateToChar(values[4]);
+    printf("Original: %d, Truncated: %d\n", values[4], truncated);
+
+    return;
+}
+
+int main() {
+    int localVar;
+    int values[5];
+    localVar = getint();
+    values[0] = localVar;
+    values[1] = CONST_VAL;
+    values[2] = array[2];
+    values[3] = 300;
+    values[4] = -1;
+    printTruncatedValues(values);
+    return 0;
+}

@@ -1,0 +1,17 @@
+int globalVar = 0;
+const int constVar = 10;
+int func(int param) {
+    int localVar = param + constVar;
+    return localVar;
+}
+void voidFunc() {
+    printf("This is a void function\\n");
+}
+int main(){
+    int input;
+    input = getint();
+    int result = func(input);
+    printf("Result: %d\\n", result);
+    voidFunc();
+    return 0;
+}

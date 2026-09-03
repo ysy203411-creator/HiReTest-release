@@ -1,0 +1,20 @@
+const int MAX = 100;
+int add(int a, int b) {
+    return a + b;
+    return 0; // 添加不可达的return语句
+}
+void printMessage() {
+    return;
+}
+int main(){
+    int x = getint();
+    int y = getint();
+    int result = add(x, y);
+    printf("Result: %d\n", result);
+    if (x > y) {
+        printMessage();
+    } else {
+        printMessage();
+    }
+    return 0;
+}

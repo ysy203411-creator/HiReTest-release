@@ -1,0 +1,17 @@
+const int TRUE = 1;
+const int FALSE = 0;
+const int a = 5;
+const int b = 10;
+const int c = 5; // 修改常量名以避免重名
+int main(){
+    int result1;
+    int result2;
+    int result3;
+    int result4;
+    result1 = (a + 5) - b; // equivalent to FALSE (0)
+    result2 = b - a; // equivalent to TRUE (1)
+    result3 = c - a; // equivalent to TRUE (0)
+    result4 = b - c; // equivalent to TRUE (5)
+    printf("%d %d %d %d\n", result1, result2, result3, result4);
+    return 0;
+}

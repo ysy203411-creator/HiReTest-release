@@ -1,0 +1,25 @@
+const int MAX = 10;
+int globalArray[MAX];
+int sum(int arr[], int length) {
+    int total = 0;
+    int i = 0; // 修改局部变量名以避免重复声明
+    for (i = 0; i < length; i = i + 1) {
+        total = total + arr[i];
+    }
+    return total;
+}
+int main(){
+    int localArray[MAX];
+    int j = 0; // 修改局部变量名以避免重复声明
+    for (j = 0; j < MAX; j = j + 1) {
+        localArray[j] = j;
+    }
+    int result = sum(localArray, MAX);
+    printf("Sum of localArray: %d\n", result);
+    for (j = 0; j < MAX; j = j + 1) {
+        globalArray[j] = j * 2;
+    }
+    result = sum(globalArray, MAX);
+    printf("Sum of globalArray: %d\n", result);
+    return 0;
+}

@@ -1,0 +1,35 @@
+int a;
+int b;
+int c;
+int d;
+int e;
+int f;
+int g;
+int h;
+int i;
+int j;
+int k;
+int l;
+void calculate(int x, int y, int z, int w) {
+    int result;
+    result = x + y + z + w;
+    printf("%d\n", result);
+}
+int main(){
+    a = getint();
+    b = getint();
+    c = getint();
+    d = getint();
+    e = getint();
+    f = getint();
+    g = getint();
+    h = getint();
+    i = getint();
+    j = getint();
+    k = getint();
+    l = getint();
+    calculate(a, b, c, d);
+    calculate(e, f, g, h);
+    calculate(i, j, k, l);
+    return 0;
+}

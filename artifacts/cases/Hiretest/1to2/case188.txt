@@ -1,0 +1,19 @@
+const int CONST_VALUE = 5;
+int globalVar = CONST_VALUE + 2;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 3;
+    int sum = add(globalVar, localVar);
+    printResult(sum);
+    if (sum > CONST_VALUE) {
+        printf("Sum is greater than CONST_VALUE\n");
+    } else {
+        printf("Sum is not greater than CONST_VALUE\n");
+    }
+    return 0;
+}

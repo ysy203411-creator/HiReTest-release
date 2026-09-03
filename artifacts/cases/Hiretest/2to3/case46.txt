@@ -1,0 +1,17 @@
+const int CONST_VAL = 5;
+int globalVar = 10;
+int array[5] = {1, 2, 3, 4, 5}; // 符合约束，因为数组长度是编译期可求值的非负整数常量表达式。
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 20;
+    static int staticVar;
+    staticVar = add(globalVar, localVar);
+    int sum = add(CONST_VAL, array[2]);
+    printResult(sum);
+    return 0;
+}

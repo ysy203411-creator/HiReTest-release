@@ -1,0 +1,17 @@
+const int a = 5;
+const int b = 10;
+int sum(int x, int y) {
+    return x + y;
+}
+int main(){
+    int result = 0;
+    int numbers[5] = {1, 2, 3, 4, 5};
+    result = sum(a, b);
+    printf("Sum of a and b: %d\n", result);
+    int i;
+    for (i = 0; i < 5; i = i + 1) {
+        result = result + numbers[i];
+    }
+    printf("Result after OR operation: %d\n", result);
+    return 0;
+}

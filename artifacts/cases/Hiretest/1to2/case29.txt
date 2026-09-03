@@ -1,0 +1,15 @@
+const int MAX = 100;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int result;
+    int x = 5;
+    int y = 10;
+    result = add(x, y); // Valid function call
+    // Another function call with a different arithmetic expression
+    result = add(x + y, y);
+    printf("Result: %d\n", result);
+    return 0;
+}

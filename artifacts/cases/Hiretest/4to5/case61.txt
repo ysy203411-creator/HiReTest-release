@@ -1,0 +1,26 @@
+const int SIZE = 5;
+int numbers[SIZE];
+int sum;
+
+void calculateSum(int arr[]) {
+    sum = 0;
+    sum = sum + arr[0];
+    sum = sum + arr[1];
+    sum = sum + arr[2];
+    sum = sum + arr[3];
+    sum = sum + arr[4];
+    return;
+}
+
+int main() {
+    numbers[0] = getint();
+    numbers[1] = getint();
+    numbers[2] = getint();
+    numbers[3] = getint();
+    numbers[4] = getint();
+
+    calculateSum(numbers);
+
+    printf("Sum: %d\n", sum);
+    return 0;
+}

@@ -1,0 +1,21 @@
+const int CONST_A = 5;
+const int CONST_B = 10;
+int globalVar = 3;
+int array[5] = {1, 2, 3, 4, 5};
+int multiply(int a, int b) {
+    return a * b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 2;
+    int result = multiply(CONST_A, CONST_B) * globalVar;
+    printResult(result);
+    int i;
+    for (i = 0; i < 5; i = i + 1) {
+        result = multiply(array[i], localVar) * CONST_B;
+        printResult(result);
+    }
+    return 0;
+}

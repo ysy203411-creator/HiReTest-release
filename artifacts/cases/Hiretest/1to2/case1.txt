@@ -1,0 +1,20 @@
+const int a = 5;
+const int b = 10;
+int x = 0;
+int y = 0;
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int result = 0;
+    x = getint();
+    y = getint();
+    result = add(x, y) + a * b;
+    printf("Result: %d\n", result);
+    if (result > 0 & result < 100) {
+        printf("Result is between 0 and 100\n");
+    } else {
+        printf("Result is out of range\n");
+    }
+    return 0;
+}

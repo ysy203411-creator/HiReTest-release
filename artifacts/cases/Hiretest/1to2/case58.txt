@@ -1,0 +1,20 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = CONST_VAL;
+    int result = add(globalVar, localVar);
+    printResult(result);
+    // This line contains a deliberate error for testing
+    if (result & 1) {
+        printf("Odd result\n");
+    } else {
+        printf("Even result\n");
+    }
+    return 0;
+}

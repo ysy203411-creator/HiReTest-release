@@ -1,0 +1,13 @@
+const int MAX = 10;
+int arr[MAX];
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int x = 5;
+    int y = 3;
+    int z = add(x, y);
+    int result = -z; // 使用一元运算符
+    printf("Result: %d\n", result);
+    return 0;
+}

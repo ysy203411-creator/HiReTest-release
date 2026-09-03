@@ -1,0 +1,17 @@
+const int rq1_case_id_15 = 15;
+const int CONST_VAL = 10;
+int globalVar = 5;
+int globalArray[3] = {1, 2, 3};
+void testFunction(int param) {
+    int localVar = param + CONST_VAL;
+    int localArray[2] = {localVar, globalVar};
+    printf("%d\n", localArray[0]);
+    printf("%d\n", localArray[1]);
+}
+int main(){
+    int mainVar = 0;
+    int mainArray[2] = {globalVar, CONST_VAL};
+    testFunction(mainArray[0]);
+    printf("%d\n", mainArray[1]);
+    return 0;
+}

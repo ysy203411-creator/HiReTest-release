@@ -1,0 +1,31 @@
+const int CONST_VALUE = 10;
+int global_var;
+int test_array_0 = 1;
+int test_array_1 = 2;
+int test_array_2 = 3;
+int test_array_3 = 4;
+int test_array_4 = 5;
+
+int calculate(int a, int b) {
+    return a + b;
+}
+
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+
+int main() {
+    int local_var = getint();
+    int sum = calculate(CONST_VALUE, local_var);
+    print_result(sum);
+
+    global_var = 0;
+    global_var = global_var + test_array_0;
+    global_var = global_var + test_array_1;
+    global_var = global_var + test_array_2;
+    global_var = global_var + test_array_3;
+    global_var = global_var + test_array_4;
+
+    printf("Global Sum: %d\n", global_var);
+    return 0;
+}

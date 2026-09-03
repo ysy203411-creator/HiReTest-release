@@ -1,0 +1,23 @@
+const int a = 5;
+const int b = 10;
+int compare_constants() {
+    if (a < b) {
+        return 1;
+    } else {
+        return 0;
+    }
+    return 0; // 已符合约束条件
+}
+int main(){
+    int x = compare_constants();
+    printf("%d\n", x); // Expected output: 1
+    int y = getint();
+    int z;
+    if (y > 0) {
+        z = 1;
+    } else {
+        z = 0;
+    }
+    printf("%d\n", z);
+    return 0;
+}

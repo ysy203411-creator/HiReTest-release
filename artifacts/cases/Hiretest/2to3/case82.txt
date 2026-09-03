@@ -1,0 +1,17 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int arr[5] = {1, 2, 3, 0, 0}; // 补全数组初始化列表
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int localVar = 3;
+    printSum(globalVar, localVar);
+    arr[2] = CONST_VAL; // 保留此行，因为它符合约束
+    printf("Array element: %d\n", arr[2]);
+    return 0;
+}

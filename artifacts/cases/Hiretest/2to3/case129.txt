@@ -1,0 +1,20 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int arr[5] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+void printValue(int value) {
+    printf("Value: %d\n", value);
+}
+int main(){
+    int localVar = 3;
+    localVar = add(globalVar, CONST_VAL;
+    printValue(localVar);
+    if (localVar > 0) {
+        printf("Positive\n");
+    else {
+        printf("Non-positive\n");
+    }
+    return 0;
+}

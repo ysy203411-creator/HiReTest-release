@@ -1,0 +1,16 @@
+const int rq1_case_id_57 = 57;
+const int CONST_VAL = 5;
+int global_var = 10;
+int array[5] = {1, 2, 3, 4, 5};
+void modifyArray(int arr[]) {
+    arr[0] = 100; // 修改数组第一个元素
+}
+int main(){
+    int local_var = CONST_VAL;
+    int another_array[3] = {7, 8, 9};
+    modifyArray(array); // 正确调用，传递数组
+    printf("Array[0]: %d\n", array[0]); // 应输出 100
+    // 错误调用，传递变量而非数组
+    modifyArray(local_var); // 应该检测到错误：实参与形参类型不匹配
+    return 0;
+}

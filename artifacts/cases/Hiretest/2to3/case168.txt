@@ -1,0 +1,13 @@
+const int a = 5;
+int b = 10;
+int func2() { // 修改函数名以避免重定义
+    return a;
+}
+int func1() {
+    return b;
+}
+int main(){
+    int result = func1();
+    printf("Result: %d\n", result);
+    return 0;
+}

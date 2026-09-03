@@ -1,0 +1,15 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printValue(int value) {
+    printf("%d\n", value);
+}
+int main(){
+    int localVar = 3;
+    int result = add(globalVar, localVar);
+    printValue(result);
+    // 删除了错误测试行，因为它不符合约束条件
+    return 0;
+}

@@ -1,0 +1,17 @@
+const int MAX = 10;
+int arr[MAX];
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int x = 5;
+    int y = 10;
+    int result = add(x, y);
+    printf("Result: %d\n", result);
+    int a = 1;
+    int b = 2;
+    if (a | b) { // 错误：使用单独的 |
+        printf("This is an error.\n");
+    }
+    return 0;
+}

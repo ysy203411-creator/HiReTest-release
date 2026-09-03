@@ -1,0 +1,23 @@
+const int rq1_case_id_69 = 69;
+const int SIZE = 5;
+int arr[SIZE] = {1, 2, 3, 4, 5};
+const int CONST_VAL = 10;
+int compare(int a, int b) {
+    // 修改返回值为算术表达式，符合约束
+    return a - b;
+}
+void print_result(int result) {
+    // 使用算术表达式替代关系运算符，保持原意
+    if (result - 0) {
+        printf("Comparison is true\n");
+    } else {
+        printf("Comparison is false\n");
+    }
+}
+int main(){
+    int x = getint();
+    int y = arr[2];
+    int result = compare(x, y);
+    print_result(result);
+    return 0;
+}

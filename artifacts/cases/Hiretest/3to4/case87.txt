@@ -1,0 +1,23 @@
+const int rq1_case_id_87 = 87;
+const int SIZE = 5;
+int globalArray[SIZE] = {1, 2, 3};
+int globalVar;
+void initializeArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        arr[i] = i * 2;
+    }
+}
+void printArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int main(){
+    int localArray[SIZE];
+    initializeArray(localArray, SIZE);
+    printArray(localArray, SIZE);
+    return 0;
+}

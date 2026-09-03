@@ -1,0 +1,13 @@
+int a;
+int b;
+int main()
+{
+    a = 5;
+    b = 10;
+    int res1 = a + b; // Should be 15
+    int res2 = a + b; // Should be 15
+    int res3 = a + b; // Should be 15
+    int res4 = a + b; // Should be 15
+    printf("%d %d %d %d", res1, res2, res3, res4);
+    return 0;
+}

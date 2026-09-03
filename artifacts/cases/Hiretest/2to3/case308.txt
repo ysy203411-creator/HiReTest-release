@@ -1,0 +1,16 @@
+const int a = 5;
+int b = 0; // 初始化为 0
+int c = 10;
+int array[5];
+void func(int param) {
+    int localVar = param;
+    printf("%d\n", localVar);
+}
+int main(){
+    int x;
+    int y;
+    array[0] = a + b + c;
+    printf("%d\n", array[0]);
+    func(array[0]);
+    return 0;
+}

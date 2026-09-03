@@ -1,0 +1,37 @@
+const int CONST_VAL = 10;
+int globalVar;
+int globalArray[5] = {1, 2, 3, 0, 0}; // 补全初始化
+
+int add(int a, int b) {
+    return a + b;
+}
+
+void printArray(int arr[]) {
+    int i = 0;
+    /* 用 while 循环替代 for */
+    i = 0;
+    while (i < 5) {
+        printf("%d ", arr[i]);
+        i = i + 1;
+    }
+    printf("\n");
+    return;
+}
+
+int main() {
+    int localVar = getint();
+    globalVar = add(CONST_VAL, localVar);
+    printf("Sum: %d\n", globalVar);
+
+    int localArray[5];
+    int i = 0;
+    /* 用 while 循环替代 for */
+    i = 0;
+    while (i < 5) {
+        localArray[i] = globalArray[i] + localVar;
+        i = i + 1;
+    }
+
+    printArray(localArray);
+    return 0;
+}

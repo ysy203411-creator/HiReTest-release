@@ -1,0 +1,26 @@
+const int a = 5;
+const int b = 10;
+int arr[3] = {1, 2, 3};
+
+int sum(int x, int y) {
+    return x + y;
+}
+
+int main() {
+    int result = sum(a, b);
+    printf("%d\n", result);
+
+    int input;
+    input = getint();
+
+    /* 将输入限制在 0~2 之间，保证数组下标合法 */
+    if (input < 0) {
+        input = 0;
+    }
+    if (input > 2) {
+        input = 2;
+    }
+
+    printf("%d\n", arr[input]);
+    return 0;
+}

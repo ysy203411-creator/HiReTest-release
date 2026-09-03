@@ -1,0 +1,17 @@
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE];
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+    return;
+}
+int main(){
+    int localVar = 3;
+    globalArray[0] = add(globalVar, localVar);
+    printSum(globalArray[0], localVar);
+    return 0;
+}

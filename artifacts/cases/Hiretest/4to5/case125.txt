@@ -1,0 +1,27 @@
+int globalVar;
+const int CONST_VAL = 10;
+int array[5] = {1, 2, 3, 0, 0}; // 补全数组初始化
+
+void printArray(int arr[]) {
+    int i = 0;
+    // 使用 for 语句替代 goto 语句
+    for (i = 0; i < 5; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int main(){
+    int localVar = 5;
+    static int staticVar;
+    int sum = add(localVar, CONST_VAL);
+    printf("Sum: %d\n", sum);
+    globalVar = getint();
+    printf("GlobalVar: %d\n", globalVar);
+    printArray(array);
+    return 0;
+}

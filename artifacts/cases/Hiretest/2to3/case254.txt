@@ -1,0 +1,9 @@
+const int a = 10;
+int foo(int x) {
+    return x + a;
+}
+int main(){
+    int b = foo(a);
+    printf("%d\n", b);
+    return 0;
+}

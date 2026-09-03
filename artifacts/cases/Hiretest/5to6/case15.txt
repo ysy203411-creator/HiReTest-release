@@ -1,0 +1,8 @@
+int a = 300;
+void testFunc(int x) {
+    printf("%d\n", x);
+}
+int main(){
+    testFunc(a);
+    return 0;
+}

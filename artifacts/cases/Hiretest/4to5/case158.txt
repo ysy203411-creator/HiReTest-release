@@ -1,0 +1,18 @@
+int a = 5;
+int b = 10;
+int add(int x, int y) {
+    return x + y;
+}
+int multiply(int x, int y) {
+    return x * y;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int sum = add(a, b);
+    int product = multiply(a, b);
+    print_result(sum);
+    print_result(product);
+    return 0;
+}

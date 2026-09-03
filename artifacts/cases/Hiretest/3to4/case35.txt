@@ -1,0 +1,24 @@
+const int rq1_case_id_35 = 35;
+const int SIZE = 5;
+const int arr[SIZE] = {1, 2, 3, 4, 5};
+int getValue(int type, int index) {
+    if (index < SIZE) {
+        if (type == 0) { // 使用整数代替字符
+            return arr[index];
+        } 
+
+        if (type == 1) { // 使用整数代替字符
+            return arr[index];
+        }
+    }
+    return 0;
+}
+int main(){
+    int result1 = getValue(0, 2); // 使用整数代替字符
+    int result2 = getValue(1, 4); // 使用整数代替字符
+    int result3 = getValue(0, 5); // 使用整数代替字符
+    printf("Result1: %d\n", result1);
+    printf("Result2: %d\n", result2);
+    printf("Result3: %d\n", result3);
+    return 0;
+}

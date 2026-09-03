@@ -1,0 +1,7 @@
+const int a[5;  // 缺少右中括号，错误类型 k
+int main(){
+    const int b = 10;
+    const int c[3] = {1, 2};  // 正确的数组初始化
+    printf("%d\n", b);
+    return 0;
+}

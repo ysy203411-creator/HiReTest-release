@@ -1,0 +1,11 @@
+const int CHAR_CONST = 65; // ASCII for 'A'
+int main(){
+    int num = CHAR_CONST;
+    int c = CHAR_CONST; // 使用整型代替字符类型
+    if (num == c) {
+        printf("Character and integer constants match: %d == %d\n", num, c);
+    } else {
+        printf("Character and integer constants do not match: %d != %d\n", num, c);
+    }
+    return 0;
+}

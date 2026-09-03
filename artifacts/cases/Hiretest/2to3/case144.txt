@@ -1,0 +1,14 @@
+const int a = 5;
+int b = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+void assignVar() {
+    b = 20; // 合法，对变量进行赋值
+}
+void assignArray() {
+    arr[2] = 30; // 合法，对数组元素进行赋值
+}
+int main(){
+    assignVar();
+    assignArray();
+    return 0;
+}

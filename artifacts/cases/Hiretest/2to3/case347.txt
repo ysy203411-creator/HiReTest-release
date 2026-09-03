@@ -1,0 +1,16 @@
+const int SIZE = 5;
+int array[SIZE];
+void initializeArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        arr[i] = i * i;
+    }
+}
+int main(){
+    initializeArray(array);
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        printf("Element %d: %d\n", i, array[i]);
+    }
+    return 0;
+}

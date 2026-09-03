@@ -1,0 +1,13 @@
+const int a = 10;
+int b;
+int main(){
+    int c;
+    b = getint();
+    if (b == 0) {
+        printf("%d\n", 0); // 使用%d格式符输出0表示错误
+        return 0;
+    }
+    c = a / b;
+    printf("%d\n", c);
+    return 0;
+}

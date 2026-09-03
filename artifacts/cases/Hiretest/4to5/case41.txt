@@ -1,0 +1,14 @@
+int a;
+int b;
+int main(){
+    int result;
+    a = getint();
+    b = getint();
+    int c = 65; // ASCII value of 'A'
+    int flag = 1; // true equivalent
+    result = a * c;
+    printf("%d\n", result);
+    result = b / flag;
+    printf("%d\n", result);
+    return 0;
+}

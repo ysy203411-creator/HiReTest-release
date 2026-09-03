@@ -1,0 +1,12 @@
+int a = 10;
+int b = 5;
+int c;
+int main(){
+    c = a * b;
+    printf("%d\n", c); // Expected output: 50
+    c = a / b;
+    printf("%d\n", c); // Expected output: 2
+    c = a % b;
+    printf("%d\n", c); // Expected output: 0
+    return 0;
+}

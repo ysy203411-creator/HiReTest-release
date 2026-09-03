@@ -1,0 +1,19 @@
+const int x = 10;
+int a = 5;
+int b = 3;
+int arr[5] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int result = add(a, b);
+    printResult(result);
+    
+    if (a & b) { // 错误：单独的 & 应视为非法符号
+        printf("This line should not compile due to error.\n");
+    }
+    return 0;
+}

@@ -1,0 +1,16 @@
+const int MAX = 10;
+int globalVar;
+int arr[MAX];
+void assign(int a[], int value) {
+    a[0] = value;
+}
+int main(){
+    int localVar;
+    globalVar = 5;
+    arr[2] = globalVar;
+    localVar = arr[2];
+    printf("Value: %d\n", localVar);
+    assign(arr, localVar);
+    printf("Array[0]: %d\n", arr[0]);
+    return 0;
+}

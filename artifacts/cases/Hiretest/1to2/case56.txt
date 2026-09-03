@@ -1,0 +1,24 @@
+const int CONST_VAL = 5;
+int globalVar = 10;
+int globalArray[5] = {1, 2, 3, 4, 5};
+void printValues(int val, int arr[]) {
+    printf("Value: %d\n", val);
+    printf("Array: %d, %d, %d, %d, %d\n", arr[0], arr[1], arr[2], arr[3], arr[4]);
+}
+int main(){
+    int localVar = CONST_VAL + globalVar;
+    int localArray[5];
+    int i = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        localArray[i] = globalArray[i] + i;
+    }
+    
+    printValues(localVar, localArray);
+    int condition = (localVar > 10) & (localArray[0] < 5); // 使用单独的 &，这是错误的
+    if (condition) {
+        printf("Condition is true\n");
+    } else {
+        printf("Condition is false\n");
+    }
+    return 0;
+}

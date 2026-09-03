@@ -1,0 +1,15 @@
+const int MAX = 10;
+int arr[MAX];
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int x = 5;
+    int y = 10;
+    int result = add(x, y);
+    printf("Result: %d\n", result);
+    // 移除非法符号 |，保持测试用例设计目的
+    int invalidResult = add(x, y);
+    printf("Invalid Result: %d\n", invalidResult);
+    return 0;
+}

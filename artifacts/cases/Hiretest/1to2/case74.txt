@@ -1,0 +1,11 @@
+const int MAX = 100;
+int globalVar;
+int validFunction(int a, int b) {
+    return a + b;
+}
+int main(){
+    int localVar = 10;
+    int result = validFunction(localVar, 20);
+    printf("%d\n", result);
+    return 0;
+}

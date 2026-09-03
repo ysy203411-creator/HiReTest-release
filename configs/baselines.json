@@ -1,0 +1,7 @@
+{
+  "common": {"stages": ["1to2", "2to3", "3to4", "4to5", "5to6"], "case_budget": {"1to2": 213, "2to3": 389, "3to4": 93, "4to5": 240, "5to6": 59}, "backend_stages": ["4to5", "5to6"], "evaluation_workers": 8},
+  "TDOnly": { "runner": "baselines/tdonly/generate.py", "model": "gpt-4o", "temperature": 0.4, "max_tokens": 4096, "top_p": 1.0, "timeout_seconds": 100, "workers": 8, "seed": null},
+  "Fuzz4All": {"upstream": "https://github.com/fuzz4all/fuzz4all", "config": "baselines/fuzz4all_sysy/sysy.yaml", "model": "bigcode/starcoderbase", "device": "cuda", "batch_size": 4, "max_length": 4096, "total_time_hours": 1, "oracle_timeout_seconds": 30, "extractor": "baselines/fuzz4all_sysy/extract_sysy_cases.py"},
+  "Grammarinator": {"upstream": "https://github.com/renatahodovan/grammarinator", "package_requirement": "grammarinator", "runner": "src/hiretest/generate_tosem_baselines.py", "start_rule": "compUnit", "max_depth": 10, "stage_seed_start": {"1to2": 1, "2to3": 10001, "3to4": 20001, "4to5": 30001, "5to6": 40001}, "seed_increment": 3},
+  "ReActAgent": {"framework_upstream": "https://github.com/langchain-ai/langgraph", "requirements": "requirements/react-agent.txt", "prompt_builder": "src/hiretest/generate_langgraph_react_prompts.py", "runner": "src/hiretest/langgraph_react_agent_baseline.py", "model": "gpt-4o", "temperature": 0.4, "max_tokens": 4096, "timeout_seconds": 100, "max_tool_calls": 3, "intent_planning": false, "seed": null}
+}

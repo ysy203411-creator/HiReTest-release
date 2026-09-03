@@ -1,0 +1,7 @@
+int g0 = 0;
+
+int main() {
+    int asciiValue = 10; // Test newline escape character
+    printf("ASCII value of newline: %d\n", asciiValue);
+    return 0;
+}

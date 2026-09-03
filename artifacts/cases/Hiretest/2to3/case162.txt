@@ -1,0 +1,21 @@
+const int CONST_VAL = 10;
+int globalArray[5] = {1, 2, 3, 0, 0}; // 修改初始化列表以匹配数组大小
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+    return;
+}
+int main(){
+    int localVar = 5;
+    int result = add(localVar, CONST_VAL);
+    printSum(result, globalArray[0]);
+    if (result > 10 && globalArray[1] < 5) {
+        printf("Condition met!\n");
+    } else {
+        printf("Condition not met!\n");
+    }
+    return 0;
+}

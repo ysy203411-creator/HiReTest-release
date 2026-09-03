@@ -1,0 +1,17 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result is: %d\n", result);
+}
+int main(){
+    int localVar = 3;
+    int result = add(globalVar, localVar);
+    printResult(result);
+    if (result > 10 & result < 20) { // 使用单独的 &，应视为非法符号
+        printf("This line contains an error.\n");
+    }
+    return 0;
+}

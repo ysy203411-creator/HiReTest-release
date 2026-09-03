@@ -1,0 +1,28 @@
+const int a = 10;
+int myArray[10];
+int result;
+
+void initializeArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        arr[i] = i * 2;
+    }
+}
+
+int findMax(int arr[], int size) {
+    int max = arr[0];
+    int i = 1;
+    for (i = 1; i < size; i = i + 1) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+int main() {
+    initializeArray(myArray, a);
+    result = findMax(myArray, a);
+    printf("The maximum value in the array is: %d\n", result);
+    return 0;
+}

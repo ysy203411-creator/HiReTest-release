@@ -1,0 +1,19 @@
+const int TRUE = 1;
+const int FALSE = 0;
+int evaluate_condition(int a, int b) {
+    if (a > 0 || b > 0) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+    return FALSE; // 修改为符合条件的返回值
+}
+int main(){
+    int x;
+    int y;
+    x = getint();
+    y = getint();
+    int result = evaluate_condition(x, y);
+    printf("Condition result: %d\n", result);
+    return 0;
+}

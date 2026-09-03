@@ -1,0 +1,35 @@
+const int MAX_LEN = 100;
+int buffer[MAX_LEN];
+
+int main() {
+    const int STR1_LEN = 13;
+    const int STR2_LEN = 13;
+    int str1[STR1_LEN] = {72, 101, 108, 108, 111, 48, 65, 87, 111, 114, 108, 100, 0}; // "Hello0AWorld"
+    int str2[STR2_LEN] = {84, 101, 115, 116, 48, 48, 83, 116, 114, 105, 110, 103, 0}; // "Test00String"
+
+    printf("String 1: ");
+    for (int j = 0; str1[j]; j = j + 1) {
+        printf("%d ", str1[j]);
+    }
+    printf("\n");
+
+    printf("String 2: ");
+    for (int j = 0; str2[j]; j = j + 1) {
+        printf("%d ", str2[j]);
+    }
+    printf("\n");
+
+    int len1 = 0;
+    int len2 = 0;
+    for (int i = 0; str1[i]; i = i + 1) {
+        len1 = len1 + 1;
+    }
+    for (int i = 0; str2[i]; i = i + 1) {
+        len2 = len2 + 1;
+    }
+
+    printf("Length of String 1: %d\n", len1);
+    printf("Length of String 2: %d\n", len2);
+
+    return 0;
+}

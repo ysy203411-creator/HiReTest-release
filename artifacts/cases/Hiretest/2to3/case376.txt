@@ -1,0 +1,21 @@
+const int a = 5;
+int b = 10;
+int add(int x, int y) {
+    return x + y;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int x = getint();
+    int y = getint();
+    int sum;
+    sum = add(x, y);
+    printResult(sum);
+    if (x > 0) { // 测试行号错误修复
+        printf("Positive x\n");
+    } else { // 缺少右括号错误修复
+        printf("Non-positive x\n");
+    }
+    return 0;
+}

@@ -1,0 +1,9 @@
+const int SIZE = 10;
+int array[SIZE;
+int main(){
+    int localArray[5;
+    array[0] = 1;
+    localArray[0] = 2;
+    printf("%d %d\n", array[0], localArray[0]);
+    return 0;
+}

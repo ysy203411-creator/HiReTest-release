@@ -1,0 +1,26 @@
+const int MAX = 100;
+int global_var = 10;
+int arr[MAX];
+int add(int a, int b) {
+    return a + b;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int a = 5;
+    int b = 15;
+    int result = 0;
+    
+    // This is a single line comment
+    result = add(a, b); /* This is a multi-line comment
+    spanning multiple lines
+    and should be handled correctly */
+    
+    if (result > 0) {
+        print_result(result);
+    } else {
+        printf("Error: result is non-positive\n");
+    }
+    return 0;
+}

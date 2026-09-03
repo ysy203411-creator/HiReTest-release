@@ -1,0 +1,19 @@
+const int CONST_VAL = 10;
+int globalVar = CONST_VAL;
+int array[5] = {CONST_VAL, 2, 3, 4, 5};
+void printValues(int[] arr) {
+    int i = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+}
+int main(){
+    int localVar = getint();
+    int localArray[3] = {localVar, CONST_VAL, 0};
+    printValues(array);
+    printValues(localArray);
+    if (localVar & CONST_VAL) { // 错误：使用单独的 & 应视为非法符号
+        printf("Error in logic\n");
+    }
+    return 0;
+}

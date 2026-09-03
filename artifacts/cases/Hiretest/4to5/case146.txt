@@ -1,0 +1,31 @@
+const int CONST_INT = 10;
+int global_var = 5;
+int global_array[5] = {1, 2, 3, 4, 5};
+
+int add(int a, int b) {
+    return a + b;
+}
+
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+
+void print_array(int arr[]) {
+    printf("array[0] = %d\n", arr[0]);
+    printf("array[1] = %d\n", arr[1]);
+    printf("array[2] = %d\n", arr[2]);
+    printf("array[3] = %d\n", arr[3]);
+    printf("array[4] = %d\n", arr[4]);
+    return;
+}
+
+int main() {
+    int local_var = 0;
+    int input = getint();
+    int sum = add(global_var, input);
+    print_result(sum);
+
+    print_array(global_array);
+
+    return 0;
+}

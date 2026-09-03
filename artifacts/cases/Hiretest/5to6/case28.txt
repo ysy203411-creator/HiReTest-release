@@ -1,0 +1,16 @@
+const int SIZE = 1;
+int arr[4] = {1, 2, 3, 4};
+
+int getElement(int index);  // 先声明
+
+int getElement(int index) {
+    return arr[index];
+}
+
+int main() {
+    int index;
+    index = getint();
+    int result = getElement(index);
+    printf("Element at index %d is %d\\n", index, result);
+    return 0;
+}

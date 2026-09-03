@@ -1,0 +1,19 @@
+const int MAX = 100;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int a = 5;
+    int b = 15;
+    int result = add(a, b);
+    printResult(result);
+    // Intentional error: single '&' should be '&&'
+    if (a > 0 & b < MAX) {
+        printf("This line should trigger an error due to single '&'.\n");
+    }
+    return 0;
+}

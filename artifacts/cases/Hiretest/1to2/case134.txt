@@ -1,0 +1,23 @@
+const int a = 10;
+const int b = 20;
+int main(){
+    int x = 5;
+    int y = 15;
+    int result;
+    
+    // 使用非法符号 & 和 |，应被识别为错误
+    if (x & y) {
+        result = a + b;
+    } else {
+        result = a - b;
+    }
+    
+    if (x | y) {
+        result = a * b;
+    } else {
+        result = a / b;
+    }
+    
+    printf("Result: %d\n", result);
+    return 0;
+}

@@ -1,0 +1,12 @@
+const int SIZE = 5;
+int arr[SIZE];
+void func() {
+    int x;
+    x = arr[0];
+}
+int main(){
+    int y;
+    y = arr[1;
+    printf("%d\n", y);
+    return 0;
+}

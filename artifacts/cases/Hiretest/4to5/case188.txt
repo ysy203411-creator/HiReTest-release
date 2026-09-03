@@ -1,0 +1,28 @@
+const int a = 1;
+int b;
+int c[5] = {0, 1, 2, 3, 4};
+
+int process(int x) {
+    return x * 2;
+}
+
+void printResult(int arr[]) {
+    int i = 0;
+    printf("%d\n", arr[i]);
+    i = 1;
+    printf("%d\n", arr[i]);
+    i = 2;
+    printf("%d\n", arr[i]);
+    i = 3;
+    printf("%d\n", arr[i]);
+    i = 4;
+    printf("%d\n", arr[i]);
+}
+
+int main() {
+    b = getint();
+    int result = process(b);
+    c[0] = result;
+    printResult(c);
+    return 0;
+}

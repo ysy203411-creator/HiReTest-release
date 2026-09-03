@@ -1,0 +1,25 @@
+const int MAX = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+    return;
+}
+int main(){
+    int a = 3;
+    int b = 7;
+    int sum = add(a, b);
+    int product = multiply(a, b);
+    
+    if (sum > 0 & product > 0) { // Intentional error: single '&' instead of '&&'
+        printResult(sum);
+    } else {
+        printResult(product);
+    }
+    return 0;
+}

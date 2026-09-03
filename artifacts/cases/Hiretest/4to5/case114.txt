@@ -1,0 +1,22 @@
+const int MAX_VALUE = 200;
+int globalVar;
+int globalArray[5];
+
+void processInt(int value) {
+    int isTooLarge;
+    int diff;
+    /* isTooLarge = 1 if value > MAX_VALUE, else 0 */
+    isTooLarge = (value - MAX_VALUE) / (value - MAX_VALUE + 1);
+    diff = value - MAX_VALUE;
+    printf("Value: %d, isTooLargeFlag: %d, diffToMax: %d\n", value, isTooLarge, diff);
+    return;
+}
+
+int main() {
+    int inputValue;
+    inputValue = getint();
+    globalVar = inputValue;
+    globalArray[0] = globalVar;
+    processInt(globalArray[0]);
+    return 0;
+}

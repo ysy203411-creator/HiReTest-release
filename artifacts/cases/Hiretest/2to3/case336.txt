@@ -1,0 +1,20 @@
+const int a = 5;
+const int b = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+int multiply(int x, int y) {
+    return x * y;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+    return;
+}
+int main(){
+    int sum = add(a, b);
+    int product = multiply(arr[2], arr[4]); // 修改为合法的整型表达式
+    print_result(sum);
+    print_result(product);
+    return 0;
+}

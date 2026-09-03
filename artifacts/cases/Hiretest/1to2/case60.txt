@@ -1,0 +1,23 @@
+const int MAX = 10;
+int globalArray[MAX] = {1, 2, 3, 4, 5};
+int sum(int array[], int length) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < length; i = i + 1) {
+        total = total + array[i];
+    }
+    return total;
+}
+void printSum() {
+    int result = sum(globalArray, MAX);
+    printf("Sum: %d\n", result);
+}
+int main(){
+    int localVar = 5;
+    int anotherVar = 10;
+    if (localVar > 0 & anotherVar < 15) { // 错误：单独使用 &，应使用 &&
+        printf("Both conditions are true.\n");
+    }
+    printSum();
+    return 0;
+}

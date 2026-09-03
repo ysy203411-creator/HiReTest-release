@@ -1,0 +1,15 @@
+const int rq1_case_id_91 = 91;
+int a = 10;
+int func1(int x) {
+    return x + a;
+}
+int func2(int y) {
+    int a = 5; // 局部变量遮蔽全局变量
+    return func1(y); // 应该能正确调用 func1
+    return 1;
+}
+int main(){
+    int result = func2(3);
+    printf("Result: %d\n", result); // 应输出 "Result: 13"
+    return 0;
+}

@@ -1,0 +1,11 @@
+const int SIZE = 5;
+const int arr[5] = {1, 2, 3}; // 未初始化的元素应为0
+
+int main() {
+    printf("%d ", arr[0]);
+    printf("%d ", arr[1]);
+    printf("%d ", arr[2]);
+    printf("%d ", arr[3]);
+    printf("%d ", arr[4]); // 应输出：1 2 3 0 0
+    return 0;
+}

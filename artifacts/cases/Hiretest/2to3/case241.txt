@@ -1,0 +1,17 @@
+const int MAX = 10;
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int x = 5;
+    int y = 3;
+    
+    if (x > y) {
+        printf("x is greater than y\n");
+    } else {
+        printf("x is not greater than y\n");
+    }
+    int result = add(x, y);
+    printf("Result of addition: %d\n", result);
+    return 0;
+}

@@ -1,0 +1,13 @@
+const int CONST_VAL = 10;
+int global_var = 5;
+int compute(int x) {
+    int local_var = 3;
+    return x + local_var;
+}
+int main(){
+    int a = 2;
+    int result = 0;
+    result = compute(a) + CONST_VAL + global_var;
+    printf("%d\n", result);
+    return 0;
+}

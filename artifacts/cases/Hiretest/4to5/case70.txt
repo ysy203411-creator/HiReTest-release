@@ -1,0 +1,43 @@
+const int CHAR_ARRAY_LENGTH = 10;
+const int str0 = 97;  // 'a'
+const int str1 = 98;  // 'b'
+const int str2 = 99;  // 'c'
+const int str3 = 10;  // '\n'
+const int str4 = 97;  // 'a'
+const int str5 = 98;  // 'b'
+const int str6 = 99;  // 'c'
+const int str7 = 0;
+const int str8 = 0;
+const int str9 = 0;
+
+int main() {
+    int i = 0;
+    while (i < CHAR_ARRAY_LENGTH) {
+        int v;
+        if (i == 0) {
+            v = str0;
+        } else if (i == 1) {
+            v = str1;
+        } else if (i == 2) {
+            v = str2;
+        } else if (i == 3) {
+            v = str3;
+        } else if (i == 4) {
+            v = str4;
+        } else if (i == 5) {
+            v = str5;
+        } else if (i == 6) {
+            v = str6;
+        } else if (i == 7) {
+            v = str7;
+        } else if (i == 8) {
+            v = str8;
+        } else {
+            v = str9;
+        }
+        printf("%d ", v);
+        i = i + 1;
+    }
+    printf("\n");
+    return 0;
+}

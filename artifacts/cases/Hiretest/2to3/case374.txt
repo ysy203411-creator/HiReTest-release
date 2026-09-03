@@ -1,0 +1,17 @@
+const int MAX = 10;
+int globalArray[MAX];
+int sum(int a, int b) {
+    return a + b;
+}
+int main(){
+    int x = 5;
+    int y = 10;
+    int result;
+    if (x | y) { // 这里使用了错误的单独 | 符号，应该是 || 或其他合法操作符
+        result = sum(x, y);
+    } else {
+        result = 0;
+    }
+    printf("Result: %d\n", result);
+    return 0;
+}

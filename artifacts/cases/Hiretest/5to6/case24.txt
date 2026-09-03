@@ -1,0 +1,16 @@
+const int size = 10;
+int str[size] = {116, 101, 115, 116, 0}; // ASCII values for "test"
+
+int main() {
+    printf("Original string: ");
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        if (str[i] == 0) {
+            printf("Null terminator found at index: %d\n", i); // Corrected to print index
+        } else {
+            printf("%d ", str[i]); // Print integer ASCII value
+        }
+    }
+    printf("\n");
+    return 0;
+}

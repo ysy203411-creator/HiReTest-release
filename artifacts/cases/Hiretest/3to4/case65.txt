@@ -1,0 +1,21 @@
+const int rq1_case_id_65 = 65;
+const int MAX = 10;
+int globalArray[MAX] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+int sum(int arr[], int length) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < length; i = i + 1) {
+        total = total + arr[i];
+    }
+    return total;
+}
+void printSum(int arr[], int length) {
+    int s = sum(arr, length);
+    printf("Sum: %d\n", s);
+}
+int main(){
+    int localArray[MAX] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    printSum(globalArray, MAX);
+    printSum(localArray, MAX);
+    return 0;
+}

@@ -1,0 +1,22 @@
+const int CONST_ONE = 1;
+const int CONST_ZERO = 0;
+int a;
+int b;
+int c[3];
+int compare(int x, int y) {
+    if (x == y) {
+        return CONST_ONE;
+    } else {
+        return CONST_ZERO;
+    }
+    // 删除不可达的 return 1;
+}
+int main(){
+    a = getint();
+    b = getint();
+    c[0] = compare(a, b);
+    c[1] = compare(a, CONST_ONE);
+    c[2] = compare(b, CONST_ZERO);
+    printf("%d %d %d\n", c[0], c[1], c[2]);
+    return 0;
+}

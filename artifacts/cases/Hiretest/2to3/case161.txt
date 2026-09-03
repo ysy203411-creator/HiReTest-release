@@ -1,0 +1,14 @@
+const int a = 5;
+int b = 10;
+int func() {
+    return 1;
+}
+int main(){
+    int a = 3;
+    int arr[5];
+    arr[2] = 4; // 错误：缺少右中括号
+    a = 6;
+    b = 7;
+    int c = 8; // 修改：将误用的函数名替换为局部变量
+    return 0;
+}

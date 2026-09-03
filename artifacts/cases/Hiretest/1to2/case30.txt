@@ -1,0 +1,16 @@
+const int a = 5;
+const int b = 10;
+const int c = 20;
+int add(int x, int y) {
+    return x + y;
+}
+int main(){
+    int result;
+    result = add(a, b);
+    if (result > 0 & result < c) { // 错误：使用单独的 & 应视为非法符号
+        printf("Result is within range.\n");
+    } else {
+        printf("Result is out of range.\n");
+    }
+    return 0;
+}

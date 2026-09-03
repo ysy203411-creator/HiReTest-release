@@ -1,0 +1,22 @@
+const int MAX_LENGTH = 10;
+int globalVar = 5;
+int arr[MAX_LENGTH] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 10;
+    int sum = add(globalVar, localVar);
+    printResult(sum);
+    if (globalVar == 5) {
+        printf("Global variable is five.\n");
+    }
+    int index = 0;
+    for (; index < MAX_LENGTH; index = index + 1) {
+        printf("Array element: %d\n", arr[index]);
+    }
+    return 0;
+}

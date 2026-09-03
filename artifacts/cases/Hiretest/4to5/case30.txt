@@ -1,0 +1,8 @@
+int a;
+int b;
+int main(){
+    a = getint();
+    b = a + 1; // 直接赋值，不进行类型转换
+    printf("%d\n", b);
+    return 0;
+}

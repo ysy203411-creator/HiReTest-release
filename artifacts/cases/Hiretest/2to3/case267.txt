@@ -1,0 +1,24 @@
+const int N = 10;
+int array[N];
+int sum(int a, int b) {
+    int result = a + b;
+    return result;
+}
+int multiply(int a, int b) {
+    int result = a * b;
+    return result;
+}
+int main(){
+    int i;
+    int total = 0;
+    for (i = 0; i < N; i = i + 1) {
+        array[i] = i;
+    }
+    
+    for (i = 0; i < N; i = i + 1) {
+        total = sum(total, multiply(array[i], 2));
+    }
+    
+    printf("Total: %d\n", total);
+    return 0;
+}

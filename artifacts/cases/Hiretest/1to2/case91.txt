@@ -1,0 +1,15 @@
+const int CONST_VAL = 10;
+int global_var = 5;
+int array[5] = {1, 2, 3, 4, 5};
+void print_value(int val) {
+    printf("Value: %d\n", val);
+}
+int main(){
+    int local_var = getint();
+    if (local_var & CONST_VAL) { // 使用单独的 & 是错误
+        print_value(local_var);
+    } else {
+        print_value(global_var);
+    }
+    return 0;
+}

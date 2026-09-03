@@ -1,0 +1,29 @@
+# configs/sysy.yaml
+
+target:
+  language: "sysy"
+
+fuzzing:
+  num: 59
+  total_time: 1
+  resume: false
+  otf: true
+  evaluate: false
+  output_folder: "outputs/sysy_fuzzing"
+  target_name: "sysy_compiler"
+
+llm:
+  model_name: "bigcode/starcoderbase"
+  device: "cuda"
+  batch_size: 4
+  max_length: 4096
+oracle:
+  timeout: 30
+
+# 用户输入
+user_input:
+
+  - "文法-作业5.md"
+
+# 验证脚本
+target_binary: "validate_sysy.sh"

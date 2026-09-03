@@ -1,0 +1,11 @@
+int a;
+int b;
+int main(){
+    int x = getint();
+    int y = getint();
+    a = x + y; // 使用加法代替逻辑运算
+    b = x * y; // 使用乘法代替逻辑运算
+    printf("a: %d\n", a);
+    printf("b: %d\n", b);
+    return 0;
+}

@@ -1,0 +1,9 @@
+int globalVar;
+void testFunction() {
+    // No operations inside
+}
+int main(){
+    testFunction();
+    printf("Function executed: %d\\n", 0);
+    return 0;
+}

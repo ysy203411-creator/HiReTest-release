@@ -1,0 +1,7 @@
+int globalVar;
+int main(){
+    int localVar;
+    printf("%d\n", globalVar); // Expect 0 as default initialization
+    printf("%d\n", localVar);  // Undefined behavior, may not be 0
+    return 0;
+}

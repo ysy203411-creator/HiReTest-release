@@ -1,0 +1,15 @@
+const int a = 10;
+int b[5] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int x = 5;
+    int y = 15;
+    int result = add(x, y; // 缺少右括号，测试 j 类错误
+    printResult(result);
+    return 0;
+}

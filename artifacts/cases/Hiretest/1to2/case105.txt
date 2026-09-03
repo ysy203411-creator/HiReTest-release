@@ -1,0 +1,22 @@
+const int MAX = 100;
+int globalVar = 10;
+int globalArray[5] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int localVar = 5;
+    int result = add(globalVar, localVar);
+    printf("Result: %d\n", result);
+    if (result > 0 & result < MAX) { // Intentional error: single '&' instead of '&&'
+        printf("Result is within range.\n");
+    } else {
+        printf("Result is out of range.\n");
+    }
+    printSum(globalArray[0], globalArray[1]);
+    return 0;
+}

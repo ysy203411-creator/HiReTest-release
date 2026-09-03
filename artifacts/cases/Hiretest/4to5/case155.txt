@@ -1,0 +1,80 @@
+int a;
+const int N = 10;
+int arr[N];
+
+void init_array() {
+    int i;
+    i = 0;
+    arr[0] = 0;
+    arr[1] = 1;
+    arr[2] = 2;
+    arr[3] = 3;
+    arr[4] = 4;
+    arr[5] = 5;
+    arr[6] = 6;
+    arr[7] = 7;
+    arr[8] = 8;
+    arr[9] = 9;
+    return;
+}
+
+int main() {
+    int i;
+    int found;
+    int idx;
+
+    init_array();
+    a = getint();
+
+    /* 计算 arr[0] == a ? */
+    found = arr[0] - a;
+    idx = 0;
+    printf("Check index %d, diff %d\\n", idx, found);
+
+    /* 计算 arr[1] == a ? */
+    found = arr[1] - a;
+    idx = 1;
+    printf("Check index %d, diff %d\\n", idx, found);
+
+    /* 计算 arr[2] == a ? */
+    found = arr[2] - a;
+    idx = 2;
+    printf("Check index %d, diff %d\\n", idx, found);
+
+    /* 计算 arr[3] == a ? */
+    found = arr[3] - a;
+    idx = 3;
+    printf("Check index %d, diff %d\\n", idx, found);
+
+    /* 计算 arr[4] == a ? */
+    found = arr[4] - a;
+    idx = 4;
+    printf("Check index %d, diff %d\\n", idx, found);
+
+    /* 计算 arr[5] == a ? */
+    found = arr[5] - a;
+    idx = 5;
+    printf("Check index %d, diff %d\\n", idx, found);
+
+    /* 计算 arr[6] == a ? */
+    found = arr[6] - a;
+    idx = 6;
+    printf("Check index %d, diff %d\\n", idx, found);
+
+    /* 计算 arr[7] == a ? */
+    found = arr[7] - a;
+    idx = 7;
+    printf("Check index %d, diff %d\\n", idx, found);
+
+    /* 计算 arr[8] == a ? */
+    found = arr[8] - a;
+    idx = 8;
+    printf("Check index %d, diff %d\\n", idx, found);
+
+    /* 计算 arr[9] == a ? */
+    found = arr[9] - a;
+    idx = 9;
+    printf("Check index %d, diff %d\\n", idx, found);
+
+    return 0;
+}

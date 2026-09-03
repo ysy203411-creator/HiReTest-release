@@ -1,0 +1,22 @@
+const int a = 5;
+const int b = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+void printSum(int x, int y) {
+    int sum = add(x, y);
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int x = 1;
+    int y = 2;
+    int z;
+    if (x != 0 || y != 0) {
+        z = 1;
+    } else {
+        z = 0;
+    }
+    printSum(a, b);
+    return 0;
+}

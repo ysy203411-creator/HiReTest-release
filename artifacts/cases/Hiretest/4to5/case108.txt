@@ -1,0 +1,14 @@
+int a;
+int b;
+int main(){
+    a = getint();
+    b = getint();
+    if (a == b) {
+        printf("%s\n", "Equal");
+    } 
+
+    if (a != b) {
+        printf("%s\n", "Not Equal");
+    }
+    return 0;
+}

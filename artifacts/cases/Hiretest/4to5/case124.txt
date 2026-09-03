@@ -1,0 +1,18 @@
+const int MAX = 100;
+int globalVar;
+int compute(int a, int b) {
+    int result = a + b;
+    return result;
+}
+void displayResult(int value) {
+    printf("Result: %d\n", value);
+}
+int main(){
+    int num1, num2;
+    printf("Enter two numbers:\n");
+    num1 = getint();
+    num2 = getint();
+    int sum = compute(num1, num2);
+    displayResult(sum);
+    return 0;
+}

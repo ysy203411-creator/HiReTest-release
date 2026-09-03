@@ -1,0 +1,23 @@
+const int MAX = 100;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int a = 5;
+    int b = 15;
+    int result = add(a, b);
+    printResult(result);
+    if (a < b && b < MAX) {
+        printf("a is less than b and b is less than MAX\n");
+    }
+    int arr[5] = {1, 2, 3, 4, 5};
+    int i = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        printf("arr[%d] = %d\n", i, arr[i]);
+    }
+    return 0;
+}

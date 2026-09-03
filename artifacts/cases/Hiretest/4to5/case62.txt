@@ -1,0 +1,31 @@
+const int SIZE = 5;
+int arr[SIZE];
+
+int main() {
+    int i;
+    /* 读入 SIZE 个整数到数组 arr 中 */
+    i = 0;
+    arr[i] = getint();
+    i = 1;
+    arr[i] = getint();
+    i = 2;
+    arr[i] = getint();
+    i = 3;
+    arr[i] = getint();
+    i = 4;
+    arr[i] = getint();
+
+    /* 依次输出数组元素及其下标 */
+    i = 0;
+    printf("Array element 0: %d\n", arr[i]);
+    i = 1;
+    printf("Array element 1: %d\n", arr[i]);
+    i = 2;
+    printf("Array element 2: %d\n", arr[i]);
+    i = 3;
+    printf("Array element 3: %d\n", arr[i]);
+    i = 4;
+    printf("Array element 4: %d\n", arr[i]);
+
+    return 0;
+}

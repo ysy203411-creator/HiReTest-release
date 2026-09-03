@@ -1,0 +1,12 @@
+const int rq1_case_id_24 = 24;
+const int a = 5;
+const int neg_b = -5; // 修改为常量表达式
+int negate(int x) {
+    return -x;
+}
+int main(){
+    int c = negate(a);
+    printf("Value of neg_b: %d\n", neg_b);
+    printf("Negated value of a: %d\n", c);
+    return 0;
+}

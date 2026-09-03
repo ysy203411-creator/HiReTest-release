@@ -1,0 +1,21 @@
+int global_var;
+const int CONST_VAL = 10;
+int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+void printFactorial(int n) {
+    int result = factorial(n);
+    printf("Factorial of %d is %d\n", n, result);
+}
+int main(){
+    int input = getint();
+    global_var = input == 0 ? 1 : 0; // 修改了这一行，避免使用非法的一元运算符组合
+    if (!global_var) {
+        printf("Input was non-zero\n");
+    } else {
+        printf("Input was zero\n");
+    }
+    printFactorial(5);
+    return 0;
+}

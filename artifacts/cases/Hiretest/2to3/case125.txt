@@ -1,0 +1,12 @@
+const int MAX = 100;
+int globalArray[MAX];
+int invalidTypeFunction(int param) { // Changed invalidType to int
+    return param;
+}
+int main(){
+    int localVar = 10;
+    printf("Local variable: %d\n", localVar);
+    globalArray[0] = localVar;
+    printf("Global array first element: %d\n", globalArray[0]);
+    return 0;
+}

@@ -1,0 +1,24 @@
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+int sum(int arr[], int size) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        total = total + arr[i];
+    }
+    return total;
+}
+void printSum(int arr[], int size) {
+    int result = sum(arr, size);
+    printf("Sum of array elements: %d\n", result);
+    return;
+}
+int main(){
+    int localArray[MAX_SIZE] = {0};
+    int i = 0;
+    for (i = 0; i < MAX_SIZE; i = i + 1) {
+        localArray[i] = globalArray[i];
+    }
+    printSum(localArray, MAX_SIZE);
+    return 0;
+}

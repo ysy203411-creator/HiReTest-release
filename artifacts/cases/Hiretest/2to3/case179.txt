@@ -1,0 +1,29 @@
+const int SIZE = 5;
+int errors[SIZE] = {3, 1, 4, 1, 5};
+void printErrors(int err[], int size) {
+    int j = 0;  // 修改变量名以避免重复声明
+    for (j = 0; j < size; j = j + 1) {
+        printf("Error at line: %d\n", err[j]);
+    }
+}
+int main(){
+    int sortedErrors[SIZE];
+    int k = 0;  // 修改变量名以避免重复声明
+    for (k = 0; k < SIZE; k = k + 1) {
+        sortedErrors[k] = errors[k];
+    }
+    // Sort the errors array
+    int m = 0;  
+    for (m = 0; m < SIZE - 1; m = m + 1) {
+        int n = 0;  
+        for (n = 0; n < SIZE - m - 1; n = n + 1) {
+            if (sortedErrors[n] > sortedErrors[n + 1]) {
+                int temp = sortedErrors[n];
+                sortedErrors[n] = sortedErrors[n + 1];
+                sortedErrors[n + 1] = temp;
+            }
+        }
+    }
+    printErrors(sortedErrors, SIZE);
+    return 0;
+}

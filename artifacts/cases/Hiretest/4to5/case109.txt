@@ -1,0 +1,20 @@
+int a = 5;
+int b = 10;
+int result;
+int compare(int x, int y) {
+    if (x < y) {
+        return 1;
+    } else {
+        return 0;
+    }
+    return 0; // 修改为返回0以符合约束
+}
+int main(){
+    int input;
+    input = getint();
+    result = compare(a, b);
+    printf("Result of compare(a, b): %d\n", result);
+    result = compare(a, input);
+    printf("Result of compare(a, input): %d\n", result);
+    return 0;
+}

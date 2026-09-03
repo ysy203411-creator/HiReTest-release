@@ -1,0 +1,7 @@
+const int SIZE = 5;
+int array[SIZE];
+int main(){
+    int i = 0;
+    array[i] = 2;  // 缺少右中括号 ]，应能触发错误类型 k
+    return 0;
+}

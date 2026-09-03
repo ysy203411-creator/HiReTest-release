@@ -1,0 +1,18 @@
+const int SIZE = 5;
+int array[SIZE];
+void initializeArray() {
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        array[i] = i * i;
+    }
+}
+int getElement(int index) {
+    return array[index];
+}
+int main(){
+    initializeArray();
+    int value = getElement(2);
+    printf("Value: %d\n", value);
+    int errorValue = array[3];
+    return 0;
+}

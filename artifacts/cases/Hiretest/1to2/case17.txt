@@ -1,0 +1,21 @@
+const int MAX_SIZE = 100;
+int globalArray[MAX_SIZE];
+int globalVar = 10;
+int sum(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("The result is: %d\n", result);
+}
+int main(){
+    int localVar = 5;
+    int localArray[10];
+    localArray[0] = 1;
+    localArray[1] = 2;
+    int result = sum(globalVar, localVar);
+    printResult(result);
+    if (localArray[0] & localArray[1]) { // 使用单独的 &，应视为非法符号
+        printf("This line contains an error.\n");
+    }
+    return 0;
+}

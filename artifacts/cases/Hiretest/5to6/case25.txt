@@ -1,0 +1,17 @@
+const int SIZE = 5;
+int arr[SIZE] = {1, 2, 3, 4, 5};
+
+void printArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < SIZE; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    printArray(arr);
+    int input = getint();
+    printf("Input: %d\n", input);
+    return 0;
+}

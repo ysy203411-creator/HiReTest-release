@@ -1,0 +1,27 @@
+const int a = 10;
+const int b = 20;
+int c[5] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+void compare(int x, int y) {
+    if (x < y) {
+        printf("x is less than y\n");
+    } 
+    if (x > y) {
+        printf("x is greater than y\n");
+    } else {
+        printf("x is equal to y\n");
+    }
+}
+int main(){
+    int result = add(a, b);
+    int temp = c[2]; // 将 c[2] 存储到局部变量 temp 中
+    compare(result, temp);
+    if (a > b || b < c[0]) {
+        printf("Condition met\n");
+    } else {
+        printf("Condition not met\n");
+    }
+    return 0;
+}

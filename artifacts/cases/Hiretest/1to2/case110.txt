@@ -1,0 +1,23 @@
+const int MAX = 10;
+int globalArray[MAX] = {1, 2, 3};
+void printArray(int arr[]) {
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        printf("%d\n", arr[i]);
+    }
+}
+int main(){
+    int localArray[MAX];
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        localArray[i] = globalArray[i] * 2;
+    }
+    int condition = 1 & 0; // 错误：使用单独的 & 运算符
+    if(condition) {
+        printf("This should not print.\n");
+    } else {
+        printf("Condition is false.\n");
+    }
+    printArray(localArray);
+    return 0;
+}

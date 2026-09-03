@@ -1,0 +1,16 @@
+const int CONST_VAL = 10;
+int Var1 = 5;
+int Var2 = 10;
+void printValue(int value) {
+    printf("Value: %d\n", value);
+}
+int main(){
+    int result = 0;
+    int VAR1 = 20; // Should be identified as a different identifier from Var1
+    int var2 = 30; // Should be identified as a different identifier from Var2
+    result = Var1 + VAR1; // Test different case sensitivity
+    printValue(result);
+    result = Var2 + var2; // Test different case sensitivity
+    printValue(result);
+    return 0;
+}

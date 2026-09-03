@@ -1,0 +1,25 @@
+const int a = 10;
+const int b = 3;
+int result_add;
+int result_sub;
+int result_mul;
+int result_div;
+int result_rem;
+
+void calculate() {
+    result_add = a + b;
+    result_sub = a - b;
+    result_mul = a * b;
+    result_div = a / b;
+    result_rem = a % b;
+}
+
+int main() {
+    calculate();
+    printf("Add: %d\n", result_add);
+    printf("Sub: %d\n", result_sub);
+    printf("Mul: %d\n", result_mul);
+    printf("Div: %d\n", result_div);
+    printf("Rem: %d\n", result_rem);
+    return 0;
+}

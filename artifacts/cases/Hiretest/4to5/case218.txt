@@ -1,0 +1,8 @@
+int globalVar;
+int main(){
+    int localVar;
+    localVar = getint();
+    globalVar = localVar + 5;
+    printf("%d\n", globalVar);
+    return 0;
+}

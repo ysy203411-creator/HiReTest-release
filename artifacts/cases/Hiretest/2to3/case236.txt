@@ -1,0 +1,13 @@
+const int SIZE = 5;
+int arr[SIZE];
+void testFunc(int a, int b[], int c) {
+    return;
+}
+int main(){
+    int x = 10;
+    int y[SIZE];
+    int z = 20;
+    // Correcting the function call by passing an integer for the third parameter
+    testFunc(x, arr, z); // 'z' is an int, matching the expected type for 'c'
+    return 0;
+}

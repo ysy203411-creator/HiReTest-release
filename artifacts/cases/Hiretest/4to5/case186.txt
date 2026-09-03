@@ -1,0 +1,12 @@
+int arr[5];
+int main(){
+    int index;
+    index = getint(); // Get the index from standard input
+    if (index >= 0 && index < 5) { // Ensure index is within bounds
+        arr[index] = getint(); // Assign a value from standard input to the array element
+        printf("%d\n", arr[index]); // Print the value of the array element
+    } else {
+        printf("Index out of bounds\n");
+    }
+    return 0;
+}

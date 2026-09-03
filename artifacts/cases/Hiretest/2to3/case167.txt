@@ -1,0 +1,25 @@
+const int CONST_VAL = 5;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 3;
+    int result = 0;
+    // Test block analysis with proper scope handling
+    {
+        int innerVar = 2;
+        result = add(localVar, innerVar);
+        printResult(result);
+    }
+    // Test block analysis with return statement
+    {
+        int innerVar = 4;
+        result = add(localVar, innerVar);
+        // Removing the return statement within the block to comply with constraints
+    }
+    return 0;
+}

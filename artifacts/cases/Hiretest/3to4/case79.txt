@@ -1,0 +1,21 @@
+const int rq1_case_id_79 = 79;
+const int A = 6;
+const int B = 3;
+int multiply(int x, int y) {
+    return x * y;
+}
+int divide(int x, int y) {
+    return x / y;
+}
+int mod(int x, int y) {
+    return x % y;
+}
+int main(){
+    int result1 = multiply(A, B);
+    printf("6 * 3 = %d\n", result1); // Expected output: 18
+    int result2 = divide(A, B);
+    printf("6 / 3 = %d\n", result2); // Expected output: 2
+    int result3 = mod(A, B);
+    printf("6 %% 3 = %d\n", result3); // Expected output: 0
+    return 0;
+}

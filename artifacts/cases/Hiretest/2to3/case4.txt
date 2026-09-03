@@ -1,0 +1,20 @@
+const int MAX = 100;
+int globalVar;
+int add(int a, int b) {
+    int result;
+    result = a + b;
+    return result; // 已修改为符合约束条件
+}
+void printMessage() {
+    printf("Hello, World!\n");
+    return;
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    int sum;
+    printMessage();
+    sum = add(x, y);
+    printf("Sum: %d\n", sum);
+    return 0;
+}

@@ -1,0 +1,26 @@
+const int rq1_case_id_10 = 10;
+const int a = 10;
+int b;
+int arr[5] = {1, 2, 3, 4, 5};
+void testFunc(int x) {
+    if (x > 0) {
+        printf("Positive: %d\n", x);
+    } else {
+        printf("Non-positive\n");
+    }
+    return;
+}
+int main(){
+    int i;
+    for (i = 0; i < 5; i = i + 1) {
+        if (arr[i] % 2 == 0) {
+            printf("Even: %d\n", arr[i]);
+        } else {
+            printf("Odd: %d\n", arr[i]);
+        }
+    }
+    
+    testFunc(a);
+    testFunc(b);
+    return 0;
+}

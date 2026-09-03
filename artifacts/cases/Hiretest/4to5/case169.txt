@@ -1,0 +1,17 @@
+const int SIZE = 5;
+int array[SIZE];
+int main(){
+    int i = 0;
+    while (i < SIZE) {
+        array[i] = getint();
+        i = i + 1;
+    }
+    int sum = 0;
+    i = 0;
+    while (i < SIZE) {
+        sum = sum + array[i];
+        i = i + 1;
+    }
+    printf("Sum: %d\n", sum);
+    return 0;
+}

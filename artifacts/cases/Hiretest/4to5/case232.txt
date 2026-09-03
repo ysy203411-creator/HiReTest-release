@@ -1,0 +1,17 @@
+const int MAX = 100;
+int global_var;
+int add(int a, int b) {
+    return a + b;
+}
+int sub(int a, int b) {
+    return a - b;
+}
+int main(){
+    int a = 10;
+    int b = getint();
+    int result1 = add(a, b);
+    int result2 = sub(a, b);
+    printf("Addition result: %d\n", result1);
+    printf("Subtraction result: %d\n", result2);
+    return 0;
+}

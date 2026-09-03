@@ -1,0 +1,26 @@
+const int rq1_case_id_14 = 14;
+const int a = 5;
+const int b = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int x = a + b;
+    int y = arr[2];
+    int z = add(x, y);
+    printResult(z);
+    if (x > y) {
+        printf("x is greater than y\n");
+    } else {
+        printf("x is not greater than y\n");
+    }
+    int i = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        printf("arr[%d] = %d\n", i, arr[i]);
+    }
+    return 0;
+}

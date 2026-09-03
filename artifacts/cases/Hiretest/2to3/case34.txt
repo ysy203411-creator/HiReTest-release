@@ -1,0 +1,22 @@
+const int SIZE = 5;
+int array[SIZE] = {1, 2, 3, 4, 5};
+void printArray(int arr[], int size) {
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int main(){
+    int c = 92; // ASCII for '\\'
+    int d = 10; // ASCII for '\n'
+    int e = 39; // ASCII for '\''
+    int f = 34; // ASCII for '\"'
+    if (c == 92 && d == 10 && e == 39 && f == 34) {
+        printf("All escape characters are correct.\n");
+    } else {
+        printf("There is an error in escape characters.\n");
+    }
+    printArray(array, SIZE);
+    return 0;
+}

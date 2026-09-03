@@ -1,0 +1,23 @@
+const int MAX = 10;
+int globalArray[MAX] = {1, 2, 3, 4, 5, 0, 0, 0, 0, 0};  // 修改初始化列表，补全剩余元素为 0
+int sum(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int result = sum(a, b);
+    printf("Sum of %d and %d is %d\n", a, b, result);
+    return;
+}
+int main(){
+    int localArray[5];
+    int i;
+    for (i = 0; i < 5; i = i + 1) {
+        localArray[i] = globalArray[i];
+    }
+    int total = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        total = total + localArray[i];
+    }
+    printSum(total, 10);
+    return 0;
+}

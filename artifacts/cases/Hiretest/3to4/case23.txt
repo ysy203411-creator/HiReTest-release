@@ -1,0 +1,16 @@
+const int rq1_case_id_23 = 23;
+const int MAX = 100;
+int arr[MAX];
+void process(int x, int[] data) {
+    printf("Processing %d\n", x);
+}
+void processByte(int x) {
+    printf("Byte processing %d\n", x);
+}
+int main(){
+    int value = 42;
+    int byteValue = 127;
+    process(value, arr); // 正常调用，匹配类型
+    processByte(byteValue); // 正常调用，匹配类型
+    return 0;
+}

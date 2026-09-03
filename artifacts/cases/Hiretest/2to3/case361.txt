@@ -1,0 +1,28 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int arr[3] = {1, 2, 3};
+void printValue(int value) {
+    printf("Value: %d\n", value);
+    return;
+}
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int localVar = 2;
+    int result = add(globalVar, localVar);
+    printValue(result);
+    if (result < CONST_VAL) {
+        printf("Result is less than CONST_VAL\n");
+    } 
+    if (result == CONST_VAL) {
+        printf("Result is equal to CONST_VAL\n");
+    } else {
+        printf("Result is greater than CONST_VAL\n");
+    }
+    int i = 0;
+    for (i = 0; i < 3; i = i + 1) {
+        printf("Array element %d: %d\n", i, arr[i]);
+    }
+    return 0;
+}

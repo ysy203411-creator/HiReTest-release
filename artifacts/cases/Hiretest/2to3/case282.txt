@@ -1,0 +1,12 @@
+const int CONST_ARR[3] = {1, 2, 3};
+int var_arr[3] = {4, 5, 6};
+int var = 10;
+/* 只使用允许的参数类型：int 和 int[] */
+void testFunc(int a, int b[]) {
+    return;
+}
+int main(){
+    /* 形参 b[] 是 int[]，实参必须是变量数组名，使用 var_arr */
+    testFunc(var, var_arr);
+    return 0;
+}

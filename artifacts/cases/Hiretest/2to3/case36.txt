@@ -1,0 +1,18 @@
+const int MAX = 10;
+int arr[MAX];
+int foo(int x) {
+    return x + 1;
+}
+void bar(int a[]) {
+    printf("%d\n", a[0]);
+}
+int main(){
+    int x = 5;
+    int y = foo(x;
+    arr[0] = x;
+    bar(arr;
+    if (x < y & x > 0) {
+        printf("x is between 0 and y\n");
+    }
+    return 0;
+}

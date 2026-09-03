@@ -1,0 +1,24 @@
+int globalVar;
+const int CONST_VAL = 10;
+int compute(int a, int b) {
+    return a + b;
+}
+void updateGlobalVar(int newValue) {
+    globalVar = newValue;
+}
+int main(){
+    int localVar = 5;
+    int result;
+    int inputValue;
+    inputValue = getint();
+    int i = 0;
+    while (i < 3) {
+        localVar = localVar + i;
+        result = compute(localVar, inputValue);
+        printf("%d\n", result);
+        i = i + 1;
+    }
+    updateGlobalVar(localVar);
+    printf("GlobalVar: %d\n", globalVar);
+    return 0;
+}

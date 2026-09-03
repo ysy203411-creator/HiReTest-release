@@ -1,0 +1,9 @@
+int global_var;
+const int CONST_VAL = 255;
+int main(){
+    int input_val = getint();
+    int uchar_val = input_val % 256; // Simulate byte load using modulo operation
+    global_var = uchar_val; // Store the zero-extended result
+    printf("%d\n", global_var); // Should print the zero-extended value
+    return 0;
+}

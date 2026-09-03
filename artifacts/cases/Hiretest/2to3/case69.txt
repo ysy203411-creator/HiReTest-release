@@ -1,0 +1,15 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printHello() {
+    printf("Hello, World!\n");
+}
+int main(){
+    int result;
+    result = add(3, 4); // Valid function call with parameters
+    printf("Result: %d\n", result);
+    printHello( // Missing closing parenthesis
+    return 0;
+}

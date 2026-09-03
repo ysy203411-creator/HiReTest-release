@@ -1,0 +1,21 @@
+int a = 5;
+int b = 10;
+int result;
+
+int calculate_or(int x, int y) {
+    int lx;
+    int ly;
+    lx = x / (x + x + 1) * (x + x + 1);
+    ly = y / (y + y + 1) * (y + y + 1);
+    return lx + ly;
+}
+
+int main() {
+    int input;
+    result = calculate_or(a, b);
+    printf("Result of logical OR between %d and %d is: %d\n", a, b, result);
+    input = getint();
+    result = calculate_or(input, 0);
+    printf("Result of logical OR between %d and 0 is: %d\n", input, result);
+    return 0;
+}

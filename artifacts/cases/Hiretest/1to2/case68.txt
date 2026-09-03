@@ -1,0 +1,25 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int arr[3] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int x, int y) {
+    int sum = add(x, y);
+    printf("Sum: %d\n", sum);
+    return;
+}
+int main(){
+    int localVar = 0;
+    localVar = globalVar + CONST_VAL;
+    int result = add(localVar, arr[2]);
+    printSum(result, 10);
+    
+    if (result > 10) {
+        printf("Result is greater than 10\n");
+    } else {
+        printf("Result is not greater than 10\n");
+    }
+    
+    return 0;
+}

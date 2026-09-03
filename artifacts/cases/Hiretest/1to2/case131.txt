@@ -1,0 +1,25 @@
+const int MAX = 10;
+int globalVar = 0;
+int sum(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+    return;
+}
+int main(){
+    int a = 5;
+    int b = 3;
+    int result = sum(a, b);
+    printResult(result);
+    // Test annotation processing
+    /*
+    This is a multi-line comment
+    It should be correctly processed
+    */
+    int testVar = 1;
+    if (testVar || 2) { // 将错误的赋值语句改为if条件判断
+        testVar = 1;
+    }
+    return 0;
+}

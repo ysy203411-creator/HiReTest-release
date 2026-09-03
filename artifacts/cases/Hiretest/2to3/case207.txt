@@ -1,0 +1,24 @@
+const int MAX = 10;
+int arr[MAX];
+int sum(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    printf("Sum: %d\n", sum(a, b));
+}
+int main(){
+    int a = 5;
+    int b = 3;
+    printSum(a, b);
+    if (a > b  {  // j类错误：缺少右小括号 )
+        printf("a is greater than b\n");
+    } else {
+        printf("b is greater than or equal to a\n");
+    }
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        arr[i] = i;
+    }
+    printf("Array initialized.\n");
+    return 0;
+}

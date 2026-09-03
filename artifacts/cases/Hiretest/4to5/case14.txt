@@ -1,0 +1,10 @@
+int labelInitialized;
+int main(){
+    labelInitialized = 0;
+    if (labelInitialized == 0) {
+        printf("Label is initialized to zero\n");
+    } else {
+        printf("Label is not initialized\n");
+    }
+    return 0;
+}

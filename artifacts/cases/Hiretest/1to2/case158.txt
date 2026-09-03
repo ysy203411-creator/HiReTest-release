@@ -1,0 +1,20 @@
+const int a = 10;
+const int b = 20;
+int result;
+int main(){
+    int x = 5;
+    int y = 10;
+    if (x & y) { // 错误：单独的 '&' 应视为非法符号
+        result = a + b;
+    } else {
+        result = a - b;
+    }
+    printf("Result: %d\n", result);
+    if (x | y) { // 错误：单独的 '|' 应视为非法符号
+        result = a * b;
+    } else {
+        result = a / b;
+    }
+    printf("Result: %d\n", result);
+    return 0;
+}

@@ -1,0 +1,14 @@
+const int a = 5;
+int b;
+int arr[3];
+void func() {
+    b = a; // 正常赋值
+    // a = 10; // 错误：尝试给常量赋值，删除此行以符合约束
+}
+int main(){
+    arr[0] = 1;
+    arr[1 = 2; // 缺少右中括号，错误类型 "k"
+    b = getint(; // 缺少右小括号，错误类型 "j"
+    printf("%d\n", b);
+    return 0;
+}

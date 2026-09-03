@@ -1,0 +1,20 @@
+int a;
+int b;
+int c;
+
+int main() {
+    a = 1;
+    b = 0;
+    c = 2;
+
+    /* 模拟 a && b：当 a 和 b 都非 0 时，a * b 非 0，否则为 0 */
+    printf("a = %d, b = %d, c = %d\n", a, b, c);
+    printf("a * b (simulate a && b, nonzero means true) = %d\n", a * b);
+    printf("a * c (simulate a && c, nonzero means true) = %d\n", a * c);
+
+    /* 再用 ! 运算符展示真假：!0 为 1，!非0 为 0 */
+    printf("! (a * b) = %d\n", ! (a * b));
+    printf("! (a * c) = %d\n", ! (a * c));
+
+    return 0;
+}

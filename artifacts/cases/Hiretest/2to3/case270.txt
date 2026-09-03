@@ -1,0 +1,27 @@
+const int a = 5;
+const int b = 10;
+int globalVar = 0;
+int add(int x, int y) {
+    return x + y;
+}
+int compare(int x, int y) {
+    if (x == y) {
+        return 1;
+    } else {
+        return 0;
+    }
+    return 0; // 保留此行以符合约束
+}
+int main(){
+    int localVar = 0;
+    int result = add(a, b);
+    printf("Result of add: %d\n", result);
+    if (compare(a, b)) {
+        printf("a and b are equal\n");
+    } else {
+        printf("a and b are not equal\n");
+    }
+    globalVar = result;
+    printf("Global variable: %d\n", globalVar);
+    return 0;
+}

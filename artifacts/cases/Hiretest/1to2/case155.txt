@@ -1,0 +1,18 @@
+const int a = 5;
+int b = 10;
+int c[3] = {1, 2, 3};
+int add(int x, int y) {
+    return x + y;
+}
+void printResult(int result) {
+    printf("The result is: %d\n", result);
+}
+int main(){
+    int result = add(a, b);
+    printResult(result);
+    // 错误：使用单独的 &，应为 &&
+    if (a > 0 & b < 15) {
+        printf("Both conditions are true.\n");
+    }
+    return 0;
+}

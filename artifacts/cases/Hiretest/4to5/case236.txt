@@ -1,0 +1,20 @@
+int globalVar;
+const int constVar = 10;
+
+int compute(int a, int b) {
+    return a + b;
+}
+
+void display(int result) {
+    printf("Result: %d\n", result);
+}
+
+int main() {
+    int x = 5;
+    int y = 15;
+    int result = compute(x, y);
+    display(result);
+    globalVar = getint();
+    printf("Global Var: %d\n", globalVar);
+    return 0;
+}

@@ -1,0 +1,8 @@
+const int a = 5;
+int b = 10;
+int arr[5];
+int main(){
+    int x = a - b; // 修改为合法的算术运算符
+    printf("%d\n", x);
+    return 0;
+}

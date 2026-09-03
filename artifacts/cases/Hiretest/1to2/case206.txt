@@ -1,0 +1,32 @@
+const int MAX = 100;
+int add(int a, int b) {
+    return a + b;
+}
+int subtract(int a, int b) {
+    return a - b;
+}
+int multiply(int a, int b) {
+    return a * b;
+}
+int divide(int a, int b) {
+    if (b == 0) {
+        printf("Error: Division by zero\n");
+        return 0;
+    }
+    return a / b;
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    int z = 1; // 修改 z 的初始值以避免除以零
+    int result;
+    result = add(x, y);
+    printf("Addition: %d\n", result);
+    result = subtract(x, y);
+    printf("Subtraction: %d\n", result);
+    result = multiply(x, y);
+    printf("Multiplication: %d\n", result);
+    result = divide(x, z); // 修改后的 z 不会导致除以零
+    printf("Division: %d\n", result);
+    return 0;
+}

@@ -1,0 +1,11 @@
+const int x_const = 10;
+int x_var = 20;
+int func() {
+    int x_local = 30;
+    return x_local;
+}
+int main(){
+    int result = func();
+    printf("Result: %d\n", result);
+    return 0;
+}

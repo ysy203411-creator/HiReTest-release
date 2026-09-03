@@ -1,0 +1,14 @@
+const int CONST_VAL = 255;
+int globalVar;
+int zeroExtend(int inputValue) {
+    int result = inputValue; // 去掉强制转换
+    return result;
+}
+int main(){
+    int inputValue = getint();
+    int extendedValue = zeroExtend(inputValue);
+    printf("Original: %d, Zero Extended: %d\n", inputValue, extendedValue);
+    globalVar = CONST_VAL;
+    printf("Global Var: %d\n", globalVar);
+    return 0;
+}

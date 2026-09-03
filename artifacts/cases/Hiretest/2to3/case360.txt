@@ -1,0 +1,17 @@
+const int MAX = 100;
+int globalVar = 10;
+int functionWithNoReturn() {
+    return globalVar; // 保留此处的返回值
+    return 0; // 添加显式的返回语句
+}
+void printMessage() {
+    printf("Hello, World!\n");
+}
+int main(){
+    int localVar = 5;
+    if (localVar > 0) {
+        printMessage(); // 将返回语句替换为函数调用
+    }
+    printMessage();
+    return 0;
+}

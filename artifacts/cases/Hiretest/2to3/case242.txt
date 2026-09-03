@@ -1,0 +1,17 @@
+const int a = 5;
+int b = 10;
+int c[5] = {1, 2, 3, 4, 5};
+void func1() {
+    int x = 0;
+    x = a + b;
+    printf("%d\n", x);
+}
+int func2(int x) {
+    return x * 2;
+}
+int main(){
+    int local_a = 20; // 修改变量名以避免与全局常量名重复
+    int result = func2(b);
+    printf("%d\n", result);
+    return 0;
+}

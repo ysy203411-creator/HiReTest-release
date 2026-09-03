@@ -1,0 +1,17 @@
+const int CONST_VAL = 10;
+int add(int a, int b) {
+    return a + b;
+}
+int multiply(int x, int y) {
+    return x * y;
+}
+int main(){
+    int result1 = add(CONST_VAL, 5);
+    int result2 = multiply(result1, 2);
+    if (result1 > 0 & result2 < 30) { // Intentional error: single '&' should be '&&'
+        printf("Both conditions are true.\n");
+    } else {
+        printf("One or both conditions are false.\n");
+    }
+    return 0;
+}

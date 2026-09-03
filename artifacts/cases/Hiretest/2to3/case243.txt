@@ -1,0 +1,22 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int globalArray[3] = {1, 2};
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+    return;
+}
+int main(){
+    int localVar = 3;
+    static int staticVar;
+    int sum = add(globalVar, localVar);
+    printResult(sum);
+    if (globalArray[0] == 1) {
+        printf("Array element is 1\n");
+    }
+    int anotherSum = add(CONST_VAL, globalArray[1]);
+    printResult(anotherSum);
+    return 0;
+}

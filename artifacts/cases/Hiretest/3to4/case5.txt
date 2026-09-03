@@ -1,0 +1,20 @@
+const int rq1_case_id_5 = 5;
+const int CONST_VAL = 5;
+int globalVar = 10;
+int multiply(int a, int b) {
+    return a * b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 3;
+    int result;
+    result = multiply(globalVar, localVar);
+    printResult(result);
+    int emptyArray[5];
+    // Intentionally left uninitialized to test stack handling in the compiler
+    int computation = emptyArray[0] * CONST_VAL; // Should handle empty stack case
+    printf("Computation: %d\n", computation);
+    return 0;
+}

@@ -1,0 +1,8 @@
+const int size = 5;
+int arr[5];
+int main(){
+    arr[0] = 1;
+    arr[1] = 2;
+    printf("%d %d %d %d %d\n", arr[0], arr[1], arr[2], arr[3], arr[4]);
+    return 0;
+}

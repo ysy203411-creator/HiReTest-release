@@ -1,0 +1,26 @@
+int globalVar;
+const int CONST_VAL = 10;
+int array[5] = {1, 2, 3, 0, 0};
+
+void modifyArray(int arr[]) {
+    int i = 0;
+    /* 原本这里有 while 循环，这里改为只修改一个元素以避免使用循环语句 */
+    arr[0] = arr[0] + CONST_VAL;
+    return;
+}
+
+int main() {
+    int localVar = getint();
+    printf("Initial value: %d\n", localVar);
+
+    modifyArray(array);
+
+    int i = 0;
+    /* 原本这里有 while 循环，这里改为只输出一个元素以避免使用循环语句 */
+    printf("Array[%d]: %d\n", i, array[i]);
+
+    /* 原本这里有 if-else 语句，这里改为无条件输出，避免使用选择语句 */
+    printf("Input processed\n");
+
+    return 0;
+}

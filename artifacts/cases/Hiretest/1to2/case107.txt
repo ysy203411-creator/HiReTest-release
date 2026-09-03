@@ -1,0 +1,17 @@
+const int MAX = 10;
+int arr[MAX];
+int compute(int x) {
+    return x * x;
+}
+int main(){
+    int a = 5;
+    int b = 10;
+    int result;
+    if (a & b) {  // 使用单独的 &，应视为非法符号
+        result = compute(a);
+    } else {
+        result = compute(b);
+    }
+    printf("Result: %d\n", result);
+    return 0;
+}

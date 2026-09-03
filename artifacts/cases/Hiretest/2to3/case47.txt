@@ -1,0 +1,16 @@
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE];
+int getValue() {
+    return 42;
+}
+void printValue(int value) {
+    printf("Value: %d\n", value);
+}
+int main(){
+    int localVar = getValue();
+    globalArray[0] = localVar;
+    printValue(globalArray[0]);
+    int anotherVar = getint();
+    printf("Another value: %d\n", anotherVar);
+    return 0;
+}

@@ -1,0 +1,20 @@
+const int CONST_A = 5;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result is: %d\n", result);
+}
+int main(){
+    int localVar = 20;
+    int result = add(globalVar, localVar);
+    printResult(result);
+    
+    int unaryTest1 = -CONST_A;
+    int unaryTest2 = +globalVar;
+    int unaryTest3 = localVar;  // 去掉非法的逻辑非用法，保留一元运算测试结构
+    printf("Unary Test Results: %d, %d, %d\n", unaryTest1, unaryTest2, unaryTest3);
+    
+    return 0;
+}

@@ -1,0 +1,18 @@
+const int rq1_case_id_11 = 11;
+const int a = 5;
+int b = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+void func_void() {
+    return; // 正确的void函数返回
+}
+int func_int() {
+    return 42;
+}
+int main(){
+    int x = -a; // 修改连续单目运算符
+    int y = +b; // 修改连续单目运算符
+    func_void(); // 测试void函数调用
+    int z = func_int(); // 测试int函数调用
+    printf("%d %d %d\n", x, y, z); // 检查输出是否正确
+    return 0;
+}

@@ -1,0 +1,7 @@
+const int a = 5;
+const int b[3 = {1, 2, 3}; // 缺少右中括号，k类错误
+int main(){
+    int x = a + b[0];
+    printf("%d\n", x);
+    return 0;
+}

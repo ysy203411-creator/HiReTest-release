@@ -1,0 +1,17 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int localVar = CONST_VAL + globalVar;
+    int result = add(localVar, CONST_VAL);
+    
+    if (result & 1) {  // 错误：使用单独的 & 应视为非法符号
+        printf("Result is odd: %d\n", result);
+    } else {
+        printf("Result is even: %d\n", result);
+    }
+    
+    return 0;
+}

@@ -1,0 +1,24 @@
+const int SIZE = 5;
+int array[SIZE];
+
+int main() {
+    int i = 0;
+    int sum = 0;
+
+    /* 读入 SIZE 个整数 */
+    array[0] = getint();
+    array[1] = getint();
+    array[2] = getint();
+    array[3] = getint();
+    array[4] = getint();
+
+    /* 计算和 */
+    sum = sum + array[0];
+    sum = sum + array[1];
+    sum = sum + array[2];
+    sum = sum + array[3];
+    sum = sum + array[4];
+
+    printf("Sum: %d\n", sum);
+    return 0;
+}

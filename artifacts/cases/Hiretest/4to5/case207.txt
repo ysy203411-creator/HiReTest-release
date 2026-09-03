@@ -1,0 +1,16 @@
+int globalVar;
+const int constantValue = 10;
+int add(int a, int b) {
+    int result = a + b;
+    return result;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum); // 确保格式符%d与参数数量一致
+}
+int main(){
+    int x = getint();
+    int y = getint();
+    printSum(x, y);
+    return 0;
+}

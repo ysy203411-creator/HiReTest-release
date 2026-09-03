@@ -1,0 +1,21 @@
+const int CONST_VAL = 10;
+int globalVar = 0;
+void updateVar(int val) {
+    globalVar = val;
+}
+int main(){
+    int i;
+    for (i = 0; i < CONST_VAL; i = i + 1) {
+        int localVar = i * 2;
+        updateVar(localVar);
+        printf("Value of globalVar: %d\n", globalVar);
+    }
+    int sum = 0;
+    int arr[5] = {1, 2, 3, 4, 5}; // 修改为局部变量数组
+    int j = 0;
+    for (j = 0; j < 5; j = j + 1) { // 使用不同的局部变量 j
+        sum = sum + arr[j];
+    }
+    printf("Sum of array: %d\n", sum);
+    return 0;
+}

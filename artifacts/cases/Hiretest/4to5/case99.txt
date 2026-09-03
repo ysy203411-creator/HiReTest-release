@@ -1,0 +1,21 @@
+const int SIZE = 10;
+int globalVar;
+int array[SIZE];
+void checkSymbolType(int digits) {
+    if (digits == 32) {
+        printf("%d\n", digits); // 修改为使用 %d
+    } 
+
+    if (digits == 8) {
+        printf("%d\n", digits); // 修改为使用 %d
+    } else {
+        printf("%s\n", "Symbol Error!"); // 修改为使用 %s
+    }
+}
+int main(){
+    int input;
+    printf("%s", "Enter digits (8 or 32): "); // 修改为使用 %s
+    input = getint();
+    checkSymbolType(input);
+    return 0;
+}

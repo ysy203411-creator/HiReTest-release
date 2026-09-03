@@ -1,0 +1,16 @@
+const int MAX = 100;
+int globalArray[MAX];
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result is: %d\n", result);
+}
+int main(){
+    int a = 5;
+    int b = 15;
+    int result = add(a, b);
+    printResult(result);
+    return 0;
+}

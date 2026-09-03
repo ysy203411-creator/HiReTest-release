@@ -1,0 +1,10 @@
+const int MAX_SIZE = 10;
+int arr[MAX_SIZE];
+int func(int arr[) { // 缺少右中括号
+    return arr[0];
+}
+int main(){
+    int result = func(arr);
+    printf("Result: %d\n", result);
+    return 0;
+}

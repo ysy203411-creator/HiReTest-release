@@ -1,0 +1,19 @@
+const int MAX = 10;
+int globalArray[MAX] = {1, 2, 3, 4, 5};
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int x = 5;
+    int y = 10;
+    printSum(x, y);
+    
+    int result = add(globalArray[0], globalArray[1]);
+    printf("Result: %d\n", result);
+    
+    return 0;
+}

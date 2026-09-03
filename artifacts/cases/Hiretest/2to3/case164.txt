@@ -1,0 +1,17 @@
+const int CONST_A = 5;
+int global_var = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+int multiply(int a, int b) {
+    return a * b;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int local_var = 2;
+    int result = multiply(global_var, local_var);
+    print_result(result);
+    int mul_exp_result = CONST_A * arr[2] / local_var % global_var;
+    printf("MulExp Result: %d\n", mul_exp_result);
+    return 0;
+}

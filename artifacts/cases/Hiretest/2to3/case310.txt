@@ -1,0 +1,4 @@
+const int a[3 = {1, 2, 3};  // 缺少右中括号，应该触发 'k' 类错误
+int main(){
+    return 0;
+}

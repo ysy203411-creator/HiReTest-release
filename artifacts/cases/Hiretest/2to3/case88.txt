@@ -1,0 +1,11 @@
+const int a = 5;
+int b = 0; // 修正：全局变量 b 初始化为 0
+int add(int x, int y) {
+    return x + y;
+}
+int main(){
+    int c;
+    c = add(a, b); // b 已初始化，调用合法
+    printf("%d\n", c);
+    return 0;
+}

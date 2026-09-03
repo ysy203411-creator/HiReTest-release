@@ -1,0 +1,16 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int myFunction(int a) {
+    return a + CONST_VAL;
+}
+void anotherFunction() {
+    int localVar = 20;
+    printf("Local variable: %d\n", localVar);
+}
+int main(){
+    int result;
+    result = myFunction(globalVar);
+    printf("Result: %d\n", result);
+    anotherFunction();
+    return 0;
+}

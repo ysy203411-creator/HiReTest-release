@@ -1,0 +1,13 @@
+const int a = 10;
+int b = 10; // 初始化全局变量 b 为常量表达式
+
+void initialize() {
+    b = a + 5;
+}
+
+int main(){
+    initialize();
+    int result = b * 2;
+    printf("%d\n", result); // 修正转义序列为合法格式
+    return 0;
+}

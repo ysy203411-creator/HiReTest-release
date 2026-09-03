@@ -1,0 +1,12 @@
+const int MAX = 10;
+int numbers[MAX];
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int result = add(5, 3);
+    int error = 5; // 移除非法符号 |，保持语法和语义正确
+    printf("Result: %d\n", result);
+    printf("Error: %d\n", error);
+    return 0;
+}

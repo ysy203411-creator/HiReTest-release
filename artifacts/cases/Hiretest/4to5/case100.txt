@@ -1,0 +1,22 @@
+int globalVar;
+const int globalConst = 10;
+int add(int a, int b) {
+    return a + b;
+}
+int main(){
+    int localVar;
+    const int localConst = 5;
+    int result;
+    
+    localVar = getint();
+    result = add(localVar, globalConst);
+    printf("Result: %d\n", result);
+    
+    if (result > 15) {
+        printf("Result is greater than 15\n");
+    } else {
+        printf("Result is 15 or less\n");
+    }
+    
+    return 0;
+}

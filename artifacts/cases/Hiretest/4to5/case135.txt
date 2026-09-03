@@ -1,0 +1,17 @@
+const int CONST_VAL = 10;
+int global_var = 5;
+void printValues(int a, int b) {
+    printf("Values: %d, %d\n", a, b);
+}
+int calculateSum(int x, int y) {
+    return x + y;
+}
+int main(){
+    int local_var = 3;
+    int sum = calculateSum(global_var, local_var);
+    printf("Sum: %d\n", sum);
+    printValues(CONST_VAL, sum);
+    global_var = getint();
+    printf("New global_var: %d\n", global_var);
+    return 0;
+}

@@ -1,0 +1,19 @@
+const int MAX = 100;
+int globalArray[MAX];
+int computeSum(int arr[], int size) {
+    int sum = 0;
+    int i = 0;
+    for (i = 0; i < size; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+void printResult(int result) {
+    printf("The sum is: %d\n", result);
+}
+int main(){
+    int localArray[5] = {1, 2, 3, 4, 5};
+    int sum = computeSum(localArray, 5);
+    printResult(sum);
+    return 0;
+}

@@ -1,0 +1,20 @@
+const int a = 5;
+int b = 10;
+int add(int x, int y) {
+    return x + y;
+}
+void printSum(int x, int y) {
+    printf("Sum: %d\n", x + y);
+    return; // Adding return; statement for clarity, but it's optional for void functions
+}
+int multiply(int x, int y) {
+    return x * y; // Correcting the function to return the product of x and y
+}
+int main(){
+    int result = add(a, b);
+    printf("Result: %d\n", result);
+    printSum(a, b);
+    int product = multiply(a, b); 
+    printf("Product: %d\n", product);
+    return 0;
+}

@@ -1,0 +1,16 @@
+const int SIZE = 10;
+int globalArray[SIZE];
+int testFunc(int param) {
+    int localVar = param * 2;
+    if (localVar > 10) {
+        return localVar;
+    } else {
+        return 0; // 修改为返回一个整型字面量
+    }
+    return 0; // 添加不可达的 return 语句以符合约束
+}
+int main(){
+    globalArray[0] = testFunc(5);
+    printf("Result: %d\n", globalArray[0]);
+    return 0;
+}

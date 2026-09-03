@@ -1,0 +1,19 @@
+const int MAX = 10;
+int arr[MAX];
+int sum(int arr[], int n) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < n; i = i + 1) {
+        total = total + arr[i];
+    }
+    return total;
+}
+int main(){
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        arr[i] = i;
+    }
+    int result = sum(arr, MAX);
+    printf("Sum of array elements: %d\n", result);
+    return 0;
+}

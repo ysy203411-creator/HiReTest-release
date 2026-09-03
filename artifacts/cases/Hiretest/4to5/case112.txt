@@ -1,0 +1,27 @@
+const int SIZE = 5;
+int globalArray[SIZE] = {1, 2, 3, 4, 5};
+int globalVar = 10;
+
+int processArray(int arr[], int len) {
+    int sum = 0;
+    int i = 0;
+    while (i < len) {
+        sum = sum + arr[i];
+        i = i + 1;
+    }
+    return sum;
+}
+
+void printSum(int sum) {
+    printf("Sum: %d\n", sum);
+}
+
+int main() {
+    int localArray[SIZE] = {5, 4, 3, 2, 1};
+    int length = SIZE;
+    int result1 = processArray(localArray, length); // 修改此行
+    int result2 = processArray(localArray, length);
+    printSum(result1);
+    printSum(result2);
+    return 0;
+}

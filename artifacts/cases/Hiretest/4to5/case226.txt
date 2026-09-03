@@ -1,0 +1,29 @@
+int globalArray[10];
+
+int sumArray(int arr[], int size) {
+    int sum;
+    int i;
+    sum = 0;
+    i = 0;
+    while (i < size) {
+        sum = sum + arr[i];
+        i = i + 1;
+    }
+    return sum;
+}
+
+int main() {
+    int localArray[5];
+    int result;
+
+    localArray[0] = 1;
+    localArray[1] = 2;
+    localArray[2] = 3;
+    localArray[3] = 4;
+    localArray[4] = 5;
+
+    result = sumArray(localArray, 5);
+    printf("%d\n", result);
+
+    return 0;
+}

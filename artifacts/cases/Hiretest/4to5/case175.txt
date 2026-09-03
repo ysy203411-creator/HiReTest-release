@@ -1,0 +1,20 @@
+int globalVar = 0;
+const int CONST_VAL = 10;
+
+int compute(int a, int b) {
+    int result = a + b;
+    return result;
+}
+
+void displayResult(int value) {
+    printf("Result: %d\n", value);
+}
+
+int main() {
+    int input1 = getint();
+    int input2 = getint();
+    int sum = compute(input1, input2);
+    displayResult(sum);
+    printf("Sum is %s greater than constant value.\n", (sum > CONST_VAL) ? "" : "not");
+    return 0;
+}

@@ -1,0 +1,17 @@
+const int MAX = 10;
+int numbers[MAX];
+void process(int arr[]) {
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        arr[i] = i * i;
+    }
+}
+int main(){
+    int result = 0;
+    process(numbers);
+    int a = 5;
+    int b = 10;
+    int c = a & b; // 使用单独的 & 符号，应该被识别为错误
+    printf("Result: %d\n", result);
+    return 0;
+}

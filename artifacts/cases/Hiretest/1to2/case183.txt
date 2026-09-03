@@ -1,0 +1,19 @@
+const int CONST_VALUE = 10;
+int globalVar = 5;
+int arr[3] = {1, 2};
+void printValues(int x, int y) {
+    printf("Values: %d, %d\n", x, y);
+}
+int main(){
+    int localVar = 3;
+    int result = CONST_VALUE + globalVar + localVar;
+    printValues(result, arr[0]);
+    
+    if (result > 10 & localVar < 5) { // 使用单独的 &，应视为非法符号
+        printf("Condition met\n");
+    } else {
+        printf("Condition not met\n");
+    }
+    
+    return 0;
+}

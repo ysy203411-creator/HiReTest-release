@@ -1,0 +1,26 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int array[3] = {1, 2, 3};
+void printValue(int value) {
+    printf("Value: %d\n", value);
+    return;
+}
+int computeSum(int[] arr) {
+    int sum = 0;
+    int i = 0;
+    for (i = 0; i < 3; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+int main(){
+    int localVar = 7;
+    int result = 0;
+    if (localVar > 5 & globalVar < 10) { // 错误：使用了单独的 & 符号
+        result = computeSum(array);
+    } else {
+        printValue(CONST_VAL);
+    }
+    printf("Result: %d\n", result);
+    return 0;
+}

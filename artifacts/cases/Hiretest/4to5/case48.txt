@@ -1,0 +1,23 @@
+const int global_const = 10;
+int global_var;
+int array[5] = {1, 2, 3, 0, 0}; // 补全初始化
+int add(int a, int b) {
+    return a + b;
+}
+void printArray(int arr[]) {
+    int i = 0;
+    while (i < 5) { // 用 while 代替 for
+        printf("%d ", arr[i]);
+        i = i + 1;
+    }
+    return;
+}
+int main(){
+    int local_var = 5;
+    int result = add(global_const, local_var);
+    printf("Result of addition: %d\n", result);
+    global_var = getint();
+    printf("Input value: %d\n", global_var);
+    printArray(array);
+    return 0;
+}

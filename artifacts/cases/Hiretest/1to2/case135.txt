@@ -1,0 +1,24 @@
+const int MAX_LENGTH = 100;
+int global_var = 10;
+int global_array[5] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void print_result(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int local_var = 5;
+    int result = add(global_var, local_var);
+    print_result(result);
+    // Testing identifier recognition
+    int validIdentifier = 20;
+    int anotherValid_Identifier123 = 30;
+    printf("Valid Identifier: %d\n", validIdentifier);
+    printf("Another Valid Identifier: %d\n", anotherValid_Identifier123);
+    // Error: single '&' should be illegal
+    if (validIdentifier & anotherValid_Identifier123) {
+        printf("This line should not compile due to illegal '&' usage.\n");
+    }
+    return 0;
+}

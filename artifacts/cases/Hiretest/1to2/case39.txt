@@ -1,0 +1,20 @@
+const int MAX = 100;
+int globalVar = 10;
+void printMessage() {
+    printf("Hello, World!\n");
+    return;
+}
+int add(int a, int b) {
+    return a + b;
+}
+void voidFunc() {
+    printf("This is a void function.\n");
+    return;
+}
+int main(){
+    int localVar = 5;
+    int result = add(globalVar, localVar);
+    printf("Result: %d\n", result);
+    // Removed invalid function calls
+    return 0;
+}

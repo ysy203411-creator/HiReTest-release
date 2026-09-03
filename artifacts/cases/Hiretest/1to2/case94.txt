@@ -1,0 +1,21 @@
+const int MAX = 100;
+int global_var = 10;
+int array[MAX];
+int compute(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int local_var = 5;
+    int result = compute(global_var, local_var);
+    
+    // This is a single-line comment
+    printResult(result); // Another comment
+    /* This is a multi-line comment
+    // Nested single-line comment
+    */
+    
+    return 0;
+}

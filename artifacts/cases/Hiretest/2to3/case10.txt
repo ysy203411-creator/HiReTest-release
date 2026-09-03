@@ -1,0 +1,31 @@
+const int MAX_SIZE = 10;
+int globalArray[MAX_SIZE];
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localArray[5];
+    int x = 5;
+    int y = 10;
+    int sum = add(x, y);
+    printResult(sum);
+    globalArray[0] = 1;
+    globalArray[1] = 2;
+    globalArray[2] = 3;
+    globalArray[3] = 4;
+    globalArray[4] = 5;
+    localArray[0] = 6;
+    localArray[1] = 7;
+    localArray[2] = 8;
+    localArray[3] = 9;
+    localArray[4] = 10;
+    if (sum > 10) {
+        printf("Sum is greater than 10\n");
+    } else {
+        printf("Sum is less than or equal to 10\n");
+    }
+    return 0;
+}

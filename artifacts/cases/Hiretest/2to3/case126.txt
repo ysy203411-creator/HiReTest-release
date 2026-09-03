@@ -1,0 +1,10 @@
+const int SIZE = 10;
+int myFunction(int param[]) {
+    int x = param[0;
+    return x;
+}
+int main(){
+    int array[SIZE];
+    printf("%d\n", myFunction(array));
+    return 0;
+}

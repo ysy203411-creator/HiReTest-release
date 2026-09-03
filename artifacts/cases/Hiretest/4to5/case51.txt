@@ -1,0 +1,15 @@
+const int CONST_VALUE = 10;
+int globalArray[5] = {1, 2, 3, 4, 5};
+int main(){
+    int a = CONST_VALUE;
+    int b = globalArray[2];
+    int c;
+    printf("%d\n", a); // Should print: 10
+    printf("%d\n", b); // Should print: 3
+    
+    c = getint();
+    globalArray[1] = c;
+    printf("%d\n", globalArray[1]); // Should print the input value
+    
+    return 0;
+}

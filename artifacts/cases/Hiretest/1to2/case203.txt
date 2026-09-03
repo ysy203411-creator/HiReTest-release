@@ -1,0 +1,20 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int array[3] = {1, 2, 3};
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int localVar = 0;
+    localVar = add(globalVar, CONST_VAL);
+    printResult(localVar);
+    if (localVar > 10 & localVar < 20) {  // 使用单独的 &，应当被识别为错误
+        printf("Within range\n");
+    } else {
+        printf("Out of range\n");
+    }
+    return 0;
+}

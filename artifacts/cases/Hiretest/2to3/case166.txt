@@ -1,0 +1,13 @@
+const int SIZE = 5;
+int arr[SIZE] = {1, 2, 3, 4, 5};
+void testFunc(int a, int b, int c) {
+    printf("a: %d, b: %d, c: %d\n", a, b, c);
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    int z = 30;
+    // 正确的调用
+    testFunc(x, y, z);
+    return 0;
+}

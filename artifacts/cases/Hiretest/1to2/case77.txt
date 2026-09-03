@@ -1,0 +1,23 @@
+const int MAX = 10;
+int globalArray[MAX];
+int sum(int[] array) {
+    int total = 0;
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        total = total + array[i];
+    }
+    return total;
+}
+void printSum(int sumValue) {
+    printf("Sum is: %d\n", sumValue);
+}
+int main(){
+    int localArray[MAX];
+    int i = 0;
+    for (i = 0; i < MAX; i = i + 1) {
+        localArray[i] = i;
+    }
+    int totalSum = sum(localArray);
+    printSum(totalSum);
+    return 0;
+}

@@ -1,0 +1,21 @@
+int global_var = 10;
+const int CONST_VAR = 20;
+int add(int a, int b) {
+    return a + b;
+}
+int subtract(int a, int b) {
+    return a - b;
+}
+int main(){
+    int x = 5;
+    int y = 10;
+    int result;
+    // 使用单独的 & 符号，检测是否能正确识别错误
+    if (x & y) {
+        result = add(x, y);
+    } else {
+        result = subtract(x, y);
+    }
+    printf("Result: %d\n", result);
+    return 0;
+}

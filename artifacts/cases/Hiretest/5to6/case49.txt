@@ -1,0 +1,14 @@
+int arr[5] = {1, 2, 3, 4, 5};
+int getElement(int arr[], int offset) {
+    return arr[offset];
+}
+int main(){
+    int index = getint(); // getint() 函数无需显式声明即可使用
+    if (index >= 0 && index < 5) {
+        int value = getElement(arr, index);
+        printf("Value at index %d: %d\n", index, value);
+    } else {
+        printf("Index out of bounds\n");
+    }
+    return 0;
+}

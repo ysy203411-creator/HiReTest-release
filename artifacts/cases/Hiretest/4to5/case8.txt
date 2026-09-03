@@ -1,0 +1,18 @@
+int globalVar;
+int main(){
+    int localVar;
+    int charInput;
+    printf("Enter a number: ");
+    globalVar = getint();
+    printf("You entered: %d\n", globalVar);
+    
+    printf("Enter another number: ");
+    localVar = getint();
+    printf("You entered: %d\n", localVar);
+    
+    printf("Enter a character as an integer: ");
+    charInput = getint(); // Use getint() to read the character as an integer
+    printf("You entered: %d\n", charInput);
+    
+    return 0;
+}

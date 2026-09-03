@@ -1,0 +1,16 @@
+int a;
+int b;
+const int c = 10;
+int arr[5] = {1, 2, 3, 4, 5};
+int add(int x, int y) {
+    return x + y;
+}
+int main(){
+    a = getint();
+    b = getint();
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+    int result = arr[2] * c;
+    printf("Result: %d\n", result);
+    return 0;
+}

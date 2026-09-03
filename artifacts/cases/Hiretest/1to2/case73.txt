@@ -1,0 +1,19 @@
+const int CONST_VAL = 10;
+int globalVar = CONST_VAL;
+int array[5] = {1, 2, 3};
+void printValue(int value) {
+    printf("Value: %d\n", value);
+}
+int main(){
+    int localVar = getint();
+    int result;
+    if (localVar > CONST_VAL) {
+        printValue(localVar);
+        result = 1; // true
+    } else {
+        printValue(CONST_VAL);
+        result = 0; // false
+    }
+    printf("Result: %d\n", result);
+    return 0;
+}

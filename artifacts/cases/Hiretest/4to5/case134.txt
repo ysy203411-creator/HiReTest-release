@@ -1,0 +1,50 @@
+int a;
+int b;
+int c;
+
+void print_less(int x, int y) {
+    printf("%d is less than %d\n", x, y);
+    return;
+}
+
+void print_greater(int x, int y) {
+    printf("%d is greater than %d\n", x, y);
+    return;
+}
+
+void print_equal(int x, int y) {
+    printf("%d is equal to %d\n", x, y);
+    return;
+}
+
+void print_a_non_zero(int x) {
+    printf("a is non-zero\n");
+    return;
+}
+
+void print_a_zero(int x) {
+    printf("a is zero\n");
+    return;
+}
+
+int main() {
+    a = getint();
+    b = getint();
+    c = getint();  // 由输入决定调用哪个分支函数
+
+    if (a < b) {
+        print_less(a, b);
+    } else if (a > b) {
+        print_greater(a, b);
+    } else {
+        print_equal(a, b);
+    }
+
+    if (a != 0) {
+        print_a_non_zero(a);
+    } else {
+        print_a_zero(a);
+    }
+
+    return 0;
+}

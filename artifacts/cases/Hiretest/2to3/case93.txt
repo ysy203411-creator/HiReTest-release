@@ -1,0 +1,23 @@
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+    return;
+}
+int main(){
+    int localVar = 2;
+    int result = 0;
+    int arr[5] = {1, 2, 3, 4, 5};
+    result = add(CONST_VAL, globalVar);
+    printf("Result: %d\n", result);
+    int i = 0;
+    for (i = 0; i < 5; i = i + 1) {
+        printf("Array[%d]: %d\n", i, arr[i]);
+    }
+    printSum(localVar, result);
+    return 0;
+}

@@ -1,0 +1,21 @@
+int a = 5;
+const int b = 10;
+int array[3] = {1, 2, 3};
+
+int calculate(int x, int y) {
+    return x + y;
+}
+
+void printValues(int x, int y, int z) {
+    printf("Values: %d, %d, %d\n", x, y, z);
+}
+
+int main(){
+    int x = a;
+    int y = b;
+    int z = array[1];
+    int result = calculate(x, y);
+    printValues(x, y, z);
+    printf("Result: %d\n", result);
+    return 0;
+}

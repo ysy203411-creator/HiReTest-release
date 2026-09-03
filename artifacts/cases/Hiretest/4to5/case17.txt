@@ -1,0 +1,12 @@
+const int TRUE = 1;
+const int FALSE = 0;
+int a;
+int b;
+
+int main() {
+    a = getint();
+    b = getint();
+    /* 由于不允许使用 if/else 和关系/逻辑运算，这里只做简单读入并固定输出 */
+    printf("Input_read\n");
+    return 0;
+}

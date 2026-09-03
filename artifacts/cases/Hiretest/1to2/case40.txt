@@ -1,0 +1,11 @@
+const int a = 5;
+const int b = 10;
+int add(int x, int y) {
+    return x + y;
+}
+int main(){
+    int result;
+    result = add(-a, +b); // 测试一元运算符的处理
+    printf("Result: %d\n", result);
+    return 0;
+}

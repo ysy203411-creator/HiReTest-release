@@ -1,0 +1,20 @@
+const int CONST_A = 10;
+int globalVar;
+int add(int a, int b) {
+    return a + b;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int localVar = 5;
+    int result = add(CONST_A, localVar);
+    printSum(CONST_A, localVar);
+    if (result > 0) {
+        printf("Result is positive.\n");
+    } else {
+        printf("Result is non-positive.\n");
+    }
+    return 0;
+}

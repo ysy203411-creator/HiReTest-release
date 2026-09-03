@@ -1,0 +1,15 @@
+const int MAX = 100;
+int array[MAX];
+int add(int x, int y) {
+    return x + y;
+}
+void printSum(int a, int b) {
+    int sum = add(a, b);
+    printf("Sum: %d\n", sum);
+}
+int main(){
+    int a = 5;
+    int b = 10;
+    printSum(a, b);
+    return 0;
+}

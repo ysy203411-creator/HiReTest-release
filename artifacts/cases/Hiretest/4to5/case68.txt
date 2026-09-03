@@ -1,0 +1,24 @@
+const int a = 5;
+const int b = 10;
+int x;
+int y;
+
+int compare(int val1, int val2) {
+    /* 
+       不使用条件语句，直接通过算术表达式构造一些返回值，
+       仅用于测试函数调用与表达式计算。
+    */
+    int diff = val1 - val2;
+    int sum = val1 + val2;
+    int prod = val1 * val2;
+    int res = diff + sum + prod;
+    return res;
+}
+
+int main() {
+    x = getint();
+    y = getint();
+    int result = compare(x, y);
+    printf("Comparison result: %d\n", result);
+    return 0;
+}

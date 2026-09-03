@@ -1,0 +1,15 @@
+const int x = 5;
+int globalVar = 10;
+int add(int a, int b) {
+    return a + b;
+}
+void printResult(int result) {
+    printf("Result: %d\n", result);
+}
+int main(){
+    int a = 2;
+    int b = 3;
+    int result = add(a, b);
+    printResult(result);
+    return 0;
+}

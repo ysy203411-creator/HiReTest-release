@@ -1,0 +1,23 @@
+const int rq1_case_id_73 = 73;
+const int CONST_VAL = 10;
+int globalVar = 5;
+int add(int a, int b) {
+    return a + b;
+}
+void printChar(int c) {
+    printf("%d\n", c);
+}
+int main(){
+    int localVar = 3;
+    int result;
+    int charVar = 65; // 'A' 的 ASCII 值
+    // Test function call with matching parameter types
+    result = add(globalVar, localVar);
+    printf("Result of add: %d\n", result);
+    // Test function call with int to char conversion
+    printChar(globalVar);
+    // Test function call with char to int conversion
+    result = add(charVar, localVar);
+    printf("Result of add with char: %d\n", result);
+    return 0;
+}

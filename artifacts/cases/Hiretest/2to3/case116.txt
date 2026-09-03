@@ -1,0 +1,8 @@
+const int a = 5;
+int b[] = {1, 2, 3, 0, 0}; // 修改为全局变量数组并提供默认初始化
+int main(){
+    int x = a;
+    int y = b[1];
+    printf("%d\n", y);
+    return 0;
+}

@@ -1,0 +1,24 @@
+const int MAX_SIZE = 100;
+int global_array[MAX_SIZE];
+int global_var = 10;
+void initialize_array(int arr[], int size) {
+    for (int i = 0; i < size; i = i + 1) {
+        arr[i] = i * 2;
+    }
+}
+int calculate_sum(int arr[], int size) {
+    int sum = 0;
+    for (int i = 0; i < size; i = i + 1) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+int main(){
+    int local_var = getint();
+    initialize_array(global_array, MAX_SIZE);
+    int sum = calculate_sum(global_array, MAX_SIZE);
+    printf("Sum of array elements: %d\n", sum);
+    printf("Global variable: %d\n", global_var);
+    printf("Local variable: %d\n", local_var);
+    return 0;
+}

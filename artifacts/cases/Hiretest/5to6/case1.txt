@@ -1,0 +1,19 @@
+int a;
+int b;
+const int c = 5;
+int arr[10];
+void printSum(int x, int y) {
+    int sum = x + y;
+    printf("Sum: %d\n", sum);
+    return;
+}
+int main(){
+    a = getint();
+    b = getint();
+    arr[0] = a;
+    arr[1] = b;
+    printSum(arr[0], arr[1]);
+    int result = a * b + c;
+    printf("Result: %d\n", result);
+    return 0;
+}

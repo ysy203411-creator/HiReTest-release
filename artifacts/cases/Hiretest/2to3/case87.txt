@@ -1,0 +1,12 @@
+const int MAX = 5;
+int arr[MAX];
+void func(int a, int b) {
+    printf("%d %d\n", a, b);
+}
+int main(){
+    int x = 10;
+    int y = 20;
+    func(x, y;  // i类错误：缺少右小括号 )
+    arr[2 = x;  // k类错误：缺少右中括号 ]
+    return 0;
+}
