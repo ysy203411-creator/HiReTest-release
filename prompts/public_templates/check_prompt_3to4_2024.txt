@@ -1,48 +1,48 @@
-#角色
-你是一个程序测试专家，请你判断我给你的测试用例是否符合以下约束.
-#任务
-请公正的判断输入的测试用例是否符合以下测试用例约束。如果符合，输出符合，不需要修改测试用例。如果不符合，需要你需要修改它让其符合。
-修改时，主要考虑保留测试用例设计的目的。如果无法在满足约束的情况下保留，就直接删除相关内容，并注意保持修改后测试用例满足约束条件。
-#测试用例约束
-生成的测试用例用于对一个类C语言的编译器进行测试。
-1. 测试用例的程序结构必须以若干全局声明（常量或变量）开头，可跟若干函数定义，最后必须有且仅有一个主函数：int main() {{ ... return 0; }}。主函数末尾必须显式包含 return 0;，且返回值只能是字面量 0。
-2. 所有标识符（变量名、常量名、函数名）必须先声明后使用；全局作用域内所有标识符（包括函数、变量、常量）不能重名；局部作用域内也不能有同名标识符；内层作用域可遮蔽外层同名标识符。
-3. 变量和常量只允许出现 int 和char 两种类型以及这两种数据类型的一维数组类型。常量（用 const 声明）必须在声明时初始化，且初值必须是常量表达式（即仅由整型字面量、已声明的常量、编译期可求值的算术表达式组成）；常量不能被赋值，也不能作为赋值语句左侧的左值。
-4. 全局变量若未初始化，默认为 0；若初始化，初值必须是常量表达式。对于全局变量数组或常量数组，若初始化列表未提供全部元素，则其余元素默认初始化为 0。局部变量可不初始化（值未定义）；若初始化，初值可以是任意表达式。
-5. 数组必须是一维的，长度必须是编译期可求值的非负整数常量表达式。数组访问必须带一个下标表达式（如 a[i]），不能多维、不能省略。
-6. 函数可以是 int ，char 或 void 类型。有返回值函数必须在最后一行有 return exp;语句。
-7. 函数参数类型只能是 int，char,以及对应的数组类型int[]，char[]。若形参是数组或字符串，实参必须是变量数组名（不能是常量数组，也不能是普通变量）。
-8. 表达式支持算术（+ - * / %）、关系（== != < > <= >=）和逻辑运算（! && ||）。多个一元运算符（+、-、!）可以连续使用，但不能有两个相同的运算符直接相邻（如 --i、!!a 非法），且 ! 仅可用于条件表达式。关系与逻辑运算只能出现在条件判断中，不可以用于赋值和运算语句。运算符优先级、结合性及短路求值规则同 C 语言。
-9. 语句包括赋值、表达式、语句块、if、for、break、continue、return、printf。其中：赋值语句左侧必须是可修改的变量（不能是常量）；break 和 continue 只能出现在 for 循环体中（直接或嵌套）；SysY 程序可调用三个运行时库函数(这三个函数无需显式声明即可使用）：getint()（无参，返回 int），getchar()（无参，返回char）和 printf(StringConst, Exp, ...)。StringConst是字符串常量，包括 32-126 的所有 ascii字符，格式符仅支持 %d和%c，其他 C 语言中的格式字符，如 %f 都视为普通字符； printf的字符串常量中转义字符中只会出现 '\n'，反斜杠只会与 n 一起出现作为一个整体表示换行。
-10. 词法上，标识符由字母、数字、下划线组成，不能以数字开头；保留字（如 int、const、if、for 等）不能用作标识符；注释语法与 C 语言一致；整型常量为非负十进制整数（负号属于一元运算符，不是常量的一部分）。
-11. 不支持自增（++）和自减（--）运算符，也不支持复合赋值运算符（+=，=，*=，/=，%=）。
-##特殊情况
-允许出现以下错误，必须只包含以下明确定义的错误中的一种或多种，且错误形式必须严格符合其定义。出现以下错误时若满足限制，则仍算作【满足约束】。
-b 类错误：在同一作用域内重复定义同名标识符（包括变量、常量、函数、参数）。
-c 类错误：使用了未声明的标识符（出现在左值或函数调用名位置）。
-d 类错误：函数调用时，实参个数与函数定义中的形参个数不一致。
-e 类错误：函数调用时，实参与形参类型不匹配。包括：传递数组给变量、传递变量给数组、传递 char 型数组给 int 型数组、传递 int 型数组给 char 型数组。
-f 类错误：在 void 函数中使用了带表达式的 return exp;。
-g 类错误：在 int 函数（包括 main）末尾缺少 return 语句。
-h 类错误：对常量或常量数组元素进行赋值（出现在赋值语句左侧或 for 语句的赋值部分）。
-i 类错误：缺少语句或声明结尾的分号 ;。
-j 类错误：缺少右小括号 )，出现在函数定义、函数调用、if/for 条件或括号表达式中。
-k 类错误：缺少右中括号 ]，出现在数组定义或数组访问中。
-l 类错误：printf 调用中，字符串里的 %d 数量与后续表达式参数数量不一致。
-必须满足以下限制：
-每一行最多只能包含一个错误；
-不会出现“恶意换行”（如在字符串、函数调用等结构中故意换行等不符合正常代码编写中会出现的情况）；
-for 语句中不会出现错误，以避免语法歧义；
-错误之外的部分应保证语法和语义正确，以确保错误可被准确识别；
-不得包含除上述错误之外的任何错误（如非法转义、非法标识符、使用指针、while 等不支持的特性）。
+# Role
+You are a program testing expert, please determine whether the test case I provide meets the following constraints.
 
-#输出格式
-先简单分析是否符合约束（出现上述规范中允许出现的错误属于符合约束。无需修改），如果符合，输出符合，"test_case"字段设置为空；如果不符合，输出不符合，并修改原来的测试用例，使其符合约束。格式如下：
-原因分析：xxx（简单分析）
-是否符合：符合/不符合
-test_case：
+# Task
+Please fairly judge whether the input test case meets the following test case constraints. If it does, output "Complies" and do not modify the test case. If it does not, you need to modify it to make it compliant. When modifying, mainly consider preserving the purpose of the test case design. If it is impossible to retain the content while meeting the constraints, delete the relevant content and ensure that the modified test case meets the constraints.
+
+# Test Case Constraints
+The generated test case is used to test a C-like language compiler.
+1. The structure of the test case program must start with several global declarations (constants or variables), followed by several function definitions, and end with exactly one main function: int main() {{ ... return 0; }}. The main function must explicitly include return 0; at the end, and the return value must be the literal 0.
+2. All identifiers (variable names, constant names, function names) must be declared before use; all identifiers in the global scope (including functions, variables, and constants) must not be duplicated; there must be no duplicate identifiers in the local scope; inner scope can shadow outer scope identifiers with the same name.
+3. Variables and constants can only appear in int and char types, and their one-dimensional array types. Constants (declared with const) must be initialized at declaration, and the initial value must be a constant expression (i.e., composed only of integer literals, declared constants, and arithmetic expressions that can be evaluated at compile time). Constants cannot be assigned, and cannot appear as the left-hand side of an assignment statement.
+4. If a global variable is not initialized, it defaults to 0; if it is initialized, the initial value must be a constant expression. For global variable arrays or constant arrays, if the initialization list does not provide all elements, the remaining elements are default-initialized to 0. Local variables may not be initialized (value is undefined); if initialized, the initial value can be any expression.
+5. Arrays must be one-dimensional, and the length must be a non-negative integer constant expression that can be evaluated at compile time. Array access must include an index expression (e.g., a[i]), and cannot be multidimensional or omitted.
+6. Functions can be of type int, char, or void. Functions with return values must have a return exp; statement on the last line.
+7. Function parameter types can only be int, char, and their corresponding array types int[] and char[]. If the formal parameter is an array or string, the actual argument must be a variable array name (not a constant array, nor a regular variable).
+8. Expressions support arithmetic (+ - * / %), relational (== != < > <= >=), and logical (! && ||) operations. Multiple unary operators (+, -, !) can be used consecutively, but two identical operators cannot be adjacent (e.g., --i, !!a are invalid). ! can only be used in conditional expressions. Relational and logical operations can only appear in conditional judgments and cannot be used in assignments or arithmetic statements. Operator precedence, associativity, and short-circuit evaluation rules are the same as in C.
+9. Statements include assignment, expression, statement block, if, for, break, continue, return, and printf. Among these: the left-hand side of an assignment statement must be a modifiable variable (not a constant); break and continue can only appear in for loops (directly or nested); SysY programs can call three runtime library functions (these three functions do not need to be explicitly declared): getint() (no parameters, returns int), getchar() (no parameters, returns char), and printf(StringConst, Exp, ...). StringConst is a string constant, including all ASCII characters from 32 to 126; format specifiers only support %d and %c; other C language format specifiers, such as %f, are treated as ordinary characters; in the printf string constant, the only escape character that can appear is '\n', and the backslash will only appear together with 'n' as a single entity to represent a newline.
+10. Lexically, identifiers consist of letters, digits, and underscores, and cannot start with a digit; reserved words (such as int, const, if, for, etc.) cannot be used as identifiers; the comment syntax is consistent with C; integer constants are non-negative decimal integers (the minus sign is a unary operator, not part of the constant).
+11. The ++ and -- operators are not supported, nor are compound assignment operators (+=, =, *=, /=, %=).
+
+## Special Cases
+The following errors are allowed and must only include one or more of the clearly defined errors listed below, and the error forms must strictly conform to their definitions. If the error satisfies the constraints, it is still considered as [meeting the constraints].
+b class error: Re-defining the same identifier (variable, constant, function, parameter) within the same scope.
+c class error: Using an undeclared identifier (appearing in left value or function call name position).
+d class error: The number of actual arguments in a function call does not match the number of formal parameters in the function definition.
+e class error: The types of actual and formal parameters in a function call do not match. This includes: passing an array to a variable, passing a variable to an array, passing a char array to an int array, and passing an int array to a char array.
+f class error: Using a return exp; statement with an expression in a void function.
+g class error: Missing return statement at the end of an int function (including main).
+h class error: Assigning to a constant or constant array element (appearing on the left-hand side of an assignment statement or in the assignment part of a for statement).
+i class error: Missing semicolon ; at the end of a statement or declaration.
+j class error: Missing right parenthesis ), appearing in function definition, function call, if/for condition, or parenthesized expression.
+k class error: Missing right bracket ], appearing in array definition or array access.
+l class error: In a printf call, the number of %d in the string does not match the number of subsequent expression parameters.
+Must satisfy the following constraints:
+Each line can contain at most one error;
+There will be no "malicious line breaks" (such as intentional line breaks in strings, function calls, etc., which do not conform to normal code writing);
+There will be no errors in for statements to avoid syntactic ambiguity;
+The parts outside of errors should ensure syntactic and semantic correctness to ensure that errors can be accurately identified;
+No other errors (such as illegal escape sequences, illegal identifiers, use of pointers, while, etc.) are allowed.
+
+# Output Format
+First, briefly analyze whether the test case meets the constraints (errors allowed in the above specifications are considered as meeting the constraints. No modification is needed). If it does, output "Complies", and set the "test_case" field to empty. If it does not, output "Does not conform", and modify the original test case to make it compliant. The format is as follows:
+Reason Analysis: xxx (brief analysis)
+Whether it meets the constraints: Complies/Does not conform
+test_case:
 '''c
-修改后的测试用例
+Modified test case
 '''
-
-

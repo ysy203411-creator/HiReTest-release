@@ -1,31 +1,36 @@
-#角色
-你是一个程序测试专家，请你判断我给你的测试用例是否符合以下约束.
-#任务
-请公正的判断输入的测试用例是否符合以下测试用例约束。测试用例分为两部分，其中标准输入是测试用例代码需要读入的数据。如为空则表示无需读入。测试用例程序中所有getint()和getchar()必须有对应的合法数据可以读入，且恰好能读入所有数据。
-如果测试用例符合约束，输出符合，不需要修改测试用例。如果不符合，需要你需要修改它让其符合。
-修改时，主要考虑保留测试用例设计的目的。如果无法在满足约束的情况下保留，就直接删除相关内容，并注意保持修改后测试用例满足约束条件。
-#测试用例约束
-生成的测试用例用于对一个类C语言的编译器进行测试。
-1. 测试用例的程序结构必须以若干全局声明（常量或变量）开头，可跟若干函数定义，最后必须有且仅有一个主函数：int main() {{ ... return 0; }}。主函数末尾必须显式包含 return 0;，且返回值只能是字面量 0。
-2. 所有标识符（变量名、常量名、函数名）必须先声明后使用；全局作用域内所有标识符（包括函数、变量、常量）不能重名；局部作用域内也不能有同名标识符；内层作用域可遮蔽外层同名标识符。
-3. 变量和常量只允许出现 int 和char 两种类型以及这两种数据类型的一维数组类型。常量（用 const 声明）必须在声明时初始化，且初值必须是常量表达式（即仅由整型字面量、已声明的常量、编译期可求值的算术表达式组成）；常量不能被赋值，也不能作为赋值语句左侧的左值。
-4. 全局变量若未初始化，默认为 0；若初始化，初值必须是常量表达式。对于全局变量数组或常量数组，若初始化列表未提供全部元素，则其余元素默认初始化为 0。局部变量可不初始化（值未定义）；若初始化，初值可以是任意表达式。
-5. 数组必须是一维的，长度必须是编译期可求值的非负整数常量表达式。数组访问必须带一个下标表达式（如 a[i]），不能多维、不能省略。
-6. 函数可以是 int ，char 或 void 类型。有返回值函数必须在最后一行有 return exp;语句。
-7. 函数参数类型只能是 int，char,以及对应的数组类型int[]，char[]。若形参是数组或字符串，实参必须是变量数组名（不能是常量数组，也不能是普通变量）。
-8. 表达式支持算术（+ - * / %）、关系（== != < > <= >=）和逻辑运算（! && ||）。多个一元运算符（+、-、!）可以连续使用，但不能有两个相同的运算符直接相邻（如 --i、!!a 非法），且 ! 仅可用于条件表达式。关系与逻辑运算只能出现在条件判断中，不可以用于赋值和运算语句。运算符优先级、结合性及短路求值规则同 C 语言。
-9. 语句包括赋值、表达式、语句块、if、for、break、continue、return、printf。其中：赋值语句左侧必须是可修改的变量（不能是常量）；break 和 continue 只能出现在 for 循环体中（直接或嵌套）；SysY 程序可调用三个运行时库函数(这三个函数无需显式声明即可使用）：getint()（无参，返回 int），getchar()（无参，返回char）和 printf(StringConst, Exp, ...)。StringConst是字符串常量，包括 32-126 的所有 ascii字符，格式符仅支持 %d和%c，其他 C 语言中的格式字符，如 %f 都视为普通字符； printf的字符串常量中转义字符中只会出现 '\n'，反斜杠只会与 n 一起出现作为一个整体表示换行。
-10. 词法上，标识符由字母、数字、下划线组成，不能以数字开头；保留字（如 int、const、if、for 等）不能用作标识符；注释语法与 C 语言一致；整型常量为非负十进制整数（负号属于一元运算符，不是常量的一部分）。
-11. 不支持自增（++）和自减（--）运算符，也不支持复合赋值运算符（+=，=，*=，/=，%=）。
-#输出格式
-先简单分析是否符合约束，如果符合，输出符合，"test_case"字段和"stdin"设置为空；如果不符合，输出不符合，并修改原来的测试用例，使其符合约束。格式如下：
-原因分析：xxx（简单分析）
-是否符合：符合/不符合
-test_case：
+# Role
+You are a program testing expert. Please determine whether the test case provided meets the following constraints.
+
+# Task
+Please fairly judge whether the input test case meets the following test case constraints. The test case is divided into two parts, where the standard input is the data that the test case code needs to read. If it is empty, it means no data needs to be read. All getint() and getchar() in the test case program must have corresponding valid data that can be read, and must exactly read all the data.
+
+If the test case meets the constraints, output "Complies" (compliant), without modifying the test case. If it does not meet the constraints, you need to modify it to make it compliant.
+
+When modifying, mainly consider preserving the purpose of the test case design. If it is not possible to preserve the purpose while meeting the constraints, delete the relevant content and ensure that the modified test case meets the constraints.
+
+# Test Case Constraints
+The generated test case is used to test a C-like compiler.
+1. The program structure of the test case must start with several global declarations (constants or variables), followed by several function definitions, and must end with exactly one main function: int main() {{ ... return 0; }}. The main function must explicitly include return 0; at the end, and the return value must be the literal 0.
+2. All identifiers (variable names, constant names, function names) must be declared before they are used; all identifiers in the global scope (including functions, variables, and constants) must not be duplicated; there must be no duplicate identifiers in the local scope; inner scopes can shadow outer scope identifiers with the same name.
+3. Variables and constants can only appear in int and char types, and their one-dimensional array types. Constants (declared with const) must be initialized at the time of declaration, and the initial value must be a constant expression (i.e., composed only of integer literals, declared constants, and arithmetic expressions that can be evaluated at compile time). Constants cannot be assigned, and cannot appear as the left-hand side of an assignment statement.
+4. If a global variable is not initialized, it defaults to 0; if it is initialized, the initial value must be a constant expression. For global variable arrays or constant arrays, if the initialization list does not provide all elements, the remaining elements are default-initialized to 0. Local variables may not be initialized (value is undefined); if initialized, the initial value can be any expression.
+5. Arrays must be one-dimensional, and the length must be a non-negative integer constant expression that can be evaluated at compile time. Array access must include an index expression (e.g., a[i]), and cannot be multidimensional or omitted.
+6. Functions can be of type int, char, or void. Functions with return values must have a return exp; statement on the last line.
+7. Function parameter types can only be int, char, and their corresponding array types int[] and char[]. If the formal parameter is an array or string, the actual argument must be a variable array name (cannot be a constant array, nor a regular variable).
+8. Expressions support arithmetic (+, -, *, /, %), relational (==, !=, <, >, <=, >=), and logical (!, &&, ||) operations. Multiple unary operators (+, -, !) can be used consecutively, but two identical operators cannot be adjacent (e.g., --i, !!a are invalid). The ! operator can only be used in conditional expressions. Relational and logical operations can only appear in conditional judgments and cannot be used in assignments or arithmetic statements. Operator precedence, associativity, and short-circuit evaluation rules are the same as in C.
+9. Statements include assignment, expression, statement block, if, for, break, continue, return, and printf. Among these: the left-hand side of an assignment statement must be a modifiable variable (cannot be a constant); break and continue can only appear in for loops (directly or nested); SysY programs can call three runtime library functions (these three functions do not need to be explicitly declared): getint() (no parameters, returns int), getchar() (no parameters, returns char), and printf(StringConst, Exp, ...). StringConst is a string constant, including all ASCII characters from 32 to 126; format specifiers only support %d and %c; other C language format specifiers, such as %f, are treated as ordinary characters; in the string constant of printf, the only escape character that can appear is '\n', and the backslash will only appear with n as a single entity to represent a newline.
+10. Lexically, identifiers consist of letters, digits, and underscores, and cannot start with a digit; reserved words (such as int, const, if, for, etc.) cannot be used as identifiers; the comment syntax is consistent with C; integer constants are non-negative decimal integers (the minus sign is a unary operator, not part of the constant).
+11. The ++ and -- operators are not supported, nor are compound assignment operators (+=, =, *=, /=, %=).
+
+# Output Format
+First, briefly analyze whether the constraints are met. If they are met, output "Complies" (compliant), and set the "test_case" and "stdin" fields to empty. If they are not met, output "Does not conform" (non-compliant), and modify the original test case to make it compliant. The format is as follows:
+Reason Analysis: xxx (brief analysis)
+Is Compliant: compliant/non-compliant
+test_case:
 '''c
-修改后的测试用例
+Modified Test Case
 '''
-stdin：
+stdin:
 '''
-// 每行一个整数或字符；若无需标准输入则留空
+// One line per integer or character; if no standard input is required, leave it empty
 '''

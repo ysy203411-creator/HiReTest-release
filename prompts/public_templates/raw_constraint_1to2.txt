@@ -1,16 +1,19 @@
-# 一、概要
+# 1. Overview
 
-SysY 语言是编译技术实验所完成的编译器的源语言，是 C 语言的一个子集。一个 SysY 语言源程序文件中有且仅有一个名为 main 的主函数定义，除此之外包含若干全局变量声明、常量声明和其他函数定义。SysY 语言支持 32 位有符号数 int 类型及其的一维数组类型；const 修饰符用于声明常量。
-SysY 语言本身没有提供输入/输出(I/O)的语言构造，I/O 是以运行时库方式提供，库函数可以在 SysY 程序中的函数内调用。部分 SysY 运行时库函数的参数类型会超出 SysY 支持的数据类型，如可以为字符串。SysY 编译器需要能处理这种情况，将 SysY 程序中这样的参数正确地传递给 SysY 运行时库。
-- 函数：函数可以带参数也可以不带参数，参数的类型可以是 int 或其一维数组类型；函数可以返回 int 类型的值，或者不返回值（即声明为 void 类型）。当参数为 int 时，按值传递；而参数为数组类型时，实际传递的是数组的起始地址。函数体由若干变量声明和语句组成。
-- 变量/常量声明：可以在一个变量/常量声明语句中声明多个变量或常量，声明时可以带初始化表达式。所有变量/常量要求先定义再使用。在函数外声明的为全局变量/常量，在函数内声明的为局部变量/常量。
-- 语句：语句包括赋值语句、表达式语句(表达式可以为空)、语句块、if 语句、for 语句、break语句、continue语句、return 语句。语句块中可以包含若干变量声明和语句。
-- 表达式：支持基本的算术运算（`+、-、*、/、%`）、关系运算（`==、!=、<、>、<=、>=`）和逻辑运算（`!、&&、||`），非 0 表示真、0 表示假，而关系运算或逻辑运算的结果用 1 表示真、0 表示假。**算符的优先级和结合性以及计算规则(含逻辑运算的“短路计算”)与 C 语言一致。**
+SysY is the source language for the compiler developed in the compiler technology lab, which is a subset of the C language. A SysY source file contains exactly one definition of the `main` function. It may also contain global variable declarations, constant declarations, and other function definitions. SysY supports the 32-bit signed integer type `int` and its one-dimensional array type. The `const` qualifier is used to declare constants.
 
-# 二、运行时库
+SysY itself does not have built-in language constructs for input/output (I/O). I/O is provided via a runtime library, whose library functions can be invoked inside functions of SysY programs. Some parameters of SysY runtime library functions may fall outside the data types supported by SysY (e.g., string literals). The SysY compiler must handle such cases and correctly pass these arguments from SysY programs to the SysY runtime library.
 
-源程序可通过 getint 与 printf 函数完成 I/O 交互。如果希望在C语言中测试测试程序，只需要将 getint 加入函数声明即可，示例如下：
-```c
+- **Functions**: Functions may or may not take parameters. Parameter types can be `int` or one-dimensional arrays of `int`. A function may return an `int` value or return nothing (declared as `void`). For `int` parameters, pass-by-value is used. For array-type parameters, the starting address of the array is passed instead. A function body consists of variable declarations and statements.
+- **Variable / Constant Declarations**: Multiple variables or constants may be declared in a single declaration statement, optionally with initializers. All variables and constants must be defined before use. Declarations outside functions are global; declarations inside functions are local.
+- **Statements**: Statements include assignment statements, expression statements (expressions may be empty), blocks, `if` statements, `for` statements, `break`, `continue`, and `return` statements. A block may contain variable declarations and statements.
+- **Expressions**: SysY supports basic arithmetic operators (`+`, `-`, `*`, `/`, `%`), relational operators (`==`, `!=`, `<`, `>`, `<=`, `>=`), and logical operators (`!`, `&&`, `||`). Non-zero values represent true, and zero represents false. Relational or logical operations evaluate to `1` for true and `0` for false. **Operator precedence, associativity, and evaluation rules (including short-circuit evaluation for logical operators) are identical to those in C.**
+
+# 2. Runtime Library
+
+Programs perform I/O via `getint` and `printf`. To test programs in C, simply declare `getint` as shown below:
+
+```
 int getint() {
 int t;
 scanf("%d",&t);
@@ -19,537 +22,540 @@ return t;
 }
 ```
 
-printf 函数的使用方法为 `'printf' '(' <StringConst> {, <Exp>} ')'` ，其中 StringConst 为字符串常量终结符，其规范参考第三章文法及测试程序覆盖要求的第三小节第五部分字符串常量。`<StringConst>` 的解析超出 SysY 支持的数据类型，SysY 编译器需要能处理这种情况。
+The syntax of `printf` is `'printf' '(' <StringConst> {, <Exp>} ')'`. `<StringConst>` denotes a string constant terminal, specified in Section 3 Grammar and Test Coverage, Subsection 3.5 String Constants. Parsing `<StringConst>` involves types outside SysY’s native type system; the SysY compiler must handle this case.
 
-# 三、文法及测试程序覆盖要求
-## 1. 文法
+# 3. Grammar and Test Coverage Requirements
 
-SysY 语言的文法采用扩展的 Backus 范式（EBNF，Extended Backus-Naur Form）表示，其中：
-- 符号[...]表示方括号内包含的为可选项
-- 符号{...}表示花括号内包含的为可重复 0 次或多次的项
-- 终结符或者是由单引号括起的串，或者是 Ident、IntConst、StringConst 这样的记号
-- 所有类似 'main' 这样的用单引号括起的字符串都是保留的关键字
-SysY 语言的文法表示如下，其中 CompUnit 为开始符号：
-**重要：建议同时对照文法第三部分的语义约束。**
+## 3.1 Grammar
+
+The grammar of SysY is specified in Extended Backus–Naur Form (EBNF):
+
+- `[...]` denotes an optional item.
+- `{...}` denotes an item that may appear zero or more times.
+- Terminals are either quoted strings or tokens such as `Ident`, `IntConst`, `StringConst`.
+- Quoted strings like `'main'` are reserved keywords.
+
+The start symbol is `CompUnit`.
+
+> 
+> Important: Please also refer to the semantic constraints in Section 4.
+
 ```
-编译单元 CompUnit → {Decl} {FuncDef} MainFuncDef // 1.是否存在Decl 2.是否存在FuncDef
-
-声明 Decl → ConstDecl | VarDecl // 覆盖两种声明
-
-常量声明 ConstDecl → 'const' BType ConstDef { ',' ConstDef } ';' // 1.花括号内重复0次 2.花括号内重复多次
-
-基本类型 BType → 'int'
-
-常量定义 ConstDef → Ident [ '[' ConstExp ']' ] '=' ConstInitVal // 包含普通变量、一维数组两种情况
-
-常量初值 ConstInitVal → ConstExp | '{' [ ConstExp { ',' ConstExp } ] '}' // 1.常表达式初值 2.一维数组初值
-
-变量声明 VarDecl → [ 'static' ] BType VarDef { ',' VarDef } ';' // 1.花括号内重复0次 2.花括号内重复多次
-
-变量定义 VarDef → Ident [ '[' ConstExp ']' ] | Ident [ '[' ConstExp ']' ] '=' InitVal //包含普通常量、一维数组定义
-
-变量初值 InitVal → Exp | '{' [ Exp { ',' Exp } ] '}' // 1.表达式初值 2.一维数组初值
-
-函数定义 FuncDef → FuncType Ident '(' [FuncFParams] ')' Block // 1.无形参 2.有形参
-
-主函数定义 MainFuncDef → 'int' 'main' '(' ')' Block // 存在main函数
-
-函数类型 FuncType → 'void' | 'int' // 覆盖两种类型的函数
-
-函数形参表 FuncFParams → FuncFParam { ',' FuncFParam } // 1.花括号内重复0次 2.花括号内重复多次
-
-函数形参 FuncFParam → BType Ident ['[' ']'] // 1.普通变量 2.一维数组变量
-
-语句块 Block → '{' { BlockItem } '}' // 1.花括号内重复0次 2.花括号内重复多次
-
-语句块项 BlockItem → Decl | Stmt // 覆盖两种语句块项
-
-语句 Stmt → LVal '=' Exp ';' // 每种类型的语句都要覆盖
-
-| [Exp] ';' // 有无Exp两种情况；printf函数调用
-
+CompUnit → {Decl} {FuncDef} MainFuncDef
+Decl → ConstDecl | VarDecl
+ConstDecl → 'const' BType ConstDef { ',' ConstDef } ';'
+BType → 'int'
+ConstDef → Ident [ '[' ConstExp ']' ] '=' ConstInitVal
+ConstInitVal → ConstExp | '{' [ ConstExp { ',' ConstExp } ] '}'
+VarDecl → [ 'static' ] BType VarDef { ',' VarDef } ';'
+VarDef → Ident [ '[' ConstExp ']' ] | Ident [ '[' ConstExp ']' ] '=' InitVal
+InitVal → Exp | '{' [ Exp { ',' Exp } ] '}'
+FuncDef → FuncType Ident '(' [FuncFParams] ')' Block
+MainFuncDef → 'int' 'main' '(' ')' Block
+FuncType → 'void' | 'int'
+FuncFParams → FuncFParam { ',' FuncFParam }
+FuncFParam → BType Ident ['[' ']']
+Block → '{' { BlockItem } '}'
+BlockItem → Decl | Stmt
+Stmt → LVal '=' Exp ';'
+| [Exp] ';'
 | Block
-
-| 'if' '(' Cond ')' Stmt [ 'else' Stmt ] // 1.有else 2.无else
-
-| 'for' '(' [ForStmt] ';' [Cond] ';' [ForStmt] ')' Stmt // 1. 无缺省，1种情况2.ForStmt与Cond中缺省一个，3种情况 3. ForStmt与Cond中缺省两个，3种情况 4. ForStmt与Cond全部缺省，1种情况
-
+| 'if' '(' Cond ')' Stmt [ 'else' Stmt ]
+| 'for' '(' [ForStmt] ';' [Cond] ';' [ForStmt] ')' Stmt
 | 'break' ';'
-
 | 'continue' ';'
-
-| 'return' [Exp] ';' // 1.有Exp 2.无Exp
-
-| 'printf''('StringConst {','Exp}')'';' // 1.有Exp 2.无Exp
-
-语句 ForStmt → LVal '=' Exp { ',' LVal '=' Exp } // 1.花括号内重复0次 2.花括号内重复多次
-
-表达式 Exp → AddExp // 存在即可
-
-条件表达式 Cond → LOrExp // 存在即可
-
-左值表达式 LVal → Ident ['[' Exp ']'] // 1.普通变量、常量 2.一维数组
-
-基本表达式 PrimaryExp → '(' Exp ')' | LVal | Number
-
-数值 Number → IntConst // 存在即可
-
-一元表达式 UnaryExp → PrimaryExp | Ident '(' [FuncRParams] ')' | UnaryOp UnaryExp // 3种情况均需覆盖,函数调用也需要覆盖FuncRParams的不同情况
-
-单目运算符 UnaryOp → '+' | '−' | '!' 注：'!'仅出现在条件表达式中 // 三种均需覆盖
-
-函数实参表达式 FuncRParams → Exp { ',' Exp } // 1.花括号内重复0次 2.花括号内重复多次 3.Exp需要覆盖数组传参和部分数组传参
-
-乘除模表达式 MulExp → UnaryExp | MulExp ('*' | '/' | '%') UnaryExp // 1.UnaryExp 2.* 3./ 4.% 均需覆盖
-
-加减表达式 AddExp → MulExp | AddExp ('+' | '−') MulExp // 1.MulExp 2.+ 需覆盖 3.- 需覆盖
-
-关系表达式 RelExp → AddExp | RelExp ('<' | '>' | '<=' | '>=') AddExp // 1.AddExp 2.< 3.> 4.<= 5.>= 均需覆盖
-
-相等性表达式 EqExp → RelExp | EqExp ('==' | '!=') RelExp // 1.RelExp 2.== 3.!= 均需覆盖
-
-逻辑与表达式 LAndExp → EqExp | LAndExp '&&' EqExp // 1.EqExp 2.&& 均需覆盖
-
-逻辑或表达式 LOrExp → LAndExp | LOrExp '||' LAndExp // 1.LAndExp 2.|| 均需覆盖
-
-常量表达式 ConstExp → AddExp 注：使用的 Ident 必须是常量 // 存在即可
+| 'return' [Exp] ';'
+| 'printf' '(' StringConst {',' Exp} ')' ';'
+ForStmt → LVal '=' Exp { ',' LVal '=' Exp }
+Exp → AddExp
+Cond → LOrExp
+LVal → Ident ['[' Exp ']']
+PrimaryExp → '(' Exp ')' | LVal | Number
+Number → IntConst
+UnaryExp → PrimaryExp | Ident '(' [FuncRParams] ')' | UnaryOp UnaryExp
+UnaryOp → '+' | '−' | '!' /* Note: '!' only appears in conditional expressions */
+FuncRParams → Exp { ',' Exp }
+MulExp → UnaryExp | MulExp ('*' | '/' | '%') UnaryExp
+AddExp → MulExp | AddExp ('+' | '−') MulExp
+RelExp → AddExp | RelExp ('<' | '>' | '<=' | '>=') AddExp
+EqExp → RelExp | EqExp ('==' | '!=') RelExp
+LAndExp → EqExp | LAndExp '&&' EqExp
+LOrExp → LAndExp | LOrExp '||' LAndExp
+ConstExp → AddExp /* Note: Identifiers used must be constants */
 ```
 
-## 2.补充说明
-### （1）标识符 Ident
+## 3.2 Supplementary Notes
 
-SysY 语言中标识符 Ident 的规范如下 ( identifier )：
+### (1) Identifiers (`Ident`)
+
 ```
 identifier → identifier-nondigit
 | identifier identifier-nondigit
 | identifier digit
 ```
 
-其中，identifier-nondigit为下划线或大小写字母，digit为0到9的数字。
-注：请参考 ISO/IEC 9899 http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1124.pdf第 51 页关于标识符的定义**同名标识符**的约定：
-- 全局变量（常量）和局部变量（常量）的作用域可以重叠，重叠部分局部变量（常量）优先；
-- 同名局部变量的作用域不能重叠，即同一个 Block 内不能有同名的标识符（常量/变量）；
-- 在不同的作用域下，SysY 语言中变量（常量）名可以与函数名相同；
-- 保留关键字不能作为标识符。
+`identifier-nondigit` is underscore or upper/lowercase letter; `digit` ranges from `0` to `9`.
+
+Reference: ISO/IEC 9899 (page 51). Scoping rules:
+
+- Scopes of global variables/constants and local variables/constants may overlap; local declarations shadow global ones in overlapping regions.
+- Local declarations with identical names cannot have overlapping scopes: no duplicate identifiers inside one block.
+- Variable/constant names may reuse function names in different scopes.
+- Reserved keywords cannot be used as identifiers.
+
+Valid example:
+
 ```
-// 合法样例
 int main() {
 	int a = 0;
 	{
 		int a = 1;
-		printf("%d",a); // 输出 1
+		printf("%d",a); // outputs 1
 	}
 	return 0;
 }
 ```
+
+Invalid example:
+
 ```
-// 非法样例
 int main() {
 	int a = 0;
 	{
 		int a = 1;
-		int a = 2; // 非法！
+		int a = 2; // invalid
 	}
 	return 0;
 }
 ```
-### (2) 注释
-SysY 语言中注释的规范与 C 语言一致，如下：
-- 单行注释：以序列 ‘//’ 开始，直到换行符结束，不包括换行符。
-- 多行注释：以序列 ‘/’ 开始，直到第一次出现 ‘/’ 时结束，包括结束处‘/’。
-注：请参考 ISO/IEC 9899 http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1124.pdf 第 66 页关于注释的定义。
-### (3) 数值常量
-SysY 语言中数值常量可以是整型数 IntConst，其规范如下（对应 integer-const）：
-```
-整型常量 integer-const → decimal-const | 0
 
-• decimal-const → nonzero-digit | decimal-const digit
+### (2) Comments
 
-• nonzero-digit 为1至9的数字。
+SysY comments follow C rules:
+
+- Single-line comment: starts with `//` and ends at newline (newline excluded).
+- Multi-line comment: starts with `/*` and ends at the first occurrence of `*/` (the terminating `*/` is included).
+
+Reference: ISO/IEC 9899 (page 66).
+
+### (3) Integer Constants
+
 ```
-注：请参考 ISO/IEC 9899 http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1124.pdf 第 54 页关于整型常量的定义，在此基础上忽略所有后缀。
-### (4) 字符串常量
-SysY 语言中 `<StringConst>` 的定义如下：
+integer-const → decimal-const | 0
+decimal-const → nonzero-digit | decimal-const digit
+nonzero-digit: digits from 1 to 9
+```
+
+Reference: ISO/IEC 9899 (page 54). Suffixes are ignored.
+
+### (4) String Constants
+
 ```
 <FormatChar> → %d
-<NormalChar> → 十进制编码为32,33,35-126的ASCII字符，'\'（编码92）出现当且仅当为'\n'
+<NormalChar> → ASCII characters with decimal codes 32, 33, 35–126; backslash (92) only appears in '\n'
 <Char> → <FormatChar> | <NormalChar>
-<StringConst> → '"'{<Char>}'"'
+<StringConst> → '"' {<Char>} '"'
 ```
-字符串中**仅可能会出现一种转义字符'\n'**，用以标注此处换行，其他转义情况无需考虑。
-# 四、语义约束
 
-符合上述文法的程序集合是合法的 SysY 语言程序集合的超集。下面进一步给出 SysY 语言的语义约束。
-## 运行时库
-1. **为了降低开发难度，保证所有测试程序中 getint 与 printf 只会作为运行时库调用出现，不会作为自定义的变量/函数标识符。**
-2. printf 函数默认不换行。
-3. 与 C 语言中的 printf 类似，输出语句中，格式字符将被替换为对应标识符，普通字符原样输出。
-## static 关键字
-1. static 关键字用于修饰**静态局部变量**，不会在全局变量定义中出现。
-2. 用 static 修饰的变量声明，若带有初始值，则初始值可在编译期内求出。
-3. 用 static 修饰的变量声明，**即使在声明时未赋初值，编译器也会把它初始化为0**。
-4. static 关键字指定的变量只初始化一次，并在**之后调用该函数时保留其状态**，离开函数时不会被销毁。但其修饰的变量作用域被限制在声明此变量的函数内部。
+Only one escape sequence `\n` is supported inside strings.
 
-## 编译单元 CompUnit
-```
-编译单元 CompUnit → {Decl} {FuncDef} MainFuncDef
+# 4. Semantic Constraints
 
-声明 Decl → ConstDecl | VarDecl
-```
-1. CompUnit 的顶层变量/常量声明语句（对应 Decl ）、函数定义（对应 FuncDef ）都不可以重复定义同名标识符（ Ident ），即便标识符的类型不同也不允许。
-2. CompUnit 的变量/常量/函数声明的作用域从该声明处开始到文件结尾。
-## 常量定义 ConstDef
-```
-常量定义 ConstDef → Ident [ '[' ConstExp ']' ] '=' ConstInitVal
-```
-1. ConstDef 用于定义符号常量。ConstDef 中的 Ident 为常量的标识符，在 Ident后、‘=’ 之前是可选的一维数组以及一维数组长度的定义部分，在 ‘=’ 之后是初始值。常量必须有对应的初始值。
-2. ConstDef 的一维数组以及一维数组长度的定义部分不存在时，表示定义单个变量。
-3. ConstDef 的一维数组以及一维数组长度的定义部分存在时，表示定义数组。其语义和 C 语言一致，每维的下界从 0 编号。
-4. ConstDef 中表示各维长度的 ConstExp 都必须能在编译时求值到**非负整数**。
+The set of programs accepted by the above grammar is a superset of valid SysY programs. Additional semantic rules are given below.
 
-## 变量定义 VarDef
-```
-变量定义 VarDef → Ident [ '[' ConstExp ']' ] | Ident [ '[' ConstExp ']' ] '=' InitVal
-```
-1. 变量的定义与常量基本一致，但是变量可以没有初始值部分，此时其运行时实际初值未定义。
-## 初值 ConstInitVal / InitVal
-```
-常量初值 ConstInitVal → ConstExp | '{' [ ConstExp { ',' ConstExp } ] '}'
+## Runtime Library
 
-变量初值 InitVal → Exp | '{' [ Exp { ',' Exp } ] '}' | StringConst
-```
-1. 任何常量的初值表达式必须是常量表达式 ConstExp。
-2. **常量必须有初始值，常量数组不需要每一个元素都有初始值，但是未赋值的部分编译器需要将其置0。**
-3. 全局变量的初值表达式也必须是常量表达式 ConstExp。但局部变量的初值表达式是 Exp，可以使用已经声明的变量。
-4. 对于单个的常量或变量，初始值也必须是单个的表达式。（表达式包括单个数字、单个变量、单个常量等情况）
-5. **对于全局变量，如果没有给出初始值，那么应该全部置 0 ，局部变量不需要。**
-## 函数形参 FuncFParam 与实参 FuncRParams
-```
-函数形参表 FuncFParams → FuncFParam { ',' FuncFParam }
+1. For simplicity, `getint` and `printf` are only used as runtime library function calls in all test cases and will not be defined as user variables or functions.
+2. `printf` does not append a newline by default.
+3. Similar to C `printf`, format specifiers are replaced by corresponding argument values; ordinary characters are printed verbatim.
 
-函数实参表 FuncRParams → Exp { ',' Exp }
+## `static` Keyword
+
+1. `static` modifies **static local variables** and never appears on global variable definitions.
+2. If a `static` variable has an initializer, the initial value must be computable at compile time.
+3. A `static` variable without an explicit initializer is zero-initialized by the compiler.
+4. A `static` variable is initialized exactly once and retains its state across subsequent invocations of the enclosing function; it is not destroyed when the function exits, but its scope is limited to that function.
+
+## Compilation Unit `CompUnit`
+
 ```
-1. FuncFParam 定义一个函数的一个形式参数。当 Ident 后面的可选部分存在时， 表示数组定义。
-2. 函数实参的语法是 Exp。对于普通变量，遵循按值传递；对于数组类型的参数，则形参接收的是实参数组的地址，并通过地址间接访问实参数组中的元素。
-3. 普通常量可以作为函数参数，但是常量数组不可以，如 `const int arr[3] = {1,2,3}` ，常量数组 arr 不能作为参数传入到函数中。
-4. 函数调用时要保证实参类型和形参类型一致，具体请看下面例子。
+CompUnit → {Decl} {FuncDef} MainFuncDef
+Decl → ConstDecl | VarDecl
+```
+
+1. Top-level declarations (`Decl`) and function definitions (`FuncDef`) in one compilation unit cannot redefine the same identifier, even with different types.
+2. The scope of top-level variables, constants and functions starts at their declaration and ends at the end of the source file.
+
+## Constant Definition `ConstDef`
+
+```
+ConstDef → Ident [ '[' ConstExp ']' ] '=' ConstInitVal
+```
+
+1. `ConstDef` defines a symbolic constant. The identifier is `Ident`. The optional `[ConstExp]` declares a one-dimensional array and its length. Constants must have initializers.
+2. Without the array part, it declares a single scalar constant.
+3. With the array part, it declares an array with semantics identical to C; indices start at `0`.
+4. Each `ConstExp` specifying array length must evaluate to a **non-negative integer at compile time**.
+
+## Variable Definition `VarDef`
+
+```
+VarDef → Ident [ '[' ConstExp ']' ] | Ident [ '[' ConstExp ']' ] '=' InitVal
+```
+
+1. Variable definitions are similar to constants, but variables may omit initializers; their runtime value is undefined in that case.
+
+## Initializers `ConstInitVal` / `InitVal`
+
+```
+ConstInitVal → ConstExp | '{' [ ConstExp { ',' ConstExp } ] '}'
+InitVal → Exp | '{' [ Exp { ',' Exp } ] '}' | StringConst
+```
+
+1. Constant initializers must be constant expressions `ConstExp`.
+2. **Constants require initializers. Constant arrays may omit some element initializers; omitted elements are zero-filled by the compiler.**
+3. Global variable initializers must be `ConstExp`. Local variable initializers are ordinary `Exp` and may reference previously declared variables.
+4. For scalar constants or variables, the initializer must be a single expression.
+5. **Global variables without explicit initializers are zero-initialized; local variables are not.**
+
+## Formal Parameters `FuncFParam` and Actual Parameters `FuncRParams`
+
+```
+FuncFParams → FuncFParam { ',' FuncFParam }
+FuncRParams → Exp { ',' Exp }
+```
+
+1. `FuncFParam` defines one formal parameter. The optional `[]` marks an array parameter.
+2. Ordinary variables are passed by value. For array parameters, the formal parameter receives the address of the actual array and accesses elements indirectly via that address.
+3. Ordinary constants may be passed as function arguments, but constant arrays cannot. Example: `const int arr[3] = {1,2,3}`; `arr` cannot be passed into a function.
+4. Actual arguments must match formal parameters in type.
+
 ```
 void f1(int x){
 	return ;
 }
-
 void f2(int x[]){
 	return ;
 }
 int main(){
 	int x = 10;
 	int t[5] = {1, 2, 3, 4, 5};
-	f1(x); // 合法
-	f1(t[0]); // 合法
-	f1(t); // 不合法
-	f2(t); // 合法
+	f1(x); // valid
+	f1(t[0]); // valid
+	f1(t); // invalid
+	f2(t); // valid
 }
 ```
-## 函数定义 FuncDef
+
+## Function Definition `FuncDef`
+
 ```
-函数定义 FuncDef → FuncType Ident '(' [FuncFParams] ')' Block
+FuncDef → FuncType Ident '(' [FuncFParams] ')' Block
 ```
-1. FuncDef 表示函数定义。其中的 FuncType 指明返回类型。当返回类型为 int 时，函数内所有分支都应当含有带有 Exp 的 return 语句。不含有 return 语句的分支的返回值未定义。当返回值类型为 void 时，函数内只能出现不带返回值的 return 语句。
-2. FuncFParams 的语义如前文。
-## 语句块 Block
-1. Block 表示语句块。语句块会创建作用域，语句块内声明的常量和变量的生存期在该语句块内。
-2. 语句块内可以再次定义与语句块外同名的变量或常量（通过 Decl 语句)，其作用域从定义处开始到该语句块尾结束，它隐藏语句块外的同名变量或常量。
-3. 为了降低开发难度，**保证所有测试程序中有返回值的函数 Block 的最后一句一定会显式的给出 return 语句，否则就当作“无返回语句”的错误处理**。同时，同学们编写上传的样例程序时，也需要保证这一点。
-4. main 函数的返回值只能为常数0。
-## 语句 Stmt
-1. Stmt 中的 if 类型语句遵循就近匹配。
-2. 单个 Exp 可以作为 Stmt。这个 Exp 会被求值，但是所求的值会被丢弃。
-## 左值 LVal
-1. LVal 表示具有左值的表达式，可以为变量或者某个数组元素。
-2. 当 LVal 表示数组时，方括号个数必须和数组变量的维数相同（即定位到元素）。
-3. 当 LVal 表示单个变量时，不能出现后面的方括号。
-## Exp 与 Cond
-1. **Exp 在 SysY 中代表 int 型或 void 型的表达式；Cond 代表条件表达式，故它定义为 LOrExp。前者的单目运算符中不出现'!'，后者可以出现。**
-2. LVal 必须是当前作用域内、该 Exp 语句之前有定义的变量或常量；对于赋值号左边的 LVal 必须是变量。
-3. 函数调用形式是 Ident ‘(’ FuncRParams ‘)’，其中的 FuncRParams 表示实际参数。实际参数的类型和个数必须与 Ident 对应的函数定义的形参完全匹配。
-4. SysY 中算符的优先级与结合性与 C 语言一致，在上面的 SysY 文法中已体现出优先级与结合性的定义。
-## 一元表达式 UnaryExp
-1. 相邻两个 UnaryOp 不能相同，如 int a = ++-i; ，但是 int a = +-+i; 是可行的。
-2. UnaryOp 为 '!' 只能出现在条件表达式中。
-## 常量表达式 ConstExp
-1. **ConstExp 在 SysY 中代表 int 型表达式。**
-2. ConstExp 在编译期内是可被求值的，ConstExp -> AddExp 中涉及到的的 ident 均必须是常量，即只能使用常数、可以取得具体值的常量以及由它们组成的、在编译器内可被求值的算术表达式。
-# 六、错误处理
-从词法分析作业开始，我们每次作业都要求同学们开发的编译能够处理正确的程序与错误的程序，对于正确的程序按照每次作业要求输出正确结果，对于错误的程序输出所有的错误的行号和错误类别码。
-错误主要分为三类，词法分析部分错误，语法分析部分错误，语义分析部分错误。同学们在涉及编译器时，应该完成这三个部分的所有错误处理之后再进行错误的输出。
-## 错误类型列表
-错误类别 a 为词法分析中会出现的错误。
-错误类别 i, j, k 为语法分析中会出现的错误。
-剩余错误类别均为语义分析中会出现的错误。
 
-| 错误类型                     | 错误类别码 | 解释                                                                       | 对应文法及出错符号，…表示省略该条规则其他部分                                                                                        |
-| ------------------------ | ----- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| 非法符号                     | a     | 出现了 '&' 和 '\|' 这两个符号，应该将其当做'&&' 与 '\|\|' 进行处理，但是在记录单词名称的时候仍记录 '&' 和 '\|' | LAndExp → LAndExp '&&'EqExp<br>LOrExp → LOrExp '\|\|'LAndExp                                                   |
-| 名字重定义                    | b     | 函数名或者变量名在**当前作用域**下重复定义。<br>注意，变量一定是同一级作用域下才会判定出<br>错，不同级作用域下，内层会覆盖外层定义。 | ConstDef → Ident …<br>VarDef → … Ident … Ident …<br>FuncDef → FuncType Ident …<br>FuncFParam → BType Ident ... |
-| 未定义的名字                   | c     | 使用了未定义的标识符报错行号为 Ident 所在行数。                                              | LVal → Ident …<br>UnaryExp → Ident …                                                                           |
-| 函数参数个数不匹配                | d     | 函数调用语句中，参数个数与函数定义中的参数个数不匹配。                                              | UnaryExp → Ident ‘(’ [<br>FuncRParams ] ‘)’                                                                    |
-| 函数参数类型不匹配                | e     | 函数调用语句中，参数类型与函数定义中对应位置的参数类型不匹配。关于参数类型不匹配会在下方特别说明进行详细说明。                  | UnaryExp → Ident ‘(’ [<br>FuncRParams ] ‘)                                                                     |
-| 无返回值的函数存在不匹配的return语句    | f     | 无返回值的函数存在有返回值的return语句。                                                  | Stmt → ‘return’ { ‘[’ Exp ’]’ } ‘;’                                                                            |
-| 有返回值的函数缺少return语句        | g     | 只需要考虑函数末尾是否存在return语句，**无需考虑控制流。**                                       | FuncDef → FuncType Ident ‘(’[FuncFParams]‘)’ Block<br>MainFuncDef → 'int' 'main' '('')' Block                  |
-| 不能改变常量的值                 | h     | LVal 为常量时，不能对其修改。                                                        | Stmt → LVal ‘=’ Exp ‘;’<br>ForStmt → LVal '=' Exp …                                                            |
-| 缺少分号                     | i     | 缺少分号                                                                     | Stmt, ConstDecl 及 VarDecl 中的 ';’                                                                               |
-| 缺少右小括号’)                 | j     | 缺少右小括号’)                                                                 | 函数调用 ( UnaryExp )、函数定义 ( FuncDef, MainFuncDef )、 Stmt 及 PrimaryExp 中的 ')’                                      |
-| 缺少右中括号’]                 | k     | 缺少右中括号’]                                                                 | 数组定义 ( ConstDef, VarDef,FuncFParam ) 和使用 ( LVal )中的 ']’                                                        |
-| printf中格式字符与表达式个数不匹配     | l     | printf中格式字符与表达式个数不匹配                                                     | 'printf' '(' StringConst {',' Exp}')' ';'                                                                      |
-| 在非循环块中使用break和continue语句 | m     | 在非循环块中使用break和continue语句                                                 | Stmt → ‘break’ ‘;’\|‘continue’ ‘;                                                                              |
-## 文法符号与错误类型对应
+1. `FuncType` specifies return type. For `int`-returning functions, every control-flow branch must contain a `return` with an expression; branches without `return` yield undefined return values. For `void` functions, only `return` without an expression is allowed.
+2. Semantics of `FuncFParams` are as above.
 
-为方便对照, 下文给出了文法符号与可能存在的错误的对应关系：
+## Block `Block`
+
+1. A block introduces a scope; constants and variables declared inside live only within that block.
+2. A block may redeclare names from outer scopes; inner declarations shadow outer ones from their definition until the end of the block.
+3. For test simplicity, **all non-void functions in test cases end with an explicit `return` statement; missing `return` at function end is treated as an error.** Student-written test programs must follow this rule.
+4. The `main` function must return constant `0`.
+
+## Statements `Stmt`
+
+1. `if` statements follow the dangling-else rule (nearest match).
+2. A bare `Exp` can be a statement: the expression is evaluated and its result discarded.
+
+## Lvalue `LVal`
+
+1. `LVal` denotes an lvalue expression: a variable or array element.
+2. For array access, the number of bracket subscripts must match the array dimension to select an element.
+3. Scalar variables cannot have trailing subscript brackets.
+
+## `Exp` and `Cond`
+
+1. **`Exp` represents expressions of type `int` or `void`. `Cond` denotes a condition expression and is defined as `LOrExp`. The unary `!` may only appear in `Cond`, not in ordinary `Exp`.**
+2. The identifier in an `LVal` must be defined before use in the current scope. The left-hand side of an assignment must be a variable, not a constant.
+3. Function call syntax: `Ident ( FuncRParams )`. The number and types of actual arguments must exactly match the corresponding function definition.
+4. Operator precedence and associativity follow C and are encoded in the grammar above.
+
+## Unary Expression `UnaryExp`
+
+1. Two identical consecutive unary operators are forbidden, e.g., `++-i` is invalid, while `+-+i` is allowed.
+2. Unary `!` may only appear inside conditional expressions.
+
+## Constant Expression `ConstExp`
+
+1. **`ConstExp` denotes an `int` expression.**
+2. `ConstExp` must be evaluable at compile time. All identifiers inside a `ConstExp` must refer to constants.
+
+# 5. Error Handling
+
+Starting from the lexical analysis assignment, your compiler must accept both valid and invalid programs. For valid programs, produce correct outputs. For invalid programs, output the line number and error code of every error.
+
+Errors fall into three categories: lexical errors, syntax errors, semantic errors. All three phases must detect errors before reporting.
+
+## Error Codes
+
+Category `a`: lexical errors.
+Categories `i,j,k`: syntax errors.
+All remaining categories: semantic errors.
+
+| Error Description | Code | Explanation | Relevant Grammar |
+| --- | --- | --- | --- |
+| Illegal symbol | a | `&` and ` | `are encountered. They should be treated as`&&`and` |
+| Redefined identifier | b | Function or variable name redefined in the current scope. Inner scopes shadow outer definitions. | ConstDef → Ident …   VarDef → … Ident …   FuncDef → FuncType Ident …   FuncFParam → BType Ident ... |
+| Undefined identifier | c | Use of an undefined identifier; report line of `Ident`. | LVal → Ident …   UnaryExp → Ident … |
+| Mismatched number of function arguments | d | Argument count in function call does not match definition. | UnaryExp → Ident '(' [FuncRParams] ')' |
+| Mismatched argument type | e | Argument type mismatch at function call. Details below. | UnaryExp → Ident '(' [FuncRParams] ')' |
+| Mismatched return in void function | f | A `void` function contains a `return` with an expression. | Stmt → 'return' [ Exp ] ';' |
+| Missing return in non-void function | g | Check only whether the final statement of the function block is a `return`. Control flow analysis is **not required**. | FuncDef → FuncType Ident '('[FuncFParams]')' Block   MainFuncDef → 'int' 'main' '('')' Block |
+| Assignment to constant | h | LVal is a constant and cannot be assigned. | Stmt → LVal '=' Exp ';'   ForStmt → LVal '=' Exp … |
+| Missing semicolon | i | Missing `;` | Stmt, ConstDecl, VarDecl |
+| Missing right parenthesis `)` | j | Missing `)` | function call, function definition, `if`, `for`, `PrimaryExp` |
+| Missing right bracket `]` | k | Missing `]` | array definition and array access |
+| Mismatched format specifier count in `printf` | l | Number of format specifiers and arguments to `printf` disagree. | `printf' '(' StringConst {',' Exp} ')' ';'` |
+| `break` / `continue` outside loop | m | `break` or `continue` appears outside a loop block. | Stmt → 'break' ';' \| 'continue' ';' |
+
+## Grammar symbols and corresponding errors
+
 ```
-编译单元 CompUnit → {Decl} {FuncDef} MainFuncDef
-
-声明 Decl → ConstDecl | VarDecl
-
-常量声明 ConstDecl → 'const' BType ConstDef { ',' ConstDef } ';' // i
-
-基本类型 BType → 'int'
-
-常量定义 ConstDef → Ident [ '[' ConstExp ']' ] '=' ConstInitVal // b, k
-
-常量初值 ConstInitVal → ConstExp | '{' [ ConstExp { ',' ConstExp } ] '}'
-
-变量声明 VarDecl → [ 'static' ] BType VarDef { ',' VarDef } ';' // i
-
-变量定义 VarDef → Ident [ '[' ConstExp ']' ] | Ident [ '[' ConstExp ']' ] '=' InitVal //b, k
-
-变量初值 InitVal → Exp | '{' [ Exp { ',' Exp } ] '}'
-
-函数定义 FuncDef → FuncType Ident '(' [FuncFParams] ')' Block // b, g, j
-
-主函数定义 MainFuncDef → 'int' 'main' '(' ')' Block // g j
-
-函数类型 FuncType → 'void' | 'int'
-
-函数形参表 FuncFParams → FuncFParam { ',' FuncFParam }
-
-函数形参 FuncFParam → BType Ident ['[' ']'] // b, k
-
-语句块 Block → '{' { BlockItem } '}'
-
-语句块项 BlockItem → Decl | Stmt
-
-语句 Stmt → LVal '=' Exp ';' // h, i
-
-| [Exp] ';' // i, l(printf 被调用时)
-
+CompUnit → {Decl} {FuncDef} MainFuncDef
+Decl → ConstDecl | VarDecl
+ConstDecl → 'const' BType ConstDef { ',' ConstDef } ';' // i
+BType → 'int'
+ConstDef → Ident [ '[' ConstExp ']' ] '=' ConstInitVal // b, k
+ConstInitVal → ConstExp | '{' [ ConstExp { ',' ConstExp } ] '}'
+VarDecl → [ 'static' ] BType VarDef { ',' VarDef } ';' // i
+VarDef → Ident [ '[' ConstExp ']' ] | Ident [ '[' ConstExp ']' ] '=' InitVal //b, k
+InitVal → Exp | '{' [ Exp { ',' Exp } ] '}'
+FuncDef → FuncType Ident '(' [FuncFParams] ')' Block // b, g, j
+MainFuncDef → 'int' 'main' '(' ')' Block // g j
+FuncType → 'void' | 'int'
+FuncFParams → FuncFParam { ',' FuncFParam }
+FuncFParam → BType Ident ['[' ']'] // b, k
+Block → '{' { BlockItem } '}'
+BlockItem → Decl | Stmt
+Stmt → LVal '=' Exp ';' // h, i
+| [Exp] ';' // i, l(when calling printf)
 | Block
-
 | 'if' '(' Cond ')' Stmt [ 'else' Stmt ] // j
-
 | 'for' '(' [ForStmt] ';' [Cond] ';' [ForStmt] ')' Stmt // h
-
 | 'break' ';' | 'continue' ';' // i m
-
 | 'return' [Exp] ';' // f i
-
-'printf''('StringConst {','Exp}')'';' // i j l
-
-语句 ForStmt → LVal '=' Exp { ',' LVal '=' Exp } // h
-
-表达式 Exp → AddExp
-
-条件表达式 Cond → LOrExp
-
-左值表达式 LVal → Ident ['[' Exp ']'] // c k
-
-基本表达式 PrimaryExp → '(' Exp ')' | LVal | Number // j
-
-数值 Number → IntConst
-
-一元表达式 UnaryExp → PrimaryExp | Ident '(' [FuncRParams] ')' | UnaryOp UnaryExp // c d e j
-
-单目运算符 UnaryOp → '+' | '−' | '!' 注：'!'仅出现在条件表达式中
-
-函数实参表 FuncRParams → Exp { ',' Exp }
-
-乘除模表达式 MulExp → UnaryExp | MulExp ('*' | '/' | '%') UnaryExp
-
-加减表达式 AddExp → MulExp | AddExp ('+' | '−') MulExp
-
-关系表达式 RelExp → AddExp | RelExp ('<' | '>' | '<=' | '>=') AddExp
-
-相等性表达式 EqExp → RelExp | EqExp ('==' | '!=') RelExp
-
-逻辑与表达式 LAndExp → EqExp | LAndExp '&&' EqExp // a
-
-逻辑或表达式 LOrExp → LAndExp | LOrExp '||' LAndExp // a
-
-常量表达式 ConstExp → AddExp 注：使用的 Ident 必须是常量
+'printf' '(' StringConst {',' Exp} ')' ';' // i j l
+ForStmt → LVal '=' Exp { ',' LVal '=' Exp } // h
+Exp → AddExp
+Cond → LOrExp
+LVal → Ident ['[' Exp ']'] // c k
+PrimaryExp → '(' Exp ')' | LVal | Number // j
+Number → IntConst
+UnaryExp → PrimaryExp | Ident '(' [FuncRParams] ')' | UnaryOp UnaryExp // c d e j
+UnaryOp → '+' | '−' | '!' /* '!' only in condition expressions */
+FuncRParams → Exp { ',' Exp }
+MulExp → UnaryExp | MulExp ('*' | '/' | '%') UnaryExp
+AddExp → MulExp | AddExp ('+' | '−') MulExp
+RelExp → AddExp | RelExp ('<' | '>' | '<=' | '>=') AddExp
+EqExp → RelExp | EqExp ('==' | '!=') RelExp
+LAndExp → EqExp | LAndExp '&&' EqExp // a
+LOrExp → LAndExp | LOrExp '||' LAndExp // a
+ConstExp → AddExp /* Identifiers must be constants */
 ```
 
-## 特别说明
-1. 错误 i，j，k 类型中的“前一个非终结符”强调的是在文法规则里出现在 ; ) ] 之前的非终结符号，在分析中处理的是该非终结符产生的终结符号串的最后一个符号，也就是 ; ) ] 本应该正常出现的位置的上一个单词。
-2. 所有错误都不会出现恶意换行的情况，包括字符、字符串中的换行符、函数调用等等。所谓恶意换行是指**会使得错误处理难以正确进行的换行**。
-3. 其他类型的错误，错误的行号以能够断定发现出错的第一个符号的行号为准。例如有返回值的函数缺少返回语句的错误，只有当识别到函数末尾的}时仍未出现返回语句，才可以断定出错，报错行号即为}的行号。
-4. 为了避免因为测试程序中的错误导致出现语法二义性，使得语法树以错误的方式建立，我们保证：**for 语句不会出现除了 h 类型以外的任何错误。进一步的，我们保证，所有会导致语法树不能正确建立的错误都不会出现。**
-5. 每一行中最多只有一个错误。
-6. 同一作用域下**函数和变量之间不能有相同的名字**。
-7. 对于一个名字重定义的函数，也应该完整分析函数内部是否具有其它错误。
-8. 对于调用函数时，参数类型不匹配一共有以下几种情况的不匹配：
-- 传递数组给变量。
-- 传递变量给数组。
+## Special Notes
 
-## 本次作业的单独要求
-### 词法分析问题描述
-请根据希冀平台的课程信息-教学资料页面给定的文法文档，并结合指导书，设计并实现词法分析程序，程序要能够处理正确的源程序以及错误的源程序。
-对于正确的源程序，需要从源程序中识别出单词，记录其单词类别和单词值，输出单词类别码和单词的字符/字符串形式。
-对于错误的源程序，需要识别出错误，并输出错误所在的行号和错误的类别码。
-词法分析中，单词的类别码统一定义如下：
-单词名称	类别码	单词名称	类别码	单词名称	类别码	单词名称	类别码
-Ident	IDENFR	else	ELSETK	*	MULT	;	SEMICN
-IntConst	INTCON	!	NOT	/	DIV	,	COMMA
-StringConst	STRCON	&&	AND	%	MOD	(	LPARENT
-const	CONSTTK	||	OR	<	LSS	)	RPARENT
-int	INTTK	for	FORTK	<=	LEQ	[	LBRACK
-static	STATICTK	return	RETURNTK	>	GRE	]	RBRACK
-break	BREAKTK	void	VOIDTK	>=	GEQ	{	LBRACE
-continue	CONTINUETK	+	PLUS	==	EQL	}	RBRACE
-if	IFTK	-	MINU	!=	NEQ	=	ASSIGN
-main	MAINTK	printf	PRINTFTK	
+1. For errors `i,j,k`, the "preceding nonterminal" refers to the nonterminal before `;`, `)`, `]` in grammar rules; we look at the last token of that nonterminal’s token stream.
+2. No malicious newlines in test cases, including inside character/string literals and function calls. A malicious newline would make error recovery hard.
+3. For other errors, report the line number of the first token where the error can be diagnosed. Example: missing return in non-void functions is diagnosed when reaching the closing `}` of the function block; report the line of `}`.
+4. To avoid grammar ambiguities caused by test-case errors, `for` statements contain no errors other than type `h`. All errors that would prevent constructing a parse tree are absent.
+5. At most one error per source line.
+6. Functions and variables cannot share the same name in the same scope.
+7. If a function name is redefined, the compiler must still fully analyze the function body for other errors.
+8. Two type-mismatch cases in function calls:
+   - passing array to scalar parameter
+   - passing scalar to array parameter
 
-**输入形式**
-testfile.txt 中的测试程序，有的是正确的源程序，有的是有错误的源程序。
+# 6. Lexical Analysis Assignment Requirements
 
-**输出形式**
-对于正确的源程序，将 单词类别码 和 单词的字符/字符串形式 按读入顺序输出至 lexer.txt。
-单词类别码 单词的字符/字符串形式（中间仅用一个空格间隔）
+## Problem Description
 
-对于错误的源程序，将 错误所在的行号和错误的类别码 按行号从小到大输出至 error.txt，行号从1开始编号。
-错误的行号 错误的类别码（中间仅用一个空格间隔）
+Implement a lexical analyzer according to the grammar document and guide. It must handle both valid and invalid source files.
 
-**注意事项**
-读取的字符串要原样保留着便于输出，特别是数字，这里输出的并不是真正的单词值，其实是读入的字符串，单词值需另行记录。
-单词的类别和单词值以及其他关注的信息，在词法分析阶段获取后，后续的分析阶段会使用，请注意记录。
-当前要求的正确源程序的输出只是为了便于评测，完整的编译器最后无需出现这些信息，请设计为方便打开/关闭这些输出的方案。
-本次作业中对于每个错误样例，只会出现词法分析部分的错误。每个错误样例中有且仅有1个错误。
-即使是一个错误的源程序，也应该完成词法分析的全部任务，这样才能进行语法分析和语义分析部分的错误处理。
-错误类别码见文法最后一部分。
+For valid source files: recognize tokens, record token category and token value, output token code and token string.
+For invalid source files: detect errors and output line number and error code.
 
-**词法分析可能出现的错误**
+### Token Codes
+
+| Token | Code | Token | Code | Token | Code | Token | Code |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Ident | IDENFR | else | ELSETK | * | MULT | ; | SEMICN |
+| IntConst | INTCON | ! | NOT | / | DIV | , | COMMA |
+| StringConst | STRCON | && | AND | % | MOD | ( | LPARENT |
+| const | CONSTTK | \|\| | OR | < | LSS | ) | RPARENT |
+| int | INTTK | for | FORTK | <= | LEQ | [ | LBRACK |
+| static | STATICTK | return | RETURNTK | > | GRE | ] | RBRACK |
+| break | BREAKTK | void | VOIDTK | >= | GEQ | { | LBRACE |
+| continue | CONTINUETK | + | PLUS | == | EQL | } | RBRACE |
+| if | IFTK | - | MINU | != | NEQ | = | ASSIGN |
+| main | MAINTK | printf | PRINTFTK |  |  |  |  |
+
+### Input
+
+`testfile.txt`: source program (valid or erroneous).
+
+### Output
+
+Valid program: write token code and token string to `lexer.txt`.
+
+> 
+> `TokenCode TokenString` (single space separator)
+
+Erroneous program: write error line number and error code to `error.txt`, sorted by line number.
+
+> 
+> `LineNumber ErrorCode` (single space separator)
+
+### Remarks
+
+- Preserve the original string of literals; numeric output is the input string, not the parsed integer value.
+- Store token type, value and other information for later phases.
+- The token printing output for evaluation should be toggleable; the final full compiler does not need it.
+- In this assignment, error samples only contain lexical errors, and exactly one error per error sample.
+- Continue full lexical analysis even for erroneous input to support later syntax/semantic error handling.
+- Error codes are defined above.
+
+### Lexical Error Case
+
 ```
-逻辑与表达式 LAndExp → EqExp | LAndExp '&&' EqExp // a
-逻辑或表达式 LOrExp → LAndExp | LOrExp '||' LAndExp // a
+LAndExp → EqExp | LAndExp '&&' EqExp // a
+LOrExp → LAndExp | LOrExp '||' LAndExp // a
 ```
 
-**样例**
-正确源程序样例
-样例输入：
+### Example
+
+Valid input:
+
+```
 const int array[2] = {1,2};
-
 int main(){
     int c;
     c = getint();
     printf("output is %d",c);
     return c;
 }
-样例输出：
-`CONSTTK const`
-`INTTK int`
-`IDENFR array`
-`LBRACK [`
-`INTCON 2`
-`RBRACK ]`
-`ASSIGN =`
-`LBRACE {`
-`INTCON 1`
-`COMMA ,`
-`INTCON 2`
-`RBRACE }`
-`SEMICN ;`
-`INTTK int`
-`MAINTK main`
-`LPARENT (`
-`RPARENT )`
-`LBRACE {`
-`INTTK int`
-`IDENFR c`
-`SEMICN ;`
-`IDENFR c`
-`ASSIGN =`
-`IDENFR getint`
-`LPARENT (`
-`RPARENT )`
-`SEMICN ;`
-`PRINTFTK printf`
-`LPARENT (`
-`STRCON "output is %d"`
-`COMMA ,`
-`IDENFR c`
-`RPARENT )`
-`SEMICN ;`
-`RETURNTK return`
-`IDENFR c`
-`SEMICN ;`
-`RBRACE }`
+```
 
-**错误源程序样例**
-样例输入：
+Valid output:
+
+```
+CONSTTK const
+INTTK int
+IDENFR array
+LBRACK [
+INTCON 2
+RBRACK ]
+ASSIGN =
+LBRACE {
+INTCON 1
+COMMA ,
+INTCON 2
+RBRACE }
+SEMICN ;
+INTTK int
+MAINTK main
+LPARENT (
+RPARENT )
+LBRACE {
+INTTK int
+IDENFR c
+SEMICN ;
+IDENFR c
+ASSIGN =
+IDENFR getint
+LPARENT (
+RPARENT )
+SEMICN ;
+PRINTFTK printf
+LPARENT (
+STRCON "output is %d"
+COMMA ,
+IDENFR c
+RPARENT )
+SEMICN ;
+RETURNTK return
+IDENFR c
+SEMICN ;
+RBRACE }
+```
+
+Error input:
+
+```
 int main(){
     if(1 & 2){
         printf("2025 Compiler\n");
     }
     return 0;
 }
-样例输出：
+```
+
+Error output (`error.txt`):
+
+```
 2 a
+```
 
-**评分标准**
-对于正确的源程序，按与预期结果不一致的项数（每一行单词信息算一项）扣分，每项扣 5%。
-对于错误的源程序，正确报出错误得满分，错报或多报不得分。
+### Grading
 
-**参考资料**
-教材 第17章 17.3 ；第18章 18.3.4
+For valid programs: points deducted for every mismatched token line.
+For error programs: full points for correct error report; zero for false positives or extra reports.
 
-pl0-compiler.doc 中 getsym 及相关子程序（过程）
+### References
 
-pascals-compiler.docx 中 insymbol 及相关子程序（过程）
+Textbook Ch17 §17.3; Ch18 §18.3.4
+`pl0-compiler.doc`: `getsym` and related routines
+`pascals-compiler.docx`: `insymbol` and related routines
+Teaching materials on the course platform
+Public test library for lexical analysis
 
-希冀平台 课程信息-教学资料 页面相关资料
+### Language & Environment
 
-详细的错误类别信息见 2025编译技术实验文法说明 
+C/C++ / Java
 
-**资料下载**
-PL/0、PASCALS编译器源代码可以从希冀平台的 课程信息-教学资料 页面中获取。
+- CLion 2019.3.6 for C/C++
+- IDEA Community 2022.2.2 for Java
 
-**辅助工具**
-2025词法分析作业公共测试程序库
+### Submission Requirements
 
-**开发语言及环境**
-用 C/C++/JAVA 实现。
-机房安装的 C/C++ 开发环境是 CLion 2019.3.6；
-Java 的开发环境为 IDEA 2022.2.2 社区版。
-集成开发环境的安装见 在线教程 中的编译技术实验教程
+Deliver design document: compiler overview, overall design, lexical analyzer design.
 
-**文档要求**
-完成参考编译器介绍、总体设计、词法分析阶段设计文档。
+Submit **only lexical-analysis source code** for this assignment.
+Judge environment: CMake 3.28.3, Clang 12.0.0, C++17; JDK17 for Java.
 
-**提交形式**
-请注意，若已完成后续作业的同学，在词法分析作业中仅提交关于词法分析部分的代码。
-评测机所采用的编译学生代码的版本是：CMake 3.28.3，C/C++ clang 12.0.0 C++17，Java jdk 17。
-上传请将所开发的词法分析程序的源文件（.cpp/.c/.h/.Java，不含工程文件）打包为 zip 后提交。
-对于使用 Java 开发的编译器，程序运行的入口为 Compiler.java 中的 main 方法。提交时请直接Compiler.java打包在压缩包的最上层，不要嵌套一层 src 文件夹。平台 不支持 Java 第三方包。
-对于使用 C++ 开发的编译器，可以使用 CMake 进行项目管理。如果使用 CMake，可以自由选择 Clang 支持的 C++ 标准，注意需要使用 project(Compiler) 设置项目名称，确保 CMake 编译后输出的可执行文件名称为 Compiler，提交时需要在压缩包最上层包含 CMakeLists.txt，并且不要提交 CMake 构建过程的临时文件。如果不使用 CMake，平台默认使用 C++ 17 标准。
-注意在 MAC 下压缩会产生额外的文件到压缩包中，需删掉额外文件后提交。
-提交时，你的压缩包顶层需要包含一个如下内容的json文件（命名为config.json）：
+- Java: entry point is `main` in `Compiler.java`. `Compiler.java` must sit at the root of the zip archive. No third-party libraries.
+- C++: you may use CMake. `CMakeLists.txt` at archive root, `project(Compiler)`, output executable named `Compiler`. Do not submit build artifacts. Default C++17 if no CMake.
+- Remove macOS hidden files before zipping.
+
+Include `config.json` at archive root:
+
+```
 {
     "programming language": "xxx",
     "object code": "yyy"
 }
-其中，xxx为你的编译器所使用的编程语言（java, c 或 cpp），yyy为你生成的目标代码类型（pcode, llvm 或 mips），所有字母均为小写。如果评测结果为ConfigurationError，说明你的config.json文件存在问题，无法被评测程序解析，请查看评测程序返回的详细信息进行修改。
-在本次作业中，如果你还没有确定你的目标代码，可以随意填写，不会与后续作业形成绑定。
-使用 Java 提交的文件结构示例如下，除了 Compiler.java 和 config.json 外可以有任意数量的文件和文件夹：
+```
+
+`xxx`: `java`, `c`, or `cpp`; `yyy`: `pcode`, `llvm`, or `mips`, lowercase.
+You may fill a placeholder target code type if undecided; it will not bind later assignments.
+
+Example file tree for Java submission:
+
+```
 .
 ├── Compiler.java
 ├── config.json
 └── frontend
-         └── Lexer.java
+     └── Lexer.java
+```
