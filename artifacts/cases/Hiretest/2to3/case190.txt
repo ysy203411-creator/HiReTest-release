@@ -1,5 +1,5 @@
 const int SIZE = 5;
-int globalArray[5] = {1, 2, 3, 4, 5}; // 添加长度声明以符合约束条件
+int globalArray[5] = {1, 2, 3, 4, 5}; //Add length declaration to satisfy constraints
 int sumArray(int arr[], int size) {
     int sum = 0;
     int i = 0;

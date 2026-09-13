@@ -16,7 +16,7 @@ int main(){
     
     int result = sum(arr);
     
-    if (result > 50 | result < 100) { // 错误：使用单独的 | 作为条件判断
+    if (result > 50 | result < 100) { //Error: Using standalone | for conditional judgment
         printf("Result is within the expected range.\n");
     } else {
         printf("Result is out of the expected range.\n");

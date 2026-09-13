@@ -1,7 +1,7 @@
 const int SIZE = 5;
-int global_arr[SIZE] = {0}; // 初始化未提供全部元素，需默认初始化为 0
+int global_arr[SIZE] = {0}; //Initialization did not provide all elements, need to default initialize to 0
 int global_var;
-void test_func(int arr[], int size) { // 修改参数类型为 int[]
+void test_func(int arr[], int size) { //Change parameter type to int[]
     int i = 0;
     while (i < size) {
         printf("%d\n", arr[i]);

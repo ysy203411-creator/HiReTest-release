@@ -4,7 +4,7 @@ int compute(int x) {
     return x * 2;
 }
 void process(int data[]) {
-    int j = 0;  // 修改局部变量名以避免重名
+    int j = 0;  //Rename local variable to avoid name collision
     for (j = 0; j < MAX; j = j + 1) {
         data[j] = compute(data[j]);
     }
@@ -15,9 +15,9 @@ int main(){
         arr[i] = i;
     }
     
-    process(arr);  // 实参为数组名，符合约束
+    process(arr);  //The argument is an array name, which meets the constraint
     int result = 0;
-    int m = 0;  // 修改局部变量名以避免重名
+    int m = 0;  //Rename local variable to avoid name collision
     for (m = 0; m < MAX; m = m + 1) {
         result = result + arr[m];
     }

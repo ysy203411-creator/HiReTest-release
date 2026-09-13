@@ -7,7 +7,7 @@ int main(){
     int x = 10;
     int y = 20;
     int z = 30;
-    // 正确的调用
+    //Correct call
     testFunc(x, y, z);
     return 0;
 }

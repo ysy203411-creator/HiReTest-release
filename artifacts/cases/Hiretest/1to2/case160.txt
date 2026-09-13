@@ -13,7 +13,7 @@ int main(){
     printf("Sum of array elements: %d\n", result);
     int a = 5;
     int b = 10;
-    if (a & b) { // 使用单独的 &，应视为非法符号
+    if (a & b) { // Use of a single & should be considered an illegal symbol
         printf("This line contains an error.\n");
     }
     return 0;

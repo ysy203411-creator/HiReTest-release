@@ -1,5 +1,5 @@
 const int ARRAY_SIZE = 5;
-const int INIT_VALUES[5] = {1, 2, 3, 0, 0}; // 修改为一维数组，并提供全部元素
+const int INIT_VALUES[5] = {1, 2, 3, 0, 0}; //Convert to a one-dimensional array, and provide all elements
 
 int main() {
     int i;

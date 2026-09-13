@@ -11,14 +11,14 @@ int main(){
     int y = 4;
     int z = 0;
     int result;
-    // 使用逻辑或表达式
+    //Use logical OR expression
     if (x > 0 || y > 0) {
         result = compute(x, y);
     } else {
         result = compute(x, z);
     }
     printResult(result);
-    // 另一个逻辑或表达式
+    //Another logical OR expression
     if (globalVar > 0 || CONST_VAL > 0) {
         printf("Global or Const is positive.\n");
     }

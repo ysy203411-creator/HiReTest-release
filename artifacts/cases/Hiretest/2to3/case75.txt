@@ -9,8 +9,8 @@ int sum(int arr[]) {
     return total;
 }
 int main(){
-    array[0 = 1; // 缺少右中括号错误
-    array[1 = 2; // 缺少右中括号错误
+    array[0 = 1; //Missing closing bracket error
+    array[1 = 2; //Missing closing bracket error
     printf("Sum: %d\n", sum(array));
     return 0;
 }

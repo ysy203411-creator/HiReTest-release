@@ -12,7 +12,7 @@ int main(){
     int result = add(x, y);
     printResult(result);
     int invalid;
-    if (x | y) { // Move the error to an if statement to satisfy a类错误的限制条件
+    if (x | y) { //Move the error to an if statement to satisfy a class error's restriction condition
         invalid = 1;
     } else {
         invalid = 0;

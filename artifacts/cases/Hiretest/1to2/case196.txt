@@ -16,7 +16,7 @@ int computeSum(int[] arr) {
 int main(){
     int localVar = 7;
     int result = 0;
-    if (localVar > 5 & globalVar < 10) { // 错误：使用了单独的 & 符号
+    if (localVar > 5 & globalVar < 10) { //Error: single & symbol used
         result = computeSum(array);
     } else {
         printValue(CONST_VAL);

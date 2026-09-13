@@ -6,7 +6,7 @@ int add(int x, int y) {
 int main(){
     int result;
     result = add(a, b);
-    printf("Result: %d\n", result);  // 添加缺少的分号
+    printf("Result: %d\n", result);  //Add missing semicolons
     if (result > 10) {
         printf("Greater than 10\n");
     } else {

@@ -4,7 +4,7 @@ int func(int x) {
 }
 int main(){
     int result;
-    result = func(10; // 缺少右括号
+    result = func(10; //Missing closing parenthesis
     printf("Result: %d\n", result);
     return 0;
 }

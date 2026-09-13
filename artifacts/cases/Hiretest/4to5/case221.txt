@@ -3,7 +3,7 @@ int globalArray[SIZE];
 
 void initializeArray(int arr[]) {
     int i = 0;
-    // 使用 for 语句代替 while 语句
+    //Use for statement instead of while statement
     for (i = 0; i < SIZE; i = i + 1) {
         arr[i] = i * 2;
     }

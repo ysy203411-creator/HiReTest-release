@@ -4,14 +4,14 @@ int add(int a, int b) {
     return a + b;
 }
 void printError() {
-    if (array[0] | array[1]) { // 使用非法符号 |
+    if (array[0] | array[1]) { //Use of illegal symbol |
         printf("Error: %d\n", array[0]);
     }
 }
 int main(){
     int x = 5;
     int y = 10;
-    int result = add(x, y;  // 缺少右小括号 )，j 类错误
+    int result = add(x, y;  //Missing right parenthesis ), j class error
     printError();
     return 0;
 }

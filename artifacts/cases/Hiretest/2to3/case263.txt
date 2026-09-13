@@ -1,5 +1,5 @@
 const int SIZE = 5;
-int array[SIZE] = {1, 2, 3, 4}; // 初始化缺少一个元素，测试大括号处理
+int array[SIZE] = {1, 2, 3, 4}; //Initialization is missing an element, test braces handling
 int sum(int arr[], int length) {
     int total = 0;
     int i = 0;

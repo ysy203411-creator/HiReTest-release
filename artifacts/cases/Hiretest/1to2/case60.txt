@@ -15,7 +15,7 @@ void printSum() {
 int main(){
     int localVar = 5;
     int anotherVar = 10;
-    if (localVar > 0 & anotherVar < 15) { // 错误：单独使用 &，应使用 &&
+    if (localVar > 0 & anotherVar < 15) { //Error: & used alone, should use &&
         printf("Both conditions are true.\n");
     }
     printSum();

@@ -21,6 +21,19 @@ def public_prompt_root() -> Path:
     return release_root() / "prompts" / "public_templates"
 
 
+def data_workspace_root() -> Path:
+    """Return the configured working-data directory or the local placeholder."""
+    configured = os.environ.get("HIRETEST_DERIVED_DATA_ROOT")
+    if configured:
+        return Path(configured).expanduser().resolve()
+    return release_root() / "data"
+
+
+def generated_artifacts_root() -> Path:
+    """Return a writable location that does not overwrite released artifacts."""
+    return artifacts_root() / "generated"
+
+
 def restricted_data_root() -> Path:
     configured = os.environ.get("HIRETEST_DATA_ROOT")
     if not configured:

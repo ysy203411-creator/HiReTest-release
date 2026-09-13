@@ -11,6 +11,6 @@ int main(){
     result = sum(x, y);
     printf("Sum: %d\n", result);
     // Function call with undefined function
-    result = add(x, y;  // Missing closing parenthesis, should trigger j类错误
+    result = add(x, y;  //Missing closing parenthesis, should trigger j class error
     return 0;
 }

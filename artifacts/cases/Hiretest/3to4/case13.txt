@@ -10,7 +10,7 @@ int compare(int val1, int val2) {
     } else {
         return 0;
     }
-    return 0; // 添加此行以符合约束
+    return 0; //Add this line to comply with constraints
 }
 void print_result(int result) {
     if (result) {

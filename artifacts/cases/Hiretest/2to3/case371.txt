@@ -7,7 +7,7 @@ int parseBtype(int type) {
         return CONST_CHAR;
     }
     return 1;
-    return 0; // 添加显式的 return 语句
+    return 0; //Add explicit return statement
 }
 int main(){
     int result;

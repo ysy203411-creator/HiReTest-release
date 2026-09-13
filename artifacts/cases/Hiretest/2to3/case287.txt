@@ -1,7 +1,7 @@
 const int MAX = 100;
 int globalArray[MAX];
 void testFunction() {
-    return;  // 修改为不带表达式的return语句
+    return;  //Change to a return statement without an expression
 }
 int main(){
     int localVar = 10;

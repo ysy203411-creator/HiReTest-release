@@ -10,7 +10,7 @@ int main(){
     int x = 3;
     int y = 7;
     int result = 0;
-    if (x & y) { // 错误：单独的 & 应视为非法符号
+    if (x & y) { //Error: standalone & is considered an illegal symbol
         result = add(x, y);
     }
     printResult(result);

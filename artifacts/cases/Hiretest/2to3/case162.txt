@@ -1,5 +1,5 @@
 const int CONST_VAL = 10;
-int globalArray[5] = {1, 2, 3, 0, 0}; // 修改初始化列表以匹配数组大小
+int globalArray[5] = {1, 2, 3, 0, 0}; //Modify the initializer list to match the array size
 int add(int a, int b) {
     return a + b;
 }

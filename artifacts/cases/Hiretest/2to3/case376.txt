@@ -12,9 +12,9 @@ int main(){
     int sum;
     sum = add(x, y);
     printResult(sum);
-    if (x > 0) { // 测试行号错误修复
+    if (x > 0) { //Fix line number error
         printf("Positive x\n");
-    } else { // 缺少右括号错误修复
+    } else { //Fix missing closing bracket error
         printf("Non-positive x\n");
     }
     return 0;

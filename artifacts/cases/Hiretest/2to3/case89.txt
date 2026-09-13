@@ -15,9 +15,9 @@ int sumArray(int arr[], int size) {
     return sum;
 }
 int main(){
-    int localArr[SIZE]; // 修改变量名以避免重名
-    initializeArray(localArr, SIZE); // 修改变量名以避免重名
-    int total = sumArray(localArr, SIZE); // 修改变量名以避免重名
+    int localArr[SIZE]; //Rename variable to avoid name collision
+    initializeArray(localArr, SIZE); //Rename variable to avoid name collision
+    int total = sumArray(localArr, SIZE); //Rename variable to avoid name collision
     printf("Total sum is: %d\n", total);
     return 0;
 }

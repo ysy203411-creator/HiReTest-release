@@ -1,7 +1,7 @@
 int globalVar;
 void testFunction() {
     int localVar = 10;
-    // break; // 删除错误的 break 语句
+    // break; // Remove the incorrect break statement
 }
 int main(){
     const int constVar = 5;
@@ -9,9 +9,9 @@ int main(){
     int i;
     for (i = 0; i < 5; i = i + 1) {
         if (array[i] == constVar) {
-            break; // 正确使用
+            break; // Use correctly
         }
     }
-    testFunction(); // 调用函数以测试函数内的错误处理
+    testFunction(); // Call function to test error handling within the function
     return 0;
 }

@@ -1,5 +1,5 @@
 const int MAX = 100;
-int globalVar = 0; // 显式初始化为 0
+int globalVar = 0; //Explicitly initialized to 0
 int array[MAX];
 int computeValue(int x) {
     if (x > 0) {

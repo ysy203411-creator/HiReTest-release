@@ -1,4 +1,4 @@
-const int a[5 = {1, 2, 3, 4, 5}; // 缺少右中括号 ]
+const int a[5 = {1, 2, 3, 4, 5}; //Missing closing bracket ]
 int main(){
     int x = 0;
     x = a[3];

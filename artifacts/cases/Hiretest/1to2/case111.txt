@@ -10,7 +10,7 @@ int main(){
     int x = 5;
     int y = 10;
     int result = 0;
-    if (x & y) {  // 使用单个 & 符号，触发错误
+    if (x & y) {  //Use single & symbol to trigger error
         result = add(x, y);
     } else {
         result = subtract(y, x);

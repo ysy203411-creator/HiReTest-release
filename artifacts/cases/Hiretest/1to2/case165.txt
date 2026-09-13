@@ -11,7 +11,7 @@ int main(){
     int local_var = 5;
     int result = add(local_var, global_var);
     print_result(result);
-    /* 原本这里使用了逻辑运算符 && 作为赋值右侧，违反约束 13，改为纯算术表达式 */
+    /*Originally, the logical operator && was used as the right-hand side of an assignment, violating constraint 13, changed to a pure arithmetic expression*/
     int undeclared_var = arr[2] + local_var;
     printf("Undeclared Var: %d\n", undeclared_var);
     return 0;

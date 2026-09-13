@@ -23,7 +23,7 @@ int main(){
     int sum = add(globalVar, localArray[2]);
     printf("Sum: %d\n", sum);
     
-    // 修改部分：将关系和逻辑运算符移到条件判断中
+    //Move relational and logical operators into the condition judgment
     if ((sum > 20 && sum < 30) || (sum == 15)) {
         printf("Result: 1\n");
     } else {

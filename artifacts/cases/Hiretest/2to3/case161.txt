@@ -6,9 +6,9 @@ int func() {
 int main(){
     int a = 3;
     int arr[5];
-    arr[2] = 4; // 错误：缺少右中括号
+    arr[2] = 4; //Error: missing closing bracket
     a = 6;
     b = 7;
-    int c = 8; // 修改：将误用的函数名替换为局部变量
+    int c = 8; //Fix: replace the misused function name with a local variable
     return 0;
 }

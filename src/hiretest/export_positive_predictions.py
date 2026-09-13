@@ -7,8 +7,10 @@ import torch
 
 try:
     from .train import ChangeClassifier, build_feature_matrix
+    from .paths import data_workspace_root
 except ImportError:
     from train import ChangeClassifier, build_feature_matrix
+    from paths import data_workspace_root
 
 
 DEFAULT_COLUMNS = [
@@ -84,12 +86,12 @@ def build_output_df(test_df, preds):
     output_df = positive_df[DEFAULT_COLUMNS].copy()
     output_df.rename(
         columns={
-            "homework_id": "课程id",
-            "student_id": "学生id",
-            "file_path": "文件路径",
-            "old_position_merged": "代码变更修改前的位置",
-            "new_position_merged": "代码变更修改后的位置",
-            "label": "变更实际是否是正样本",
+            "homework_id": "Assignment ID",
+            "student_id": "Student ID",
+            "file_path": "File Path",
+            "old_position_merged": "Old Change Position",
+            "new_position_merged": "New Change Position",
+            "label": "Ground-truth Label",
         },
         inplace=True,
     )
@@ -97,23 +99,23 @@ def build_output_df(test_df, preds):
 
 
 def parse_args():
-    root = Path(os.environ.get("HIRETEST_DERIVED_DATA_ROOT", Path(__file__).resolve().parents[2] / "data" / "restricted"))
+    root = data_workspace_root()
     parser = argparse.ArgumentParser(
-        description="Export positive_predictions1-style Excel without training or mutating existing result files."
+        description="Export positive-prediction Excel without training or mutating released result files."
     )
     parser.add_argument(
         "--test-df",
-        default=str(root / "test_df_by_student.pkl"),
+        default=str(root / "outputs" / "test_df_by_student.pkl"),
         help="Existing test_df_by_student.pkl produced by the original split.",
     )
     parser.add_argument(
         "--model",
-        default=str(root / "final_model.pth"),
+        default=str(root / "models" / "hiretest_classifier.pth"),
         help="Existing trained model checkpoint.",
     )
     parser.add_argument(
         "--output",
-        default=str(root / "positive_predictions1.xlsx"),
+        default=str(root / "outputs" / "positive_predictions.xlsx"),
         help="Excel file to create.",
     )
     parser.add_argument(

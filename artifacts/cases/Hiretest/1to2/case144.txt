@@ -10,10 +10,10 @@ void print_result(int result) {
 int main(){
     int result = add(a, b);
     print_result(result);
-    if (a | b) {  // 错误：使用单独的 |，应为 || 
+    if (a | b) {  //Error: use || instead of single |
         printf("This should be an error.\n");
     }
-    if (a & b) {  // 错误：使用单独的 &，应为 && 
+    if (a & b) {  //Error: use && instead of single &
         printf("This should also be an error.\n");
     }
     return 0;

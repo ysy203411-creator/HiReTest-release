@@ -1,6 +1,6 @@
 const int rq1_case_id_24 = 24;
 const int a = 5;
-const int neg_b = -5; // 修改为常量表达式
+const int neg_b = -5; //Change to constant expression
 int negate(int x) {
     return -x;
 }

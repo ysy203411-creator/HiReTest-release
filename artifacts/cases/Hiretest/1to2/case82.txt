@@ -5,7 +5,7 @@ int add(int x, int y) {
     return x + y;
 }
 int main(){
-    int result = add(a, b); // 添加逗号以修正错误
+    int result = add(a, b); //Add a comma to fix the error
     printf("%d\n", result);
     return 0;
 }

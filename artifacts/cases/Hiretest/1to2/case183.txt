@@ -9,7 +9,7 @@ int main(){
     int result = CONST_VALUE + globalVar + localVar;
     printValues(result, arr[0]);
     
-    if (result > 10 & localVar < 5) { // 使用单独的 &，应视为非法符号
+    if (result > 10 & localVar < 5) { // Use of a single & should be considered an illegal symbol
         printf("Condition met\n");
     } else {
         printf("Condition not met\n");

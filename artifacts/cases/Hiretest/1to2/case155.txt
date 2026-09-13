@@ -10,7 +10,7 @@ void printResult(int result) {
 int main(){
     int result = add(a, b);
     printResult(result);
-    // 错误：使用单独的 &，应为 &&
+    //Error: Use && instead of & alone
     if (a > 0 & b < 15) {
         printf("Both conditions are true.\n");
     }

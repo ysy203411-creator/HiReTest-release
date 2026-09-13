@@ -11,8 +11,8 @@ int negate(int x) {
 int main(){
     int a = 0;
     int b = 1;
-    int result1 = negate(a); // 应该返回 1
-    int result2 = negate(b); // 应该返回 0
+    int result1 = negate(a); //Should return 1
+    int result2 = negate(b); //Should return 0
     printf("Result1: %d\n", result1);
     printf("Result2: %d\n", result2);
     return 0;

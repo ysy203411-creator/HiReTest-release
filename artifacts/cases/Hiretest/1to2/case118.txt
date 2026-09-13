@@ -16,7 +16,7 @@ int main(){
     for (i = 0; i < MAX; i = i + 1) {
         array[i] = i * 2;
     }
-    if (result > 10 & result < 20) {  // 错误：使用单独的 &，应为 &&
+    if (result > 10 & result < 20) {  //Error: Use && instead of & alone
         printf("Result is between 11 and 19\n");
     }
     return 0;

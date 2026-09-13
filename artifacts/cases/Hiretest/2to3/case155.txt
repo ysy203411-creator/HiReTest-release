@@ -15,8 +15,8 @@ int main(){
     }
     int result = sum(arr, MAX);
     printf("Sum of squares: %d\n", result);
-    int missingSemicolon = 5 // i类错误：缺少分号
-    int missingParenthesis = (5 * 3 // j类错误：缺少右小括号
-    int missingBracket = arr[5 // k类错误：缺少右中括号
+    int missingSemicolon = 5 // i class error: missing semicolon
+    int missingParenthesis = (5 * 3 // j class error: missing right parenthesis
+    int missingBracket = arr[5 // k class error: missing right bracket
     return 0;
 }

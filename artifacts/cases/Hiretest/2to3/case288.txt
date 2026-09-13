@@ -8,7 +8,7 @@ int multiply(int a, int b) {
 }
 int main(){
     int result;
-    result = add(3, 4); // 修改为参数个数匹配
+    result = add(3, 4); //Change to match the number of parameters
     result = multiply(2, 3);
     printf("Result: %d\n", result);
     return 0;

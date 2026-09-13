@@ -19,7 +19,7 @@ int main(){
         printf("a is equal to 5\n");
     }
     int b = 10;
-    if (b | 5) { // 错误：使用单独的 | 代替 ||
+    if (b | 5) { //Error: Use separate | instead of ||
         printf("b is greater than 5\n");
     }
     return 0;

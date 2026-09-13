@@ -1,4 +1,4 @@
-int a[5] = {1, 2, 3, 4, 5}; // 修改为全局变量数组
+int a[5] = {1, 2, 3, 4, 5}; //Convert to global array
 const int b = 10;
 void printArray(int arr[], int size) {
     int i = 0;
@@ -11,18 +11,18 @@ void printArray(int arr[], int size) {
     printf("\n");
 }
 int main(){
-    const int maxSize = 100; // 定义一个常量作为数组的最大长度
+    const int maxSize = 100; //Define a constant as the maximum array length
     int size = getint();
     if (size > maxSize) {
-        size = maxSize; // 限制数组长度不超过最大值
+        size = maxSize; //Limit array length not to exceed the maximum value
     }
-    int arr[100]; // 使用常量表达式定义数组长度
+    int arr[100]; //Use a constant expression to define array length
     int i = 0;
     for (i = 0; i < size; i = i + 1) {
         arr[i] = getint();
     }
     printArray(arr, size);
-    printArray(a, 5); // 使用变量数组作为实参
+    printArray(a, 5); //Use a variable array as an argument
     printf("Constant b: %d\n", b);
     return 0;
 }

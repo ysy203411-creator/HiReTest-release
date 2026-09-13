@@ -1,5 +1,5 @@
 const int SIZE = 10;
-int globalArray[10];  // 修改为编译期可求值的非负整数常量表达式
+int globalArray[10];  //Change to a non-negative integer constant expression evaluatable at compile time
 int sumArray(int arr[], int len) {
     int sum = 0;
     int i = 0;

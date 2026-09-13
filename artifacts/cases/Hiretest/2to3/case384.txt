@@ -11,9 +11,9 @@ int main(){
         printf("Value of globalVar: %d\n", globalVar);
     }
     int sum = 0;
-    int arr[5] = {1, 2, 3, 4, 5}; // 修改为局部变量数组
+    int arr[5] = {1, 2, 3, 4, 5}; //Convert to local variable array
     int j = 0;
-    for (j = 0; j < 5; j = j + 1) { // 使用不同的局部变量 j
+    for (j = 0; j < 5; j = j + 1) { //Use different local variable j
         sum = sum + arr[j];
     }
     printf("Sum of array: %d\n", sum);

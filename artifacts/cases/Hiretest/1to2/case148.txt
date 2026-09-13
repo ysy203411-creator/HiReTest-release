@@ -17,7 +17,7 @@ int sumArray(int arr[], int size) {
 int main(){
     initArray(numbers, MAX);
     int totalSum = sumArray(numbers, MAX);
-    if (totalSum > 50 & totalSum < 100) { // 使用单独的 &，应视为非法符号
+    if (totalSum > 50 & totalSum < 100) { // Use of a single & should be considered an illegal symbol
         printf("Sum is between 50 and 100: %d\n", totalSum);
     } else {
         printf("Sum is out of range: %d\n", totalSum);

@@ -8,7 +8,7 @@ int main(){
     int y = 10;
     int result = add(x, y);
     printf("Result: %d\n", result);
-    // 移除非法符号 |，保持测试用例设计目的
+    //Remove illegal symbol |, keep test case design purpose
     int invalidResult = add(x, y);
     printf("Invalid Result: %d\n", invalidResult);
     return 0;

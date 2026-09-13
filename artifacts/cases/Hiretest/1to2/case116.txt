@@ -4,7 +4,7 @@ int c[5] = {1, 2, 3, 4, 5};
 int add(int x, int y) {
     return x + y;
 }
-void printSum(int arr[], int size) {  // 修改形参类型为 int arr[]
+void printSum(int arr[], int size) {  //Change parameter type to int arr[]
     int sum = 0;
     int i = 0;
     for (i = 0; i < size; i = i + 1) {
@@ -16,7 +16,7 @@ int main(){
     int result = add(a, b);
     printf("Result: %d\n", result);
     
-    printSum(c, 5);  // 传递变量数组名
+    printSum(c, 5);  //Pass variable array name
     
     int ch = 0;  // Initialize with a valid integer value
     

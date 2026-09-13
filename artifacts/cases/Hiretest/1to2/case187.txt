@@ -9,7 +9,7 @@ void printResult(int result) {
 int main(){
     int a = 5;
     int b = 10;
-    int result = add(a, b);  // 修正了函数调用中的括号错误
+    int result = add(a, b);  //Fixed bracket error in function call
     printResult(result);
     return 0;
 }

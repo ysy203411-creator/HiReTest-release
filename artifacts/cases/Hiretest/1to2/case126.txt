@@ -14,7 +14,7 @@ int main(){
         sum = sum + numbers[i];
     }
     
-    if (sum > 0 & sum < 100) { // 错误：使用单独的 & 应视为非法符号
+    if (sum > 0 & sum < 100) { //Error: Using a standalone & is considered an illegal symbol
         printf("Sum is within range.\n");
     } else {
         printf("Sum is out of range.\n");

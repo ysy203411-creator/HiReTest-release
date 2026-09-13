@@ -7,9 +7,9 @@ void printResult(int result) {
     printf("Result: %d\n", result);
 }
 int main(){
-    int result = add(x, y); // 添加右小括号
+    int result = add(x, y); // Add closing parenthesis
     printResult(result);
-    if (x > 5) { // 添加右小括号
+    if (x > 5) { // Add closing parenthesis
         printf("x is greater than 5\n");
     }
     return 0;

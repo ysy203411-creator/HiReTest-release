@@ -9,7 +9,7 @@ int compare(int x, int y) {
     } else {
         return CONST_ZERO;
     }
-    // 删除不可达的 return 1;
+    // Remove unreachable return 1;
 }
 int main(){
     a = getint();

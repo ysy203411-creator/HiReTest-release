@@ -1,6 +1,6 @@
 const int CONST_VALUE = 10;
 int globalVar = 5;
-int array[5] = {1, 2, 3, 0, 0}; // 修改初始化列表，补全未初始化元素
+int array[5] = {1, 2, 3, 0, 0}; //Complete uninitialized elements in the initializer list
 void printArray(int arr[]) {
     int i = 0;
     for (i = 0; i < 5; i = i + 1) {

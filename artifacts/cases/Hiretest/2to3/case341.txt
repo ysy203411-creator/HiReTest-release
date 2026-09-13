@@ -13,7 +13,7 @@ int main(){
     } else {
         printf("Result is incorrect\n");
     }
-    int comparison = (x == y) | (x != y); // 这里故意使用单个 |，以测试错误识别能力
+    int comparison = (x == y) | (x != y); //Here, a single | is intentionally used to test error detection capability
     if (comparison) {
         printf("Comparison is true\n");
     } else {

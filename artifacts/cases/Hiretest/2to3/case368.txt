@@ -1,10 +1,10 @@
 const int CONST_VAL = 10;
 int globalVar;
-int arr[5] = {1, 2, 3, 0, 0};  // 提供全部元素以满足约束条件4
+int arr[5] = {1, 2, 3, 0, 0};  //Provide all elements to satisfy constraint 4
 void printArray(int arr[]) {
     int i = 0;
     for (i = 0; i < 5; i = i + 1) {
-        printf("%d\n", arr[i]);  // 添加下标访问以满足约束条件6
+        printf("%d\n", arr[i]);  //Add subscript access to satisfy constraint 6
     }
 }
 int main(){

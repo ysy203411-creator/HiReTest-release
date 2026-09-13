@@ -1,6 +1,6 @@
 const int CONST_VAL = 10;
 int globalVar = 5;
-int arr[5] = {1, 2, 3, 0, 0}; // 补全数组初始化列表
+int arr[5] = {1, 2, 3, 0, 0}; //Complete array initializer list
 int add(int a, int b) {
     return a + b;
 }
@@ -11,7 +11,7 @@ void printSum(int a, int b) {
 int main(){
     int localVar = 3;
     printSum(globalVar, localVar);
-    arr[2] = CONST_VAL; // 保留此行，因为它符合约束
+    arr[2] = CONST_VAL; //Leave this line, as it satisfies the constraints
     printf("Array element: %d\n", arr[2]);
     return 0;
 }

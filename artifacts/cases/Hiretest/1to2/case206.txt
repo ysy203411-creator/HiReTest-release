@@ -18,7 +18,7 @@ int divide(int a, int b) {
 int main(){
     int x = 10;
     int y = 20;
-    int z = 1; // 修改 z 的初始值以避免除以零
+    int z = 1; //Modify the initial value of z to avoid division by zero
     int result;
     result = add(x, y);
     printf("Addition: %d\n", result);
@@ -26,7 +26,7 @@ int main(){
     printf("Subtraction: %d\n", result);
     result = multiply(x, y);
     printf("Multiplication: %d\n", result);
-    result = divide(x, z); // 修改后的 z 不会导致除以零
+    result = divide(x, z); //The modified z does not cause division by zero
     printf("Division: %d\n", result);
     return 0;
 }

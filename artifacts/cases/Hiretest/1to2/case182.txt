@@ -5,7 +5,7 @@ int sum(int x, int y) {
     return x + y;
 }
 int main(){
-    const int c = a + b; // 使用合法的常量表达式初始化常量
+    const int c = a + b; //Use a legal constant expression to initialize a constant
     int result = sum(arr[0], arr[1]);
     printf("Result: %d\n", result);
     return 0;

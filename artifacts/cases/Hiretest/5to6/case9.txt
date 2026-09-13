@@ -1,7 +1,7 @@
 const int CONST_VAL = 255;
 int globalVar;
 int zeroExtend(int inputValue) {
-    int result = inputValue; // 去掉强制转换
+    int result = inputValue; //Remove cast
     return result;
 }
 int main(){

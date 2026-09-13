@@ -12,7 +12,7 @@ int main(){
     int localArray[3] = {10, 20, 30};
     int totalSum = sumArray(globalArray, SIZE) + sumArray(localArray, 3);
     
-    int value = globalArray[2]; // 修复语法错误，添加缺失的右括号
+    int value = globalArray[2]; //Fix syntax errors, add missing closing brackets
     printf("Total Sum: %d\n", totalSum);
     
     return 0;

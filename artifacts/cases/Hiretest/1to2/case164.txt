@@ -12,7 +12,7 @@ int main(){
     for (i = 0; i < MAX; i = i + 1) {
         sum = sum + data[i];
     }
-    if (sum > 50 & sum < 100) {  // 使用单独的 &，应视为非法符号
+    if (sum > 50 & sum < 100) {  // Use of a single & should be considered an illegal symbol
         printf("Sum is within range.\n");
     } else {
         printf("Sum is out of range.\n");

@@ -11,7 +11,7 @@ int main(){
     process(numbers);
     int a = 5;
     int b = 10;
-    int c = a & b; // 使用单独的 & 符号，应该被识别为错误
+    int c = a & b; // Using the & symbol alone, should be recognized as an error
     printf("Result: %d\n", result);
     return 0;
 }

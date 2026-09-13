@@ -11,7 +11,7 @@ int main(){
     int y = 20;
     int result = add(x, y);
     printResult(result);
-    // 使用非法符号 | 代替 ||
+    //Use illegal symbol | instead of ||
     if (x > 0 | y > 0) {
         printf("Both numbers are positive.\n");
     }

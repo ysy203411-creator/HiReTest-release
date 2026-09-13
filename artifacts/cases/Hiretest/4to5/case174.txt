@@ -10,7 +10,7 @@ int main(){
     int localVar = getint();
     int sum = add(localVar, CONST_VAL);
     printResult(sum);
-    globalVar = getint(); // 使用允许的库函数 getint()
+    globalVar = getint(); // Use the allowed library function getint()
     printf("Char received: %d\n", globalVar);
     return 0;
 }

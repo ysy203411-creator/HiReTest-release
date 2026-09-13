@@ -1,6 +1,6 @@
 const int MAX_SIZE = 10;
 int arr[MAX_SIZE];
-int func(int arr[) { // 缺少右中括号
+int func(int arr[) { //Missing closing bracket
     return arr[0];
 }
 int main(){

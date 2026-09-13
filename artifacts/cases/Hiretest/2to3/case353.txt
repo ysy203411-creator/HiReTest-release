@@ -1,7 +1,7 @@
 const int MAX = 10;
 int arr[MAX];
 int func(int a) {
-    int arr[5]; // 局部变量遮蔽全局变量
+    int arr[5]; //Local variables shadow global variables
     arr[2] = a;
     return arr[2];
 }

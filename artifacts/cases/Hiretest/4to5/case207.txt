@@ -6,7 +6,7 @@ int add(int a, int b) {
 }
 void printSum(int a, int b) {
     int sum = add(a, b);
-    printf("Sum: %d\n", sum); // 确保格式符%d与参数数量一致
+    printf("Sum: %d\n", sum); //Ensure the format specifier %d matches the number of parameters
 }
 int main(){
     int x = getint();

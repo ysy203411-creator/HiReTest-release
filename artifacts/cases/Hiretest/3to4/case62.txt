@@ -7,7 +7,7 @@ void updateArray(int a[]) {
 }
 void testFunction() {
     int local_var = 5;
-    for (CONST_VAL = 0; CONST_VAL < 10; CONST_VAL = CONST_VAL + 1) { // h类错误：对常量进行赋值
+    for (CONST_VAL = 0; CONST_VAL < 10; CONST_VAL = CONST_VAL + 1) { //H class error: assigning to a constant
         local_var = local_var + CONST_VAL;
     }
 }

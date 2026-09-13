@@ -7,7 +7,7 @@ int add(int x, int y) {
 int main(){
     int result;
     result = add(a, b);
-    if (result > 0 & result < c) { // 错误：使用单独的 & 应视为非法符号
+    if (result > 0 & result < c) { //Error: Using a standalone & is considered an illegal symbol
         printf("Result is within range.\n");
     } else {
         printf("Result is out of range.\n");

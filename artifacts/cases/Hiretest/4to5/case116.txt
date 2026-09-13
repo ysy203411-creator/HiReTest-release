@@ -1,6 +1,6 @@
 const int CONST_VAL = 10;
 int globalVar;
-int globalArray[5] = {1, 2, 3, 0, 0}; // 补全初始化
+int globalArray[5] = {1, 2, 3, 0, 0}; //Complete initialization
 
 int add(int a, int b) {
     return a + b;
@@ -8,7 +8,7 @@ int add(int a, int b) {
 
 void printArray(int arr[]) {
     int i = 0;
-    /* 用 while 循环替代 for */
+    /*Replace for with while*/
     i = 0;
     while (i < 5) {
         printf("%d ", arr[i]);
@@ -25,7 +25,7 @@ int main() {
 
     int localArray[5];
     int i = 0;
-    /* 用 while 循环替代 for */
+    /*Replace for with while*/
     i = 0;
     while (i < 5) {
         localArray[i] = globalArray[i] + localVar;

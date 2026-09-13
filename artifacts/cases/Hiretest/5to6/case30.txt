@@ -12,10 +12,10 @@ int accessArrayElement(int index) {
 int main() {
     int input;
     input = getint();
-    /* 直接在主函数中使用 input 修改全局变量，避免将函数调用表达式作为参数传递 */
+    /*Use input in the main function to modify the global variable, avoiding passing function call expressions as parameters*/
     globalVar = input;
     printf("Global Variable: %d\n", globalVar);
-    int element = accessArrayElement(2); // 修改：先获取数组元素，再传递给printf
+    int element = accessArrayElement(2); //Modify: first get the array elements, then pass them to printf
     printf("Array Element at index 2: %d\n", element);
     return 0;
 }

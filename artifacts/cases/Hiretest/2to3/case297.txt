@@ -1,5 +1,5 @@
 const int a[5] = {1, 2, 3, 4, 5};
-int b = 10;  // 修改为变量
+int b = 10;  //Change to variable
 int c[3] = {1, 2, 3};
 int add(int x, int y) {
     return x + y;
@@ -11,7 +11,7 @@ void printArray(int arr[], int size) {
     }
 }
 int main(){
-    int result = add(b, 3);  // 修改为常量表达式
+    int result = add(b, 3);  //Change to constant expression
     printf("Result: %d\n", result);
     printArray(c, 3);
     return 0;

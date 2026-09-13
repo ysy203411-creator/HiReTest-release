@@ -10,7 +10,7 @@ int main(){
     int x = getint();
     int y = getint();
     int sum = add(x, y);
-    if (sum > 10 & sum < 20) { // 错误：使用单独的 &
+    if (sum > 10 & sum < 20) { //Error: using separate &
         printResult(sum);
     } else {
         printf("Sum is out of range.\n");

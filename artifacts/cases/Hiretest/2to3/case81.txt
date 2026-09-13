@@ -1,5 +1,5 @@
 const int MAX = 10;
-const int globalArray[MAX] = {1, 2, 3}; // 修改为常量数组
+const int globalArray[MAX] = {1, 2, 3}; //Change to constant array
 int sum(int a, int b) {
     return a + b;
 }

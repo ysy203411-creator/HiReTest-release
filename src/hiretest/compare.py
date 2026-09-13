@@ -1,27 +1,29 @@
+import argparse
 import os
 import re
 import subprocess
-from collections import defaultdict, Counter
-import zipfile
 import glob
+from pathlib import Path
+
 import pandas as pd
-from unrar import rarfile
 
-# 定义根目录和结果目录
+try:
+    from .paths import data_workspace_root, release_root
+except ImportError:  # Support direct execution from src/hiretest.
+    from paths import data_workspace_root, release_root
 
-root_dir = 'compare/data'
-# dst_dir = 'compare/mid_data'
-dst_dir = 'compare/mid_data_1681_1682'
-final_dir = 'compare/final_data_1681_1682'
+# Runtime paths are configured by CLI arguments or environment variables.
+root_dir = str(Path(os.environ.get("HIRETEST_DATA_ROOT", release_root() / "data")))
+dst_dir = str(data_workspace_root() / "version_diffs")
 
-# 作业编号列表（假设作业编号是已知的，并且按照顺序排列）
-assignments = ['1527', '1526', '1641', '1681', '1682', '1705']
+# The selected adjacent assignment IDs are supplied at runtime.
+assignments = []
 
 
 def run_gumtree_textdiff(path1, path2, output_path):
     output_dir = os.path.dirname(output_path)
 
-    # 检查输出文件夹是否存在，如果不存在则创建它
+    #Check if output folder exists, create it if not
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
@@ -29,9 +31,9 @@ def run_gumtree_textdiff(path1, path2, output_path):
 
     filename = os.path.basename(output_path)
 
-    # 分割文件名和后缀
+    #Split filename and extension
     filename_without_ext, ext = os.path.splitext(filename)
-    # 构建命令行指令
+    #Build command line instruction
     if ext == '.java':
         command = ['gumtree.bat', 'textdiff','-m','gumtree-simple-id-theta', path1, path2, '-o', new_output_path]
     elif ext == '.cpp' or ext == '.hpp':
@@ -44,11 +46,11 @@ def run_gumtree_textdiff(path1, path2, output_path):
         print(new_output_path)
         return
 
-    # 使用subprocess.run()执行指令
+    #Execute instruction using subprocess.run()
 
     result = subprocess.run(command, capture_output=True, text=True,shell=True)
 
-    # 检查执行结果
+    #Check execution result
     if result.returncode != 0:
         print("gumtree error")
 
@@ -56,7 +58,7 @@ def run_gumtree_textdiff(path1, path2, output_path):
 def run_gumtree_parse(path, output_path):
     output_dir = os.path.dirname(output_path)
 
-    # 检查输出文件夹是否存在，如果不存在则创建它
+    #Check if output folder exists, create it if not
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
@@ -64,9 +66,9 @@ def run_gumtree_parse(path, output_path):
 
     filename = os.path.basename(output_path)
 
-    # 分割文件名和后缀
+    #Split filename and extension
     filename_without_ext, ext = os.path.splitext(filename)
-    # 构建命令行指令
+    #Build command line instruction
     if ext == '.java':
         command = ['gumtree.bat', 'parse', path, '-o', new_output_path]
     elif ext == '.cpp' or ext == '.hpp':
@@ -77,11 +79,11 @@ def run_gumtree_parse(path, output_path):
     else:
         return
 
-    # 使用subprocess.run()执行指令
+    #Execute instruction using subprocess.run()
 
     result = subprocess.run(command, capture_output=True, text=True,shell=True)
 
-    # 检查执行结果
+    #Check execution result
     if result.returncode != 0:
         print("gumtree error")
 
@@ -91,40 +93,40 @@ def del_match(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
 
-        # 初始化结果列表
+        #Initialize result list
         result = []
-        # 初始化删除标志
+        #Initialize delete flag
         deleting = False
         change = False
         line_before = ''
         for line in lines:
             if line.strip() == "match":
-                # 遇到 "==="
+                #Encounter "==="
                 if result and line_before == "===":
-                    # 如果上一行是 "==="，开始删除
+                    #If the previous line is "===", start deletion
                     deleting = True
                     change = True
-                    # 移除上一行
+                    #Remove the previous line
                     result.pop()
             elif line.strip() == "===" and deleting:
                 result.append(line)
-                deleting = False  # 退出删除状态
+                deleting = False  #Exit deletion mode
             elif deleting:
-                # 如果处于删除状态，跳过当前行
+                #If in deletion mode, skip the current line
                 continue
             else:
-                # 不处于删除状态，正常添加行到结果中
+                #Not in deletion mode, add the line to the result normally
                 result.append(line)
-                # 如果当前行是 "match"，但不立即删除，只记录状态
+                #If the current line is "match", but do not delete immediately, just record the state
                 if line.strip() == "match":
                     print('why occur match')
-                    # 确保之前的行是 "==="，这个条件已在前面处理过
+                    #Ensure the previous line is "===", this condition has already been handled earlier
                     pass
             line_before = line.strip()
-            # 如果遇到新的 "===" 并且当前不在删除状态，结束删除
+            #If encountering a new "===" and not in deletion mode, end deletion
 
 
-        # 将结果写回文件，或者你可以选择其他处理方式
+        #Write the result back to the file, or you can choose other processing methods
         with open(file_path, 'w', encoding='utf-8') as file:
             file.writelines(result)
         if change == True:
@@ -132,13 +134,13 @@ def del_match(file_path):
 
 
 def compare3code(path1,path2,path3,output_path):
-    # 获取三个路径下的所有文件路径
+    #Get all file paths under three paths
     files1 = set()
     files2 = set()
     files3 = set()
 
     def collect_files(path, files_set):
-        ignore_dirs = {".git",".idea", "__MACOSX","META-INF",".vscode",".settings"}  # 默认忽略的文件夹集合
+        ignore_dirs = {".git",".idea", "__MACOSX","META-INF",".vscode",".settings"}  #Set of default ignored folders
         ignore_extensions = {".txt", ".class", ".json",".DS_Store",".zip",".md",".exe",".pdf"}
         for root, dirs, files in os.walk(path):
             dirs[:] = [d for d in dirs if d not in ignore_dirs]
@@ -151,7 +153,7 @@ def compare3code(path1,path2,path3,output_path):
     collect_files(path2, files2)
     collect_files(path3, files3)
 
-    # 找出三个版本中都存在的文件
+    #Find files present in all three versions
     common_files = files1.intersection(files2).intersection(files3)
 
     for file in common_files:
@@ -170,15 +172,14 @@ def compare3code(path1,path2,path3,output_path):
         run_gumtree_parse(file3, ast_path3)
 
 
-def get_student_score(input_folder, output_excel_path):
-    homework_ids = ['1527', '1526', '1641', '1681', '1682', '1705']
+def get_student_score(input_folder, output_excel_path, homework_ids):
     students_data = {}
 
-    # 遍历每个学生文件夹
+    #Traverse each student folder
     for student_id in os.listdir(input_folder):
         student_dir = os.path.join(input_folder, student_id)
         if not os.path.isdir(student_dir):
-            continue  # 跳过非文件夹
+            continue  #Skip non-folders
 
         student_scores = {}
         for hw_id in homework_ids:
@@ -187,19 +188,19 @@ def get_student_score(input_folder, output_excel_path):
                 student_scores[hw_id] = 0.0
                 continue
 
-                # 查找last和first文件
+                #Find last and first files
             last_files = glob.glob(os.path.join(hw_dir, 'last_*.txt'))
             if last_files:
-                filename = os.path.basename(last_files[0])  # 取第一个last文件
+                filename = os.path.basename(last_files[0])  #Take the first last file
             else:
                 first_files = glob.glob(os.path.join(hw_dir, 'first_*.txt'))
                 if first_files:
-                    filename = os.path.basename(first_files[0])  # 取第一个first文件
+                    filename = os.path.basename(first_files[0])  #Take the first first file
                 else:
                     student_scores[hw_id] = 0.0
                     continue
 
-            # 使用正则表达式提取分数
+            #Use regex to extract scores
             match = re.fullmatch(r'(?:last|first)_([0-9.]+)\.txt', filename, re.IGNORECASE)
             if match:
                 try:
@@ -212,38 +213,37 @@ def get_student_score(input_folder, output_excel_path):
 
         students_data[student_id] = student_scores
 
-    # 创建DataFrame并确保列顺序
+    #Create DataFrame and ensure column order
     df = pd.DataFrame.from_dict(students_data, orient='index', columns=homework_ids)
 
-    # 确保输出目录存在
+    #Ensure output directory exists
     os.makedirs(os.path.dirname(output_excel_path), exist_ok=True)
 
-    # 导出到Excel
+    #Export to Excel
     df.to_excel(output_excel_path)
 
 
-def get_student_submit_count(input_folder, output_excel_path):
-    homework_ids = ['1527', '1526', '1641', '1681', '1682', '1705']
+def get_student_submit_count(input_folder, output_excel_path, homework_ids):
     students_data = {}
 
-    # 遍历每个学生文件夹
+    #Traverse each student folder
     for student_id in os.listdir(input_folder):
         student_dir = os.path.join(input_folder, student_id)
         if not os.path.isdir(student_dir):
-            continue  # 跳过非文件夹
+            continue  #Skip non-folders
 
         submission_counts = {}
         for hw_id in homework_ids:
             hw_dir = os.path.join(student_dir, hw_id)
             total_submissions = 0
 
-            # 检查作业文件夹是否存在
+            #Check if the assignment folder exists
             if os.path.exists(hw_dir) and os.path.isdir(hw_dir):
-                # 遍历子作业文件夹
+                #Traverse sub-assignment folders
                 for sub_hw in os.listdir(hw_dir):
                     sub_hw_path = os.path.join(hw_dir, sub_hw)
                     if os.path.isdir(sub_hw_path):
-                        # 统计提交文件夹数量
+                        #Count submitted folders
                         submissions = [name for name in os.listdir(sub_hw_path)
                                        if os.path.isdir(os.path.join(sub_hw_path, name))]
                         total_submissions += len(submissions)
@@ -252,26 +252,24 @@ def get_student_submit_count(input_folder, output_excel_path):
 
         students_data[student_id] = submission_counts
 
-    # 创建DataFrame并保持列顺序
+    #Create DataFrame and preserve column order
     df = pd.DataFrame.from_dict(students_data, orient='index', columns=homework_ids)
 
-    # 确保输出目录存在
+    #Ensure output directory exists
     os.makedirs(os.path.dirname(output_excel_path), exist_ok=True)
 
-    # 导出到Excel
+    #Export to Excel
     df.to_excel(output_excel_path)
 
 
 def get_basic_data():
-    assign_num = {'1527':0, '1526':0, '1641':0, '1681':0, '1682':0, '1705':0}
-    pass_num = {'1527': 0, '1526': 0, '1641': 0, '1681': 0, '1682': 0, '1705': 0}
+    assign_num = {assignment_id: 0 for assignment_id in assignments}
+    pass_num = {assignment_id: 0 for assignment_id in assignments}
     for student_id in os.listdir(root_dir):
         student_path = os.path.join(root_dir, student_id)
         for assignment_id in assignments:
             assignment_path = os.path.join(student_path, assignment_id)
             if os.path.exists(assignment_path):
-                if assignment_id == '1682':
-                    print(student_id)
                 assign_num[assignment_id] += 1
                 score_path1 = os.path.join(assignment_path, 'first_100.0.txt')
                 score_path2 = os.path.join(assignment_path, 'last_100.0.txt')
@@ -282,7 +280,7 @@ def get_basic_data():
 
 def traverse_data():
     flag = 0
-    # 遍历所有学生文件夹
+    #Traverse all student folders
     for student_id in os.listdir(root_dir):
         # if student_id == "22371105":
         #     flag = 1
@@ -291,23 +289,21 @@ def traverse_data():
         #     continue
         student_path = os.path.join(root_dir, student_id)
         if os.path.isdir(student_path):
-            # 遍历学生的所有作业文件夹
-            path1 = '' #前一次作业最后一次提交
-            path2 = '' #后一次作业第一次提交
-            path3 = '' #后一次作业最后一次提交
+            #Traverse all assignments folders for each student
+            path1 = '' #Last submission of the previous assignment
+            path2 = '' #First submission of the next assignment
+            path3 = '' #Last submission of the next assignment
             for assignment_id in assignments:
                 assignment_path = os.path.join(student_path, assignment_id)
                 if not os.path.exists(assignment_path):
                     continue
                 submit_list = os.listdir(assignment_path)
-                if assignment_id != '1681' and assignment_id != '1682':
-                    continue
-                if assignment_id == assignments[3] and (len(submit_list) == 4 or len(submit_list) == 5):
+                if assignment_id == assignments[0] and (len(submit_list) == 4 or len(submit_list) == 5):
                     score_path = os.path.join(student_path, assignment_id,'last_100.0.txt')
                     if not os.path.isfile(score_path):
                         break
                     path1 = os.path.join(student_path, assignment_id,'last')
-                elif assignment_id == assignments[3] and (len(submit_list) == 2 or len(submit_list) == 3):
+                elif assignment_id == assignments[0] and (len(submit_list) == 2 or len(submit_list) == 3):
                     score_path = os.path.join(student_path, assignment_id,'first_100.0.txt')
                     if not os.path.isfile(score_path):
                         break
@@ -320,9 +316,37 @@ def traverse_data():
                         compare3code(path1,path2,path3,output_path)
             print(f"{student_id} finish")
 
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Generate GumTree diffs for one adjacent assignment transition."
+    )
+    parser.add_argument(
+        "--data-root",
+        default=os.environ.get("HIRETEST_DATA_ROOT", str(release_root() / "data")),
+        help="Authorized submission-data root; see README.md.",
+    )
+    parser.add_argument(
+        "--derived-root",
+        default=str(data_workspace_root()),
+        help="Writable directory for generated intermediate data.",
+    )
+    parser.add_argument("--from-assignment", required=True, help="Earlier assignment ID.")
+    parser.add_argument("--to-assignment", required=True, help="Later assignment ID.")
+    return parser.parse_args()
+
 
 if __name__ == "__main__":
-    traverse_data() #遍历学生提交记录，生成 Diff 和 AST 文件
-    # get_basic_data() #统计各作业的“总提交人数”与“满分通过人数”
-    # get_student_score('compare/data', 'compare/student_scores.xlsx') #提取并汇总所有学生的最终成绩到 Excel
-    # get_student_submit_count('src_classification', 'compare/student_submit_count.xlsx') #统计并汇总所有学生的提交次数到 Excel
+    args = parse_args()
+    root_dir = str(Path(args.data_root).expanduser().resolve())
+    assignments = [args.from_assignment, args.to_assignment]
+    dst_dir = str(
+        Path(args.derived_root).expanduser().resolve()
+        / "version_diffs"
+        / f"{args.from_assignment}_to_{args.to_assignment}"
+    )
+    if not Path(root_dir).is_dir():
+        raise FileNotFoundError(
+            f"Data directory not found: {root_dir}. Obtain the authorized data package "
+            "and configure it as described in README.md."
+        )
+    traverse_data()

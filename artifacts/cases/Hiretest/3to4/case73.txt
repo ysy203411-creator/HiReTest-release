@@ -10,7 +10,7 @@ void printChar(int c) {
 int main(){
     int localVar = 3;
     int result;
-    int charVar = 65; // 'A' 的 ASCII 值
+    int charVar = 65; //The ASCII value of 'A'
     // Test function call with matching parameter types
     result = add(globalVar, localVar);
     printf("Result of add: %d\n", result);

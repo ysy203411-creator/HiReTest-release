@@ -16,7 +16,7 @@ void compare(int x, int y) {
 }
 int main(){
     int result = add(a, b);
-    int temp = c[2]; // 将 c[2] 存储到局部变量 temp 中
+    int temp = c[2]; //Store c[2] into local variable temp
     compare(result, temp);
     if (a > b || b < c[0]) {
         printf("Condition met\n");

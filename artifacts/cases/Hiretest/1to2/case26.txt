@@ -12,7 +12,7 @@ int main(){
     int y = getint();
     int result = add(x, y);
     printResult(result);
-    if (x & y) {  // 使用单独的 & 作为条件表达式，触发 a 类错误
+    if (x & y) {  //Use & alone as a conditional expression, triggering a class error
         printf("Both non-zero\n");
     }
     return 0;

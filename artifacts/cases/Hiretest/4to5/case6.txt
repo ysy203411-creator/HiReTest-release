@@ -13,7 +13,7 @@ int main() {
     int input;
     input = getint();
 
-    /* 将输入限制在 0~2 之间，保证数组下标合法 */
+    /*Limit input to 0~2 to ensure array index validity*/
     if (input < 0) {
         input = 0;
     }

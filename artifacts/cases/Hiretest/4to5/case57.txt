@@ -3,13 +3,13 @@ int b;
 
 int main() {
     a = getint();
-    /* 原逻辑：若 a > 0 则 b = 1，否则 b = -1
-       由于不允许 if 语句，这里只保留简单赋值和输出测试 */
+    /*Original logic: if a > 0 then b = 1, else b = -1
+       Since if statements are not allowed, only simple assignment and output testing are retained*/
     b = -1;
     printf("%d\n", b);
 
-    /* 原逻辑：for (i = 0; i < 3; i = i + 1) 打印 0,1,2
-       由于不允许 for 语句，这里改为顺序赋值和输出，保留表达式和多次输出测试 */
+    /*Original logic: for (i = 0; i < 3; i = i + 1) print 0,1,2
+       Since for statements are not allowed, this is changed to sequential assignment and output, retaining expressions and multiple output testing*/
     int i;
     i = 0;
     printf("%d\n", i);

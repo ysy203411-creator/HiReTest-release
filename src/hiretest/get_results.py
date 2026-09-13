@@ -8,32 +8,36 @@ except ImportError:
     from data_preprocessing import load_ast_file
 from pathlib import Path
 import argparse
-RELEASE_ROOT = Path(__file__).resolve().parents[2]
-PROJECT_ROOT = Path(os.environ.get("HIRETEST_DERIVED_DATA_ROOT", RELEASE_ROOT / "data" / "restricted"))
-PROMPT_DIR = PROJECT_ROOT / "prompt"
-# mid_data_path = ["", "mid_data_1852_1854", "mid_data_1854_1856", "mid_data_1856_1858","mid_data_1858_1859","mid_data_1859_1860"]
-# homework_ids = ["1852","1854","1856","1858","1859","1860"]
-mid_data_path = ["", "mid_data_1527_1526", "mid_data_1526_1641", "mid_data_1641_1681","mid_data_1681_1682","mid_data_1682_1705"]
-homework_ids = ["1527","1526","1641","1681","1682","1705"]
+
+try:
+    from .paths import data_workspace_root, public_prompt_root
+except ImportError:  # Support direct execution from src/hiretest.
+    from paths import data_workspace_root, public_prompt_root
+
+
+PROJECT_ROOT = data_workspace_root()
+PROMPT_DIR = public_prompt_root()
+mid_data_path = []
+homework_ids = []
 test_case_ids = ["","1to2","2to3","3to4","4to5","5to6"]
 prompt_header = "full_prompt" #prompt
 
 
 def logical_to_physical_offset(file_path: str, log_start: int, log_end: int) -> Tuple[int, int]:
     """
-    将 GumTree TextDiff 的逻辑字符索引映射为原始文件的物理字节偏移。
+    Map the logical character indices from GumTree TextDiff to physical byte offsets in the original file.
     
-    GumTree TextDiff 规则：
-    - \r\n 计为 1 个逻辑字符（归一化为 \n）
-    - 其他字符各计为 1
+    GumTree TextDiff rules:
+    - \r\n is counted as 1 logical character (normalized to \n)
+    - All other characters are counted as 1
     
     Args:
-        file_path: 源代码文件路径
-        log_start: TextDiff 输出的起始逻辑位置
-        log_end: TextDiff 输出的结束逻辑位置
+        file_path: Source code file path
+        log_start: Start logical position from TextDiff output
+        log_end: End logical position from TextDiff output
     
     Returns:
-        (phys_start, phys_end): 原始文件中的字节偏移量 [start, end)
+        (phys_start, phys_end): Byte offsets in the original file [start, end)
     """
     with open(file_path, 'rb') as f:
         raw = f.read()
@@ -51,7 +55,7 @@ def logical_to_physical_offset(file_path: str, log_start: int, log_end: int) -> 
         if phys_start is not None and phys_end is not None:
             break
         
-        # \r\n 在逻辑中计为 1 步，物理中占 2 字节
+        # \r\n is counted as 1 step in logic but occupies 2 bytes physically
         if raw[i] == 0x0D and i + 1 < n and raw[i+1] == 0x0A:
             gum_idx += 1
             i += 2
@@ -67,16 +71,16 @@ def logical_to_physical_offset(file_path: str, log_start: int, log_end: int) -> 
 def extract_code_by_logical_position(file_path: str, log_start: int, log_end: int, 
                                      snap_to_boundary: bool = True) -> str:
     """
-    根据 TextDiff 逻辑坐标从源代码文件中提取代码片段。
+    Extract code snippets from the source code file based on TextDiff logical coordinates.
     
     Args:
-        file_path: 源代码文件路径
-        log_start: TextDiff 起始位置
-        log_end: TextDiff 结束位置
-        snap_to_boundary: 是否智能吸附到完整语法边界（解决 ±1 截断问题）
+        file_path: Source code file path
+        log_start: Start position from TextDiff
+        log_end: End position from TextDiff
+        snap_to_boundary: Whether to smartly snap to complete syntax boundaries (to solve ±1 truncation issues)
     
     Returns:
-        提取的代码字符串
+        Extracted code string
     """
     if log_start == -1 or log_end == -1:
         return ""
@@ -87,7 +91,7 @@ def extract_code_by_logical_position(file_path: str, log_start: int, log_end: in
         raw = f.read()
     
     if snap_to_boundary:
-        # 向前扫修饰符
+        # Forward modifier scan
         scan_back = max(0, phys_start - 50)
         window = raw[scan_back:phys_start]
         for kw in [b'public ', b'private ', b'protected ', b'static ', b'class ', b'interface ']:
@@ -100,7 +104,7 @@ def extract_code_by_logical_position(file_path: str, log_start: int, log_end: in
             if nl != -1:
                 phys_start = scan_back + nl + 1
         
-        # 向后找闭合 }
+        # Backward find closing }
         scan_fwd = min(len(raw), phys_end + 100)
         window_fwd = raw[phys_end:scan_fwd]
         brace = window_fwd.find(b'}')
@@ -118,74 +122,64 @@ def extract_code_by_logical_position(file_path: str, log_start: int, log_end: in
 def extract_and_save_method_contexts(
     excel_path: str,
     output_dir: str,
-    base_data_dir: str,  # 新增参数：数据根目录，用于查找源文件
+    base_data_dir: str,  # New parameter: data root directory, used to locate source files
     info_type: str
 ):
     """
-    根据预测结果Excel文件，提取每条数据变更前后所在方法的代码，并保存为去重后的txt文件。
+    Extract code before and after each data change in methods from the predicted result Excel file, and save them as a deduplicated txt file.
 
     Args:
-        excel_path (str): 输入的Excel文件路径
-        output_dir (str): 输出目录
-        string_template (str): 用于格式化输出的模板字符串
-        base_data_dir (str): 数据根目录 (e.g., 'HiReTest/data')
+        excel_path (str): Input Excel file path
+        output_dir (str): Output directory
+        string_template (str): Template string for formatting output
+        base_data_dir (s): Data root directory (e.g., 'HiReTest/data')
     """
-    # 1. 加载Excel数据
+    # 1. Load Excel data
     df = pd.read_excel(excel_path)
     print(f"Loaded {len(df)} predicted positive samples from {excel_path}.")
 
-    # --- 关键修改：按 homework_id 分组 ---
-    # 2. 按 '课程id' (homework_id) 分组
-    grouped = df.groupby('课程id')
+    # --- Key modification: group by homework_id ---
+    # 2. Group by 'course id' (homework_id)
+    grouped = df.groupby('Assignment ID')
     print(f"Found {len(grouped)} unique homework_ids: {list(grouped.groups.keys())}")
 
-    # 3. 遍历每个 homework_id 组
+    # 3. Traverse each homework_id group
     for homework_id, group_df in grouped:
         homework_id = str(homework_id)
-        # if homework_id == '1854':
-        #     index = 1
-        # elif homework_id == '1856':
-        #     index = 2
-        # elif homework_id == '1858':
-        #     index = 3
-        # elif homework_id == '1859':
-        #     index = 4
-        # elif homework_id == '1860':
-        #     index = 5
-        if homework_id == '1526':
-            index = 1
-        elif homework_id == '1641':
-            index = 2
-        elif homework_id == '1681':
-            index = 3
-        elif homework_id == '1682':
-            index = 4
-        elif homework_id == '1705':
-            index = 5
+        try:
+            index = homework_ids.index(homework_id)
+        except ValueError as exc:
+            raise ValueError(
+                f"Assignment ID {homework_id!r} is not present in --assignment-ids"
+            ) from exc
+        if index == 0:
+            raise ValueError(
+                "Positive predictions must refer to a target assignment, not the first source assignment"
+            )
 
         print(f"\nProcessing homework_id: {homework_id} ({len(group_df)} samples)")
         
-        # 3.1 为当前 homework_id 创建专属输出目录
+        # 3.1 Create a dedicated output directory for the current homework_id
         homework_output_dir = os.path.join(output_dir, test_case_ids[index])
         os.makedirs(homework_output_dir, exist_ok=True)
 
-        # 3.2 初始化用于存储 (method_code_pair, formatted_string) 的列表
+        #3.2 Initialize a list to store (method_code_pair, formatted_string)
         results_to_dedup = []
 
-        # 3.3 遍历当前组的每一行
+        #3.3 Iterate through each line of the current group
         for idx, row in group_df.iterrows():
             try:
-                file_name = row['文件路径']
-                student_id = str(row['学生id'])
-                # homework_id 已从分组中获取
-                old_pos_str = row['代码变更修改前的位置']
-                new_pos_str = row['代码变更修改后的位置']
+                file_name = row['File Path']
+                student_id = str(row['Student ID'])
+                #homework_id has been retrieved from the group
+                old_pos_str = row['Old Change Position']
+                new_pos_str = row['New Change Position']
                 
-                # 解析位置字符串
+                #Parse the position string
                 old_start, old_end = parse_position_string(old_pos_str)
                 new_start, new_end = parse_position_string(new_pos_str)
 
-                # 提取方法代码
+                #Extract the method code
                 old_method_code = ""
                 new_method_code = ""
                 if old_start != -1 and new_start != -1:
@@ -239,7 +233,7 @@ def extract_and_save_method_contexts(
                                 )                 
                     else:
                         continue                    
-                # 生成格式化字符串
+                #Generate the formatted string
                 with open(PROMPT_DIR / f'prompt_{index}to{index+1}.txt','r',encoding='utf-8') as file:
                     template = file.read()
 
@@ -275,7 +269,7 @@ def extract_and_save_method_contexts(
                 print(f"Error processing row (homework_id={homework_id}, idx={idx}): {e}")
                 continue
 
-        # 3.4 对当前 homework_id 的结果去重
+        #3.4 Deduplicate the results for the current homework_id
         dedup_dict = {}
         for key, formatted_str in results_to_dedup:
             if key not in dedup_dict:
@@ -284,7 +278,7 @@ def extract_and_save_method_contexts(
         unique_strings = list(dedup_dict.values())
         print(f"  -> Generated {len(results_to_dedup)} strings, {len(unique_strings)} unique.")
 
-        # 3.5 保存到当前 homework_id 的文件夹
+        #3.5 Save to the folder for the current homework_id
         for i, s in enumerate(unique_strings, start=1):
             output_file = os.path.join(homework_output_dir, f"case{i}.txt")
             with open(output_file, 'w', encoding='utf-8') as f:
@@ -296,7 +290,7 @@ def extract_and_save_method_contexts(
 
 
 def parse_position_string(pos_str: str) -> Tuple[int, int]:
-    """解析位置字符串如 '[123, 456]' 或 '[-1, -1]'，返回 (start, end)。"""
+    """Parse the position string like '[123, 456]' or '[-1, -1]', return (start, end)."""
     if pos_str == "N/A" or not isinstance(pos_str, str):
         return (-1, -1)
     try:
@@ -309,16 +303,16 @@ def parse_position_string(pos_str: str) -> Tuple[int, int]:
         return (-1, -1)
 
 def _get_homework_index(homework_id: str, homework_ids: list) -> int:
-    """根据 homework_id 获取在 homework_ids 中的索引。"""
+    """Get the index of homework_id in homework_ids."""
     return homework_ids.index(homework_id)
 
 def _map_to_source_code_path(base_data_dir: str, file_name: str, student_id: str, homework_id: str, version: str) -> str:
-    """映射到源代码文件路径。"""
+    """Map to the source code file path."""
     source_version_dir = 'first' if version == 'old' else 'last'
     return os.path.join(base_data_dir, 'data', student_id, homework_id, source_version_dir, file_name)
 
 def _map_to_ast_path(base_data_dir: str, file_name: str, student_id: str, homework_id: str, mid_data_path: list, homework_ids: list, version: str) -> str:
-    """映射到 AST 文件路径。"""
+    """Map to the AST file path."""
     hw_idx = _get_homework_index(homework_id, homework_ids)
     mid_data_dir_name = mid_data_path[hw_idx]
     ast_version_num = '2' if version == 'old' else '3'
@@ -328,7 +322,7 @@ def _extract_method_code(base_data_dir: str, mid_data_path: list, homework_ids: 
                          file_name: str, student_id: str, homework_id: str, 
                          start: int, end: int, version: str) -> Tuple[str, str]:
     """
-    根据逻辑坐标提取方法代码和方法名（已修复坐标映射）
+    Extract method code and method name based on logical coordinates (fixed coordinate mapping)
     Returns:
         (method_code, method_name)
     """
@@ -339,18 +333,18 @@ def _extract_method_code(base_data_dir: str, mid_data_path: list, homework_ids: 
         return "", ""
     
     try:
-        # 1. 加载 AST 查找方法节点（AST 坐标是逻辑坐标，直接使用）
+        # 1. Load AST to find method node (AST coordinates are logical coordinates, used directly)
         ast = load_ast_file(ast_file_path)
         method_node, method_name = _find_containing_method_with_name(ast, start, end)
         if not method_node:
             return "", ""
         
-        # 2. 使用逻辑坐标 -> 物理偏移映射提取代码
+        # 2. Extract code using logical coordinate -> physical offset mapping
         method_code = extract_code_by_logical_position(
             source_file_path, 
             method_node['start'], 
             method_node['end'],
-            snap_to_boundary=True  # 吸附到完整方法边界
+            snap_to_boundary=True  # Stick to full method boundaries
         )
         return method_code, method_name
         
@@ -362,9 +356,9 @@ def _extract_change_code(base_data_dir: str, mid_data_path: list, homework_ids: 
                          file_name: str, student_id: str, homework_id: str, 
                          start: int, end: int, version: str) -> Tuple[str, str]:
     """
-    根据逻辑坐标提取变更代码片段（已修复坐标映射）
+    Extract changed code snippet based on logical coordinates (fixed coordinate mapping)
     Returns:
-        (change_code, method_name)  # 第二个返回值保留兼容，实际为 None
+        (change_code, method_name)  # The second return value is retained for compatibility, actual value is None
     """
     source_file_path = _map_to_source_code_path(base_data_dir, file_name, student_id, homework_id, version)
     ast_file_path = _map_to_ast_path(base_data_dir, file_name, student_id, homework_id, mid_data_path, homework_ids, version)
@@ -373,16 +367,16 @@ def _extract_change_code(base_data_dir: str, mid_data_path: list, homework_ids: 
         return "", None
     
     try:
-        # 1. 加载 AST 查找包含变更的方法节点（用于返回方法名）
+        # 1. Load AST to find method node containing the change (used for returning method name)
         ast = load_ast_file(ast_file_path)
         method_node, method_name = _find_containing_method_with_name(ast, start, end)
         
-        # 2. 使用逻辑坐标 -> 物理偏移映射提取变更片段
+        # 2. Extract change snippet using logical coordinate -> physical offset mapping
         change_code = extract_code_by_logical_position(
             source_file_path, 
             start, 
             end,
-            snap_to_boundary=False  # 变更片段不需要吸附到方法边界
+            snap_to_boundary=False  # The change snippet does not need to stick to method boundaries
         )
         return change_code, method_name
         
@@ -394,7 +388,7 @@ def _find_method_in_version(base_data_dir: str, mid_data_path: list, homework_id
                             file_name: str, student_id: str, homework_id: str, 
                             method_name: str, version: str) -> str:
     """
-    在指定版本中，根据方法名查找方法代码（已修复坐标映射）
+    In the specified version, find method code based on method name (fixed coordinate mapping)
     """
     source_file_path = _map_to_source_code_path(base_data_dir, file_name, student_id, homework_id, version)
     ast_file_path = _map_to_ast_path(base_data_dir, file_name, student_id, homework_id, mid_data_path, homework_ids, version)
@@ -402,14 +396,14 @@ def _find_method_in_version(base_data_dir: str, mid_data_path: list, homework_id
     if not os.path.exists(source_file_path) or not os.path.exists(ast_file_path):
         return ""
     try:
-        # 1. 加载 AST 查找方法节点
+        # 1. Load AST to find method node
         ast = load_ast_file(ast_file_path)
         method_node = _find_method_by_name(ast, method_name)
         if not method_node:
             print(f"  -> Method '{method_name}' not found in AST of {ast_file_path}")
             return ""
         
-        # 2. 使用逻辑坐标 -> 物理偏移映射提取代码
+        # 2. Extract code using logical coordinate -> physical offset mapping
         method_code = extract_code_by_logical_position(
             source_file_path,
             method_node['start'],
@@ -424,22 +418,22 @@ def _find_method_in_version(base_data_dir: str, mid_data_path: list, homework_id
 
 def _find_containing_method_with_name(ast_node: Dict[str, Any], target_start: int, target_end: int) -> Tuple[Optional[Dict[str, Any]], str]:
     """
-    在 AST 中查找包含 [target_start, target_end] 范围的 MethodDeclaration 节点，并返回其方法名。
+    Find MethodDeclaration node in AST that contains [target_start, target_end] range, and return its method name.
     Returns:
         (method_node, method_name)
     """
-    # 检查当前节点是否是 MethodDeclaration 且包含目标范围
+    #Check if current node is MethodDeclaration and contains target range
     if (ast_node.get('node_type') == 'MethodDeclaration' and 
         ast_node['start'] <= target_start and target_end <= ast_node['end']):
-        # --- 关键修正：正确解析 SimpleName ---
+        # --- Key Fix: Correctly parse SimpleName ---
         method_name = ""
         for child in ast_node.get('children', []):
             if child.get('node_type') == 'SimpleName':
-                # 方法名在 SimpleName 节点的 'content' 字段中
+                # Method name is in the 'content' field of SimpleName node
                 raw_content = child.get('content', '').strip()
-                # 尝试两种格式：
-                # 格式1: "Lexer" -> 直接使用
-                # 格式2: "SimpleName: Lexer" -> 分割后取第二部分
+                # Try two formats:
+                # Format1: "Lexer" -> Use directly
+                # Format2: "SimpleName: Lexer" -> Take the second part after splitting
                 if raw_content.startswith('SimpleName:'):
                     method_name = raw_content.split(':', 1)[1].strip()
                 else:
@@ -447,7 +441,7 @@ def _find_containing_method_with_name(ast_node: Dict[str, Any], target_start: in
                 break
         return ast_node, method_name
 
-    # 递归检查子节点
+    # Recursively check child nodes
     for child in ast_node.get('children', []):
         result_node, result_name = _find_containing_method_with_name(child, target_start, target_end)
         if result_node:
@@ -458,10 +452,10 @@ def _find_containing_method_with_name(ast_node: Dict[str, Any], target_start: in
 
 def _find_method_by_name(ast_node: Dict[str, Any], target_method_name: str) -> Optional[Dict[str, Any]]:
     """
-    在 AST 中查找指定名称的 MethodDeclaration 节点。
+    Find MethodDeclaration node with specified name in AST.
     """
     if ast_node.get('node_type') == 'MethodDeclaration':
-        # --- 关键修正：使用相同的逻辑提取方法名 ---
+        # --- Key Fix: Use the same logic to extract method name ---
         for child in ast_node.get('children', []):
             if child.get('node_type') == 'SimpleName':
                 raw_content = child.get('content', '').strip()
@@ -482,31 +476,32 @@ def _find_method_by_name(ast_node: Dict[str, Any], target_method_name: str) -> O
     return None
 
 def batch_process_txt(source_dir: str, dest_dir: str, replacement_file: str):
-    """
-    批量处理 txt 文件：
-    - 以 'case' 开头的文件：替换 '#文法规范' 与 '##代码修改' 之间的内容
-    - 其他文件：直接原样复制到目标文件夹
-    """
-    # 1. 读取替换内容
+    """Batch process txt files:
+- Files starting with 'case': replace the content between '# Grammar Specification' and '## Code Modification'
+- Other files: copy directly to the target folder"""
+    # 1. Read replacement content
     repl_path = Path(replacement_file)
     if not repl_path.is_file():
-        raise FileNotFoundError(f"❌ 替换文件未找到: {replacement_file}")
+        raise FileNotFoundError(f"❌ Replacement file not found: {replacement_file}")
     new_content = repl_path.read_text(encoding='utf-8').strip()
 
-    # 2. 确保目标文件夹存在
+    # 2. Ensure target folder exists
     dest_path = Path(dest_dir)
     dest_path.mkdir(parents=True, exist_ok=True)
 
-    # 3. 编译正则
-    pattern = re.compile(r'(#文法规范).*?(##代码修改)', re.DOTALL)
+    # 3. Compile regex
+    pattern = re.compile(
+        r'(#\s*Grammar Specification).*?(##\s*Code Modification)',
+        re.DOTALL | re.IGNORECASE,
+    )
     source_path = Path(source_dir)
     if not source_path.is_dir():
-        raise NotADirectoryError(f"❌ 源文件夹不存在: {source_dir}")
+        raise NotADirectoryError(f"❌ Source folder does not exist: {source_dir}")
 
     modified_count = 0
     copied_count = 0
 
-    # 替换回调函数：保留首尾标记，中间插入新内容
+    # Replace callback function: keep start and end markers, insert new content in between
     def repl_func(match):
         return f"{match.group(1)}\n{new_content}\n{match.group(2)}"
 
@@ -516,40 +511,52 @@ def batch_process_txt(source_dir: str, dest_dir: str, replacement_file: str):
             dest_file = dest_path / txt_file.name
 
             if txt_file.name.startswith('case'):
-                # 仅对 case 开头的文件尝试替换
+                # Only attempt replacement for files starting with case
                 if pattern.search(content):
                     modified_content = pattern.sub(repl_func, content)
-                    print(f"✅ 已替换: {txt_file.name}")
+                    print(f"✅ Replaced: {txt_file.name}")
                 else:
                     modified_content = content
-                    print(f"⚠️ 未找到标记，已原样保存: {txt_file.name}")
+                    print(f"⚠️ Markers not found, saved as is: {txt_file.name}")
                 
                 dest_file.write_text(modified_content, encoding='utf-8')
                 modified_count += 1
             else:
-                # 其他文件直接复制
+                # Other files are copied directly
                 dest_file.write_text(content, encoding='utf-8')
-                print(f"📄 已复制: {txt_file.name}")
+                print(f"📄 Copied: {txt_file.name}")
                 copied_count += 1
 
         except UnicodeDecodeError:
-            print(f"❌ 编码错误 {txt_file.name}: 请确保文件为 UTF-8 编码")
+            print(f"❌ Encoding error {txt_file.name}: Please ensure file is UTF-8 encoded")
         except Exception as e:
-            print(f"❌ 处理 {txt_file.name} 时发生异常: {e}")
+            print(f"❌ Error processing {txt_file.name} occurred: {e}")
 
-    print(f"\n🎉 处理完成！替换: {modified_count} 个 | 复制: {copied_count} 个")
+    print(f"\n🎉 Processing complete! Replaced: {modified_count} items | Copied: {copied_count} item")
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Generate HiReTest LLM prompts from positive prediction Excel.")
-    parser.add_argument("--excel", default=str(PROJECT_ROOT / "positive_predictions1.xlsx"))
+    parser.add_argument("--excel", default=str(PROJECT_ROOT / "outputs" / "positive_predictions.xlsx"))
     parser.add_argument(
         "--output",
-        default=str(PROJECT_ROOT / "test_case_prompt_regenerated"),
-        help="Output prompt root. Defaults to a regenerated directory to avoid overwriting test_case_prompt/.",
+        default=str(PROJECT_ROOT / "repair_prompts"),
+        help="Output prompt root used by ask_for_llm.py.",
     )
-    parser.add_argument("--data-root", default=str(PROJECT_ROOT / "data"))
+    parser.add_argument("--data-root", default=str(PROJECT_ROOT))
     parser.add_argument("--prompt-dir", default=str(PROMPT_DIR))
+    parser.add_argument(
+        "--assignment-ids",
+        default=os.environ.get("HIRETEST_ASSIGNMENT_SEQUENCE"),
+        required=not bool(os.environ.get("HIRETEST_ASSIGNMENT_SEQUENCE")),
+        help="Comma-separated ordered assignment IDs.",
+    )
+    parser.add_argument(
+        "--transition-dirs",
+        default=os.environ.get("HIRETEST_TRANSITION_DIRS"),
+        required=not bool(os.environ.get("HIRETEST_TRANSITION_DIRS")),
+        help="Comma-separated diff directories for the five transitions.",
+    )
     parser.add_argument("--info-type", choices=["total", "piece"], default="total")
     parser.add_argument("--constraint-mode", choices=["prompt", "full_prompt"], default=prompt_header)
     return parser.parse_args()
@@ -558,11 +565,12 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
     PROMPT_DIR = Path(args.prompt_dir).resolve()
+    homework_ids = [item.strip() for item in args.assignment_ids.split(",") if item.strip()]
+    transition_dirs = [item.strip() for item in args.transition_dirs.split(",") if item.strip()]
+    mid_data_path = [""] + transition_dirs
+    if len(homework_ids) != len(test_case_ids):
+        raise ValueError("--assignment-ids must contain six ordered IDs for five transitions")
+    if len(transition_dirs) != len(test_case_ids) - 1:
+        raise ValueError("--transition-dirs must contain five directories")
     prompt_header = args.constraint_mode
     extract_and_save_method_contexts(args.excel, args.output, args.data_root, args.info_type)
-
-    # 替换测试用例约束（原来的记录识别结果的excel文件好像被覆盖了，想要用那一版的结果只能这样了
-    # SOURCE_FOLDER = str(PROJECT_ROOT / "test_case_prompt" / "5to6")
-    # DEST_FOLDER   = str(PROJECT_ROOT / "test_case_prompt_regenerated" / "5to6")
-    # REPLACEMENT_FILE = str(PROJECT_ROOT / "prompt" / "raw_constraint_5to6.txt")
-    # batch_process_txt(SOURCE_FOLDER, DEST_FOLDER, REPLACEMENT_FILE)

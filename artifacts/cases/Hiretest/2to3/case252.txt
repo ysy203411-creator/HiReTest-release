@@ -1,4 +1,4 @@
-const int a = 5, b = 10 // 缺少分号
+const int a = 5, b = 10 //Missing semicolon
 int main(){
     int x = a + b;
     printf("%d\n", x);

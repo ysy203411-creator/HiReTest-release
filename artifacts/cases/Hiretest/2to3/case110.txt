@@ -1,7 +1,7 @@
 const int LENGTH = 5;
 int array[LENGTH];
 int func(int a, int b) {
-    if (a > b) { // 将关系运算符放到if语句中
+    if (a > b) { //Put relational operators in if statements
         return a;
     } else {
         return b;

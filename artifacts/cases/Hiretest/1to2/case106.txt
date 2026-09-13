@@ -5,7 +5,7 @@ int add(int a, int b) {
 }
 int main(){
     int result = add(5, 3);
-    int error = 5; // 移除非法符号 |，保持语法和语义正确
+    int error = 5; //Remove illegal symbol |, keep syntax and semantics correct
     printf("Result: %d\n", result);
     printf("Error: %d\n", error);
     return 0;

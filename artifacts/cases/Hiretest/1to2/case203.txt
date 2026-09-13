@@ -11,7 +11,7 @@ int main(){
     int localVar = 0;
     localVar = add(globalVar, CONST_VAL);
     printResult(localVar);
-    if (localVar > 10 & localVar < 20) {  // 使用单独的 &，应当被识别为错误
+    if (localVar > 10 & localVar < 20) {  // Use of a separate & should be identified as an error
         printf("Within range\n");
     } else {
         printf("Out of range\n");

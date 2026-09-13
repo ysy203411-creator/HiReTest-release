@@ -3,7 +3,7 @@ int add(int a, int b) {
 }
 int main(){
     int result;
-    result = add(1, 2;  // 缺少右括号
+    result = add(1, 2;  //Missing closing parenthesis
     printf("Result: %d\n", result);
     return 0;
 }

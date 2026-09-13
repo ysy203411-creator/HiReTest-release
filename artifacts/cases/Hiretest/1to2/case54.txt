@@ -13,7 +13,7 @@ int main(){
     printf("Sum: %d\n", result);
     int x = 5;
     int y = 10;
-    if (x & y) { // 使用单独的 &，应视为非法符号
+    if (x & y) { // Use of a single & should be considered an illegal symbol
         printf("x and y are both non-zero\n");
     } else {
         printf("Either x or y is zero\n");

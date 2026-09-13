@@ -10,7 +10,7 @@ int main(){
     int x = 5;
     int y = 10;
     int result;
-    // 使用单独的 & 符号，检测是否能正确识别错误
+    //Use the & symbol separately to check if errors can be correctly identified
     if (x & y) {
         result = add(x, y);
     } else {

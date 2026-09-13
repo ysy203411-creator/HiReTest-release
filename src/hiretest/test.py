@@ -96,26 +96,26 @@ def test_standard_students(student_ids, students_dir, assignment_id, test_cases_
             continue
         target_dir = os.path.join(student_assignment_path, 'last')
         
-        # 🔧 只处理尚未被标记为无效的测试用例
+        #Only process test cases not yet marked as invalid
         active_cases = [case for case in test_cases if case_still_valid[case]]
         if not active_cases:
-            # 所有用例都已失效，提前结束
+            #All test cases have failed, ending early
             continue
             
         try:
             fingerprints = test_single_student(index, target_dir, test_cases_dir, active_cases)
             all_fingerprints[student_id] = fingerprints
             i = 0
-            # 🔧 关键：检查当前学生的运行结果，标记失败的用例为无效
+            #Key: Check current student's execution result, mark failed test cases as invalid
             for case in active_cases:
                 fp = fingerprints.get(case, None)
                 if fp is None:
                     i += 1
-                    case_still_valid[case] = False  # 该用例在此学生处失败，后续学生不再处理
+                    case_still_valid[case] = False  #This test case failed for this student, subsequent students will not process it
             # print(f"student:{student_id},total:{len(active_cases)},bad:{i}")
         except Exception as e:
             all_fingerprints[student_id] = {}
-            # 🔧 如果整个学生执行异常，标记所有活跃用例为无效
+            #If a student's execution causes an exception, mark all active test cases as invalid
             for case in active_cases:
                 case_still_valid[case] = False
     
@@ -126,7 +126,7 @@ def test_standard_students(student_ids, students_dir, assignment_id, test_cases_
     common_fingerprints = {}
     
     for case in test_cases:
-        # 🔧 跳过已被标记为无效的用例
+        #Skip test cases already marked as invalid
         if not case_still_valid[case]:
             continue
             
@@ -187,7 +187,7 @@ def test_standard_students_for_compiler(student_ids, students_dir, assignment_id
                 out = outputs.get(case_id, None)
                 if out is None:
                     i += 1
-                    case_still_valid[case] = False  # 该用例在此学生处失败，后续学生不再处理
+                    case_still_valid[case] = False  #This test case failed for this student, subsequent students will not process it
             # print(f"student:{student_id},total:{len(active_cases)},bad:{i}")
             print(f"standard student {student_id}: invalidated {i}/{len(active_cases)} cases")
             sys.stdout.flush()
@@ -259,13 +259,13 @@ def test_student_compilers(students_dir, test_cases_dir, output_dir, index, assi
 
     if not all_students:
         return
-    print("正在运行标准程序... ")
+    print("Running standard program...")
     valid_cases, std_fingerprints = test_standard_students(
         STANDARD_STUDENT_IDS, students_dir, assignment_id, test_cases_dir, test_cases, index
     )
-    print(f"标准程序验证完成。")
+    print(f"Standard program verification completed.")
     if not valid_cases:
-        print("无有效的测试用例")
+        print("No valid test cases")
         return
     
     test_cases = valid_cases
@@ -290,7 +290,7 @@ def test_student_compilers(students_dir, test_cases_dir, output_dir, index, assi
                 for case, fp in fingerprints.items():
                     case_student_fingerprints[case][student] = fp
             except Exception as e:
-                print(f"\n学生 {student} 测试异常：{e}")
+                print(f"\nStudent {student}Test exception:{e}")
                 sys.stdout.flush()
                 for case in test_cases:
                     case_student_fingerprints[case][student] = None
@@ -298,7 +298,7 @@ def test_student_compilers(students_dir, test_cases_dir, output_dir, index, assi
             completed += 1
             percent = (completed / total) * 100
             elapsed = time.time() - start_time
-            sys.stdout.write(f"\r测试进度: {completed}/{total} ({percent:.1f}%) | 已用时: {elapsed:.1f}s")
+            sys.stdout.write(f"\rTest Progress: {completed}/{total} ({percent:.1f}%) | Time Elapsed: {elapsed:.1f}s")
             sys.stdout.flush()
             
     print() 
@@ -342,7 +342,7 @@ def test_student_compilers(students_dir, test_cases_dir, output_dir, index, assi
         filtered_cases.append(case)
     final_case_count = len(filtered_cases)
     case_efficiency = (final_case_count / initial_case_count * 100) if initial_case_count > 0 else 0.0
-    print(f"测试用例统计: 初始={initial_case_count}, 最终={final_case_count}, 有效率={case_efficiency:.2f}%")
+    print(f"Test Case Statistics: Initial={initial_case_count}, Final={final_case_count}, Efficiency={case_efficiency:.2f}%")
    
     test_cases_sorted = filtered_cases
 
@@ -350,22 +350,22 @@ def test_student_compilers(students_dir, test_cases_dir, output_dir, index, assi
     case_cols = test_cases_sorted  
     
     for student in students:
-        row = {'学生': student}
+        row = {'Anonymous Student': student}
         for case in case_cols:
             row[case] = version_map[case].get(student, 0)
         data_rows.append(row)
 
-    df = pd.DataFrame(data_rows, columns=['学生'] + case_cols)
+    df = pd.DataFrame(data_rows, columns=['Anonymous Student'] + case_cols)
 
     with pd.ExcelWriter(analyse_result_file) as writer:
-        df.to_excel(writer, index=False, sheet_name='版本报告')
+        df.to_excel(writer, index=False, sheet_name='Version Report')
 
     student_pass_rates = {}
     for student in students:
         pass_count = sum(1 for c in test_cases_sorted if version_map[c].get(student) == 1)
         student_pass_rates[student] = pass_count / len(test_cases_sorted) if test_cases_sorted else 0
     
-    # 统计各区间人数
+    # Count People in Each Interval
     ranges = [(1.0, "100%"), (0.9, "90-100%"), (0.8, "80-90%"), (0.7, "70-80%"), (0.0, "<70%")]
     counts = {label: 0 for _, label in ranges}
     for student, rate in student_pass_rates.items():
@@ -381,8 +381,8 @@ def test_student_compilers(students_dir, test_cases_dir, output_dir, index, assi
         pct = (count / total_valid * 100) if total_valid > 0 else 0.0
         output_parts.append(f"{label}={count} ({pct:.2f}%)")
 
-    print(f"学生通过率分布: {', '.join(output_parts)}")
-    print(f"结果保存到{analyse_result_file}")
+    print(f"Student Pass Rate Distribution: {', '.join(output_parts)}")
+    print(f"Results Saved To{analyse_result_file}")
 
 def test_student_compilers_for_compiler(students_dir, test_cases_dir, output_dir, index,
                                         assignment_id, analyse_result_file, max_workers=None):
@@ -420,7 +420,7 @@ def test_student_compilers_for_compiler(students_dir, test_cases_dir, output_dir
 
     if not all_students:
         return
-    print("正在运行标准程序... ")  
+    print("Running Standard Program... ")
     if index == 3: 
         valid_case_ids, std_outputs = test_standard_students_for_compiler(
             STANDARD_STUDENT_IDS_4, students_dir, assignment_id, test_cases_dir, test_cases
@@ -430,9 +430,9 @@ def test_student_compilers_for_compiler(students_dir, test_cases_dir, output_dir
             STANDARD_STUDENT_IDS_5, students_dir, assignment_id, test_cases_dir, test_cases
         )        
     if not valid_case_ids:
-        print("无有效的测试用例")
+        print("No Valid Test Cases")
         return
-    print(f"标准程序验证完成。")
+    print(f"Standard Program Verification Completed.")
     test_cases = [f"case{cid}.txt" for cid in valid_case_ids]
 
     case_student_outputs = defaultdict(dict)
@@ -455,7 +455,7 @@ def test_student_compilers_for_compiler(students_dir, test_cases_dir, output_dir
                 for case_id, out in outputs.items():
                     case_student_outputs[case_id][student] = out
             except Exception as e:
-                print(f"\n学生 {student} 测试异常：{e}")
+                print(f"\nStudent {student}Test Exception:{e}")
                 sys.stdout.flush()
                 for case in test_cases:
                     case_id = case[4:-4]
@@ -464,7 +464,7 @@ def test_student_compilers_for_compiler(students_dir, test_cases_dir, output_dir
             completed += 1
             percent = (completed / total) * 100
             elapsed = time.time() - start_time
-            sys.stdout.write(f"\r编译器测试进度: {completed}/{total} ({percent:.1f}%) | 已用时: {elapsed:.1f}s")
+            sys.stdout.write(f"\rCompiler Test Progress: {completed}/{total} ({percent:.1f}%) | Time Used: {elapsed:.1f}s")
             sys.stdout.flush()
             
     print()
@@ -514,7 +514,7 @@ def test_student_compilers_for_compiler(students_dir, test_cases_dir, output_dir
         filtered_case_ids.append(case_id)
     final_case_count = len(filtered_case_ids)
     case_efficiency = (final_case_count / initial_case_count * 100) if initial_case_count > 0 else 0.0
-    print(f"测试用例统计: 初始={initial_case_count}, 最终={final_case_count}, 有效率={case_efficiency:.2f}%")
+    print(f"Test Case Statistics: Initial={initial_case_count}, Final={final_case_count}, Efficiency={case_efficiency:.2f}%")
     
     case_ids_sorted = filtered_case_ids
 
@@ -522,15 +522,15 @@ def test_student_compilers_for_compiler(students_dir, test_cases_dir, output_dir
     case_cols = [f"case{cid}" for cid in case_ids_sorted]
     
     for student in students:
-        row = {'学生': student}
+        row = {'Anonymous Student': student}
         for cid in case_ids_sorted:
             row[f"case{cid}"] = version_map[f"case{cid}"].get(student, 0)
         data_rows.append(row)
 
-    df = pd.DataFrame(data_rows, columns=['学生'] + case_cols)
+    df = pd.DataFrame(data_rows, columns=['Anonymous Student'] + case_cols)
 
     with pd.ExcelWriter(analyse_result_file) as writer:
-        df.to_excel(writer, index=False, sheet_name='版本报告')
+        df.to_excel(writer, index=False, sheet_name='Version Report')
 
     student_pass_rates = {}
     for student in students:
@@ -552,8 +552,8 @@ def test_student_compilers_for_compiler(students_dir, test_cases_dir, output_dir
         pct = (count / total_valid * 100) if total_valid > 0 else 0.0
         output_parts.append(f"{label}={count} ({pct:.2f}%)")
 
-    print(f"学生通过率分布: {', '.join(output_parts)}")
-    print(f"结果保存到{analyse_result_file}")
+    print(f"Student Pass Rate Distribution: {', '.join(output_parts)}")
+    print(f"Results Saved To{analyse_result_file}")
 
 def test_single_student(index, target_dir, test_cases_dir, test_cases):
     try:
@@ -847,14 +847,14 @@ def analyze_test_results(output_dir='test_results', excel_path='versions_report.
                 fingerprint_to_version[fingerprint] = current_version
                 current_version += 1
             version_map[case][student] = fingerprint_to_version[fingerprint]
-    df = pd.DataFrame(columns=['学生'] + test_cases)
+    df = pd.DataFrame(columns=['Anonymous Student'] + test_cases)
     for student in students:
-        row = {'学生': student}
+        row = {'Anonymous Student': student}
         for case in test_cases:
             row[case] = version_map[case].get(student, 0)
         df = pd.concat([df, pd.DataFrame([row])], ignore_index=True)
     with pd.ExcelWriter(excel_path) as writer:
-        df.to_excel(writer, index=False, sheet_name='版本报告')
+        df.to_excel(writer, index=False, sheet_name='Version Report')
 
 if __name__ == "__main__":
     raise SystemExit(

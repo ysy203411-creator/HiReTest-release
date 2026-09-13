@@ -10,7 +10,7 @@ int main(){
     int localVar = 3;
     int result = add(globalVar, localVar);
     printResult(result);
-    if (result > 10 & result < 20) { // 使用单独的 &，应视为非法符号
+    if (result > 10 & result < 20) { // Use of a separate & should be considered an illegal symbol
         printf("This line contains an error.\n");
     }
     return 0;

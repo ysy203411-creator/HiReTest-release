@@ -1,9 +1,9 @@
 const int size = 10;
-int globalArray[5] = {0}; // 初始化全局数组
+int globalArray[5] = {0}; //Initialize global array
 
 void initializeArray(int arr[], int length) {
     int i = 0;
-    /* 使用 while 循环代替 for */
+    /*Use while loop instead of for*/
     while (i < length) {
         arr[i] = i * 2;
         i = i + 1;
@@ -15,14 +15,14 @@ int main() {
     int localArray[3];
     int i = 0;
 
-    /* 手动初始化局部数组元素，避免使用初始化列表语法 */
+    /*Manually initialize local array elements, avoid initialization list syntax*/
     localArray[0] = 1;
     localArray[1] = 2;
     localArray[2] = 0;
 
     initializeArray(globalArray, 5);
 
-    /* 重新使用 i 前不再重复声明 */
+    /*Reuse i without redeclaring it*/
     i = 0;
     while (i < 3) {
         printf("%d ", localArray[i]);

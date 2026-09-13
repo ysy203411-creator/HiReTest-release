@@ -3,7 +3,7 @@ int b;
 int main(){
     a = getint();
     b = getint();
-    int result = a - b; // 使用减法运算替代比较运算
+    int result = a - b; //Use subtraction instead of comparison
     if (result > 0) {
         printf("a is greater than b\\n");
     } else {

@@ -12,7 +12,7 @@ int main(){
     int array[3] = {1, 2, 3};
     int result = add(globalVar, localVar);
     printResult(result);
-    if (array[0] == CONST_VAL) {  // 修改：将if条件中的关系运算符移到条件判断中
+    if (array[0] == CONST_VAL) {  //Move the relational operator in the if condition into the condition judgment
         printf("Array first element equals CONST_VAL\n");
     } else {
         printf("Array first element does not equal CONST_VAL\n");

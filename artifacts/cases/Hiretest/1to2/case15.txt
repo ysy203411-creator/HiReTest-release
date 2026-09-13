@@ -11,7 +11,7 @@ int main(){
     int y = 20;
     int result = add(x, y);
     printResult(result);
-    if (x > 5 & y < 25) { // 错误：使用单独的 & 符号
+    if (x > 5 & y < 25) { //Error: Using separate & symbols
         printf("This line should not compile.\n");
     }
     return 0;

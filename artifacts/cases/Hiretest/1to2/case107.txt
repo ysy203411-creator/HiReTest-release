@@ -7,7 +7,7 @@ int main(){
     int a = 5;
     int b = 10;
     int result;
-    if (a & b) {  // 使用单独的 &，应视为非法符号
+    if (a & b) {  // Use of a single & should be considered an illegal symbol
         result = compute(a);
     } else {
         result = compute(b);

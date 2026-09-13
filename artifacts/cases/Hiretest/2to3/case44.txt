@@ -8,7 +8,7 @@ void printInt(int c) {
     printf("%d\n", c);
 }
 int main(){
-    int x = 65; // 使用整型字面量代替字符常量 'A'
+    int x = 65; //Use integer literals instead of character constants 'A'
     int y = add(a, b);
     printf("%d\n", y);
     printInt(x);

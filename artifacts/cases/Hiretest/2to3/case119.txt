@@ -13,9 +13,9 @@ int main(){
     int result = add(x, y);
     printResult(result);
     if (result > 10) {
-        // 这里可以进行其他操作
+        //Here you can perform other operations
     } else {
-        // 这里可以进行其他操作
+        //Here you can perform other operations
     }
     return 0;
 }

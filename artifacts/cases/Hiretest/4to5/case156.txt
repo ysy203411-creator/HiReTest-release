@@ -3,7 +3,7 @@ int globalArray[SIZE];
 int globalVar;
 
 void initializeGlobalArray() {
-    /* 展开原本的 while 循环逻辑 */
+    /*Expand the original while loop logic*/
     globalArray[0] = 0 * 2;
     globalArray[1] = 1 * 2;
     globalArray[2] = 2 * 2;
@@ -16,7 +16,7 @@ int main() {
     initializeGlobalArray();
     globalVar = getint();
 
-    /* 展开原本的 while 循环打印逻辑 */
+    /*Expand the original while loop print logic*/
     printf("%d ", globalArray[0]);
     printf("%d ", globalArray[1]);
     printf("%d ", globalArray[2]);

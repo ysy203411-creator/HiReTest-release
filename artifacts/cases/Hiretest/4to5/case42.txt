@@ -2,7 +2,7 @@ const int TRUE = 1;
 const int FALSE = 0;
 const int a = 5;
 const int b = 10;
-const int c = 5; // 修改常量名以避免重名
+const int c = 5; //Rename the constant to avoid name collision
 int main(){
     int result1;
     int result2;

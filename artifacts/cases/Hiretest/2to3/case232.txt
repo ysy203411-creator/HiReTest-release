@@ -3,7 +3,7 @@ int arr[MAX];
 int func() {
     int a = 5;
     a = a + 2;
-    return 0; // 修改为返回字面量 0
+    return 0; //Change to return literal 0
 }
 int main(){
     int x = func();

@@ -6,7 +6,7 @@ void fillArray(int arr[], int size) {
         arr[i] = i * i;
     }
 }
-int sumArray(int arr[], int size) { // 修改了这里，去掉了const
+int sumArray(int arr[], int size) { //Modified here, removed const
     int sum = 0;
     int i = 0;
     for (i = 0; i < size; i = i + 1) {

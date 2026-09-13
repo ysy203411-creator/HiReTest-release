@@ -3,7 +3,7 @@ int getElement(int arr[], int offset) {
     return arr[offset];
 }
 int main(){
-    int index = getint(); // getint() 函数无需显式声明即可使用
+    int index = getint(); //The getint() function can be used without explicit declaration
     if (index >= 0 && index < 5) {
         int value = getElement(arr, index);
         printf("Value at index %d: %d\n", index, value);

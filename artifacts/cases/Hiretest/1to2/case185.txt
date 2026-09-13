@@ -4,7 +4,7 @@ int main(){
     const int M = 5;
     int values[M] = {1, 2, 3, 4, 5};
     int x = 0;
-    if (x & 1) { // 错误：使用单独的 & 应视为非法符号
+    if (x & 1) { //Error: Using a standalone & is considered an illegal symbol
         printf("Odd\n");
     } else {
         printf("Even\n");

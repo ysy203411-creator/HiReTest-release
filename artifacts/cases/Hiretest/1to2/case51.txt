@@ -10,7 +10,7 @@ int main(){
     printf("Result: %d\n", result);
     int a = 1;
     int b = 2;
-    if (a | b) { // 错误：使用单独的 |
+    if (a | b) { //Error: using separate |
         printf("This is an error.\n");
     }
     return 0;

@@ -19,7 +19,7 @@ int main(){
         globalArray[i] = i;
     }
     printArray(globalArray, MAX_SIZE);
-    if (result > 0 & result < 20) { // 错误：使用单独的 & 符号
+    if (result > 0 & result < 20) { //Error: Using separate & symbols
         printf("Result is within range.\n");
     }
     return 0;

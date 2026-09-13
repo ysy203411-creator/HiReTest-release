@@ -1,7 +1,7 @@
-const int a[5;  // 缺少右中括号，错误类型 k
+const int a[5;  //Missing closing bracket, error type k
 int main(){
     const int b = 10;
-    const int c[3] = {1, 2};  // 正确的数组初始化
+    const int c[3] = {1, 2};  //Correct array initialization
     printf("%d\n", b);
     return 0;
 }

@@ -16,7 +16,7 @@ int main(){
     int localVar = 0;
     updateGlobalVar(CONST_VAL);
     localVar = calculateSum(array);
-    if (localVar & globalVar) { // 使用单独的 &，应视为非法符号
+    if (localVar & globalVar) { // Use of a single & should be considered an illegal symbol
         printf("Sum and globalVar are both non-zero.\n");
     } else {
         printf("Either sum or globalVar is zero.\n");

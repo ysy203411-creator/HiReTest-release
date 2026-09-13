@@ -5,9 +5,9 @@ int result;
 int compare(int x, int y) {
     int diff = x - y;
     int sign = (diff / (diff + 1)) - (diff / (diff - 1));
-    /* 对于 x < y 时 diff 为负，sign 结果为 1；
-       对于 x >= y 时 diff 为非负，sign 结果为 0。
-       这里仅作为复杂表达式测试使用。 */
+    /*For x < y, diff is negative, sign result is 1;
+       For x >= y, diff is non-negative, sign result is 0.
+       This is only for testing complex expressions.*/
     return sign;
 }
 

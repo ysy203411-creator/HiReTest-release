@@ -11,7 +11,7 @@ int main(){
     int y = 10;
     int result;
     
-    if (x < y & x > 0) { // a类错误：使用单独的&
+    if (x < y & x > 0) { // a class error: using separate &
         result = x + y;
     } else {
         result = x - y;

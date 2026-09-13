@@ -12,7 +12,7 @@ int main(){
     int localArray[3] = {localVar, CONST_VAL, 0};
     printValues(array);
     printValues(localArray);
-    if (localVar & CONST_VAL) { // 错误：使用单独的 & 应视为非法符号
+    if (localVar & CONST_VAL) { //Error: Using a standalone & is considered an illegal symbol
         printf("Error in logic\n");
     }
     return 0;

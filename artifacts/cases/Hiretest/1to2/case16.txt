@@ -14,7 +14,7 @@ int main(){
     
     printArray(globalArray, MAX_SIZE);
     printArray(localArray, 3);
-    int condition = 1 || 0; // 修改：使用了合法的 ||
+    int condition = 1 || 0; //Fix: Used legal ||
     if (condition) {
         printf("Condition is true.\n");
     } else {

@@ -12,7 +12,7 @@ void printArray(int arr[]) {
 }
 int main(){
     int localVar = 5;
-    int result = add(localVar, 2);  // 修改此处，将 globalArray[2] 替换为常量 2
+    int result = add(localVar, 2);  //Modify this line, replace globalArray[2] with the constant 2
     printf("Result: %d\n", result);
     printArray(globalArray);
     if(result > 10) {

@@ -8,7 +8,7 @@ int sum(int x, int y) {
 
 void printArray(int arr[], int size) {
     int i;
-    /* 使用 for 代替 while，符合允许的语句集合 */
+    /*Use for instead of while, which is allowed in the statement set*/
     for (i = 0; i < size; i = i + 1) {
         printf("%d ", arr[i]);
     }
@@ -19,7 +19,7 @@ int main() {
     int result;
     a = getint();
     result = sum(a, b);
-    /* 去掉不允许的字符 ':'，保留功能含义 */
+    /*Remove the disallowed character ':', while preserving the functional meaning*/
     printf("Result %d\n", result);
     printf("Array elements\n");
     printArray(arr, 5);

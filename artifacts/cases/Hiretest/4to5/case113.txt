@@ -1,20 +1,20 @@
 const int SIZE = 10;
 int intArray[SIZE];
-int charValues[SIZE]; // 修改变量名以避免重名
+int charValues[SIZE]; //Rename variable to avoid name collision
 
 void initializeArrays() {
     int i = 0;
-    /* 用 while 循环和算术表达式代替 for 和字符常量 */
+    /*Use while loop and arithmetic expression instead of for and character constants*/
     while (i < SIZE) {
         intArray[i] = i * 2;
-        /* 'a' 的 ASCII 值为 97，这里用整型常量表达 */
-        charValues[i] = 97 + i; // 修改变量名
+        /*'a' ASCII value is 97, use integer constant here*/
+        charValues[i] = 97 + i; //Rename variable
         i = i + 1;
     }
 }
 
 int getIntElement(int index) {
-    /* 不使用 if 和逻辑运算符，改为简单的范围外返回固定值 */
+    /*Avoid using if and logical operators, return fixed value for out-of-range instead*/
     int result = -1;
     int i = 0;
     while (i < SIZE) {
@@ -31,7 +31,7 @@ int getCharElement(int index) {
     int i = 0;
     while (i < SIZE) {
         if (i == index) {
-            result = charValues[i]; // 修改变量名
+            result = charValues[i]; //Rename variable
         }
         i = i + 1;
     }

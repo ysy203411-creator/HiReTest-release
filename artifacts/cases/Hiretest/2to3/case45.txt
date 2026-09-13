@@ -8,15 +8,15 @@ int multiply(int a, int b) {
 }
 int main(){
     int result;
-    // 测试函数调用，无参数
+    //Test function call, no parameters
     result = add(CONST_VAL, globalVar);
     printf("Result of add: %d\n", result);
     
-    // 测试函数调用，有参数
+    //Test function call, with parameters
     result = multiply(globalVar, CONST_VAL);
     printf("Result of multiply: %d\n", result);
     
-    // 测试函数调用，缺少右括号错误
+    //Test function call, missing closing parenthesis error
     result = add(globalVar, CONST_VAL;
     printf("This line should not compile due to missing ')'\n");
     

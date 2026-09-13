@@ -13,7 +13,7 @@ void print_result(int result) {
 }
 int main(){
     int sum = add(a, b);
-    int product = multiply(arr[2], arr[4]); // 修改为合法的整型表达式
+    int product = multiply(arr[2], arr[4]); //Convert to a valid integer expression
     print_result(sum);
     print_result(product);
     return 0;

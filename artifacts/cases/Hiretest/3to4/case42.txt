@@ -12,9 +12,9 @@ int main(){
     int localVar = 2;
     int result = add(globalVar, localVar);
     printResult(result);
-    int charVar = 65; // 使用整型字面量代替字符
+    int charVar = 65; //Use integer literals instead of characters
     printf("Char as int: %d\n", charVar);
-    int voidFuncResult = 0; // 用于测试 void 函数的处理
+    int voidFuncResult = 0; //Used to test handling of void functions
     printResult(voidFuncResult);
     return 0;
 }

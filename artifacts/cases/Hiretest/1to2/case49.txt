@@ -12,7 +12,7 @@ int main(){
     int result = add(a, b);
     printResult(result);
     
-    if (a & b) { // 错误：单独的 & 应视为非法符号
+    if (a & b) { //Error: standalone & is considered an illegal symbol
         printf("This line should not compile due to error.\n");
     }
     return 0;

@@ -7,7 +7,7 @@ int compare(int x, int y) {
     } else {
         return 0;
     }
-    return 0; // 修改后的代码，添加了缺少的 return 语句
+    return 0; //The modified code added the missing return statement
 }
 int main(){
     int result1 = compare(a, b);

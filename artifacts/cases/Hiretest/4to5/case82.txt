@@ -1,6 +1,6 @@
 int a = 5;
 int b = 10;
-int c1 = 5; // 修改变量名以避免重名
+int c1 = 5; //Rename variable to avoid duplication
 int d = 0;
 int isEqual(int x, int y) {
     if (x == y) {
@@ -12,7 +12,7 @@ int isEqual(int x, int y) {
 }
 int main(){
     int result1 = isEqual(a, b);
-    int result2 = isEqual(a, c1); // 修改变量名以匹配新的声明
+    int result2 = isEqual(a, c1); //Rename variable to match the new declaration
     int result3 = isEqual(b, d);
     int result4 = isEqual(d, d);
     printf("%d\n", result1); // Expected: 0

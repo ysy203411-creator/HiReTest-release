@@ -9,7 +9,7 @@ int compare(int x, int y) {
     } else {
         return FALSE;
     }
-    return FALSE; // 修改为返回 FALSE，以符合语义和约束条件
+    return FALSE; //Change to return FALSE to comply with semantics and constraints
     return 1;
 }
 void print_result(int result) {

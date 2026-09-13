@@ -5,7 +5,7 @@ int main(){
     int y = 15;
     int result;
     
-    // 使用非法符号 & 和 |，应被识别为错误
+    //Use of illegal symbols & and |, should be identified as error
     if (x & y) {
         result = a + b;
     } else {

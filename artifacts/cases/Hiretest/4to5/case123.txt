@@ -2,7 +2,7 @@ const int SIZE = 5;
 int array[SIZE] = {1, 2, 3, 4, 5};
 int getElementValue(int index) {
     return array[index];
-    return 0; // 添加不可达的 return 0; 以符合约束
+    return 0; //Add unreachable return 0; to satisfy constraints
 }
 int main(){
     int index = getint();

@@ -4,7 +4,7 @@ int array[5] = {1, 2, 3, 4, 5};
 
 void processArray(int arr[]) {
     int i = 0;
-    /* 使用 while 循环代替 for 循环 */
+    /*Use while loop instead of for loop*/
     while (i < 5) {
         arr[i] = arr[i] * 2;
         i = i + 1;

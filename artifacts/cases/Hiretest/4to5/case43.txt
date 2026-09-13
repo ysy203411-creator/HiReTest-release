@@ -1,4 +1,4 @@
-int arr[5] = {1, 2, 3};  // 未显式初始化的元素默认补 0
+int arr[5] = {1, 2, 3};  //Uninitialized elements default to 0
 
 void printArray() {
     int i = 0;

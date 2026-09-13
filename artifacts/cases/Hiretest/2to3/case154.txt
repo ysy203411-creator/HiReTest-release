@@ -10,7 +10,7 @@ int main(){
     int localVar = 5;
     int result = add(localVar, globalArray[0]);
     printResult(result);
-    // This line contains an i类错误: missing semicolon
+    //This line contains an i-class error: missing semicolon
     int errorVar = 10
     return 0;
 }

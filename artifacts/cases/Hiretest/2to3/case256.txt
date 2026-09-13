@@ -1,6 +1,6 @@
 const int CONST_VAL = 10;
 int globalVar = 5;
-int arr[5] = {1, 2, 3, 0, 0}; // 补充未初始化的元素为 0
+int arr[5] = {1, 2, 3, 0, 0}; //Fill uninitialized elements with 0
 int add(int a, int b) {
     return a + b;
 }

@@ -14,7 +14,7 @@ void printSum(int arr[], int length) {
 }
 int main(){
     printSum(numbers, SIZE);
-    int missingSemicolon = 1 // i类错误：缺少分号
-    int anotherError = (3 + 4 // j类错误：缺少右括号
+    int missingSemicolon = 1 // i class error: missing semicolon
+    int anotherError = (3 + 4 // j class error: missing right parenthesis
     return 0;
 }

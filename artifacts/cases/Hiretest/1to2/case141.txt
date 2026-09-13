@@ -15,7 +15,7 @@ int calculateSum(int[] arr) {
 int main(){
     int local_var = 3;
     int result = 0;
-    if (local_var > 0 & global_var < 10) { // 错误：使用单独的 & 应为 &&
+    if (local_var > 0 & global_var < 10) { //Error: Use && instead of & alone
         result = calculateSum(array);
     } else {
         printValue(CONST_VAL);

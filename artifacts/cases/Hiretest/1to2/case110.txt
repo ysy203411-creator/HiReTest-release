@@ -12,7 +12,7 @@ int main(){
     for (i = 0; i < MAX; i = i + 1) {
         localArray[i] = globalArray[i] * 2;
     }
-    int condition = 1 & 0; // 错误：使用单独的 & 运算符
+    int condition = 1 & 0; //Error: Using separate & operator
     if(condition) {
         printf("This should not print.\n");
     } else {

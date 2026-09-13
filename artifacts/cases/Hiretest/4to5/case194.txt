@@ -5,7 +5,7 @@ void initializeArray(int arr[]) {
     int i;
     i = 0;
 
-    /* 用顺序赋值模拟“展开”的初始化 */
+    /*Simulate 'spread' initialization with sequential assignment*/
     arr[i] = i * 2;
     i = i + 1;
 

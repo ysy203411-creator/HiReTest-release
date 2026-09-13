@@ -7,7 +7,7 @@ void processArray(int arr[]) {
     }
 }
 int main(){
-    int localArray[5]; // 添加了缺少的右括号
+    int localArray[5]; //Added missing closing bracket
     processArray(globalArray);
     printf("Global array first element: %d\n", globalArray[0]);
     return 0;

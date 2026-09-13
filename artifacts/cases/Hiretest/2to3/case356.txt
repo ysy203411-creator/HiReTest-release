@@ -1,5 +1,5 @@
 const int SIZE = 10;
-int globalArray[SIZE] = {1, 2, 3, 4, 5, 0, 0, 0, 0, 0}; // 修改初始化列表以满足约束
+int globalArray[SIZE] = {1, 2, 3, 4, 5, 0, 0, 0, 0, 0}; //Modify the initializer list to satisfy the constraints
 int add(int a, int b) {
     return a + b;
 }

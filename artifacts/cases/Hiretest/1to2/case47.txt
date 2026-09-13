@@ -8,7 +8,7 @@ int main(){
     int y = 20;
     int result = add(x, y);
     printf("Result: %d\n", result);
-    if (x > 0 & y > 0) {  // 错误：使用单个 & 代替 &&
+    if (x > 0 & y > 0) {  //Error: using single & instead of &&
         printf("Both x and y are positive.\n");
     }
     return 0;

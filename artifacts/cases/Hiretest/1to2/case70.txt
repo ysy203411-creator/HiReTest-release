@@ -15,7 +15,7 @@ int main(){
     printArray(arr, n);
     int a = 5;
     int b = 10;
-    if (a < b & a > 0) { // 错误：使用了单独的 & 作为条件运算符
+    if (a < b & a > 0) { //Error: Using & alone as a conditional operator
         printf("a is less than b and greater than 0\n");
     }
     return 0;

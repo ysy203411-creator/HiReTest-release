@@ -7,7 +7,7 @@ int main(){
     int localVar = 5;
     int result = add(localVar, CONST_VAL);
     printf("Result: %d\n", result);
-    // 测试变量声明和函数定义的区分
+    //Test variable declaration and function definition distinction
     int anotherVar = 3;
     int yetAnotherVar;
     printf("AnotherVar: %d\n", anotherVar);

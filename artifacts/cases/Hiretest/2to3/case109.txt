@@ -13,7 +13,7 @@ int main(){
     
     int unaryTest1 = -CONST_A;
     int unaryTest2 = +globalVar;
-    int unaryTest3 = localVar;  // 去掉非法的逻辑非用法，保留一元运算测试结构
+    int unaryTest3 = localVar;  //Remove illegal logical negation usage, keep unary operation test structure
     printf("Unary Test Results: %d, %d, %d\n", unaryTest1, unaryTest2, unaryTest3);
     
     return 0;

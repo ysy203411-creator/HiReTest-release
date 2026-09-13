@@ -2,13 +2,13 @@ const int a = 5;
 int b;
 int arr[3];
 void func() {
-    b = a; // 正常赋值
-    // a = 10; // 错误：尝试给常量赋值，删除此行以符合约束
+    b = a; //Normal assignment
+    // a = 10; // Error: attempting to assign to a constant, remove this line to comply with constraints
 }
 int main(){
     arr[0] = 1;
-    arr[1 = 2; // 缺少右中括号，错误类型 "k"
-    b = getint(; // 缺少右小括号，错误类型 "j"
+    arr[1 = 2; // Missing closing square bracket, error type "k"
+    b = getint(; // Missing closing parenthesis, error type "j"
     printf("%d\n", b);
     return 0;
 }

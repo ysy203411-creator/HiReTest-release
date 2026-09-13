@@ -11,7 +11,7 @@ int sum(int[] numbers, int length) {
 int main(){
     int result;
     int value = 5;
-    if (value & 1) { // 使用单独的 &，这是一个错误
+    if (value & 1) { //Using a separate & is an error
         printf("Odd\n");
     } else {
         printf("Even\n");

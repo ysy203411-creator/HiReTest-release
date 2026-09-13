@@ -18,6 +18,6 @@ int main() {
     localVar = getint();
     globalVar = getint();
     printf("LocalVar: %d\n", localVar);
-    printf("GlobalVar: %d\n", globalVar); // 修正此处的变量名
+    printf("GlobalVar: %d\n", globalVar); //Fix the variable name here
     return 0;
 }

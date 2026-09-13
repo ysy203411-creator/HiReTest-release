@@ -1,6 +1,6 @@
 const int SIZE = 5;
-int arr[SIZE] = {1, 2, 3, 4, 5}; // 修改为变量数组
-int sumArray(int a[], int size) { // 修改参数类型
+int arr[SIZE] = {1, 2, 3, 4, 5}; //Change to variable array
+int sumArray(int a[], int size) { //Change parameter type
     int sum = 0;
     int i = 0;
     for (i = 0; i < size; i = i + 1) {

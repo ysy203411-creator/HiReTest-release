@@ -30,7 +30,7 @@ void print_a_zero(int x) {
 int main() {
     a = getint();
     b = getint();
-    c = getint();  // 由输入决定调用哪个分支函数
+    c = getint();  //Call the appropriate branch function based on input
 
     if (a < b) {
         print_less(a, b);

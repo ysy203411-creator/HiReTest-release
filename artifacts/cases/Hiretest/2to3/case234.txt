@@ -1,8 +1,8 @@
 const int MAX = 100;
 int add(int a, int b) {
     int result = a + b;
-    return result; // 添加return语句
-    return 0; // 符合约束7，添加不可达的return语句
+    return result; //Add return statement
+    return 0; //Comply with constraint 7, add unreachable return statement
 }
 int main(){
     int x = 10;

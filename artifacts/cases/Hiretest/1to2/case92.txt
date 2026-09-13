@@ -13,7 +13,7 @@ int main(){
         numbers[i] = i;
     }
     calculateSum(numbers, MAX);
-    if (sum | 0) { // 使用单独的 |，应视为非法符号
+    if (sum | 0) { // Use of | alone should be considered an illegal symbol
         printf("Sum is non-zero\n");
     } else {
         printf("Sum is zero\n");

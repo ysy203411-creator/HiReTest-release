@@ -6,23 +6,23 @@ int main() {
     int value;
     int inRangeLow;
     int inRangeHigh;
-    int inRange;  // 1 表示在范围内，0 表示不在范围内
+    int inRange;  //1 indicates in range, 0 indicates out of range
 
     index = getint();
 
-    // 计算 index >= 0
+    //Compute index >= 0
     inRangeLow = 0;
     if (index >= 0) {
         inRangeLow = 1;
     }
 
-    // 计算 index < SIZE
+    //Compute index < SIZE
     inRangeHigh = 0;
     if (index < SIZE) {
         inRangeHigh = 1;
     }
 
-    // 逻辑与：inRange = inRangeLow && inRangeHigh
+    //Logical AND: inRange = inRangeLow && inRangeHigh
     inRange = 0;
     if (inRangeLow) {
         if (inRangeHigh) {
@@ -30,12 +30,12 @@ int main() {
         }
     }
 
-    // 根据 inRange 的值选择行为（通过乘法和加法模拟条件）
-    // 当 inRange == 1 时，从数组取值并打印；否则打印越界信息
+    //Select behavior based on inRange value (simulated via multiplication and addition)
+    //When inRange == 1, fetch and print array value; otherwise print out-of-bounds message
     value = 0;
     value = globalArray[index] * inRange + value * (1 - inRange);
 
-    // 打印数组值（当越界时 index 和 value 的含义由测试用例设计者自行理解）
+    //Print array value (the meaning of index and value when out of bounds is left to the test case designer)
     printf("Value at index %d is %d\n", index, value);
 
     return 0;

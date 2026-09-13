@@ -11,7 +11,7 @@ int sum(int arr[], int size) {
 int main(){
     int totalSum = sum(numbers, MAX);
     int average = totalSum / MAX;
-    if (average & 1) {  // 错误：使用单独的 & 应视为非法符号
+    if (average & 1) {  //Error: Using a standalone & is considered an illegal symbol
         printf("Average is odd.\n");
     } else {
         printf("Average is even.\n");

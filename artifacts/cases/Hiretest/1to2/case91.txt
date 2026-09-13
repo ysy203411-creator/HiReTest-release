@@ -6,7 +6,7 @@ void print_value(int val) {
 }
 int main(){
     int local_var = getint();
-    if (local_var & CONST_VAL) { // 使用单独的 & 是错误
+    if (local_var & CONST_VAL) { //Using a separate & is incorrect
         print_value(local_var);
     } else {
         print_value(global_var);

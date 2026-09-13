@@ -24,7 +24,7 @@ int main() {
     diff = compare(a + b, a - b);  // (a + b) - (a - b)
     printf("(a + b) - (a - b): %d\n", diff);
 
-    /* 去掉逻辑非，直接使用比较结果 */
+    /*Remove logical NOT, use comparison result directly*/
     result = compare(a, 0);        // a - 0
     printf("a - 0 (no !): %d\n", result);
 

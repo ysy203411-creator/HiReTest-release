@@ -5,7 +5,7 @@ int sum;
 int calculateSum(int[] arr) {
     int localSum = 0;
     int i = 0;
-    /* 用 while 循环替代 for 循环 */
+    /*Replace for loop with while loop*/
     while (i < SIZE) {
         localSum = localSum + arr[i];
         i = i + 1;
@@ -15,7 +15,7 @@ int calculateSum(int[] arr) {
 
 int main() {
     int i = 0;
-    /* 用 while 循环替代 for 循环 */
+    /*Replace for loop with while loop*/
     while (i < SIZE) {
         numbers[i] = getint();
         i = i + 1;

@@ -1,5 +1,5 @@
 const int MAX = 10;
-int numbers[MAX] = {0}; // 初始化全局变量数组
+int numbers[MAX] = {0}; // Initialize global variable array
 int sum(int arr[], int length) {
     int total = 0;
     int i = 0;

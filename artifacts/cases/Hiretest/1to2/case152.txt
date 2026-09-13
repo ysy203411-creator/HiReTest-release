@@ -11,7 +11,7 @@ int main(){
     int y = getint();
     int result = sum(x, y);
     printResult(result);
-    if (x > 0 & y > 0) {  // 错误：使用单独的 &
+    if (x > 0 & y > 0) {  //Error: using separate &
         printf("Both numbers are positive.\n");
     }
     return 0;

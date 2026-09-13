@@ -1,9 +1,9 @@
 int globalVar;
-const int constArray[5] = {1, 2, 3, 0, 0}; // 补全初始化列表
+const int constArray[5] = {1, 2, 3, 0, 0}; //Complete initialization list
 int main(){
-    int localVar = 0; // 初始化为0
+    int localVar = 0; //Initialize to 0
     static int staticVar;
-    int array[3] = {0}; // 初始化为0
+    int array[3] = {0}; //Initialize to 0
     printf("globalVar before init: %d\n", globalVar);
     printf("localVar before init: %d\n", localVar);
     printf("staticVar before init: %d\n", staticVar);

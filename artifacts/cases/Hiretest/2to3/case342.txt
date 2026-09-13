@@ -11,7 +11,7 @@ int main(){
     int x = getint();
     int y = getint();
     int result = add(x, y);
-    if (x > 0 | y > 0) { // 使用单独的 |，应视为非法符号
+    if (x > 0 | y > 0) { // Use of | alone should be considered an illegal symbol
         print_result(result);
     }
     return 0;

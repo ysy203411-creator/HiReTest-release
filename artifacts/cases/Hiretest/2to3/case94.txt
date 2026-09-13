@@ -2,7 +2,7 @@ const int SIZE = 10;
 int arr[SIZE];
 int main(){
     int i = 0;
-    arr[i = 5;  // i类错误：缺少右小括号
+    arr[i = 5;  //i class error: missing right parenthesis
     if (i < SIZE) {
         printf("Index is within bounds.\n");
     }

@@ -8,9 +8,9 @@ void modifyArray(int arr[]) {
 int main(){
     int i;
     for (i = 0; i < 5; i = i + 1) {
-        b = i;  // 正确：给变量赋值
-        arr[i] = i;  // 正确：给数组元素赋值
+        b = i;  //Correct: Assigning a value to a variable
+        arr[i] = i;  //Correct: Assigning a value to an array element
     }
-    printf("%d %d\n", b, arr[0]);  // 修改后的 printf 调用，参数数量与 %d 数量一致
+    printf("%d %d\n", b, arr[0]);  //Modified printf call, number of parameters matches the number of %d
     return 0;
 }

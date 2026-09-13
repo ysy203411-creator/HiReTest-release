@@ -1,5 +1,5 @@
 const int SIZE = 5;
-int array[SIZE;  // 缺少右中括号
+int array[SIZE;  //Missing closing bracket
 int main(){
     int i;
     for (i = 0; i < SIZE; i = i + 1) {

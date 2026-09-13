@@ -5,8 +5,8 @@ int y;
 
 int compare(int val1, int val2) {
     /* 
-       不使用条件语句，直接通过算术表达式构造一些返回值，
-       仅用于测试函数调用与表达式计算。
+       Construct some return values directly through arithmetic expressions without using conditional statements
+       Only for testing function calls and expression evaluation.
     */
     int diff = val1 - val2;
     int sum = val1 + val2;

@@ -11,7 +11,7 @@ int main(){
     int y = 20;
     int z = 30;
     func(x, y, z);
-    int result = x + y; // 修改为使用算术运算
+    int result = x + y; //Change to use arithmetic operations
     printf("Result: %d\n", result);
     return 0;
 }

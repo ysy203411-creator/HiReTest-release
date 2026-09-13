@@ -12,7 +12,7 @@ int main(){
     int a = 5;
     int b = 10;
     int result = 0;
-    if (a > b | a < b) { // 错误：使用单独的 |
+    if (a > b | a < b) { //Error: using separate |
         result = a + b;
     } else {
         result = a - b;

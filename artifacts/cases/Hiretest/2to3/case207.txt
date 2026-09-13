@@ -10,7 +10,7 @@ int main(){
     int a = 5;
     int b = 3;
     printSum(a, b);
-    if (a > b  {  // j类错误：缺少右小括号 )
+    if (a > b  {  //j class error: missing closing parenthesis )
         printf("a is greater than b\n");
     } else {
         printf("b is greater than or equal to a\n");

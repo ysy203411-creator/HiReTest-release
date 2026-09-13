@@ -5,7 +5,7 @@ int sum(int a, int b) {
 }
 int main(){
     int result;
-    result = sum(5, 3; // 缺少右括号
+    result = sum(5, 3; //Missing closing parenthesis
     printf("Result: %d\n", result);
     return 0;
 }

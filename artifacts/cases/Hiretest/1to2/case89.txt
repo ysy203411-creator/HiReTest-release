@@ -4,7 +4,7 @@ int add(int a, int b) {
     return a + b;
 }
 void checkRelExp(int a, int b) {
-    if (a < b & a > CONST_VAL) { // 错误：使用单独的 & 代替 &&
+    if (a < b & a > CONST_VAL) { //Error: Use & instead of &&
         printf("a is less than b and greater than CONST_VAL\n");
     } else {
         printf("Condition not met\n");

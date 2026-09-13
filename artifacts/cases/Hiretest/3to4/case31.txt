@@ -13,6 +13,6 @@ int main(){
     checkArray(localArray);
     
     // Incorrect usage: passing a non-array variable, should trigger type mismatch error
-    checkArray(notArray); // e 类错误
+    checkArray(notArray); //e class error
     return 0;
 }

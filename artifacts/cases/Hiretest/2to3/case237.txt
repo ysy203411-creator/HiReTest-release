@@ -6,7 +6,7 @@ int add(int a, int b) {
 }
 int multiply(int a, int b) {
     return a * b;
-    return 0; // 添加显式的 return 语句以符合约束条件7
+    return 0; //Add an explicit return statement to satisfy constraint 7
 }
 void printArray(int arr[]) {
     int i = 0;

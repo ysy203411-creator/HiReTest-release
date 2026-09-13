@@ -1,4 +1,4 @@
-// 添加全局声明部分
+//Add global declaration section
 int newline = 10; // ASCII for '\n'
 int quote = 34; // ASCII for '\"'
 int single_quote = 39; // ASCII for '\''

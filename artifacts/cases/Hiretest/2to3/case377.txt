@@ -9,7 +9,7 @@ void printResult(int result) {
 int main(){
     int x = 5;
     int y = 15;
-    int result = add(x, y; // 缺少右括号，测试 j 类错误
+    int result = add(x, y; //Missing closing parenthesis, test j error
     printResult(result);
     return 0;
 }

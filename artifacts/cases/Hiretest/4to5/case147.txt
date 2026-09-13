@@ -5,7 +5,7 @@ int arr[SIZE] = {1, 2, 3, 4, 5};
 int sumArray(int a[], int size) {
     int sum = 0;
     int i = 0;
-    /* 由于不允许使用 for/while 等循环语句，这里直接按固定 SIZE 展开 */
+    /*Since for/while loops are not allowed, we directly expand by fixed SIZE here*/
     sum = sum + a[0];
     sum = sum + a[1];
     sum = sum + a[2];

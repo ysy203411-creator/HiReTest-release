@@ -1,14 +1,22 @@
+import argparse
 import os
 import re
 import shutil
+from pathlib import Path
 
 import pandas as pd
 
-data_dir = 'compare/data'
-# root_dir = 'compare/mid_data/'
-root_dir = 'compare/mid_data_1681_1682_new/'
-output_dir = 'compare/final_data_1681_1682_new/'
-excel_file = "compare/数据分析_1681_1682_new.xlsx"
+try:
+    from .paths import data_workspace_root, release_root
+except ImportError:  # Support direct execution from src/hiretest.
+    from paths import data_workspace_root, release_root
+
+
+# Runtime paths are overridden by CLI arguments in the command-line entry point.
+data_dir = str(Path(os.environ.get("HIRETEST_DATA_ROOT", release_root() / "data")))
+root_dir = str(data_workspace_root() / "version_diffs")
+output_dir = str(data_workspace_root() / "filtered_changes")
+excel_file = str(data_workspace_root() / "change_analysis.xlsx")
 change_type = ["match", "delete-node", "delete-tree", "insert-node", "insert-tree", "update-node", "move-tree"]
 declaration_name = ["VariableDeclarationFragment", "FieldDeclaration", "VariableDeclarationStatement",
                     "MethodDeclaration", "decl_stmt", "function_decl", "function", "struct", "typedef",
@@ -20,21 +28,21 @@ type_pattern = r'^[^ :]+'
 update_pattern = r'replace\s+(?:"([^"]*)"|(\S*))\s+by\s+(?:"([^"]*)"|(\S*))'
 
 
-# 匹配match 前后版本的位置
+#Match positions before and after version
 # name: c [1117,1118]
 # name: c [1157,1158]
-# 更新update-node 旧版本的位置，match中存在前后的位置
+#Update node positions of old version, match contains positions before and after
 # literal: "testfile.txt" [610,624]
 # replace "testfile.txt" by "testfile1.txt"
-# 插入insert-node，insert-tree 只标记了新版本在父节点下的相对位置,从AST树中查询新版本具体位置
+#Insert node, insert tree only marks the relative position of new version under parent node from AST tree, query specific position of new version
 # function [573,609]
 # ............
 # to
 # unit [0,0]
 # at 10
-# 删除delete-node，delete-tree 旧版本的位置
+#Delete node, delete tree old version position
 # operator: != [5775,5777]
-# 移动move-tree 旧版本的位置，移动后新版本的父节点下的相对位置，match中存在前后的位置
+#Move tree old version position, relative position under parent node of new version after moving, match contains positions before and after
 # MethodInvocation [8118,8145]
 #     SimpleName: f_LineBreaks_Typenum [8118,8138]
 #     METHOD_INVOCATION_ARGUMENTS [8139,8144]
@@ -72,7 +80,7 @@ class Location:
             return False
         elif self.start <= location.start and self.end >= location.end:
             return True
-        # C++的gumtree AST树有bug,最外层的范围是[0,0]
+        #C++ gumtree AST tree has bug, outermost scope is [0,0]
         elif self.start == self.end == 0:
             return True
         else:
@@ -160,7 +168,7 @@ class ChangeNode(Node):
     #         self.name = f"{node.name} + {self.name}"
 
     def addLocation(self, node):
-        # 判断是否互为兄弟节点
+        #Determine if nodes are siblings
         is_sibling = (
                 (not self.bro_location1.isEmpty() and self.bro_location1.include(node.new_location)) or
                 (not self.bro_location2.isEmpty() and self.bro_location2.include(node.new_location)) or
@@ -172,8 +180,8 @@ class ChangeNode(Node):
             print(f"error for brother location fault {self.to_string()}")
             return
 
-        # 合并节点
-        # 确定哪个节点的索引位置靠前
+        #Merge nodes
+        #Determine which node's index position is earlier
         if self.new_location.start < node.new_location.start:
             first_node = self
             second_node = node
@@ -181,15 +189,15 @@ class ChangeNode(Node):
             first_node = node
             second_node = self
 
-        # 更新节点名称
+        #Update node name
         new_name = f"{first_node.name}+{second_node.name}"
 
-        # 更新节点自身的位置
+        #Update node's own position
         new_location = Location(min(first_node.new_location.start, second_node.new_location.start),
                                 max(first_node.new_location.end, second_node.new_location.end))
 
-        # 更新兄弟节点位置
-        # 如果 first_node 的 bro_location1 或 bro_location2 是 second_node 的位置，则将其更新为新的位置
+        #Update sibling node position
+        #If first_node's bro_location1 or bro_location2 is second_node's position, update it to the new position
         if not first_node.bro_location1.isEmpty() and (first_node.bro_location1.include(second_node.new_location) or
         second_node.new_location.include(first_node.bro_location1)):
             first_node.bro_location1 = new_location
@@ -197,7 +205,7 @@ class ChangeNode(Node):
             second_node.new_location.include(first_node.bro_location2)):
             first_node.bro_location2 = new_location
 
-        # 如果 second_node 的 bro_location1 或 bro_location2 是 first_node 的位置，则将其更新为新的位置
+        #If second_node's bro_location1 or bro_location2 is first_node's position, update it to the new position
         if not second_node.bro_location1.isEmpty() and (second_node.bro_location1.include(first_node.new_location) or
         first_node.new_location.include(second_node.bro_location1)):
             second_node.bro_location1 = new_location
@@ -205,7 +213,7 @@ class ChangeNode(Node):
         first_node.new_location.include(second_node.bro_location2)):
             second_node.bro_location2 = new_location
 
-        # 更新 self 的属性
+        #Update self's properties
         self.name = new_name
         self.new_location = new_location
         self.bro_location1 = first_node.bro_location1
@@ -223,13 +231,13 @@ class ChangeNode(Node):
         return self.line_num
 
     def merge_lines(self, node):
-        # 处理 self 或 node 只占一行的情况
+        #Handle self or node occupying only one line
         self_end = self.line1 if self.line2 == -1 else self.line2
         node_end = node.line1 if node.line2 == -1 else node.line2
 
-        # 检查是否有重叠或相邻
+        #Check for overlaps or adjacency
         if not (self_end < node.line1 - 1 or node_end < self.line1 - 1):
-            # 合并行范围
+            #Merge line ranges
             new_line1 = min(self.line1, node.line1)
             new_line2 = max(self_end, node_end)
             if new_line2 == new_line1:
@@ -241,7 +249,7 @@ class ChangeNode(Node):
                 self.name = f"{node.name} + {self.name}"
             elif self.line1 < node.line1:
                 self.name = f"{self.name} + {node.name}"
-            # 更新 self 的行范围
+            #Update self's line range
             self.setLine(new_line1,new_line2)
             if self.type == "delete-tree" or self.type == "delete-node":
                 self.location.set(min(self.location.start, node.location.start),
@@ -271,7 +279,7 @@ def getCommand(file,path1,path2):
 def mat_pattern(line):
     match = re.search(match_pattern, line)
     if match:
-        # 提取捕获组中的数字
+        #Extract numbers from captured groups
         num1 = int(match.group(1))
         num2 = int(match.group(2))
         return Location(num1, num2)
@@ -283,7 +291,7 @@ def mat_pattern(line):
 def ind_pattern(line):
     match = re.search(index_pattern, line)
     if match:
-        # 提取捕获组中的数字
+        #Extract numbers from captured groups
         num = int(match.group())
         return num
     else:
@@ -294,7 +302,7 @@ def ind_pattern(line):
 def na_pattern(line):
     match = re.search(type_pattern, line)
     if match:
-        # 提取捕获组中的数字
+        #Extract numbers from captured groups
         s = str(match.group())
         return s
     else:
@@ -303,7 +311,7 @@ def na_pattern(line):
 
 
 def upd_pattern(line):
-    # 使用正则表达式匹配
+    #Use regular expression matching
     match = re.match(update_pattern, line)
 
     if not match:
@@ -350,7 +358,7 @@ def analyse_txt(diff_path, AST_path):
         lines = file.readlines()
         results = []
         matchs = []
-        flag = False  # 判断分割线
+        flag = False  #Determine the split line
         type = ""
         index = 0
         while index < len(lines):
@@ -465,9 +473,9 @@ def get_tree(path):
         while index < len(lines):
             raw_line = lines[index]
             stripped_line = raw_line.lstrip()
-            # 计算原字符串和移除了空白的字符串的长度差
+            #Calculate the length difference between the original string and the string with whitespace removed
             indent_whitespace = raw_line[:len(raw_line) - len(stripped_line)]
-            level = indent_whitespace.count('    ')  # 缩进级别
+            level = indent_whitespace.count('    ')  #Indent level
             line = raw_line.strip()
             name = na_pattern(line)
             if name == "comment" or '/' in name or '*' in name:
@@ -495,18 +503,18 @@ def get_tree(path):
 
 def extract_filename_add_id(file_path, id):
     """
-    提取文件路径中的文件名，并在文件名后添加编号。
+    Extract the filename from the file path and add a number to it.
 
-    :param file_path: 源文件路径
-    :return: 新的文件名（不包括路径）
+    :param file_path: Source file path
+    :return: New filename (without path)
     """
-    # 使用os.path.basename获取文件名
+    #Use os.path.basename to get the filename
     filename = os.path.basename(file_path)
 
-    # 分割文件名和扩展名
+    #Split filename and extension
     name, ext = os.path.splitext(filename)
 
-    # 重新组合文件名和扩展名
+    #Recombine filename and extension
     new_filename = f"{name}{id}{ext}"
     if name == "Com":
         new_filename = f"{name}({id}){ext}"
@@ -516,24 +524,24 @@ def extract_filename_add_id(file_path, id):
 
 def move_and_rename_file(source_path, file_id, destination_folder):
     """
-    将文件从源路径复制到目标文件夹，并使用extract_filename_add_one函数重命名文件。
+    Copy the file from the source path to the destination folder, and rename the file using the extract_filename_add_one function.
 
-    :param source_path: 源文件路径
-    :param destination_folder: 目标文件夹路径
+    :param source_path: Source file path
+    :param destination_folder: Destination folder path
     """
-    # 确保目标文件夹存在
+    #Ensure the destination folder exists
     os.makedirs(destination_folder, exist_ok=True)
 
-    # 提取新的文件名
+    #Extract the new filename
     dir = os.path.dirname(source_path)
     name, ext = os.path.splitext(os.path.basename(source_path))
     source = os.path.join(dir, name)
     new_filename = extract_filename_add_id(source, file_id)
 
-    # 构建新的完整目标路径
+    #Build the new full target path
     destination_path = os.path.join(destination_folder, new_filename)
 
-    # 使用shutil.copy2复制并重命名文件
+    #Use shutil.copy2 to copy and rename the file
     shutil.copy2(source, destination_path)
     return destination_path
 
@@ -554,13 +562,12 @@ def search_tree(tree, location):
 
 
 def sort_nodes(node_list):
-    """
-    对 Node 列表进行排序。
-    排序规则：
-    1. 按照 new_location.start 从小到大排序。
-    2. 如果 new_location.start 相同，则按照 new_location.end 从大到小排序。
-    """
-    # 使用 sorted 函数和自定义的排序键
+    """Sort the Node list.
+Sorting rules:
+1. Sort by new_location.start in ascending order.
+2. If new_location.start is the same, sort by new_location.end in descending order.
+"""
+    #Use the sorted function with a custom sort key
     sorted_list = sorted(
         node_list,
         key=lambda node: (node.new_location.start, -node.new_location.end)
@@ -637,20 +644,20 @@ def get_lines_index(file_path, location):
             line_num += 1
 
     if start_line == -1 or end_line == -1:
-        return -1, -1  # 如果没有找到匹配的索引范围，则返回-1, -1
+        return -1, -1  #If no matching index range is found, return -1, -1
 
     if start_line == end_line:
-        end_line = -1  # 如果索引范围只涉及一行，则将结束行设置为-1
+        end_line = -1  #If the index range spans only one line, set the end line to -1
 
     return start_line, end_line
 
 def merge_intervals(intervals):
     """
-    合并重叠或包含的区间
-    :param intervals: 区间列表，每个区间是一个 [start, end] 的列表
-    :return: 合并后的区间列表
-    """
-    # 按 start 排序
+Merge overlapping or contained intervals
+:param intervals: List of intervals, each is a [start, end] list
+:return: Merged list of intervals
+"""
+    #Sort by start
     intervals.sort(key=lambda x: x[0])
 
     merged = []
@@ -658,16 +665,16 @@ def merge_intervals(intervals):
 
     for interval in intervals[1:]:
         start, end = interval
-        # 如果当前区间与下一个区间重叠或包含
+        #If the current interval overlaps or contains the next interval
         if start <= current_interval[1]:
-            # 合并区间，取最大的 end
+            #Merge intervals, take the maximum end
             current_interval[1] = max(current_interval[1], end)
         else:
-            # 如果不重叠，将当前区间加入结果，并更新当前区间
+            #If not overlapping, add the current interval to the result and update the current interval
             merged.append(current_interval)
             current_interval = interval
 
-    # 加入最后一个区间
+    #Add the last interval
     merged.append(current_interval)
     return merged
 
@@ -678,25 +685,25 @@ def extract_substring_from_file(file_path, start, end):
     modified_lines = [lines[0]] + [' ' + line for line in lines[1:]]
     modified_content = ''.join(modified_lines)
 
-    # 检查索引是否在文件内容范围内
+    #Check if the index is within the file content range
     if start < 0 or end > len(modified_content) or start > end:
-        print(f"提供的索引范围无效,{start},{end},{len(modified_content)}")
+        print(f"The provided index range is invalid,{start},{end},{len(modified_content)}")
         end = len(modified_content)
         if start < 0:
             start = 0
 
-    # 提取子字符串
+    #Extract substring
     substring = modified_content[start:end]
     return substring
 
 
 def calculate_total_coverage(nodes):
     """
-    计算所有节点覆盖的总长度
-    :param nodes: 节点列表，每个节点是一个字典，包含 location（location 是一个字典，包含 start 和 end）
-    :return: 覆盖的总长度
+    Calculate the total length covered by all nodes
+    :param nodes: list of nodes, each node is a dictionary containing location (location is a dictionary containing start and end)
+    :return: total covered length
     """
-    # 提取所有区间
+    #Extract all intervals
     intervals = []
     for node in nodes:
         if not node.new_location.isEmpty():
@@ -704,21 +711,21 @@ def calculate_total_coverage(nodes):
 
     if len(intervals) == 0:
         return 0
-    # 合并重叠或包含的区间
+    #Merge overlapping or contained intervals
     merged_intervals = merge_intervals(intervals)
 
-    # 计算总长度
+    #Calculate total length
     total_length = 0
     for interval in merged_intervals:
-        total_length += interval[1] - interval[0] + 1  # 包含两端点
+        total_length += interval[1] - interval[0] + 1  #Include both endpoints
 
     return total_length
 
 
 def compare_tree(student_id, assignment_id, output_id, file_path):
     basename = os.path.splitext(file_path)[0]
-    raw_file_path1 = os.path.join('compare/data', student_id, assignment_id, "first", basename)
-    raw_file_path2 = os.path.join('compare/data', student_id, assignment_id, "last", basename)
+    raw_file_path1 = os.path.join(data_dir, student_id, assignment_id, "first", basename)
+    raw_file_path2 = os.path.join(data_dir, student_id, assignment_id, "last", basename)
     with open(raw_file_path1, 'r', encoding='utf-8', errors='ignore') as file1:
         content1 = file1.read()
         length1 = len(content1)
@@ -744,7 +751,7 @@ def compare_tree(student_id, assignment_id, output_id, file_path):
     while index < len(result2):
         flag = False
         node = result2[index]
-        if node.type == "delete-tree" or node.type == "delete-node":  # 同类合并
+        if node.type == "delete-tree" or node.type == "delete-node":  #Merge similar items
             for node1 in result2:
                 if (node1.type == "delete-tree" or node1.type == "delete-node") and \
                         (not node.location.same(node1.location)) and node1.location.include(node.location):
@@ -806,7 +813,7 @@ def compare_tree(student_id, assignment_id, output_id, file_path):
                 flag = True
             else:
                 if match2 and match2 != []:
-                    # 父节点是A中新增的节点
+                    #Parent node is a newly added node in A
                     old_f_loc = get_old_location(match2, node.f_location)
                     if old_f_loc is not None:
                         for old_node in result1:
@@ -814,7 +821,7 @@ def compare_tree(student_id, assignment_id, output_id, file_path):
                                 if old_node.type != "move_tree" and old_node.type != "update-node":
                                     flag = True
                                     break
-                    # #被两个A中新增的兄弟节点包围：
+                    # #Enclosed by two newly added sibling nodes in A:
                     # if flag is False and not node.bro_location1.isEmpty and not node.bro_location2.isEmpty:
                     #     flag = search_bros(mid_data, result1, match2, node)
         elif node.type == "move-tree":
@@ -844,7 +851,7 @@ def compare_tree(student_id, assignment_id, output_id, file_path):
         index += 1
     num['mid'] = len(output)
     index = 0
-    # 删除重复项
+    #Remove duplicates
     while index < len(output):
         node = output[index]
         i = index + 1
@@ -856,7 +863,7 @@ def compare_tree(student_id, assignment_id, output_id, file_path):
                 i += 1
         index += 1
     output = sort_nodes(output)
-    # 合并相邻项
+    #Merge adjacent items
     index = 0
     while index < len(output):
         node = output[index]
@@ -882,7 +889,7 @@ def compare_tree(student_id, assignment_id, output_id, file_path):
                 i += 1
         index += 1
     num['mid_1'] = len(output)
-    # 标注所在行
+    #Mark line position
     for node in output:
         if node.new_location.isEmpty():
             num1, num2 = get_lines_index(raw_file_path1, node.location)
@@ -924,7 +931,7 @@ def compare_tree(student_id, assignment_id, output_id, file_path):
                 else:
                     i += 1
         index += 1
-    # 合并重叠和相邻
+    #Merge overlapping and adjacent
     index = 0
     while index < len(output):
         node = output[index]
@@ -952,7 +959,7 @@ def compare_tree(student_id, assignment_id, output_id, file_path):
     output_path = os.path.join(output_dir, student_id, str(output_id), os.path.basename(file_path))
     dir = os.path.dirname(output_path)
 
-    # 检查输出文件夹是否存在，如果不存在则创建它
+    #Check if output folder exists, create it if not
     if os.path.exists(dir):
         shutil.rmtree(dir)
     os.makedirs(dir)
@@ -963,14 +970,14 @@ def compare_tree(student_id, assignment_id, output_id, file_path):
         if node.location.isEmpty() and node.new_location.isEmpty():
             print(f"{output_path} has node None location")
         fo.write(f"{node.to_string()}\n")
-    #写入excel
+    #Write to excel
     if os.path.exists(excel_file):
-        # 如果存在，读取现有内容
+        #If exists, read existing content
         df = pd.read_excel(excel_file)
     else:
-        # 如果不存在，创建一个空的 DataFrame
-        df = pd.DataFrame(columns=["student_id", "file_name", "change_id", "line_num","command","当次作业/过去作业",
-                                   "修改描述","修改类型","重构类型","错误类型","错误子类型"])
+        #If not exists, create an empty DataFrame
+        df = pd.DataFrame(columns=["student_id", "file_name", "change_id", "line_num","command","Current assignment/past assignment",
+                                   "Modify description","Modify type","Refactor type","Error type","Error subtype"])
     file_name,ext = os.path.splitext(os.path.basename(file_path))
     new_rows = []
     for index, node in enumerate(output, start=1):
@@ -980,12 +987,12 @@ def compare_tree(student_id, assignment_id, output_id, file_path):
             "change_id": index,
             "line_num": node.getLineNum(),
             "command": getCommand(file_name,os.path.basename(dst_path1),os.path.basename(dst_path2)),
-            "当次作业/过去作业": None,
-            "修改描述": None,
-            "修改类型": None,
-            "重构类型": None,
-            "错误类型": None,
-            "错误子类型": None,
+            "Current assignment/past assignment": None,
+            "Modify Description": None,
+            "Modify Type": None,
+            "Refactor Type": None,
+            "Error Type": None,
+            "Error Subtype": None,
         }
         new_rows.append(new_row)
     df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
@@ -998,8 +1005,50 @@ def collect_files(path, files_set):
         for file in files:
             files_set.add(os.path.relpath(os.path.join(root, file), path))
 
-#从 GumTree 生成的文本级 Diff 报告中，对代码修改进行初步过滤，并将最终结果按结构化格式输出到Excel 中，便于后续人工标注或模型训练
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Filter and structure GumTree changes produced by compare.py."
+    )
+    parser.add_argument(
+        "--data-root",
+        default=os.environ.get("HIRETEST_DATA_ROOT", str(release_root() / "data")),
+        help="Authorized submission-data root; see README.md.",
+    )
+    parser.add_argument(
+        "--diff-root",
+        required=True,
+        help="Transition directory generated by compare.py.",
+    )
+    parser.add_argument(
+        "--output-root",
+        default=str(data_workspace_root() / "filtered_changes"),
+        help="Writable directory for filtered change files.",
+    )
+    parser.add_argument(
+        "--report",
+        default=str(data_workspace_root() / "change_analysis.xlsx"),
+        help="Output workbook for structured changes.",
+    )
+    return parser.parse_args()
+
+
+#Perform initial filtering of code modifications from a text-level diff report generated by GumTree, and output the final results in a structured format to Excel for subsequent manual annotation or model training
 if __name__ == "__main__":
+    args = parse_args()
+    data_dir = str(Path(args.data_root).expanduser().resolve())
+    root_dir = str(Path(args.diff_root).expanduser().resolve())
+    output_dir = str(Path(args.output_root).expanduser().resolve())
+    excel_file = str(Path(args.report).expanduser().resolve())
+    if not Path(data_dir).is_dir():
+        raise FileNotFoundError(
+            f"Data directory not found: {data_dir}. Obtain the authorized data package "
+            "and configure it as described in README.md."
+        )
+    if not Path(root_dir).is_dir():
+        raise FileNotFoundError(f"Diff directory not found: {root_dir}")
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+    Path(excel_file).parent.mkdir(parents=True, exist_ok=True)
     file_num = 0
     total_num = {'start': 0, 'mid': 0, 'mid_1': 0, 'end': 0}
     flag = 0
@@ -1020,7 +1069,7 @@ if __name__ == "__main__":
             id = 0
             # p = os.path.join(output_dir, student_id, assignment_id, "output")
             # if os.path.exists(p):
-            #     # 删除文件夹及其所有内容
+            #     # Delete folder and its contents
             #     shutil.rmtree(p)
             for file in files:
                 num = compare_tree(student_id, assignment_id, id, file)

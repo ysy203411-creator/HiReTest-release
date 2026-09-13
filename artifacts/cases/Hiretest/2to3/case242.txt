@@ -10,7 +10,7 @@ int func2(int x) {
     return x * 2;
 }
 int main(){
-    int local_a = 20; // 修改变量名以避免与全局常量名重复
+    int local_a = 20; //Rename the variable to avoid duplication with global constant names
     int result = func2(b);
     printf("%d\n", result);
     return 0;

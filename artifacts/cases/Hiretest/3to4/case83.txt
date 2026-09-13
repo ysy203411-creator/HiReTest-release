@@ -7,17 +7,17 @@ int main() {
     int c1 = 65;
     int c2 = 66;
 
-    result = c1 + c2; // 应该处理为整数相加
-    printf("Result of addition %d\n", result); // 期望输出为131
+    result = c1 + c2; //Should be treated as integer addition
+    printf("Result of addition %d\n", result); //Expected output is 131
 
-    result = A + B; // 常量相加
-    printf("Const addition %d\n", result); // 期望输出为131
+    result = A + B; //Constant addition
+    printf("Const addition %d\n", result); //Expected output is 131
 
-    result = c1 - c2; // 整数相减
-    printf("Subtraction %d\n", result); // 期望输出为-1
+    result = c1 - c2; //Integer subtraction
+    printf("Subtraction %d\n", result); //Expected output is -1
 
-    result = A - B; // 常量相减
-    printf("Const subtraction %d\n", result); // 期望输出为-1
+    result = A - B; //Constant subtraction
+    printf("Const subtraction %d\n", result); //Expected output is -1
 
     return 0;
 }

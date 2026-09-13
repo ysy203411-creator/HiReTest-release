@@ -4,13 +4,13 @@ int result;
 int main(){
     int x = 5;
     int y = 10;
-    if (x & y) { // 错误：单独的 '&' 应视为非法符号
+    if (x & y) { //Error: standalone '&' should be considered an illegal symbol
         result = a + b;
     } else {
         result = a - b;
     }
     printf("Result: %d\n", result);
-    if (x | y) { // 错误：单独的 '|' 应视为非法符号
+    if (x | y) { //Error: standalone '|' should be considered an illegal symbol
         result = a * b;
     } else {
         result = a / b;

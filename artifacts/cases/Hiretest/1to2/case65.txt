@@ -8,7 +8,7 @@ int main(){
     int localVar = a + b;
     int result = arr[0] * arr[1];
     printSum(localVar, result);
-    if (localVar > 0 & result < 10) { // 使用单独的 &，应视为非法符号
+    if (localVar > 0 & result < 10) { // Use of a single & should be considered an illegal symbol
         printf("This line contains an error.\n");
     }
     return 0;

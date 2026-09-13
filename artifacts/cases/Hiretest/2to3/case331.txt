@@ -11,7 +11,7 @@ int main(){
     int y = 3;
     int result = sum(x, y);
     printResult(result);
-    if (x > 0 & y < 10) {  // a 类错误：使用单独的 &
+    if (x > 0 & y < 10) {  // a Type I error: using separate &
         printf("Both conditions are true.\n");
     }
     return 0;

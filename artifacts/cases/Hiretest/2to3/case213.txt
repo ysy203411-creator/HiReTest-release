@@ -8,7 +8,7 @@ int subtract(int x, int y) {
 }
 int main(){
     int result;
-    result = add(a, b;  // 缺少右括号
+    result = add(a, b;  //Missing closing parenthesis
     printf("Result: %d\n", result);
     return 0;
 }

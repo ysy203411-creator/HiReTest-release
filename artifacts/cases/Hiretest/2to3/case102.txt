@@ -3,11 +3,11 @@ int arr[N];
 void testFunction() {
     int i = 0;
     if (i < N) {
-        i = i + 1;  // 替代原先非法的 break
+        i = i + 1;  //Replace illegal break
     }
     for (i = 0; i < N; i = i + 1) {
         if (arr[i] == 0) {
-            continue;  // 合法：在 for 循环体中
+            continue;  //Legal: inside for loop body
         }
         arr[i] = i;
     }
@@ -15,9 +15,9 @@ void testFunction() {
 int main(){
     int x = 5;
     if (x > 0) {
-        x = x - 1;  // 替代原先非法的 continue
+        x = x - 1;  //Replace illegal continue
     }
     testFunction();
-    printf("Test completed. x = %d\n", x);  // 添加格式符 %d 和整型表达式参数 x
+    printf("Test completed. x = %d\n", x);  //Add format specifier %d and integer expression parameter x
     return 0;
 }

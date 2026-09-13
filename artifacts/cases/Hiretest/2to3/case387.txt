@@ -5,10 +5,10 @@ void printSum(int x, int y) {
 }
 int main(){
     int result;
-    // 空行测试
+    //Empty line test
     result = a + b;
     
-    // 空格测试
+    //Space test
     printSum(a, b);
     
     return 0;

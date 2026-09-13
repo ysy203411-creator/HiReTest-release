@@ -8,7 +8,7 @@ void printSum(int x, int y) {
     printf("Sum: %d\n", x + y);
 }
 int main(){
-    int result = add(a, b);  // 添加缺失的右括号
+    int result = add(a, b);  // Add missing closing parenthesis
     printSum(result, arr[2]);
     return 0;
 }

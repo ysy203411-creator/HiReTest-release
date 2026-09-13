@@ -11,7 +11,7 @@ int main(){
     for (i = 0; i < MAX_SIZE; i = i + 1) {
         localArray[i] = i;
     }
-    // 保留 j 类错误：缺少右小括号
-    funcWithParams(globalArray[0], globalArray; // 缺少右括号
+    //Keep j class error: missing right parenthesis
+    funcWithParams(globalArray[0], globalArray; //Missing right parenthesis
     return 0;
 }

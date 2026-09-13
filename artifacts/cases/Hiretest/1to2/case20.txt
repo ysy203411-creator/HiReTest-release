@@ -18,7 +18,7 @@ int main(){
     for (i = 0; i < MAX_LENGTH; i = i + 1) {
         array[i] = i;
     }
-    int check = (globalVar > 0) & (num1 < num2); // 使用单独的 &，应视为非法符号
+    int check = (globalVar > 0) & (num1 < num2); // Use of a single & should be considered an illegal symbol
     printf("Check value: %d\n", check);
     return 0;
 }

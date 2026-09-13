@@ -1,6 +1,6 @@
 const int a = 10;
 int func() {
-    int a = 20; // 局部变量遮蔽全局常量
+    int a = 20; //Local variable shadows global constant
     int b = 30;
     return b;
 }

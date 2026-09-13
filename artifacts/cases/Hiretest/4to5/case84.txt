@@ -6,7 +6,7 @@ int compare_constants() {
     } else {
         return 0;
     }
-    return 0; // 已符合约束条件
+    return 0; //Meets constraints
 }
 int main(){
     int x = compare_constants();

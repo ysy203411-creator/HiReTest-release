@@ -1,19 +1,19 @@
 const int CONST_SIZE = 5;
 int globalIntArray[CONST_SIZE] = {1, 2, 3};
-const int globalConstArray[CONST_SIZE] = {4, 5, 0, 0, 0};  // 修改：补全初始化列表
+const int globalConstArray[CONST_SIZE] = {4, 5, 0, 0, 0};  //Complete the initializer list
 
 int main() {
     int localArray[CONST_SIZE];
     int i = 0;
 
-    /* 读入 localArray */
+    /*Read localArray*/
     i = 0;
     while (i < CONST_SIZE) {
         localArray[i] = getint();
         i = i + 1;
     }
 
-    /* 输出 globalIntArray */
+    /*Output globalIntArray*/
     i = 0;
     while (i < CONST_SIZE) {
         printf("%d ", globalIntArray[i]);
@@ -21,7 +21,7 @@ int main() {
     }
     printf("\n");
 
-    /* 输出 globalConstArray */
+    /*Output globalConstArray*/
     i = 0;
     while (i < CONST_SIZE) {
         printf("%d ", globalConstArray[i]);
@@ -29,7 +29,7 @@ int main() {
     }
     printf("\n");
 
-    /* 输出 localArray */
+    /*Output localArray*/
     i = 0;
     while (i < CONST_SIZE) {
         printf("%d ", localArray[i]);

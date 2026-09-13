@@ -5,7 +5,7 @@ int main() {
     int sum = 0;
     int i = 0;
 
-    /* 用 while 也不被允许，这里改为等价的顺序展开以避免循环语句 */
+    /*While is also not allowed here, so it is replaced with an equivalent sequential expansion to avoid loop statements*/
     sum = sum + arr[i];  /* i = 0 */
     i = i + 1;
     sum = sum + arr[i];  /* i = 1 */

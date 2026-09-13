@@ -7,12 +7,12 @@ int main() {
     b = 0;
     c = 2;
 
-    /* 模拟 a && b：当 a 和 b 都非 0 时，a * b 非 0，否则为 0 */
+    /*Simulate a && b: when both a and b are non-zero, a * b is non-zero, otherwise 0*/
     printf("a = %d, b = %d, c = %d\n", a, b, c);
     printf("a * b (simulate a && b, nonzero means true) = %d\n", a * b);
     printf("a * c (simulate a && c, nonzero means true) = %d\n", a * c);
 
-    /* 再用 ! 运算符展示真假：!0 为 1，!非0 为 0 */
+    /*Use the ! operator to show true and false: !0 is 1, !non-zero is 0*/
     printf("! (a * b) = %d\n", ! (a * b));
     printf("! (a * c) = %d\n", ! (a * c));
 

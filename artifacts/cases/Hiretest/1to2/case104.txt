@@ -6,12 +6,12 @@ int add(int x, int y) {
 int main(){
     int result;
     result = add(a, b);
-    if (result & 1) {  // 错误：单独的 '&' 应该是 '&&'
+    if (result & 1) {  //Error: standalone '&' should be '&&'
         printf("Odd\n");
     } else {
         printf("Even\n");
     }
-    if (result | 0) {  // 错误：单独的 '|' 应该是 '||'
+    if (result | 0) {  //Error: standalone '|' should be '||'
         printf("Non-zero\n");
     } else {
         printf("Zero\n");

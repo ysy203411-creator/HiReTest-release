@@ -6,7 +6,7 @@ void func(int a, int b) {
 int main(){
     int x = 10;
     int y = 20;
-    func(x, y;  // i类错误：缺少右小括号 )
-    arr[2 = x;  // k类错误：缺少右中括号 ]
+    func(x, y;  //i class error: missing closing parenthesis )
+    arr[2 = x;  //k class error: missing closing bracket ]
     return 0;
 }

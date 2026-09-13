@@ -14,7 +14,7 @@ int main(){
     }
     
     printValues(localVar, localArray);
-    int condition = (localVar > 10) & (localArray[0] < 5); // 使用单独的 &，这是错误的
+    int condition = (localVar > 10) & (localArray[0] < 5); //Using a separate & is incorrect
     if (condition) {
         printf("Condition is true\n");
     } else {

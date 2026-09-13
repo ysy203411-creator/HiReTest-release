@@ -1,6 +1,6 @@
 const int SIZE = 5;
 int errors[SIZE];
-int globalIndex = 0; // 修改全局变量名
+int globalIndex = 0; //Rename global variable
 void addError(int errorCode) {
     if (globalIndex < SIZE) {
         errors[globalIndex] = errorCode;
@@ -14,7 +14,7 @@ void printErrors() {
     }
 }
 int main(){
-    if (globalIndex < SIZE) { // 将条件放在 if 语句中
+    if (globalIndex < SIZE) { //Place condition in if statement
         addError(404);
     }
     if (globalIndex < SIZE) {

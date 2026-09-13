@@ -1,7 +1,7 @@
 const int MAX = 100;
 int add(int a, int b) {
     return a + b;
-    return 0; // 添加不可达的return语句
+    return 0; //Add unreachable return statement
 }
 void printMessage() {
     return;

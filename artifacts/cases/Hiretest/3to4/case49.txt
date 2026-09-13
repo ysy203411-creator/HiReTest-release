@@ -8,7 +8,7 @@ void testFunc(int param) {
 int main(){
     int i;
     for (i = 0; i < 10; i = i + 1) {
-        a = i; // h 类错误：对常量进行赋值
+        a = i; //H class error: assigning to a constant
     }
     return 0;
 }

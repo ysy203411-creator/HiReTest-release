@@ -13,6 +13,6 @@ int main(){
         printf("x is less than y\n");
     }
     printSum(x, y);
-    return 0; // 修改：移除非法符号 |，保持符合约束
+    return 0; //Modify: Remove illegal symbol |, keep within constraints
     return 0;
 }

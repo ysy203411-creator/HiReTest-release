@@ -3,7 +3,7 @@ int arr[SIZE];
 
 int main() {
     int i;
-    /* 读入 SIZE 个整数到数组 arr 中 */
+    /*Read SIZE integers into array arr*/
     i = 0;
     arr[i] = getint();
     i = 1;
@@ -15,7 +15,7 @@ int main() {
     i = 4;
     arr[i] = getint();
 
-    /* 依次输出数组元素及其下标 */
+    /*Output array elements and their indices sequentially*/
     i = 0;
     printf("Array element 0: %d\n", arr[i]);
     i = 1;

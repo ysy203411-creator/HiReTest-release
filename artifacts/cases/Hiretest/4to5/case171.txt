@@ -1,5 +1,5 @@
 const int a = 10;
-int b = 10; // 初始化全局变量 b 为常量表达式
+int b = 10; //Initialize global variable b with a constant expression
 
 void initialize() {
     b = a + 5;
@@ -8,6 +8,6 @@ void initialize() {
 int main(){
     initialize();
     int result = b * 2;
-    printf("%d\n", result); // 修正转义序列为合法格式
+    printf("%d\n", result); //Fix escape sequence to a valid format
     return 0;
 }

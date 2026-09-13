@@ -1,5 +1,5 @@
 const int MAX = 100;
-int values[MAX] = {1, 2, 3, 4, 5}; // 修改为全局数组
+int values[MAX] = {1, 2, 3, 4, 5}; //Change to global array
 int array[MAX];
 int sum(int[] arr, int n) {
     int total = 0;
@@ -13,8 +13,8 @@ void printSum(int result) {
     printf("Sum is: %d\n", result);
 }
 int main(){
-    int n = 5; // 使用全局数组的长度
-    int result = sum(values, n); // 调用sum函数时传入全局数组
+    int n = 5; //Use the length of the global array
+    int result = sum(values, n); //Pass the global array to the sum function
     printSum(result);
     return 0;
 }

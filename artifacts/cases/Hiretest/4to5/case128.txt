@@ -10,7 +10,7 @@ void printFactorial(int n) {
 }
 int main(){
     int input = getint();
-    global_var = input == 0 ? 1 : 0; // 修改了这一行，避免使用非法的一元运算符组合
+    global_var = input == 0 ? 1 : 0; //Fixed this line to avoid illegal unary operator combinations
     if (!global_var) {
         printf("Input was non-zero\n");
     } else {

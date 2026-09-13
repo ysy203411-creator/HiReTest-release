@@ -13,7 +13,7 @@ void updateScope(int arr[], int size) {
 int main() {
     int localVar = 5;
     const int localConst = 3;
-    int localArray[3]; // 修改为使用字面量常量
+    int localArray[3]; //Change to use literal constants
     updateScope(globalArray, MAX);
     int i = 0;
     for (i = 0; i < MAX; i = i + 1) {

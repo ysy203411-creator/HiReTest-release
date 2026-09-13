@@ -5,12 +5,12 @@ int main() {
     a = getint();
     b = getint();
 
-    // 用算术表达式和 printf 替代 if-else 分支
+    //Replace if-else branches with arithmetic expressions and printf
     int diff;
     diff = a - b;
 
-    // 当 a > b 时，diff > 0；否则 diff <= 0
-    // 通过两条输出语句展示比较结果
+    //When a > b, diff > 0; otherwise diff <= 0
+    //Show the comparison result with two output statements
     printf("a - b = %d\n", diff);
     printf("comparison result (1: a>b, 0: a<=b): %d\n", (diff > 0) ? 1 : 0);
 

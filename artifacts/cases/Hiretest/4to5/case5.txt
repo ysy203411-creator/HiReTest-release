@@ -1,7 +1,7 @@
 const int CONST_VAL = 10;
 int global_var = 5;
 int negate(int x) {
-    return x == 0 ? 1 : 0; // 修改为使用条件表达式替代连续的 `!` 运算符
+    return x == 0 ? 1 : 0; //Replace with a conditional expression to replace consecutive `!` operators
 }
 int main(){
     int a = getint();

@@ -1,7 +1,7 @@
 const int CONST_VALUE = 10;
 int globalVar = 5;
 void modifyArray(int arr[]) {
-    arr[0] = arr[0] + CONST_VALUE; // 使用常量值进行计算
+    arr[0] = arr[0] + CONST_VALUE; //Perform calculations using constant values
 }
 int main(){
     int arr[5];
@@ -9,7 +9,7 @@ int main(){
     input = getint();
     arr[0] = input;
     modifyArray(arr);
-    printf("%d\n", arr[0]); // 输出计算后的数组元素
-    printf("%d\n", globalVar); // 输出全局变量
+    printf("%d\n", arr[0]); //Output the array elements after calculation
+    printf("%d\n", globalVar); //Output global variables
     return 0;
 }

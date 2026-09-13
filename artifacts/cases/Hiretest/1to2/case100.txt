@@ -11,7 +11,7 @@ int main(){
     int y = 20;
     int result = add(x, y);
     printResult(result);
-    int z = 0; // 修改为合法的赋值语句
+    int z = 0; //Convert to a valid assignment statement
     if (x != 0 && y != 0) {
         z = 1;
     }

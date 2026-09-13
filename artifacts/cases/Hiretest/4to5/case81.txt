@@ -3,16 +3,16 @@ const int size = 100;
 int main() {
     int count = 0;
     int i = 0;
-    int str[size]; // 使用int数组替代字符数组
+    int str[size]; //Use int array instead of char array
 
-    // 读入最多 size 个整数到数组中
+    //Read up to size integers into the array
     i = 0;
     while (i < size) {
         str[i] = getint();
         i = i + 1;
     }
 
-    // 统计值为 10 的元素个数
+    //Count the number of elements with value 10
     i = 0;
     while (i < size) {
         if (str[i] == 10) {

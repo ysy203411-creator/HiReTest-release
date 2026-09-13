@@ -10,7 +10,7 @@ int sum(int arr[]) {
 }
 int main(){
     int x = 10;
-    int result = sum(x); // 错误：将变量传给数组形参
+    int result = sum(x); //Error: passing variable to array parameter
     printf("Result: %d\n", result);
     return 0;
 }

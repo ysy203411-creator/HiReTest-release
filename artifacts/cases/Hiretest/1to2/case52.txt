@@ -8,7 +8,7 @@ int main(){
     int result;
     int arr[5] = {1, 2, 3, 4, 5};
     
-    // 使用单独的 &，这是一个 a 类错误
+    //Using a separate & , this is an a class error
     if (local_var & global_var) {
         result = add(CONST_VAL, arr[2]);
     } else {

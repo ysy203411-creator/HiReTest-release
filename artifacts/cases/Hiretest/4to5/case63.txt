@@ -6,7 +6,7 @@ int evaluate_condition(int a, int b) {
     } else {
         return FALSE;
     }
-    return FALSE; // 修改为符合条件的返回值
+    return FALSE; //Change to a return value that meets the criteria
 }
 int main(){
     int x;

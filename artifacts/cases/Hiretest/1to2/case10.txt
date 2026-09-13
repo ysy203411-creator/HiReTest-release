@@ -19,7 +19,7 @@ int main(){
     
     printNumbers(numbers);
     
-    if (result > 20 & result < 50) { // 错误：使用单独的 & 代替 &&
+    if (result > 20 & result < 50) { //Error: Use & instead of &&
         printf("Result is between 20 and 50\n");
     }
     

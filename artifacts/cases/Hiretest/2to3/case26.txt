@@ -1,6 +1,6 @@
 const int CONST_INT = 10;
 int globalVar = 5;
-int arr[5] = {1, 2, 3, 0, 0};  // 修改初始化列表以提供全部元素
+int arr[5] = {1, 2, 3, 0, 0};  //Modify the initializer list to provide all elements
 void testFunction(int param) {
     const int localConst = 20;
     int localVar = param;

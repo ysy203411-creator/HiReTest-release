@@ -10,7 +10,7 @@ int main(){
     int x = 5;
     int y = 3;
     int result;
-    if (x & y) {  // 使用单独的 &，应视为非法符号
+    if (x & y) {  // Use of a single & should be considered an illegal symbol
         result = sum(x, y);
     } else {
         result = sum(x, -y);

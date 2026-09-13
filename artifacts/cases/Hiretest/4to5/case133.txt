@@ -5,7 +5,7 @@ int add(int a, int b) {
 }
 void printSum(int a, int b) {
     int sum = add(a, b);
-    printf("Sum: %d\n", sum); // 修正：确保格式符和参数数量匹配
+    printf("Sum: %d\n", sum); //Fix: Ensure the format specifier and parameter count match
     return;
 }
 int main(){

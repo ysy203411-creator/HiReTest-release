@@ -15,6 +15,7 @@ The comparison experiments reported in the paper were conducted using the corres
 ```text
 .
 ├── artifacts/                # released HiReTest test cases and result workbooks
+├── data/                     # empty placeholder for locally obtained authorized data
 ├── prompts/public_templates/ # public generation, constraint, and review prompts
 ├── requirements/core.txt     # Python dependencies for HiReTest
 ├── scripts/                  # artifact-manifest generator
@@ -99,6 +100,48 @@ python -m pip install -r requirements/core.txt
 python -m pip install -e .
 ```
 
+## Preparing external data
+
+The public repository intentionally leaves `data/` empty. Obtain the authorized or
+Zenodo-hosted data package described in the Data and privacy section, extract it outside
+the repository when possible, and configure the paths before running the full pipeline.
+The assignment IDs below are placeholders; replace them with the ordered IDs documented
+by the data package.
+
+```powershell
+$env:HIRETEST_DATA_ROOT = "D:\path\to\authorized\submissions"
+$env:HIRETEST_DERIVED_DATA_ROOT = "D:\path\to\hiretest-workspace"
+$env:HIRETEST_ASSIGNMENT_SEQUENCE = "assignment1,assignment2,assignment3,assignment4,assignment5,assignment6"
+$env:HIRETEST_TARGET_ASSIGNMENT_IDS = "assignment2,assignment3,assignment4,assignment5,assignment6"
+$env:HIRETEST_TRANSITION_DIRS = "version_diffs/assignment1_to_assignment2,version_diffs/assignment2_to_assignment3,version_diffs/assignment3_to_assignment4,version_diffs/assignment4_to_assignment5,version_diffs/assignment5_to_assignment6"
+```
+
+Generate GumTree comparisons for one adjacent transition with explicit assignment IDs:
+
+```powershell
+python -m hiretest.compare `
+  --data-root $env:HIRETEST_DATA_ROOT `
+  --derived-root $env:HIRETEST_DERIVED_DATA_ROOT `
+  --from-assignment assignment1 `
+  --to-assignment assignment2
+```
+
+Filter one generated transition without relying on repository-specific directories:
+
+```powershell
+python -m hiretest.analyse `
+  --data-root $env:HIRETEST_DATA_ROOT `
+  --diff-root "$env:HIRETEST_DERIVED_DATA_ROOT\version_diffs\assignment1_to_assignment2" `
+  --output-root "$env:HIRETEST_DERIVED_DATA_ROOT\filtered_changes\1to2" `
+  --report "$env:HIRETEST_DERIVED_DATA_ROOT\outputs\change_analysis_1to2.xlsx"
+```
+
+`data_preprocessing.py` and `get_results.py` accept the same mappings through
+`--assignment-ids` and `--transition-dirs`. Run either command with `--help` for the
+complete interface. Model checkpoints and prediction reports default to `models/` and
+`outputs/` under `HIRETEST_DERIVED_DATA_ROOT`. Newly generated LLM cases default to
+`artifacts/generated/`; released results under `artifacts/cases/` are never overwritten.
+
 ## Inspecting the release
 
 Run a dry check to confirm that all released stage directories are visible:
@@ -123,14 +166,19 @@ For example, on Windows:
 python -m hiretest.reproduce_test `
   --case-root artifacts/cases `
   --stage 1to2 `
-  --students-dir D:\path\to\authorized\data_2025\data
+  --students-dir D:\path\to\authorized\submissions `
+  --assignment-ids assignment2,assignment3,assignment4,assignment5,assignment6
 ```
 
 Newly reproduced workbooks are written under `artifacts/reproduced/` by default and do not overwrite the released workbooks.
 
 The evaluator uses the following environment variables when applicable:
 
-- `HIRETEST_DATA_ROOT` and `HIRETEST_DERIVED_DATA_ROOT` point to authorized data outside the repository.
+- `HIRETEST_DATA_ROOT` points to authorized submissions outside the repository.
+- `HIRETEST_DERIVED_DATA_ROOT` points to a writable workspace for intermediate data, models, and reports.
+- `HIRETEST_ASSIGNMENT_SEQUENCE` records the six ordered assignment IDs used by the five-stage pipeline.
+- `HIRETEST_TARGET_ASSIGNMENT_IDS` records the five target IDs used when reevaluating released tests.
+- `HIRETEST_TRANSITION_DIRS` maps the five stages to their generated diff directories.
 - `HIRETEST_REPAIR_PROMPT_ROOT` points to authorized history-guided prompts that cannot be published.
 - `HIRETEST_MARS_JAR` points to a locally obtained MARS installation.
 - `HIRETEST_LLI` points to LLVM `lli`.

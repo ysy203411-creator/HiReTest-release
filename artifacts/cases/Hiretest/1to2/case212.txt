@@ -13,7 +13,7 @@ int main(){
     int b = getint();
     int sum = add(a, b);
     printResult(sum);
-    int condition = (a < CONST_VAL & b > globalVar); // 使用单独的 &，应视为非法符号
+    int condition = (a < CONST_VAL & b > globalVar); // Use of a separate & should be considered an illegal symbol
     if (condition) {
         printf("Condition met.\n");
     } else {

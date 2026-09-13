@@ -1,4 +1,5 @@
 import argparse
+import os
 from pathlib import Path
 
 try:
@@ -10,7 +11,6 @@ except ImportError:  # Support direct execution from src/hiretest.
 
 
 STAGES = ["1to2", "2to3", "3to4", "4to5", "5to6"]
-HOMEWORK_IDS = ["1852", "1854", "1856", "1858", "1859"]
 METHOD = "Hiretest"
 
 
@@ -20,7 +20,7 @@ def count_files(case_dir):
     return len(cases), len(inputs)
 
 
-def run_one(case_root, results_root, students_dir, stage, workers):
+def run_one(case_root, results_root, students_dir, stage, assignment_ids, workers):
     stage_index = STAGES.index(stage)
     case_dir = case_root / METHOD / stage
     if not case_dir.is_dir():
@@ -31,7 +31,7 @@ def run_one(case_root, results_root, students_dir, stage, workers):
     analysis_file = method_results_root / f"analysis_{stage}.xlsx"
     result_dir.mkdir(parents=True, exist_ok=True)
     method_results_root.mkdir(parents=True, exist_ok=True)
-    assignment_id = HOMEWORK_IDS[stage_index]
+    assignment_id = assignment_ids[stage_index]
 
     print(f"\n=== HiReTest / {stage} ===")
     print(f"students_dir: {students_dir}")
@@ -80,7 +80,12 @@ def main():
         "--students-dir",
         type=Path,
         default=None,
-        help="Authorized target-cohort directory. Defaults to HIRETEST_DATA_ROOT/data_2025/data.",
+        help="Authorized target-cohort directory. Defaults to HIRETEST_DATA_ROOT.",
+    )
+    parser.add_argument(
+        "--assignment-ids",
+        default=os.environ.get("HIRETEST_TARGET_ASSIGNMENT_IDS"),
+        help="Comma-separated target assignment IDs in 1to2,...,5to6 order.",
     )
     parser.add_argument(
         "--stage",
@@ -119,7 +124,15 @@ def main():
 
     students_dir = args.students_dir
     if students_dir is None:
-        students_dir = restricted_data_root() / "data_2025" / "data"
+        students_dir = restricted_data_root()
+
+    if not args.assignment_ids:
+        raise RuntimeError(
+            "Provide --assignment-ids or set HIRETEST_TARGET_ASSIGNMENT_IDS as described in README.md."
+        )
+    assignment_ids = [item.strip() for item in args.assignment_ids.split(",") if item.strip()]
+    if len(assignment_ids) != len(STAGES):
+        raise ValueError("--assignment-ids must contain five IDs in 1to2,...,5to6 order")
 
     for stage in stages:
         run_one(
@@ -127,6 +140,7 @@ def main():
             results_root,
             students_dir.resolve(),
             stage,
+            assignment_ids,
             args.workers,
         )
 

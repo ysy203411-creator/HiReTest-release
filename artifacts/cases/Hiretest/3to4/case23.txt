@@ -10,7 +10,7 @@ void processByte(int x) {
 int main(){
     int value = 42;
     int byteValue = 127;
-    process(value, arr); // 正常调用，匹配类型
-    processByte(byteValue); // 正常调用，匹配类型
+    process(value, arr); //Normal call, type matches
+    processByte(byteValue); //Normal call, type matches
     return 0;
 }

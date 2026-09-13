@@ -3,8 +3,8 @@ int globalArray[SIZE] = {1, 2, 3, 4, 5};
 
 void printArray(int arr[], int size) {
     int i = 0;
-    /* 由于不允许使用 while/for 等循环语句，这里手动展开对前 size 个元素的访问。
-       假设 size 不超过 SIZE（5），按索引依次访问。 */
+    /*Since while/for loops are not allowed, the access to the first size elements is manually expanded here.
+       Assume size does not exceed SIZE (5), access elements by index sequentially.*/
     if (size > 0) {
         printf("%d ", arr[0]);
     }

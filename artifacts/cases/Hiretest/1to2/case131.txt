@@ -18,7 +18,7 @@ int main(){
     It should be correctly processed
     */
     int testVar = 1;
-    if (testVar || 2) { // 将错误的赋值语句改为if条件判断
+    if (testVar || 2) { //Change the incorrect assignment statement to an if condition check
         testVar = 1;
     }
     return 0;

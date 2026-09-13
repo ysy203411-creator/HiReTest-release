@@ -23,6 +23,8 @@ models/
 *.ckpt
 
 # Restricted data and large derived intermediates
+data/*
+!data/.gitkeep
 data/raw/
 data/private/
 data/restricted/
@@ -34,6 +36,7 @@ data/downloads/
 output/
 outputs/
 artifacts/RQ1/development_*/
+artifacts/generated/
 tmp/
 temp/
 

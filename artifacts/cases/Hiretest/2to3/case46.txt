@@ -1,6 +1,6 @@
 const int CONST_VAL = 5;
 int globalVar = 10;
-int array[5] = {1, 2, 3, 4, 5}; // 符合约束，因为数组长度是编译期可求值的非负整数常量表达式。
+int array[5] = {1, 2, 3, 4, 5}; //Conforms to constraint, because the array length is a non-negative integer constant expression evaluatable at compile time.
 int add(int a, int b) {
     return a + b;
 }

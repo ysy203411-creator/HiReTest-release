@@ -17,7 +17,7 @@ int main(){
         localVar = globalArray[1];
     }
     printf("LocalVar: %d\n", localVar);
-    int unaryTest = -result; // 测试单目运算符
+    int unaryTest = -result; //Test unary operator
     printf("UnaryTest: %d\n", unaryTest);
     return 0;
 }

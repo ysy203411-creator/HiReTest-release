@@ -4,7 +4,7 @@ int add(int x, int y) {
 }
 int main(){
     int result;
-    // 调用函数时传递正确数量的参数
+    //Pass the correct number of arguments when calling a function
     result = add(2, 3);
     printf("Result: %d\n", result);
     return 0;

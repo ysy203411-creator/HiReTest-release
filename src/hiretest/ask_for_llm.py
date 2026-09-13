@@ -9,9 +9,14 @@ import requests
 import pandas as pd
 import sys 
 from pathlib import Path
-# ====== 配置区 ======
-RELEASE_ROOT = Path(__file__).resolve().parents[2]
-BASE_DIR = Path(os.environ.get("HIRETEST_BASE_DIR", RELEASE_ROOT)).resolve()
+
+try:
+    from .paths import data_workspace_root, generated_artifacts_root, public_prompt_root, release_root
+except ImportError:  # Support direct execution from src/hiretest.
+    from paths import data_workspace_root, generated_artifacts_root, public_prompt_root, release_root
+
+# ====== Configuration Area ======
+RELEASE_ROOT = release_root()
 API_BASE = os.environ.get("OPENAI_BASE_URL") or os.environ.get("API_BASE", "")
 API_KEY = os.environ.get("OPENAI_API_KEY") or os.environ.get("API_KEY", "")
 MODEL_NAME = os.environ.get("OPENAI_MODEL") or os.environ.get("MODEL_NAME", "gpt-4o")
@@ -24,10 +29,12 @@ PRESENCE_PENALTY = float(os.environ.get("HIRETEST_PRESENCE_PENALTY", "0.0"))
 TIMEOUT = int(os.environ.get("HIRETEST_TIMEOUT", "100"))
 
 STAGES = ["1to2", "2to3", "3to4", "4to5", "5to6"]
-PROMPT_ROOT = Path(os.environ.get("HIRETEST_REPAIR_PROMPT_ROOT", BASE_DIR / "data" / "restricted" / "repair_prompts"))
-CASE_ROOT = BASE_DIR / "artifacts" / "RQ1" / "development_cases" / "Hiretest_raw"
-RESULT_ROOT = BASE_DIR / "artifacts" / "RQ1" / "development_cases" / "Hiretest"
-CHECK_PROMPT_ROOT = BASE_DIR / "prompts" / "public_templates"
+PROMPT_ROOT = Path(
+    os.environ.get("HIRETEST_REPAIR_PROMPT_ROOT", data_workspace_root() / "repair_prompts")
+)
+CASE_ROOT = generated_artifacts_root() / "raw_cases" / "Hiretest"
+RESULT_ROOT = generated_artifacts_root() / "checked_cases" / "Hiretest"
+CHECK_PROMPT_ROOT = public_prompt_root()
 OVERWRITE = False
 
 index = 1
@@ -72,7 +79,7 @@ def parse_dual_output(response: str) -> Tuple[str, str]:
     stdin_content = ""
 
     test_case_section = None
-    test_case_match = re.search(r"test\_?case\s*[:：]?\s*(.*)", response, re.DOTALL)
+    test_case_match = re.search(r"test\_?case\s*:?\s*(.*)", response, re.DOTALL)
     if test_case_match:
         test_case_section = test_case_match.group(1)
 
@@ -86,7 +93,7 @@ def parse_dual_output(response: str) -> Tuple[str, str]:
         code = all_code_blocks[-1].strip()
 
     stdin_section = None
-    stdin_match = re.search(r"stdin\s*[:：]?\s*(.*)", response, re.DOTALL)
+    stdin_match = re.search(r"stdin\s*:?\s*(.*)", response, re.DOTALL)
     if stdin_match:
         stdin_section = stdin_match.group(1)
 
@@ -110,13 +117,17 @@ def parse_dual_output(response: str) -> Tuple[str, str]:
     return code, stdin_content
 
 def parse_fix_response_for_gen(response: str) -> Tuple[bool, str]:
-    fix_match = re.search(r"是否是错误修复\s*[:：]\s*(是|否)", response)
-    is_fixed = fix_match and fix_match.group(1) == "是"
+    fix_match = re.search(
+        r"Is it an (?:error|bug) fix\s*:\s*(yes|no)",
+        response,
+        re.IGNORECASE,
+    )
+    is_fixed = bool(fix_match and fix_match.group(1).lower() == "yes")
 
     test_case_code = ""
 
     test_case_section = None
-    section_match = re.search(r"test\_?case\s*[:：]?\s*(.*)", response, re.DOTALL)
+    section_match = re.search(r"test\_?case\s*:?\s*(.*)", response, re.DOTALL)
     if section_match:
         test_case_section = section_match.group(1)
     
@@ -371,13 +382,21 @@ def call_llm_claude(client, prompt: str, max_retries=3) -> str:
 
 
 def parse_llm_response(response: str) -> Tuple[bool, str]:
-    compliant_match = re.search(r"是否符合\s*[:：]\s*(符合|不符合)", response)
-    is_compliant = compliant_match and compliant_match.group(1) == "符合"
+    compliant_match = re.search(
+        r"(?:Is Compliant|Is Conforming|Whether it meets the constraints)\s*:\s*"
+        r"(Complies|Does not conform|compliant|non-compliant|conforms|does not conform)",
+        response,
+        re.IGNORECASE,
+    )
+    compliant_values = {"complies", "compliant", "conforms"}
+    is_compliant = bool(
+        compliant_match and compliant_match.group(1).lower() in compliant_values
+    )
 
     new_test_case = ""
     if not is_compliant:
         test_case_section = None
-        test_case_match = re.search(r"test\_?case\s*[:：]?\s*(.*)", response, re.DOTALL)
+        test_case_match = re.search(r"test\_?case\s*:?\s*(.*)", response, re.DOTALL)
         if test_case_match:
             test_case_section = test_case_match.group(1)
         
@@ -406,7 +425,7 @@ def process_single_case(
         write_text_file(output_path, error_msg)
         return
 
-    full_prompt = f"{prefix_prompt}\n#测试用例\n{original}"
+    full_prompt = f"{prefix_prompt}\n# Test Case\n{original}"
 
     response = call_llm(client, full_prompt)
 
@@ -609,14 +628,14 @@ def sanitize_c_test_case(code: str) -> str:
 
 
 NON_SOURCE_PHRASES = (
-    "无需修改",
-    "不需要修改",
-    "原测试用例",
-    "测试用例保持不变",
-    "原因分析",
-    "是否符合",
-    "符合约束",
-    "不符合约束",
+    "No modification needed",
+    "No modification required",
+    "Original test case",
+    "The test case remains unchanged",
+    "Reason Analysis",
+    "Is Compliant",
+    "Complies with the constraints",
+    "Does not comply with the constraints",
 )
 
 
@@ -630,7 +649,7 @@ def looks_like_sysy_source(code: str) -> bool:
         r"\bint\s+main\s*\(", stripped
     ):
         return False
-    if stripped.startswith(("原因分析", "是否符合", "test_case", "```", "'''")):
+    if stripped.startswith(("Reason Analysis", "Is Compliant", "test_case", "```", "'''")):
         return False
     if not re.search(r"\bint\s+main\s*\(", stripped):
         return False
@@ -665,16 +684,16 @@ def gen_test_case(use_routing=False, dual_output=False):
         ensure_dir(TEST_CASE_DIR)
 
     total = len(case_files)
-    print(f"开始生成测试用例，共 {total} 个...")
+    print(f"Start generating test cases, total {total} item...")
     sys.stdout.flush()
     
     for completed, (case_id, input_path) in enumerate(case_files, start=1):
-        # 更新进度条
+        # Update progress bar
         percent = (completed / total) * 100
         bar_len = 40
         filled = int(bar_len * completed / total)
         bar = '█' * filled + '░' * (bar_len - filled)
-        sys.stdout.write(f"\r生成进度: [{bar}] {completed}/{total} ({percent:.1f}%)")
+        sys.stdout.write(f"\rGeneration progress: [{bar}] {completed}/{total} ({percent:.1f}%)")
         sys.stdout.flush()
 
         try:
@@ -704,7 +723,7 @@ def gen_test_case(use_routing=False, dual_output=False):
                 write_text_file(os.path.join(TEST_CASE_DIR, f"case{case_id}.txt"), "/* ERROR: Input prompt is empty */")
             continue
 
-        # 已生成则跳过，支持断点续跑
+        # Already generated, skip, supports resuming from breakpoint
         _skip_path = os.path.join(TEST_CASE_DIR, f"case{case_id}.txt")
         if not OVERWRITE and os.path.exists(_skip_path) and os.path.getsize(_skip_path) > 0:
             continue
@@ -746,7 +765,7 @@ def gen_test_case(use_routing=False, dual_output=False):
 
 def batch_sanitize_test_cases(test_case_dir, backup=False):
     if not os.path.isdir(test_case_dir):
-        raise ValueError(f"目录不存在: {test_case_dir}")
+        raise ValueError(f"Directory does not exist: {test_case_dir}")
 
     pattern = os.path.join(test_case_dir, "case*.txt")
     all_files = glob.glob(pattern)
@@ -824,19 +843,19 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
     excel_data = []
 
     total = len(case_files)
-    print(f"开始检查测试用例，共 {total} 个...")
+    print(f"Start checking test cases, total {total} item...")
     sys.stdout.flush()
     
     for completed, (case_id, input_path) in enumerate(case_files, start=1):
-        # 更新进度条
+        # Update progress bar
         percent = (completed / total) * 100
         bar_len = 40
         filled = int(bar_len * completed / total)
         bar = '█' * filled + '░' * (bar_len - filled)
-        sys.stdout.write(f"\r检查进度: [{bar}] {completed}/{total} ({percent:.1f}%)")
+        sys.stdout.write(f"\rCheck progress: [{bar}] {completed}/{total} ({percent:.1f}%)")
         sys.stdout.flush()
         
-        # 已校验则跳过，支持断点续跑
+        #If validated, skip, supports resuming from breakpoint
         _checked_path = os.path.join(result_dir, f"case{case_id}.txt")
         if not OVERWRITE and os.path.exists(_checked_path) and os.path.getsize(_checked_path) > 0:
             continue
@@ -865,8 +884,8 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
                 write_text_file(analyse_path, "/* ERROR: Original test case missing */")
             excel_data.append({
                 "case_id": case_id,
-                "result": "不符合",
-                "iteration_results": ["错误"]
+                "result": "Does not conform",
+                "iteration_results": ["Error"]
             })
             continue
             
@@ -882,9 +901,9 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
         
         for iteration in range(1, check_times+1):
             if dual_output:
-                full_prompt = f"{prefix_prompt}\n#测试用例\n{current_case_content}\n#标准输入\n{current_stdin_content}"
+                full_prompt = f"{prefix_prompt}\n#Test Case\n{current_case_content}\n#Standard Input\n{current_stdin_content}"
             else:
-                full_prompt = f"{prefix_prompt}\n#测试用例\n{current_case_content}"
+                full_prompt = f"{prefix_prompt}\n#Test Case\n{current_case_content}"
                 
             response = call_llm(client, full_prompt)
             if dual_output:
@@ -900,7 +919,7 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
                     analyse_path = os.path.join(result_dir_fixed, f"case{case_id}_analyse.txt")
                 
                 if is_compliant:
-                    iteration_status = "符合"
+                    iteration_status = "Complies"
                     last_valid_case = current_case_content
                     last_valid_stdin = current_stdin_content
                     if not has_non_compliant:
@@ -914,7 +933,7 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
                     
                     if code:
                         final_code = guarded_case_content(code, last_valid_case)
-                        iteration_status = "不符合"
+                        iteration_status = "Does not conform"
                         last_valid_case = final_code
                         last_valid_stdin = stdin
                         write_text_file(case_path, final_code)
@@ -923,7 +942,7 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
                             current_case_content = final_code
                             current_stdin_content = stdin
                     else:
-                        iteration_status = "不符合 (无新代码)"
+                        iteration_status = "Does not match (no new code)"
                         write_text_file(case_path, last_valid_case)
                         write_text_file(input_path_out, last_valid_stdin)
             else:
@@ -937,7 +956,7 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
                     analyse_path = os.path.join(result_dir_fixed, f"case{case_id}_analyse.txt")
                 
                 if is_compliant:
-                    iteration_status = "符合"
+                    iteration_status = "Complies"
                     last_valid_case = current_case_content
                     if not has_non_compliant:
                         analyse_content = response
@@ -945,7 +964,7 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
                 else:
                     if new_case:
                         new_case = guarded_case_content(new_case, last_valid_case)
-                        iteration_status = "不符合"
+                        iteration_status = "Does not conform"
                         has_non_compliant = True
                         analyse_content = response
                         last_valid_case = new_case
@@ -953,7 +972,7 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
                         if iteration < 3:
                             current_case_content = new_case
                     else:
-                        iteration_status = "不符合 (无新代码)"
+                        iteration_status = "Does not match (no new code)"
                         has_non_compliant = True
                         analyse_content = response
                         write_text_file(case_path, last_valid_case)
@@ -963,7 +982,7 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
         if analyse_content:
             write_text_file(analyse_path, analyse_content)
         
-        final_result = "符合" if all(status == "符合" for status in iteration_results) else "不符合"
+        final_result = "Complies" if all(status == "Complies" for status in iteration_results) else "Does not conform"
         
         excel_data.append({
             "case_id": case_id,
@@ -975,10 +994,10 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
     if excel_data:
         detail_data = []
         for data in excel_data:
-            row = {"测试用例编号": data["case_id"]}
-            # 动态生成检查次数列（根据实际 check_times）
+            row = {"Test Case ID": data["case_id"]}
+            #Generate check times column dynamically (based on actual check_times)
             for i in range(check_times):
-                col_name = f"第{i+1}次检查"
+                col_name = f"Check {i+1}"
                 row[col_name] = data["iteration_results"][i] if len(data["iteration_results"]) > i else "N/A"
             detail_data.append(row)
         
@@ -992,8 +1011,8 @@ def check_test_case(use_routing=False, dual_output=False, check_times=3):
         
         excel_file_path = os.path.join(result_dir, "test_case_results.xlsx")
         with pd.ExcelWriter(excel_file_path, engine='openpyxl') as writer:
-            summary_df.to_excel(writer, sheet_name='汇总结果', index=False, header=False)
-            detail_df.to_excel(writer, sheet_name='详细结果', index=False)
+            summary_df.to_excel(writer, sheet_name='Summary Results', index=False, header=False)
+            detail_df.to_excel(writer, sheet_name='Detailed Results', index=False)
 
 
 def parse_args():
@@ -1075,12 +1094,8 @@ def main():
         )
         use_routing = False
         dual = run_index > 3
-        os.makedirs(TEST_CASE_DIR, exist_ok=True)
-        if args.mode in {"check", "both"}:
-            os.makedirs(RESULT_DIR, exist_ok=True)
-
         print(f"\n{'='*60}")
-        print(f"处理阶段 {stage}")
+        print(f"Processing Stage{stage}")
         print(f"  mode:       {args.mode}")
         print(f"  model:      {MODEL_NAME}")
         print(f"  dual_output:{dual}")
@@ -1088,6 +1103,10 @@ def main():
         print_stage_summary(stage, args.mode)
         if args.dry_run:
             continue
+
+        os.makedirs(TEST_CASE_DIR, exist_ok=True)
+        if args.mode in {"check", "both"}:
+            os.makedirs(RESULT_DIR, exist_ok=True)
 
         if args.mode in {"generate", "both"}:
             gen_test_case(use_routing=use_routing, dual_output=dual)

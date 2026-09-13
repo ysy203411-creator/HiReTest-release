@@ -13,7 +13,7 @@ int main(){
     printSquare(globalArray[0]);
     int a = 10;
     int b = 20;
-    if (a & b) {  // 使用单独的 &，应视为非法符号
+    if (a & b) {  // Use of a single & should be considered an illegal symbol
         printf("This line should not compile.\n");
     }
     return 0;

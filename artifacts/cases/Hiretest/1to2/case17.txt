@@ -14,7 +14,7 @@ int main(){
     localArray[1] = 2;
     int result = sum(globalVar, localVar);
     printResult(result);
-    if (localArray[0] & localArray[1]) { // 使用单独的 &，应视为非法符号
+    if (localArray[0] & localArray[1]) { // Use of a single & should be considered an illegal symbol
         printf("This line contains an error.\n");
     }
     return 0;

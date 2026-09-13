@@ -19,7 +19,7 @@ void printSum(int sum) {
 int main() {
     int localArray[SIZE] = {5, 4, 3, 2, 1};
     int length = SIZE;
-    int result1 = processArray(localArray, length); // 修改此行
+    int result1 = processArray(localArray, length); // Modify this line
     int result2 = processArray(localArray, length);
     printSum(result1);
     printSum(result2);

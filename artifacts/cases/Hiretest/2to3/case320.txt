@@ -1,9 +1,9 @@
 int global_var = 0;
 void void_function() {
-    return; // 正确的 void 函数返回
+    return; //Correct void function return
 }
 int int_function() {
-    return 0; // 修改后的 int 函数返回，符合约束
+    return 0; //Modified int function return, meets constraints
 }
 int main(){
     int a = 0;
@@ -12,9 +12,9 @@ int main(){
     int i;
     for (i = 0; i < 10; i = i + 1) {
         if (i == 5) {
-            break; // 合法的 break
+            break; //Valid break
         }
-        continue; // 合法的 continue
+        continue; //Valid continue
     }
     printf("All tests passed.\n");
     return 0;

@@ -5,7 +5,7 @@ int add(int x, int y) {
 }
 int main(){
     int result;
-    result = add(-a, +b); // 测试一元运算符的处理
+    result = add(-a, +b); //Test unary operator handling
     printf("Result: %d\n", result);
     return 0;
 }

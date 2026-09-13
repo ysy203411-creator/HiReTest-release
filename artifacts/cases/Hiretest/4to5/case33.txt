@@ -14,14 +14,14 @@ int main() {
     testFunction(globalVar);
 
     int i = 0;
-    /* 用 while 循环代替 for 循环，对 array 进行赋值 */
+    /*Use a while loop instead of a for loop to assign values to array*/
     while (i < 10) {
         array[i] = i * 2;
         i = i + 1;
     }
 
     int j = 0;
-    /* 用 while 循环代替 for 循环，输出 array 内容 */
+    /*Use a while loop instead of a for loop to output the contents of array*/
     while (j < 10) {
         printf("%d ", array[j]);
         j = j + 1;

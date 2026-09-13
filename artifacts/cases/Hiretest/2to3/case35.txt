@@ -1,5 +1,5 @@
 const int MAX = 100;
-int globalArray[100]; // 修改为编译期可求值的非负整数常量表达式
+int globalArray[100]; //Change to a non-negative integer constant expression evaluatable at compile time
 int add(int a, int b) {
     return a + b;
 }

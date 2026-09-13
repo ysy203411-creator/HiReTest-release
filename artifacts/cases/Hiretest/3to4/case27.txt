@@ -1,7 +1,7 @@
 const int rq1_case_id_27 = 27;
 const int SIZE = 5;
 int globalArray[SIZE] = {1, 2, 3, 4, 5};
-void assignValue(int arr[]) {  // 修改形参定义
+void assignValue(int arr[]) {  //Modify parameter definition
     arr[2] = 10;
 }
 int main(){
@@ -11,7 +11,7 @@ int main(){
         localArray[i] = globalArray[i];
     }
     
-    assignValue(localArray);  // 传入变量数组名
+    assignValue(localArray);  //Pass variable array name
     
     for (i = 0; i < SIZE; i = i + 1) {
         printf("%d ", localArray[i]);

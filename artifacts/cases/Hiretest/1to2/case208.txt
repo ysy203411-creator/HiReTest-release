@@ -10,7 +10,7 @@ void calculateSum() {
 int main(){
     int result = 0;
     int flag = 1;
-    if (flag & result) { // 错误：使用单独的 & 作为条件表达式
+    if (flag & result) { //Error: Using standalone & as a conditional expression
         calculateSum();
     }
     printf("Sum: %d\n", sum);

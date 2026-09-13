@@ -9,7 +9,7 @@ int sum(int arr[], int n) {
 }
 int main(){
     int numbers[MAX];
-    int idx = 0; // 修改变量名以避免重名
+    int idx = 0; //Rename the variable to avoid name collision
     for (idx = 0; idx < MAX; idx = idx + 1) {
         numbers[idx] = idx;
     }

@@ -3,14 +3,14 @@ const int CONST_VAL = 5;
 int global_var = 10;
 int array[5] = {1, 2, 3, 4, 5};
 void modifyArray(int arr[]) {
-    arr[0] = 100; // 修改数组第一个元素
+    arr[0] = 100; //Modify the first element of the array
 }
 int main(){
     int local_var = CONST_VAL;
     int another_array[3] = {7, 8, 9};
-    modifyArray(array); // 正确调用，传递数组
-    printf("Array[0]: %d\n", array[0]); // 应输出 100
-    // 错误调用，传递变量而非数组
-    modifyArray(local_var); // 应该检测到错误：实参与形参类型不匹配
+    modifyArray(array); //Correct call, passing an array
+    printf("Array[0]: %d\n", array[0]); //Should output 100
+    //Incorrect call, passing a variable instead of an array
+    modifyArray(local_var); //Should detect an error: actual and formal parameter types do not match
     return 0;
 }

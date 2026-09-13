@@ -8,8 +8,8 @@ void setValue(int x) {
 }
 int main(){
     int c;
-    c = getValue(); // 正确的函数调用
-    c = getint(; // 缺少右括号，测试 j 类错误修复
+    c = getValue(); //Correct function call
+    c = getint(; //Missing closing parenthesis, test j class error fix
     setValue(c);
     printf("%d\n", b);
     return 0;

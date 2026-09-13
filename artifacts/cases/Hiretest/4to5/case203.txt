@@ -7,7 +7,7 @@ void copyArray(int constArray[], int array[], int size) {
 }
 
 int main(){
-    int constArray[SIZE] = {1, 2, 3, 4, 5}; // 改为普通数组
+    int constArray[SIZE] = {1, 2, 3, 4, 5}; //Change to regular array
     copyArray(constArray, array, SIZE);
     for (int i = 0; i < SIZE; i = i + 1) {
         printf("%d ", array[i]);

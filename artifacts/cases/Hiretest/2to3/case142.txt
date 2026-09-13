@@ -2,19 +2,19 @@ const int CONST_VAL = 5;
 int globalVar = 10;
 int add(int a, int b) {
     int result = a + b;
-    return result; // 正确的返回语句
+    return result; //Correct return statement
 }
 void printResult(int[] arr) {
     int i = 0;
     for (i = 0; i < 3; i = i + 1) {
         printf("%d\n", arr[i]);
     }
-    return; // 正确的返回语句
+    return; //Correct return statement
 }
 int main(){
     int localVar = 0;
     localVar = add(CONST_VAL, globalVar);
     int results[3] = {localVar, CONST_VAL, globalVar};
     printResult(results);
-    return 0; // 主函数必须有返回语句
+    return 0; //Main function must have a return statement
 }

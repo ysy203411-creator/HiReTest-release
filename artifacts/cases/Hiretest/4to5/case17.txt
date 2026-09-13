@@ -6,7 +6,7 @@ int b;
 int main() {
     a = getint();
     b = getint();
-    /* 由于不允许使用 if/else 和关系/逻辑运算，这里只做简单读入并固定输出 */
+    /*Due to the restriction of not using if/else and relational/logical operations, only simple input is read and fixed output is produced here*/
     printf("Input_read\n");
     return 0;
 }

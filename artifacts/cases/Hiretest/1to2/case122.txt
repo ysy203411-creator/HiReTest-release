@@ -7,7 +7,7 @@ int main(){
     int localVar = 3;
     int result = sum(globalVar, localVar);
     
-    if (result & 1) { // 错误：使用单独的 &
+    if (result & 1) { //Error: using separate &
         printf("Result is odd: %d\n", result);
     } else {
         printf("Result is even: %d\n", result);

@@ -8,7 +8,7 @@ void printResult(int result) {
     printf("Result: %d\n", result);
 }
 int main(){
-    int x = (a + b) * arr[2]; // 使用括号进行表达式解析
+    int x = (a + b) * arr[2]; //Use parentheses for expression parsing
     int y = add(x, arr[3]);
     printResult(y);
     if (x > 10 && y < 50) {
