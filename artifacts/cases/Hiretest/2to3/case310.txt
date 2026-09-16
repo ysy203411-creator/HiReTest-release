@@ -1,4 +1,0 @@
-const int a[3 = {1, 2, 3};  //Missing closing bracket, should trigger 'k' error
-int main(){
-    return 0;
-}

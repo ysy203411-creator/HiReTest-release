@@ -1,9 +1,0 @@
-const int ARRAY_SIZE = 5;
-int str[ARRAY_SIZE] = {72, 105, 0, 0, 0}; // The ASCII values of "Hi" are 72 and 105
-int main(){
-    int i;
-    for (i = 0; i < ARRAY_SIZE; i = i + 1) {
-        printf("%d ", str[i]);
-    }
-    return 0;
-}

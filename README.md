@@ -1,12 +1,14 @@
 # HiReTest
 
-HiReTest is a historical repair-guided test-generation method for progressive programming assignments. It mines changes between repaired and inherited code, identifies repair-relevant changes, combines them with assignment constraints, and uses a large language model to generate and review tests. This repository contains the HiReTest implementation, public prompt templates, and the released outputs of the main method on five SysY compiler-assignment transitions.
+HiReTest is a historical repair-guided test-generation method for progressive programming assignments. It mines changes between repaired and inherited code, identifies repair-relevant changes, combines them with assignment constraints, and uses a large language model to generate and review tests. This repository provides the HiReTest implementation and the reusable prompt templates required to run the method on five SysY compiler-assignment transitions.
 
 This is the first stable public release, version `1.0.0`.
 
 ## Release scope
 
-This repository releases only the implementation and experimental outputs of **HiReTest itself**. Implementations, adapters, configurations, generated outputs, ablation results, and human-evaluation materials for comparison methods are outside the scope of this release.
+This repository is a minimal source release for artifact review. It contains the implementation of **HiReTest itself**, reusable prompt templates, dependency metadata, and instructions for supplying the original inputs.
+
+Generated prompt instances, generated test cases, intermediate data, trained models, logs, evaluation workbooks, and other experimental results are intentionally excluded. Implementations, adapters, configurations, and outputs for comparison methods, ablation studies, and human evaluation are also outside the scope of this release.
 
 The comparison experiments reported in the paper were conducted using the corresponding public implementations and the settings described in the paper. This repository is a HiReTest main-method release, not a complete reproduction package for every comparison experiment in the paper.
 
@@ -14,48 +16,15 @@ The comparison experiments reported in the paper were conducted using the corres
 
 ```text
 .
-├── artifacts/                # released HiReTest test cases and result workbooks
 ├── data/                     # empty placeholder for locally obtained authorized data
-├── prompts/public_templates/ # public generation, constraint, and review prompts
+├── prompts/public_templates/ # generation/review templates and raw stage constraints
 ├── requirements/core.txt     # Python dependencies for HiReTest
-├── scripts/                  # artifact-manifest generator
 ├── src/hiretest/             # HiReTest implementation and evaluator
 ├── .env.example              # environment-variable template without real secrets
 ├── CITATION.cff              # citation metadata
 ├── LICENSE                   # MIT License
 └── pyproject.toml            # Python package metadata
 ```
-
-## Released artifacts
-
-```text
-artifacts/
-├── cases/Hiretest/
-│   ├── 1to2/
-│   ├── 2to3/
-│   ├── 3to4/
-│   ├── 4to5/
-│   └── 5to6/
-├── results/Hiretest/
-│   ├── analysis_1to2.xlsx
-│   ├── analysis_2to3.xlsx
-│   ├── analysis_3to4.xlsx
-│   ├── analysis_4to5.xlsx
-│   └── analysis_5to6.xlsx
-└── manifest.json
-```
-
-| Transition | Test programs | Input files | Result workbook |
-| --- | ---: | ---: | --- |
-| `1to2` | 213 | 0 | `analysis_1to2.xlsx` |
-| `2to3` | 389 | 0 | `analysis_2to3.xlsx` |
-| `3to4` | 93 | 0 | `analysis_3to4.xlsx` |
-| `4to5` | 240 | 240 | `analysis_4to5.xlsx` |
-| `5to6` | 59 | 59 | `analysis_5to6.xlsx` |
-
-For the first three transitions, each `caseN.txt` is a complete SysY source program. For `4to5` and `5to6`, each test consists of a `caseN.txt` source program and the matching `inputN.txt` standard-input file.
-
-`artifacts/manifest.json` records the released files, counts, and SHA-256 checksums.
 
 ## Implementation
 
@@ -68,10 +37,41 @@ The main pipeline is implemented under `src/hiretest/`:
 - `get_results.py` extracts source context and constructs history-guided generation prompts.
 - `ask_for_llm.py` generates, reviews, and repairs candidate tests through a configured LLM API.
 - `test.py` compiles and executes generated tests and produces result workbooks.
-- `reproduce_test.py` provides the command-line entry point for reevaluating released HiReTest cases.
+- `reproduce_test.py` provides the command-line entry point for evaluating locally generated HiReTest cases.
 - `runtime.ll` provides the LLVM-compatible SysY input/output runtime used by backend stages.
 
-The public files under `prompts/public_templates/` contain generation prompts, processed and raw stage constraints, and test-review prompts for all five transitions.
+The prompt directory contains only reusable prompt resources required by the method:
+
+```text
+prompts/public_templates/
+├── prompt_1to2.txt
+├── prompt_2to3.txt
+├── prompt_3to4.txt
+├── prompt_4to5.txt
+├── prompt_5to6.txt
+├── check_prompt_1to2.txt
+├── check_prompt_2to3.txt
+├── check_prompt_3to4.txt
+├── check_prompt_4to5.txt
+├── check_prompt_5to6.txt
+├── constraint_1to2.txt
+├── constraint_2to3.txt
+├── constraint_3to4.txt
+├── constraint_4to5.txt
+├── constraint_5to6.txt
+├── raw_constraint_1to2.txt
+├── raw_constraint_2to3.txt
+├── raw_constraint_3to4.txt
+├── raw_constraint_4to5.txt
+└── raw_constraint_5to6.txt
+```
+
+The `prompt_*.txt` files provide the reusable generation instructions, the
+`check_prompt_*.txt` files provide the reusable test-review instructions, the
+`constraint_*.txt` files provide the compact constraints required by the review stage,
+and the `raw_constraint_*.txt` files contain the original constraints for the five
+assignment transitions. Legacy prompt versions and prompts instantiated from individual
+historical changes are not distributed.
 
 ## Installation
 
@@ -139,45 +139,34 @@ python -m hiretest.analyse `
 `data_preprocessing.py` and `get_results.py` accept the same mappings through
 `--assignment-ids` and `--transition-dirs`. Run either command with `--help` for the
 complete interface. Model checkpoints and prediction reports default to `models/` and
-`outputs/` under `HIRETEST_DERIVED_DATA_ROOT`. Newly generated LLM cases default to
-`artifacts/generated/`; released results under `artifacts/cases/` are never overwritten.
+`outputs/` under `HIRETEST_DERIVED_DATA_ROOT`. Per-case prompts, generated tests, and
+evaluation reports are created only in the user's local workspace. These generated
+materials are not part of this source release and must not be committed.
 
-## Inspecting the release
+## Evaluating locally generated tests
 
-Run a dry check to confirm that all released stage directories are visible:
+Evaluation requires locally generated test cases, an authorized input package, and local
+MARS and LLVM installations configured through `.env.example`. By default,
+`reproduce_test.py` reads checked cases from `artifacts/generated/checked_cases/` and
+writes evaluation workbooks under `artifacts/generated/evaluation/`. Both directories
+contain local generated outputs and are excluded from version control.
 
-```bash
-python -m hiretest.reproduce_test --case-root artifacts/cases --stage all --dry-run
-```
-
-After changing the released artifacts, rebuild the integrity manifest with:
-
-```bash
-python scripts/build_artifact_manifest.py
-```
-
-## Reevaluating released tests
-
-Raw student submissions, identities, grades, reference implementations, and other course-confidential inputs are not included. Full reevaluation requires an authorized data package plus local MARS and LLVM installations configured through `.env.example`.
-
-For example, on Windows:
+For example, on Windows with an explicit case directory:
 
 ```powershell
 python -m hiretest.reproduce_test `
-  --case-root artifacts/cases `
+  --case-root D:\path\to\generated\cases `
   --stage 1to2 `
   --students-dir D:\path\to\authorized\submissions `
   --assignment-ids assignment2,assignment3,assignment4,assignment5,assignment6
 ```
-
-Newly reproduced workbooks are written under `artifacts/reproduced/` by default and do not overwrite the released workbooks.
 
 The evaluator uses the following environment variables when applicable:
 
 - `HIRETEST_DATA_ROOT` points to authorized submissions outside the repository.
 - `HIRETEST_DERIVED_DATA_ROOT` points to a writable workspace for intermediate data, models, and reports.
 - `HIRETEST_ASSIGNMENT_SEQUENCE` records the six ordered assignment IDs used by the five-stage pipeline.
-- `HIRETEST_TARGET_ASSIGNMENT_IDS` records the five target IDs used when reevaluating released tests.
+- `HIRETEST_TARGET_ASSIGNMENT_IDS` records the five target IDs used when evaluating locally generated tests.
 - `HIRETEST_TRANSITION_DIRS` maps the five stages to their generated diff directories.
 - `HIRETEST_REPAIR_PROMPT_ROOT` points to authorized history-guided prompts that cannot be published.
 - `HIRETEST_MARS_JAR` points to a locally obtained MARS installation.
@@ -190,7 +179,7 @@ Never commit a populated `.env` file.
 
 ## Data and privacy
 
-The repository publishes generated test artifacts, not the underlying student dataset. Raw and derived student data, identities, grades, private prompts, model checkpoints, reference implementations, and API credentials must remain outside the public repository.
+The repository does not publish generated tests, experimental results, or the underlying student dataset. Raw and derived student data, identities, grades, instantiated prompts, model checkpoints, reference implementations, generated outputs, and API credentials must remain outside the public repository.
 
 If a public or controlled-access dataset is deposited on Zenodo, add its stable DOI link here and describe its access conditions. Do not replace this statement with an unverified URL.
 
@@ -200,4 +189,4 @@ If you use HiReTest, please cite the corresponding paper and the artifact versio
 
 ## License
 
-HiReTest's original source code and released artifacts are licensed under the MIT License. See `LICENSE`. Third-party tools and dependencies remain subject to their respective licenses.
+HiReTest's original source code and reusable prompt templates are licensed under the MIT License. See `LICENSE`. Third-party tools, dependencies, and externally obtained datasets remain subject to their respective licenses and access conditions.

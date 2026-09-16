@@ -1,7 +1,0 @@
-const int a = 5, b = 10; //Correct constant declaration
-const int c = 15 //Constant declaration missing semicolon, old versions will report an error, new versions will automatically add the semicolon
-int main(){
-    int sum = a + b + c;
-    printf("Sum: %d\n", sum);
-    return 0;
-}

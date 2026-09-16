@@ -32,11 +32,10 @@ data/downloads/
 *.pkl
 *.pt
 
-# Local/generated output; approved artifacts belong under artifacts/
+# Local/generated outputs are not part of the public source release
 output/
 outputs/
-artifacts/RQ1/development_*/
-artifacts/generated/
+artifacts/
 tmp/
 temp/
 

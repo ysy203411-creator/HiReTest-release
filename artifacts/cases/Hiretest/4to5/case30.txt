@@ -1,8 +1,0 @@
-int a;
-int b;
-int main(){
-    a = getint();
-    b = a + 1; //Direct assignment without type conversion
-    printf("%d\n", b);
-    return 0;
-}

@@ -1,8 +1,0 @@
-const int SIZE = 5;
-int array[SIZE];
-int main(){
-    int index = 3;
-    int value = array[index; //Missing closing bracket
-    printf("%d\n", value);
-    return 0;
-}

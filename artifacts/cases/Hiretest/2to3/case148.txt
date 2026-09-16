@@ -1,7 +1,0 @@
-const int a[5;  //Missing closing bracket, error type k
-int main(){
-    const int b = 10;
-    const int c[3] = {1, 2};  //Correct array initialization
-    printf("%d\n", b);
-    return 0;
-}

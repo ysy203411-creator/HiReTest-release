@@ -1,8 +1,0 @@
-int value = 0;
-
-int main() {
-    printf("Enter a number: ");
-    value = getint();
-    printf("You entered: %d\n", value);
-    return 0;
-}

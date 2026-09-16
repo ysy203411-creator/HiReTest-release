@@ -1,7 +1,0 @@
-const int SIZE = 5;
-int array[SIZE];
-int main(){
-    int i = 0;
-    array[i] = 2;  //Missing right bracket ], should trigger error type k
-    return 0;
-}

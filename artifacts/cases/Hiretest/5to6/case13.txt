@@ -1,8 +1,0 @@
-int a; //Global declaration
-
-int main() {
-    a = getint();
-    printf("Input value is %d\n", a); //Remove non-ASCII characters
-    printf("Character output: A\n");
-    return 0;
-}

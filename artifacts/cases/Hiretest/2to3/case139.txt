@@ -1,9 +1,0 @@
-const int a = 5;
-int main(){
-    int array[10];
-    int i;  //Declare local variable i
-    for (i = 0; i < 10; i = i + 1) {  //Use local variable i instead of constant a
-        array[i] = i;
-    }
-    return 0;
-}

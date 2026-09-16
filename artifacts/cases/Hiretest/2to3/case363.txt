@@ -1,7 +1,0 @@
-const int a[5 = {1, 2, 3, 4, 5}; //Missing closing bracket ]
-int main(){
-    int x = 0;
-    x = a[3];
-    printf("%d\n", x);
-    return 0;
-}

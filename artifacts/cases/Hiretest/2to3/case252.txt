@@ -1,6 +1,0 @@
-const int a = 5, b = 10 //Missing semicolon
-int main(){
-    int x = a + b;
-    printf("%d\n", x);
-    return 0;
-}

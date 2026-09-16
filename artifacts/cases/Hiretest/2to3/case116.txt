@@ -1,8 +1,0 @@
-const int a = 5;
-int b[] = {1, 2, 3, 0, 0}; //Convert to global array and provide default initialization
-int main(){
-    int x = a;
-    int y = b[1];
-    printf("%d\n", y);
-    return 0;
-}
