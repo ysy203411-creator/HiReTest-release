@@ -102,9 +102,10 @@ python -m pip install -e .
 
 ## Preparing external data
 
-The public repository intentionally leaves `data/` empty. Obtain the authorized or
-Zenodo-hosted data package described in the Data and privacy section, extract it outside
-the repository when possible, and configure the paths before running the full pipeline.
+The public repository intentionally leaves `data/` empty. Obtain the original input
+dataset from the [HiReTest data record on Zenodo](https://zenodo.org/records/22226749)
+(DOI: [`10.5281/zenodo.22226749`](https://doi.org/10.5281/zenodo.22226749)), extract it
+outside the repository when possible, and configure the paths before running the full pipeline.
 The assignment IDs below are placeholders; replace them with the ordered IDs documented
 by the data package.
 
@@ -181,7 +182,11 @@ Never commit a populated `.env` file.
 
 The repository does not publish generated tests, experimental results, or the underlying student dataset. Raw and derived student data, identities, grades, instantiated prompts, model checkpoints, reference implementations, generated outputs, and API credentials must remain outside the public repository.
 
-If a public or controlled-access dataset is deposited on Zenodo, add its stable DOI link here and describe its access conditions. Do not replace this statement with an unverified URL.
+The original input dataset is available from the
+[HiReTest data record on Zenodo](https://zenodo.org/records/22226749), DOI:
+[`10.5281/zenodo.22226749`](https://doi.org/10.5281/zenodo.22226749). Users must follow
+the access conditions and license stated in the Zenodo record. Keep downloaded data and
+all derived data outside the public source repository.
 
 ## Citation
 
