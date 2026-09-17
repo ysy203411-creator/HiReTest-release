@@ -54,11 +54,6 @@ prompts/public_templates/
 ├── check_prompt_3to4.txt
 ├── check_prompt_4to5.txt
 ├── check_prompt_5to6.txt
-├── constraint_1to2.txt
-├── constraint_2to3.txt
-├── constraint_3to4.txt
-├── constraint_4to5.txt
-├── constraint_5to6.txt
 ├── raw_constraint_1to2.txt
 ├── raw_constraint_2to3.txt
 ├── raw_constraint_3to4.txt
@@ -67,8 +62,7 @@ prompts/public_templates/
 ```
 
 The `prompt_*.txt` files provide the reusable generation instructions, the
-`check_prompt_*.txt` files provide the reusable test-review instructions, the
-`constraint_*.txt` files provide the compact constraints required by the review stage,
+`check_prompt_*.txt` files provide the reusable test-review instructions
 and the `raw_constraint_*.txt` files contain the original constraints for the five
 assignment transitions. Legacy prompt versions and prompts instantiated from individual
 historical changes are not distributed.
