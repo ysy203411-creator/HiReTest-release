@@ -17,7 +17,7 @@ The comparison experiments reported in the paper were conducted using the corres
 ```text
 .
 ├── data/                     # empty placeholder for locally obtained authorized data
-├── prompts/public_templates/ # generation/review templates and raw stage constraints
+├── prompts/public_templates/ # shared generation/review templates and raw constraints
 ├── requirements/core.txt     # Python dependencies for HiReTest
 ├── src/hiretest/             # HiReTest implementation and evaluator
 ├── .env.example              # environment-variable template without real secrets
@@ -40,32 +40,19 @@ The main pipeline is implemented under `src/hiretest/`:
 - `reproduce_test.py` provides the command-line entry point for evaluating locally generated HiReTest cases.
 - `runtime.ll` provides the LLVM-compatible SysY input/output runtime used by backend stages.
 
-The prompt directory contains only reusable prompt resources required by the method:
+The prompt directory contains one shared set of reusable resources for all five
+assignment transitions:
 
 ```text
 prompts/public_templates/
-├── prompt_1to2.txt
-├── prompt_2to3.txt
-├── prompt_3to4.txt
-├── prompt_4to5.txt
-├── prompt_5to6.txt
-├── check_prompt_1to2.txt
-├── check_prompt_2to3.txt
-├── check_prompt_3to4.txt
-├── check_prompt_4to5.txt
-├── check_prompt_5to6.txt
-├── raw_constraint_1to2.txt
-├── raw_constraint_2to3.txt
-├── raw_constraint_3to4.txt
-├── raw_constraint_4to5.txt
-└── raw_constraint_5to6.txt
+├── prompt.txt
+├── check_prompt.txt
+└── raw_constraint.txt
 ```
 
-The `prompt_*.txt` files provide the reusable generation instructions, the
-`check_prompt_*.txt` files provide the reusable test-review instructions
-and the `raw_constraint_*.txt` files contain the original constraints for the five
-assignment transitions. Legacy prompt versions and prompts instantiated from individual
-historical changes are not distributed.
+`prompt.txt` provides the shared generation instructions, `check_prompt.txt` provides the
+shared test-review instructions, and `raw_constraint.txt` contains the original constraint
+text used by both prompt construction and review. 
 
 ## Installation
 

@@ -54,8 +54,8 @@ def _make_paths(idx, prompt_root=None, case_root=None, result_root=None, check_p
     case_root = Path(case_root or CASE_ROOT)
     result_root = Path(result_root or RESULT_ROOT)
     check_prompt_root = Path(check_prompt_root or CHECK_PROMPT_ROOT)
-    constraint_path    = str(check_prompt_root / f"constraint_{stage}.txt")
-    PREFIX_PROMPT_FILE = str(check_prompt_root / f"check_prompt_{stage}.txt")
+    constraint_path    = str(check_prompt_root / "raw_constraint.txt")
+    PREFIX_PROMPT_FILE = str(check_prompt_root / "check_prompt.txt")
     TEST_CASE_PROMPT_DIR  = str(prompt_root / stage)
     TEST_CASE_DIR         = str(case_root / stage)
     TEST_CASE_FIXED_DIR   = str(case_root / f"{stage}_fixed")
@@ -1049,7 +1049,7 @@ def parse_args():
     parser.add_argument(
         "--check-prompt-root",
         default=str(CHECK_PROMPT_ROOT),
-        help="Directory containing constraint_*.txt and check_prompt_*.txt.",
+        help="Directory containing raw_constraint.txt and check_prompt.txt.",
     )
     parser.add_argument(
         "--model",

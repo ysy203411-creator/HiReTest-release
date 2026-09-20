@@ -20,7 +20,6 @@ PROMPT_DIR = public_prompt_root()
 mid_data_path = []
 homework_ids = []
 test_case_ids = ["","1to2","2to3","3to4","4to5","5to6"]
-prompt_header = "full_prompt" #prompt
 
 
 def logical_to_physical_offset(file_path: str, log_start: int, log_end: int) -> Tuple[int, int]:
@@ -234,17 +233,11 @@ def extract_and_save_method_contexts(
                     else:
                         continue                    
                 #Generate the formatted string
-                with open(PROMPT_DIR / f'prompt_{index}to{index+1}.txt','r',encoding='utf-8') as file:
+                with open(PROMPT_DIR / 'prompt.txt','r',encoding='utf-8') as file:
                     template = file.read()
 
-                if prompt_header == "prompt":
-                    with open(PROMPT_DIR / f'constraint_{index}to{index+1}.txt','r',encoding='utf-8') as file:
-                        constraint_content = file.read()
-                elif prompt_header == "full_prompt":
-                    with open(PROMPT_DIR / f'raw_constraint_{index}to{index+1}.txt','r',encoding='utf-8') as file:
-                        constraint_content = file.read()
-                else:
-                    print("error! prompt not found")
+                with open(PROMPT_DIR / 'raw_constraint.txt','r',encoding='utf-8') as file:
+                    constraint_content = file.read()
 
                 if info_type == "total":
                     formatted_str = template.format(
@@ -558,7 +551,6 @@ def parse_args():
         help="Comma-separated diff directories for the five transitions.",
     )
     parser.add_argument("--info-type", choices=["total", "piece"], default="total")
-    parser.add_argument("--constraint-mode", choices=["prompt", "full_prompt"], default=prompt_header)
     return parser.parse_args()
 
 
@@ -572,5 +564,4 @@ if __name__ == "__main__":
         raise ValueError("--assignment-ids must contain six ordered IDs for five transitions")
     if len(transition_dirs) != len(test_case_ids) - 1:
         raise ValueError("--transition-dirs must contain five directories")
-    prompt_header = args.constraint_mode
     extract_and_save_method_contexts(args.excel, args.output, args.data_root, args.info_type)
