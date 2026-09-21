@@ -6,9 +6,7 @@ This is the first stable public release, version `1.0.0`.
 
 ## Release scope
 
-This repository is a minimal source release for artifact review. It contains the implementation of **HiReTest itself**, reusable prompt templates, dependency metadata, and instructions for supplying the original inputs.
-
-Generated prompt instances, generated test cases, intermediate data, trained models, logs, evaluation workbooks, and other experimental results are intentionally excluded. Implementations, adapters, configurations, and outputs for comparison methods, ablation studies, and human evaluation are also outside the scope of this release.
+This repository contains the implementation of **HiReTest itself**, reusable prompt templates, dependency metadata, and instructions for supplying the original inputs.
 
 The comparison experiments reported in the paper were conducted using the corresponding public implementations and the settings described in the paper. This repository is a HiReTest main-method release, not a complete reproduction package for every comparison experiment in the paper.
 
@@ -52,7 +50,7 @@ prompts/public_templates/
 
 `prompt.txt` provides the shared generation instructions, `check_prompt.txt` provides the
 shared test-review instructions, and `raw_constraint.txt` contains the original constraint
-text used by both prompt construction and review. 
+text used by both prompt construction and review.
 
 ## Installation
 
