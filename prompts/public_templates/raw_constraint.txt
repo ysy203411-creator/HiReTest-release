@@ -1,0 +1,561 @@
+# 1. Overview
+
+SysY is the source language for the compiler developed in the compiler technology lab, which is a subset of the C language. A SysY source file contains exactly one definition of the `main` function. It may also contain global variable declarations, constant declarations, and other function definitions. SysY supports the 32-bit signed integer type `int` and its one-dimensional array type. The `const` qualifier is used to declare constants.
+
+SysY itself does not have built-in language constructs for input/output (I/O). I/O is provided via a runtime library, whose library functions can be invoked inside functions of SysY programs. Some parameters of SysY runtime library functions may fall outside the data types supported by SysY (e.g., string literals). The SysY compiler must handle such cases and correctly pass these arguments from SysY programs to the SysY runtime library.
+
+- **Functions**: Functions may or may not take parameters. Parameter types can be `int` or one-dimensional arrays of `int`. A function may return an `int` value or return nothing (declared as `void`). For `int` parameters, pass-by-value is used. For array-type parameters, the starting address of the array is passed instead. A function body consists of variable declarations and statements.
+- **Variable / Constant Declarations**: Multiple variables or constants may be declared in a single declaration statement, optionally with initializers. All variables and constants must be defined before use. Declarations outside functions are global; declarations inside functions are local.
+- **Statements**: Statements include assignment statements, expression statements (expressions may be empty), blocks, `if` statements, `for` statements, `break`, `continue`, and `return` statements. A block may contain variable declarations and statements.
+- **Expressions**: SysY supports basic arithmetic operators (`+`, `-`, `*`, `/`, `%`), relational operators (`==`, `!=`, `<`, `>`, `<=`, `>=`), and logical operators (`!`, `&&`, `||`). Non-zero values represent true, and zero represents false. Relational or logical operations evaluate to `1` for true and `0` for false. **Operator precedence, associativity, and evaluation rules (including short-circuit evaluation for logical operators) are identical to those in C.**
+
+# 2. Runtime Library
+
+Programs perform I/O via `getint` and `printf`. To test programs in C, simply declare `getint` as shown below:
+
+```
+int getint() {
+int t;
+scanf("%d",&t);
+while(getchar()!='\n');
+return t;
+}
+```
+
+The syntax of `printf` is `'printf' '(' <StringConst> {, <Exp>} ')'`. `<StringConst>` denotes a string constant terminal, specified in Section 3 Grammar and Test Coverage, Subsection 3.5 String Constants. Parsing `<StringConst>` involves types outside SysY’s native type system; the SysY compiler must handle this case.
+
+# 3. Grammar and Test Coverage Requirements
+
+## 3.1 Grammar
+
+The grammar of SysY is specified in Extended Backus–Naur Form (EBNF):
+
+- `[...]` denotes an optional item.
+- `{...}` denotes an item that may appear zero or more times.
+- Terminals are either quoted strings or tokens such as `Ident`, `IntConst`, `StringConst`.
+- Quoted strings like `'main'` are reserved keywords.
+
+The start symbol is `CompUnit`.
+
+> 
+> Important: Please also refer to the semantic constraints in Section 4.
+
+```
+CompUnit → {Decl} {FuncDef} MainFuncDef
+Decl → ConstDecl | VarDecl
+ConstDecl → 'const' BType ConstDef { ',' ConstDef } ';'
+BType → 'int'
+ConstDef → Ident [ '[' ConstExp ']' ] '=' ConstInitVal
+ConstInitVal → ConstExp | '{' [ ConstExp { ',' ConstExp } ] '}'
+VarDecl → [ 'static' ] BType VarDef { ',' VarDef } ';'
+VarDef → Ident [ '[' ConstExp ']' ] | Ident [ '[' ConstExp ']' ] '=' InitVal
+InitVal → Exp | '{' [ Exp { ',' Exp } ] '}'
+FuncDef → FuncType Ident '(' [FuncFParams] ')' Block
+MainFuncDef → 'int' 'main' '(' ')' Block
+FuncType → 'void' | 'int'
+FuncFParams → FuncFParam { ',' FuncFParam }
+FuncFParam → BType Ident ['[' ']']
+Block → '{' { BlockItem } '}'
+BlockItem → Decl | Stmt
+Stmt → LVal '=' Exp ';'
+| [Exp] ';'
+| Block
+| 'if' '(' Cond ')' Stmt [ 'else' Stmt ]
+| 'for' '(' [ForStmt] ';' [Cond] ';' [ForStmt] ')' Stmt
+| 'break' ';'
+| 'continue' ';'
+| 'return' [Exp] ';'
+| 'printf' '(' StringConst {',' Exp} ')' ';'
+ForStmt → LVal '=' Exp { ',' LVal '=' Exp }
+Exp → AddExp
+Cond → LOrExp
+LVal → Ident ['[' Exp ']']
+PrimaryExp → '(' Exp ')' | LVal | Number
+Number → IntConst
+UnaryExp → PrimaryExp | Ident '(' [FuncRParams] ')' | UnaryOp UnaryExp
+UnaryOp → '+' | '−' | '!' /* Note: '!' only appears in conditional expressions */
+FuncRParams → Exp { ',' Exp }
+MulExp → UnaryExp | MulExp ('*' | '/' | '%') UnaryExp
+AddExp → MulExp | AddExp ('+' | '−') MulExp
+RelExp → AddExp | RelExp ('<' | '>' | '<=' | '>=') AddExp
+EqExp → RelExp | EqExp ('==' | '!=') RelExp
+LAndExp → EqExp | LAndExp '&&' EqExp
+LOrExp → LAndExp | LOrExp '||' LAndExp
+ConstExp → AddExp /* Note: Identifiers used must be constants */
+```
+
+## 3.2 Supplementary Notes
+
+### (1) Identifiers (`Ident`)
+
+```
+identifier → identifier-nondigit
+| identifier identifier-nondigit
+| identifier digit
+```
+
+`identifier-nondigit` is underscore or upper/lowercase letter; `digit` ranges from `0` to `9`.
+
+Reference: ISO/IEC 9899 (page 51). Scoping rules:
+
+- Scopes of global variables/constants and local variables/constants may overlap; local declarations shadow global ones in overlapping regions.
+- Local declarations with identical names cannot have overlapping scopes: no duplicate identifiers inside one block.
+- Variable/constant names may reuse function names in different scopes.
+- Reserved keywords cannot be used as identifiers.
+
+Valid example:
+
+```
+int main() {
+	int a = 0;
+	{
+		int a = 1;
+		printf("%d",a); // outputs 1
+	}
+	return 0;
+}
+```
+
+Invalid example:
+
+```
+int main() {
+	int a = 0;
+	{
+		int a = 1;
+		int a = 2; // invalid
+	}
+	return 0;
+}
+```
+
+### (2) Comments
+
+SysY comments follow C rules:
+
+- Single-line comment: starts with `//` and ends at newline (newline excluded).
+- Multi-line comment: starts with `/*` and ends at the first occurrence of `*/` (the terminating `*/` is included).
+
+Reference: ISO/IEC 9899 (page 66).
+
+### (3) Integer Constants
+
+```
+integer-const → decimal-const | 0
+decimal-const → nonzero-digit | decimal-const digit
+nonzero-digit: digits from 1 to 9
+```
+
+Reference: ISO/IEC 9899 (page 54). Suffixes are ignored.
+
+### (4) String Constants
+
+```
+<FormatChar> → %d
+<NormalChar> → ASCII characters with decimal codes 32, 33, 35–126; backslash (92) only appears in '\n'
+<Char> → <FormatChar> | <NormalChar>
+<StringConst> → '"' {<Char>} '"'
+```
+
+Only one escape sequence `\n` is supported inside strings.
+
+# 4. Semantic Constraints
+
+The set of programs accepted by the above grammar is a superset of valid SysY programs. Additional semantic rules are given below.
+
+## Runtime Library
+
+1. For simplicity, `getint` and `printf` are only used as runtime library function calls in all test cases and will not be defined as user variables or functions.
+2. `printf` does not append a newline by default.
+3. Similar to C `printf`, format specifiers are replaced by corresponding argument values; ordinary characters are printed verbatim.
+
+## `static` Keyword
+
+1. `static` modifies **static local variables** and never appears on global variable definitions.
+2. If a `static` variable has an initializer, the initial value must be computable at compile time.
+3. A `static` variable without an explicit initializer is zero-initialized by the compiler.
+4. A `static` variable is initialized exactly once and retains its state across subsequent invocations of the enclosing function; it is not destroyed when the function exits, but its scope is limited to that function.
+
+## Compilation Unit `CompUnit`
+
+```
+CompUnit → {Decl} {FuncDef} MainFuncDef
+Decl → ConstDecl | VarDecl
+```
+
+1. Top-level declarations (`Decl`) and function definitions (`FuncDef`) in one compilation unit cannot redefine the same identifier, even with different types.
+2. The scope of top-level variables, constants and functions starts at their declaration and ends at the end of the source file.
+
+## Constant Definition `ConstDef`
+
+```
+ConstDef → Ident [ '[' ConstExp ']' ] '=' ConstInitVal
+```
+
+1. `ConstDef` defines a symbolic constant. The identifier is `Ident`. The optional `[ConstExp]` declares a one-dimensional array and its length. Constants must have initializers.
+2. Without the array part, it declares a single scalar constant.
+3. With the array part, it declares an array with semantics identical to C; indices start at `0`.
+4. Each `ConstExp` specifying array length must evaluate to a **non-negative integer at compile time**.
+
+## Variable Definition `VarDef`
+
+```
+VarDef → Ident [ '[' ConstExp ']' ] | Ident [ '[' ConstExp ']' ] '=' InitVal
+```
+
+1. Variable definitions are similar to constants, but variables may omit initializers; their runtime value is undefined in that case.
+
+## Initializers `ConstInitVal` / `InitVal`
+
+```
+ConstInitVal → ConstExp | '{' [ ConstExp { ',' ConstExp } ] '}'
+InitVal → Exp | '{' [ Exp { ',' Exp } ] '}' | StringConst
+```
+
+1. Constant initializers must be constant expressions `ConstExp`.
+2. **Constants require initializers. Constant arrays may omit some element initializers; omitted elements are zero-filled by the compiler.**
+3. Global variable initializers must be `ConstExp`. Local variable initializers are ordinary `Exp` and may reference previously declared variables.
+4. For scalar constants or variables, the initializer must be a single expression.
+5. **Global variables without explicit initializers are zero-initialized; local variables are not.**
+
+## Formal Parameters `FuncFParam` and Actual Parameters `FuncRParams`
+
+```
+FuncFParams → FuncFParam { ',' FuncFParam }
+FuncRParams → Exp { ',' Exp }
+```
+
+1. `FuncFParam` defines one formal parameter. The optional `[]` marks an array parameter.
+2. Ordinary variables are passed by value. For array parameters, the formal parameter receives the address of the actual array and accesses elements indirectly via that address.
+3. Ordinary constants may be passed as function arguments, but constant arrays cannot. Example: `const int arr[3] = {1,2,3}`; `arr` cannot be passed into a function.
+4. Actual arguments must match formal parameters in type.
+
+```
+void f1(int x){
+	return ;
+}
+void f2(int x[]){
+	return ;
+}
+int main(){
+	int x = 10;
+	int t[5] = {1, 2, 3, 4, 5};
+	f1(x); // valid
+	f1(t[0]); // valid
+	f1(t); // invalid
+	f2(t); // valid
+}
+```
+
+## Function Definition `FuncDef`
+
+```
+FuncDef → FuncType Ident '(' [FuncFParams] ')' Block
+```
+
+1. `FuncType` specifies return type. For `int`-returning functions, every control-flow branch must contain a `return` with an expression; branches without `return` yield undefined return values. For `void` functions, only `return` without an expression is allowed.
+2. Semantics of `FuncFParams` are as above.
+
+## Block `Block`
+
+1. A block introduces a scope; constants and variables declared inside live only within that block.
+2. A block may redeclare names from outer scopes; inner declarations shadow outer ones from their definition until the end of the block.
+3. For test simplicity, **all non-void functions in test cases end with an explicit `return` statement; missing `return` at function end is treated as an error.** Student-written test programs must follow this rule.
+4. The `main` function must return constant `0`.
+
+## Statements `Stmt`
+
+1. `if` statements follow the dangling-else rule (nearest match).
+2. A bare `Exp` can be a statement: the expression is evaluated and its result discarded.
+
+## Lvalue `LVal`
+
+1. `LVal` denotes an lvalue expression: a variable or array element.
+2. For array access, the number of bracket subscripts must match the array dimension to select an element.
+3. Scalar variables cannot have trailing subscript brackets.
+
+## `Exp` and `Cond`
+
+1. **`Exp` represents expressions of type `int` or `void`. `Cond` denotes a condition expression and is defined as `LOrExp`. The unary `!` may only appear in `Cond`, not in ordinary `Exp`.**
+2. The identifier in an `LVal` must be defined before use in the current scope. The left-hand side of an assignment must be a variable, not a constant.
+3. Function call syntax: `Ident ( FuncRParams )`. The number and types of actual arguments must exactly match the corresponding function definition.
+4. Operator precedence and associativity follow C and are encoded in the grammar above.
+
+## Unary Expression `UnaryExp`
+
+1. Two identical consecutive unary operators are forbidden, e.g., `++-i` is invalid, while `+-+i` is allowed.
+2. Unary `!` may only appear inside conditional expressions.
+
+## Constant Expression `ConstExp`
+
+1. **`ConstExp` denotes an `int` expression.**
+2. `ConstExp` must be evaluable at compile time. All identifiers inside a `ConstExp` must refer to constants.
+
+# 5. Error Handling
+
+Starting from the lexical analysis assignment, your compiler must accept both valid and invalid programs. For valid programs, produce correct outputs. For invalid programs, output the line number and error code of every error.
+
+Errors fall into three categories: lexical errors, syntax errors, semantic errors. All three phases must detect errors before reporting.
+
+## Error Codes
+
+Category `a`: lexical errors.
+Categories `i,j,k`: syntax errors.
+All remaining categories: semantic errors.
+
+| Error Description | Code | Explanation | Relevant Grammar |
+| --- | --- | --- | --- |
+| Illegal symbol | a | `&` and ` | `are encountered. They should be treated as`&&`and` |
+| Redefined identifier | b | Function or variable name redefined in the current scope. Inner scopes shadow outer definitions. | ConstDef → Ident …   VarDef → … Ident …   FuncDef → FuncType Ident …   FuncFParam → BType Ident ... |
+| Undefined identifier | c | Use of an undefined identifier; report line of `Ident`. | LVal → Ident …   UnaryExp → Ident … |
+| Mismatched number of function arguments | d | Argument count in function call does not match definition. | UnaryExp → Ident '(' [FuncRParams] ')' |
+| Mismatched argument type | e | Argument type mismatch at function call. Details below. | UnaryExp → Ident '(' [FuncRParams] ')' |
+| Mismatched return in void function | f | A `void` function contains a `return` with an expression. | Stmt → 'return' [ Exp ] ';' |
+| Missing return in non-void function | g | Check only whether the final statement of the function block is a `return`. Control flow analysis is **not required**. | FuncDef → FuncType Ident '('[FuncFParams]')' Block   MainFuncDef → 'int' 'main' '('')' Block |
+| Assignment to constant | h | LVal is a constant and cannot be assigned. | Stmt → LVal '=' Exp ';'   ForStmt → LVal '=' Exp … |
+| Missing semicolon | i | Missing `;` | Stmt, ConstDecl, VarDecl |
+| Missing right parenthesis `)` | j | Missing `)` | function call, function definition, `if`, `for`, `PrimaryExp` |
+| Missing right bracket `]` | k | Missing `]` | array definition and array access |
+| Mismatched format specifier count in `printf` | l | Number of format specifiers and arguments to `printf` disagree. | `printf' '(' StringConst {',' Exp} ')' ';'` |
+| `break` / `continue` outside loop | m | `break` or `continue` appears outside a loop block. | Stmt → 'break' ';' \| 'continue' ';' |
+
+## Grammar symbols and corresponding errors
+
+```
+CompUnit → {Decl} {FuncDef} MainFuncDef
+Decl → ConstDecl | VarDecl
+ConstDecl → 'const' BType ConstDef { ',' ConstDef } ';' // i
+BType → 'int'
+ConstDef → Ident [ '[' ConstExp ']' ] '=' ConstInitVal // b, k
+ConstInitVal → ConstExp | '{' [ ConstExp { ',' ConstExp } ] '}'
+VarDecl → [ 'static' ] BType VarDef { ',' VarDef } ';' // i
+VarDef → Ident [ '[' ConstExp ']' ] | Ident [ '[' ConstExp ']' ] '=' InitVal //b, k
+InitVal → Exp | '{' [ Exp { ',' Exp } ] '}'
+FuncDef → FuncType Ident '(' [FuncFParams] ')' Block // b, g, j
+MainFuncDef → 'int' 'main' '(' ')' Block // g j
+FuncType → 'void' | 'int'
+FuncFParams → FuncFParam { ',' FuncFParam }
+FuncFParam → BType Ident ['[' ']'] // b, k
+Block → '{' { BlockItem } '}'
+BlockItem → Decl | Stmt
+Stmt → LVal '=' Exp ';' // h, i
+| [Exp] ';' // i, l(when calling printf)
+| Block
+| 'if' '(' Cond ')' Stmt [ 'else' Stmt ] // j
+| 'for' '(' [ForStmt] ';' [Cond] ';' [ForStmt] ')' Stmt // h
+| 'break' ';' | 'continue' ';' // i m
+| 'return' [Exp] ';' // f i
+'printf' '(' StringConst {',' Exp} ')' ';' // i j l
+ForStmt → LVal '=' Exp { ',' LVal '=' Exp } // h
+Exp → AddExp
+Cond → LOrExp
+LVal → Ident ['[' Exp ']'] // c k
+PrimaryExp → '(' Exp ')' | LVal | Number // j
+Number → IntConst
+UnaryExp → PrimaryExp | Ident '(' [FuncRParams] ')' | UnaryOp UnaryExp // c d e j
+UnaryOp → '+' | '−' | '!' /* '!' only in condition expressions */
+FuncRParams → Exp { ',' Exp }
+MulExp → UnaryExp | MulExp ('*' | '/' | '%') UnaryExp
+AddExp → MulExp | AddExp ('+' | '−') MulExp
+RelExp → AddExp | RelExp ('<' | '>' | '<=' | '>=') AddExp
+EqExp → RelExp | EqExp ('==' | '!=') RelExp
+LAndExp → EqExp | LAndExp '&&' EqExp // a
+LOrExp → LAndExp | LOrExp '||' LAndExp // a
+ConstExp → AddExp /* Identifiers must be constants */
+```
+
+## Special Notes
+
+1. For errors `i,j,k`, the "preceding nonterminal" refers to the nonterminal before `;`, `)`, `]` in grammar rules; we look at the last token of that nonterminal’s token stream.
+2. No malicious newlines in test cases, including inside character/string literals and function calls. A malicious newline would make error recovery hard.
+3. For other errors, report the line number of the first token where the error can be diagnosed. Example: missing return in non-void functions is diagnosed when reaching the closing `}` of the function block; report the line of `}`.
+4. To avoid grammar ambiguities caused by test-case errors, `for` statements contain no errors other than type `h`. All errors that would prevent constructing a parse tree are absent.
+5. At most one error per source line.
+6. Functions and variables cannot share the same name in the same scope.
+7. If a function name is redefined, the compiler must still fully analyze the function body for other errors.
+8. Two type-mismatch cases in function calls:
+   - passing array to scalar parameter
+   - passing scalar to array parameter
+
+# 6. Lexical Analysis Assignment Requirements
+
+## Problem Description
+
+Implement a lexical analyzer according to the grammar document and guide. It must handle both valid and invalid source files.
+
+For valid source files: recognize tokens, record token category and token value, output token code and token string.
+For invalid source files: detect errors and output line number and error code.
+
+### Token Codes
+
+| Token | Code | Token | Code | Token | Code | Token | Code |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Ident | IDENFR | else | ELSETK | * | MULT | ; | SEMICN |
+| IntConst | INTCON | ! | NOT | / | DIV | , | COMMA |
+| StringConst | STRCON | && | AND | % | MOD | ( | LPARENT |
+| const | CONSTTK | \|\| | OR | < | LSS | ) | RPARENT |
+| int | INTTK | for | FORTK | <= | LEQ | [ | LBRACK |
+| static | STATICTK | return | RETURNTK | > | GRE | ] | RBRACK |
+| break | BREAKTK | void | VOIDTK | >= | GEQ | { | LBRACE |
+| continue | CONTINUETK | + | PLUS | == | EQL | } | RBRACE |
+| if | IFTK | - | MINU | != | NEQ | = | ASSIGN |
+| main | MAINTK | printf | PRINTFTK |  |  |  |  |
+
+### Input
+
+`testfile.txt`: source program (valid or erroneous).
+
+### Output
+
+Valid program: write token code and token string to `lexer.txt`.
+
+> 
+> `TokenCode TokenString` (single space separator)
+
+Erroneous program: write error line number and error code to `error.txt`, sorted by line number.
+
+> 
+> `LineNumber ErrorCode` (single space separator)
+
+### Remarks
+
+- Preserve the original string of literals; numeric output is the input string, not the parsed integer value.
+- Store token type, value and other information for later phases.
+- The token printing output for evaluation should be toggleable; the final full compiler does not need it.
+- In this assignment, error samples only contain lexical errors, and exactly one error per error sample.
+- Continue full lexical analysis even for erroneous input to support later syntax/semantic error handling.
+- Error codes are defined above.
+
+### Lexical Error Case
+
+```
+LAndExp → EqExp | LAndExp '&&' EqExp // a
+LOrExp → LAndExp | LOrExp '||' LAndExp // a
+```
+
+### Example
+
+Valid input:
+
+```
+const int array[2] = {1,2};
+int main(){
+    int c;
+    c = getint();
+    printf("output is %d",c);
+    return c;
+}
+```
+
+Valid output:
+
+```
+CONSTTK const
+INTTK int
+IDENFR array
+LBRACK [
+INTCON 2
+RBRACK ]
+ASSIGN =
+LBRACE {
+INTCON 1
+COMMA ,
+INTCON 2
+RBRACE }
+SEMICN ;
+INTTK int
+MAINTK main
+LPARENT (
+RPARENT )
+LBRACE {
+INTTK int
+IDENFR c
+SEMICN ;
+IDENFR c
+ASSIGN =
+IDENFR getint
+LPARENT (
+RPARENT )
+SEMICN ;
+PRINTFTK printf
+LPARENT (
+STRCON "output is %d"
+COMMA ,
+IDENFR c
+RPARENT )
+SEMICN ;
+RETURNTK return
+IDENFR c
+SEMICN ;
+RBRACE }
+```
+
+Error input:
+
+```
+int main(){
+    if(1 & 2){
+        printf("2025 Compiler\n");
+    }
+    return 0;
+}
+```
+
+Error output (`error.txt`):
+
+```
+2 a
+```
+
+### Grading
+
+For valid programs: points deducted for every mismatched token line.
+For error programs: full points for correct error report; zero for false positives or extra reports.
+
+### References
+
+Textbook Ch17 §17.3; Ch18 §18.3.4
+`pl0-compiler.doc`: `getsym` and related routines
+`pascals-compiler.docx`: `insymbol` and related routines
+Teaching materials on the course platform
+Public test library for lexical analysis
+
+### Language & Environment
+
+C/C++ / Java
+
+- CLion 2019.3.6 for C/C++
+- IDEA Community 2022.2.2 for Java
+
+### Submission Requirements
+
+Deliver design document: compiler overview, overall design, lexical analyzer design.
+
+Submit **only lexical-analysis source code** for this assignment.
+Judge environment: CMake 3.28.3, Clang 12.0.0, C++17; JDK17 for Java.
+
+- Java: entry point is `main` in `Compiler.java`. `Compiler.java` must sit at the root of the zip archive. No third-party libraries.
+- C++: you may use CMake. `CMakeLists.txt` at archive root, `project(Compiler)`, output executable named `Compiler`. Do not submit build artifacts. Default C++17 if no CMake.
+- Remove macOS hidden files before zipping.
+
+Include `config.json` at archive root:
+
+```
+{
+    "programming language": "xxx",
+    "object code": "yyy"
+}
+```
+
+`xxx`: `java`, `c`, or `cpp`; `yyy`: `pcode`, `llvm`, or `mips`, lowercase.
+You may fill a placeholder target code type if undecided; it will not bind later assignments.
+
+Example file tree for Java submission:
+
+```
+.
+├── Compiler.java
+├── config.json
+└── frontend
+     └── Lexer.java
+```

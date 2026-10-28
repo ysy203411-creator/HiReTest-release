@@ -1,0 +1,6 @@
+openai
+pandas
+openpyxl
+requests
+scikit-learn
+torch
